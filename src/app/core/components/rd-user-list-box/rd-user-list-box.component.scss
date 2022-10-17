@@ -1,0 +1,40 @@
+h2{
+    font-family: 'Open Sans';
+  }
+  .reset-btn{
+    background-color: #181F29;
+    margin-right:10px;
+  }
+  th, td{
+    text-align: center;
+    font-weight: 700;
+  }
+  
+  th {
+    background-color: #181F29;
+    color: #FFFFFF;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd){
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .evt-name {
+    cursor: pointer !important;
+    color:#FF3636;
+  }
+  .loading-spinner{    
+    background-color: #111111;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    opacity: 0.9;
+}
+
+.loading-spinner img{
+    align-self: end;
+}  

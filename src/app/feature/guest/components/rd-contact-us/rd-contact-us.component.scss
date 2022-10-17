@@ -1,0 +1,50 @@
+.custom-card{
+    margin-left: 33px;
+    max-width: 720px;
+}
+.custom-card h2 {
+    padding-top: 24px;
+}
+.btn-float-right {
+  float: right;
+}
+.card.custom-card{
+  padding:29px;
+}
+.description{
+  font-weight: bold;
+}
+.custom-span{
+  font-size: 20px;
+  font-weight: 800;
+}
+.contact-addr{
+  font-size: 20px; 
+  padding-left: 70px;
+  font-weight: 500;
+}
+.contact-form{
+  padding: 50px 40px;
+}
+.contant-form-control{
+  margin-bottom: 10px !important;
+  border: 1px solid #2F3C4F !important;
+  background: #ffffff !important;
+  color: #181F29 !important;
+}
+.form-control:focus{
+  border: 2px solid #4AA0FF !important;
+  box-shadow: 0px 0px 2px 0px #4AA0FF !important;
+}
+::placeholder{
+  color: #181F29;
+  opacity: 0.7;
+}
+.submit-btn{
+  margin-right:10px;
+}
+@media only screen and (max-width: 500px) {
+  .page-header-image.rellax-header {
+    background-position: unset !important;
+  }
+}

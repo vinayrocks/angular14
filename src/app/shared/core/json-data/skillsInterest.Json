@@ -1,0 +1,26 @@
+[
+  {
+    "radianSkillCategoryId":"1",
+    "radianSkillCategoryName":"Visual",
+    "radianSkillSubCategories":
+    [{"id":"1","subCategoryName":"Photography"},{"id":"2","subCategoryName":"Painting"},{"id":"3","subCategoryName":"Sketching"},{"id":"4","subCategoryName":"Animation"},{"id":"5","subCategoryName":"Conceptual"}]
+  },       
+  {
+    "radianSkillCategoryId":"2",
+    "radianSkillCategoryName":"Literary",
+    "radianSkillSubCategories":
+    [{"id":"1","subCategoryName":"Stories"},{"id":"2","subCategoryName":"Poems"},{"id":"3","subCategoryName":"Scripts"},{"id":"4","subCategoryName":"Lyrics"},{"id":"5","subCategoryName":"Humor"}]
+  },      
+  {
+    "radianSkillCategoryId":"3",
+    "radianSkillCategoryName":"Performing",
+    "radianSkillSubCategories":
+    [{"id":"1","subCategoryName":"Acting"},{"id":"2","subCategoryName":"Singing"},{"id":"3","subCategoryName":"Stand Up"},{"id":"4","subCategoryName":"Dance"},{"id":"5","subCategoryName":"Puppetry"}]    
+  },
+  {
+    "radianSkillCategoryId":"4",
+    "radianSkillCategoryName":"Technical",
+    "radianSkillSubCategories":
+    [{"id":"1","subCategoryName":"Camera"},{"id":"2","subCategoryName":"Sound"},{"id":"3","subCategoryName":"Graphic"},{"id":"4","subCategoryName":"Gaming"},{"id":"5","subCategoryName":"Presentations"}]    
+  }
+]

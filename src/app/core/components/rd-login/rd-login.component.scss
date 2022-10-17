@@ -1,0 +1,23 @@
+.page-header{
+    height: 61vh !important;
+    max-height: 420px;
+}
+.page-header-image{
+    z-index:-1;
+}
+.link{
+    cursor: pointer;
+}
+a.link:hover {
+    color: #FF3636 !important;
+}
+h6{
+    font-family: 'Open Sans';
+    font-size: 15px;
+    a{
+        font-size: 12px;
+    }
+}
+h4 {
+    font-size: 2em;
+}

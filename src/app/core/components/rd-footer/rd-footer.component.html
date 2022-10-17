@@ -1,0 +1,37 @@
+<footer class="footer footer-default" appBlockCopy>
+    <div class="container">
+        <nav>
+            <ul>
+                <li>
+                    <a [routerLink]="['/home']">
+                       Home
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/contact-us']">
+                       Contact Us
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/term-of-use']">
+                        Terms Of Service
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/privacy-policy']">
+                        Privacy Policy
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/subscription-refund-policy']">
+                        Subscription & Refund Policy
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            &copy;
+            {{data | date: 'yyyy'}}, Hunar - Dazzle here!
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,14 @@
+<div class="wrapper" appBlockCopy>
+    <!-- <app-header-image-slider></app-header-image-slider> -->
+    <!-- <div id="mainPageHeader" class="page-header" [ngClass]="{'page-header-small':setSmallPageHeader===true}"> -->
+    <div id="mainPageHeader" class="page-header">
+      <div class="page-header-image rellax-header" *ngIf="!isResetPassword" style="background-image: url('assets/img/rd_bg10.jpg');"></div>
+      <div class="page-header-image rellax-header" *ngIf="isResetPassword" style="background-image: url('assets/img/reset_password.jpg');"></div>
+      <!-- <div *ngIf="data>20 && data<=40" class="page-header-image rellax-header" style="background-image: url('assets/img/rd_bg2.jpg');"></div>
+      <div *ngIf="data>40" class="page-header-image rellax-header" style="background-image: url('assets/img/rd_bg3.jpg');"></div> -->
+
+  </div>
+  <router-outlet></router-outlet>
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-climbing-dot" [fullScreen] = "true"><p style="color: white;font-size: 20px;" > Loading... </p></ngx-spinner>
+</div>
+

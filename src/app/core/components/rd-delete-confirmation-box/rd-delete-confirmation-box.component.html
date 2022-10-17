@@ -1,0 +1,9 @@
+<h2>Delete</h2>
+<div appBlockCopy>
+  <p>Are you sure you want to delete {{data.type}}</p>
+  <p>{{data.name}}</p>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-normal reset-btn" (click)="onNoClick()">No</button>&nbsp;
+  <button class="btn btn-danger" (click)="Submit()">Yes</button>
+</div>

@@ -1,0 +1,84 @@
+<div class="container-fluid">
+    <!-- <div class="button-container">
+        <a href="#button" class="btn btn-primary btn-round btn-lg">My Portfolio's</a>
+    </div> -->
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="row card portfolio">
+                <div class="col-md-12 custom-col-12">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!--<i class="fa fa-exclamation-circle" aria-hidden="true"
+                                style="margin: 35px 0px 0px 26px;"></i>
+                            <span style="margin-left: 7px;font-style: italic;">Please ensure to add a <b>watermark</b>
+                                in your <b>word</b> document; save its as <b>PDF;</b> then upload it</span>-->
+                        </div>
+                        <div class="col-md-4">
+                            <a [routerLink]="['/member/portfolio_add']"
+                                class="btn btn-danger btn-round profile-label">Create New Portfolio</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-vertical-stepper #stepper>
+                                <mat-step *ngFor="let item of userPortfolio;let i = index" [completed]="false">
+                                    <ng-template class="row" matStepLabel>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h4>{{item.PortfolioName}}</h4>
+                                                <p class="last-acc">Last Updated:{{item.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>
+                                            </div>
+                                        </div>
+                                    </ng-template><br /><br/>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                        <div class="portfolio-label">About Portfolio</div>
+                                        <!-- <textarea class="form-control white-board" [attr.disabled]="true">
+                                            {{item.PortfolioArtifacts}}
+                                        </textarea> -->
+                                        <textarea class="form-control txtarea-custom" style="font-family: Open Sans !important;"
+                                            [(ngModel)]="item.PortfolioArtifacts"  disabled="true">
+                                        </textarea>
+                                        </div>
+                                    </div><br/><br/>
+                                    <div class="row" *ngIf="item.PortfolioMedia.length!==0">
+                                        <div class="col-md-2">
+                                            <div class="portfolio-label">Portfolio Media</div>
+                                        </div>
+                                    </div><br/>
+                                    <div class="row" *ngIf="item.PortfolioMedia.length!==0">
+                                        <div class="col-md-2"
+                                            *ngFor="let elem of item.PortfolioMedia;let i=index;">
+                                            <div class="custom-photo-container">
+                                                <img src="{{elem.Name}}" alt="" class="img-raised" title="" (click)='openImageDialog(item.PortfolioMedia,i)'
+                                                    *ngIf="elem.IsImage==='image'">
+                                                <a *ngIf="elem.IsImage==='pdf'" (click)="downloadPdf(elem.Name)">
+                                                    <img src="assets/img/radian/document.png" alt="" class="img-raised">
+                                                </a>
+                                               
+                                                <div *ngIf="elem.IsImage==='video'" class="video">
+                                                    <img src="{{elem.Image}}" (click)='openImageDialog(item.PortfolioMedia,i)'>
+                                                    <a></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-top">
+                                        <div class="col-md-12 flt-right">
+                                            <button class="btn btn-primary btn-round btn-margin"
+                                                (click)="openEdit(item.id)">Edit</button>&nbsp;
+                                            <button class="btn btn-primary btn-round reset-btn" (click)="DeletePortfolio(item)">Delete</button>
+                                        </div>
+                                    </div>
+                                </mat-step>
+                            </mat-vertical-stepper>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+</div>

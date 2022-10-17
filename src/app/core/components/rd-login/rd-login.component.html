@@ -1,0 +1,62 @@
+<div class="page-header custom-height" appBlockCopy>
+    <div class="container">
+        <div class="col-md-4 content-center">
+            <div class="card card-login card-plain">
+                <form class="form" name="loginForm" [formGroup]="loginFormGroup">
+                    <div class="title">
+                        <h4>Login</h4>
+                    </div>
+                    <div class="content">
+                        <div class="row"
+                            *ngIf="loginForm.email.errors && (loginForm.email.dirty || loginForm.email.touched)">
+                            <div class="col-md-12">
+                                <app-required-validation-message [fieldName]="'Email'"
+                                    *ngIf="loginForm.email.errors.required"></app-required-validation-message>
+                                <app-format-validation-message [fieldName]="'Email'"
+                                    *ngIf="loginForm.email.errors?.pattern"></app-format-validation-message>
+                            </div>
+                        </div>
+                        <div class="input-group input-lg"
+                            [ngClass]="{'input-group-focus':focusEmail===true}">
+                            <input type="text" class="form-control" placeholder="Email..." formControlName="email">
+                        </div>
+                        <div class="row"
+                            *ngIf="loginForm.password.errors && (loginForm.password.dirty || loginForm.password.touched)">
+                            <div class="col-md-12">
+                                <app-required-validation-message [fieldName]="'Password'"
+                                    *ngIf="loginForm.password.errors.required"></app-required-validation-message>
+                                <app-format-validation-message [fieldName]="'Password'"
+                                    *ngIf="loginForm.password.errors?.pattern"></app-format-validation-message>
+                            </div>
+                        </div>
+                        <div class="input-group input-lg"
+                            [ngClass]="{'input-group-focus':focusPassword===true}">
+                            
+                            <input type="password" placeholder="Password..." class="form-control"
+                                 formControlName="password" />
+                        </div>
+                        
+                    </div>
+                    <div class="footer text-center">
+                        <button class="btn btn-danger btn-round btn-lg btn-block" 
+                        (click)="onSubmit()">Login</button>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right">
+                            <h6>
+                                <a (click)="openForgotPassword()" class="link">Forgot Password?</a>
+                            </h6>
+                        </div>
+                        <div class="pull-left">
+                            <h6>
+                                <a (click)="openSignup()" class="link">Create Account</a>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

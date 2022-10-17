@@ -1,0 +1,99 @@
+
+<div class="container-fluid">
+  <!-- <div class="button-container">
+        <a href="#button" class="btn btn-primary btn-round btn-lg">My Profiles</a>
+    </div> -->
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="row card portfolio">
+        <div class="col-md-12 custom-col-12">
+          <div class="row">
+            <div class="col-md-12" style="margin-top: 13px;">
+              <a [routerLink]="['/member/hunar_add']" class="btn btn-danger btn-round profile-label">Create New
+                Profile</a>
+              <!-- <a href="javascript:void()" class="btn btn-danger btn-round profile-label"><i class="fa fa-plus"></i>Create Profile</a> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <mat-vertical-stepper #stepper>
+                <mat-step *ngFor="let item of userProfiles;let i = index" [completed]="false">
+                  <ng-template class="row" matStepLabel>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="team-player img-custom">
+                          <br/>
+                          <img class="rounded img-fluid img-raised" *ngIf="item.ProfilePicture!==null"
+                            src="{{projectPath}}/{{projectFilePath}}/{{item.ProfileName}}/ProfileImages/{{item.ProfilePicture}}">
+                          <img class="rounded img-fluid img-raised" *ngIf="item?.ProfilePicture===null" src="./assets/img/default-avatar.png" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-9">
+                        <h4>{{item.ProfileName}}</h4>
+                        <p class='last-acc'>Last Accessed: {{item.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>
+                      </div>
+                    </div>
+                  </ng-template><br /><br />
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="portfolio-label">About Profile</div>
+                      <!-- <textarea class="form-control white-board" [attr.disabled]="true">
+                                            {{item.ProfileDescription}}
+                                        </textarea> -->
+                      <textarea class="txtarea-custom form-control"
+                        [(ngModel)]="item.ProfileDescription"  disabled="true">
+                      </textarea>
+                    </div>
+                  </div><br /><br />
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="portfolio-label">Skills</div>
+                    </div>
+                    <div class="col-md-10">
+                      <select class="select-css" disabled="true">
+                        <option selected="true" *ngIf="item.ProfileSkill!==null">{{item.ProfileSkill.name}}</option>
+                        <option selected="true"></option>
+                      </select>
+                      <br />
+                      <div class="pretty p-switch p-fill" *ngFor="let elem of item.ProfileExpertise;let i=index;">
+                        <input type="radio" disabled="true" checked value="true" />
+                        <div class="state p-success  p-fill">
+                          <label>{{elem.name}}</label>
+                        </div>
+                      </div>
+                      <!-- <input type="tex" class="form-control" [value]="item.ProfileExpertise" disabled="true"> -->
+
+                    </div>
+                  </div><br /><hr/><br />
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="portfolio-label">Linked Portfolios</div>
+                    </div>
+                    <div class="col-md-10" style="margin-top: 5px;">
+                      <div class="pretty p-switch p-fill" *ngFor="let elem of item.LinkedPortfolio;let i=index;">
+                        <input type="radio" disabled="true" checked value="true" />
+                        <div class="state p-success  p-fill">
+                          <label>{{elem.name}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div><br />
+                  <div class="row mt-top">
+                    <div class="col-md-12 flt-right">
+                      <button class="btn btn-primary btn-round btn-margin" (click)="openEdit(item.id)">Edit</button>&nbsp;
+                      <button mat-button class="btn btn-primary btn-round btn-margin reset-btn"
+                        (click)="DeleteProfile(item)" [disabled]='i===0'>Delete</button>
+                    </div>
+                  </div>  
+                </mat-step>
+              </mat-vertical-stepper>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>
+</div>

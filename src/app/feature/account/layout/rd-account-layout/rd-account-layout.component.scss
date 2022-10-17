@@ -1,0 +1,11 @@
+@media only screen and (max-width: 500px) {
+  .page-header-image.rellax-header {
+    background-position: initial !important;
+  }
+  .page-header.page-header-small{
+    min-height: unset;
+  }
+  .custom-label{
+      margin-top: 35px;
+  }
+}

@@ -1,0 +1,77 @@
+
+<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent"
+color-on-scroll="500" appBlockCopy>
+  <!-- LOGO -->
+  <div class="logo"><a [routerLink]="['/home']"><img src="assets/img/radian/logoBigTransparent.png" /></a></div>
+  <!-- NAVIGATION MENU -->
+  <ul class="nav-links" [ngClass]="isLoggedIn?'custom-nav-link':''">
+    <!-- USING CHECKBOX HACK -->
+    <input type="checkbox" id="checkbox_toggle" [checked]="_open" (click)="_open=_open==false?true:_open"/>
+    <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+    <!-- NAVIGATION MENUS -->
+    <div class="menu">
+      <li class="nav-item">
+        <div class="dropdown button-dropdown">
+          <div ngbDropdown>
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+              <!-- <i class="now-ui-icons business_bulb-63"></i> -->
+              <p class="navbar-font">ABOUT HUNAR</p>
+            </a>
+            <div ngbDropdownMenu>
+              <a class="nav-link dropdown-item" [routerLink]="['/our-purpose']" routerLinkActive="active" (click)="_open=false"><p  class="navbar-font">OUR PURPOSE</p></a>
+              <a class="nav-link dropdown-item" [routerLink]="['/our-process']" routerLinkActive="active" (click)="_open=false"><p  class="navbar-font">OUR PROCESS</p></a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="!isLoggedIn">
+        <a class="nav-link" [routerLink]="['/account/signup']" routerLinkActive="active" (click)="_open=false">
+          <!-- <i class="now-ui-icons tech_mobile"></i> -->
+          <p class="navbar-font">JOIN US</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/updates']" routerLinkActive="active" (click)="_open=false">
+          <!-- <i class="now-ui-icons users_single-02"></i> -->
+          <p class="navbar-font">EVENTS</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/search']" routerLinkActive="active"(click)="_open=false">
+          <!-- <i class="now-ui-icons users_single-02"></i> -->
+          <p class="navbar-font">SEARCH</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/conversations']" routerLinkActive="" (click)="_open=false">
+          <!-- <i class="now-ui-icons users_single-02"></i> -->
+          <p class="navbar-font">CONVERSATIONS</p>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <div class="dropdown button-dropdown nav-link">
+          <div ngbDropdown>
+            <a ngbDropdownToggle routerLinkActive="active" class="custom-link nav-link" (click)="_open=false">
+              <p class="navbar-font-logged-in">{{currentUser?.firstName }} {{currentUser?.lastName}}</p>
+            </a>
+            <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
+              <a class="nav-link dropdown-item" [routerLink]="['/member/hunar_view']" (click)="_open=false"><p class="navbar-font-logged-in">My Profiles</p></a>
+              <a class="nav-link dropdown-item" [routerLink]="['/member/portfolio_view']" (click)="_open=false"><p class="navbar-font-logged-in">My Portfolios</p></a>
+              <a class="nav-link dropdown-item" [routerLink]="['/member/event_view']" *ngIf="currentUser?.membershipDuration!=='Basic'" (click)="_open=false"><p class="navbar-font-logged-in">My Events</p></a>
+              <a class="nav-link dropdown-item" [routerLink]="['/member/my_account']" (click)="_open=false"><p class="navbar-font-logged-in">My Account</p></a>
+              <a class="nav-link dropdown-item" [routerLink]="['/member/setting_view']" (click)="_open=false"><p class="navbar-font-logged-in">Settings</p></a>
+              <a class="nav-link dropdown-item" (click)="logout()"><p class="navbar-font-logged-in">Logout</p></a>
+
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item" (click)="openDialog()" *ngIf="!isLoggedIn">
+        <a class="nav-link nav_custom">
+          <!-- <i class="now-ui-icons users_circle-08"></i> -->
+          <p class="navbar-font">LOGIN</p>
+        </a>
+      </li>
+    </div>
+  </ul>
+</nav>

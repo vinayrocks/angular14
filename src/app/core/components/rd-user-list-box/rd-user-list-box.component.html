@@ -1,0 +1,34 @@
+<div class="row mt-top" appBlockCopy>
+    <div class="col-md-12">
+      <h2 class="title" style="text-align: center">Interested Users</h2>
+      <div class="separator separator-primary" style="margin-bottom: 20px;"></div>
+    </div>
+</div>
+<div class="row mt-top" style="padding: 0px 20px 0px 20px;" appBlockCopy>
+    <div class="col-md-12">
+      <div class="row" style="margin-bottom: 20px">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th width=30%>Name</th>
+                    <th width=30%>Email</th>
+                    <th width=40%>Contact Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of userList">
+                    <td width=30%><a class="evt-name">{{item.FirstName}} {{item.LastName}}</a></td>
+                    <td width=30% class="evt-detail">{{item.Email}}</td>
+                    <td width=40%>{{item.userContactDetail.phoneCode}} {{item.userContactDetail.phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+<div class="progress-loader" [hidden]="!showData">
+    <div class="loading-spinner">
+        <img src="./assets/img/radian/loader.svg">
+        <span class="loading-message">Please wait...</span>
+    </div>
+</div>

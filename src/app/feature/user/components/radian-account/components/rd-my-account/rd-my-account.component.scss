@@ -1,0 +1,141 @@
+
+.row.card.portfolio{
+    margin-top:28px;
+}
+.portfolio-label{
+    margin-bottom: 10px;
+}
+.btn-round {
+    border-width: 1px;
+    border-radius: 0.1875rem !important;
+    padding: 13px 25px;
+}
+.form-group .form-control, .input-group .form-control{
+    padding: 12px 18px 12px 18px;
+}
+.lbl-custom{
+    font-weight: 700;
+}
+h4 {
+    color: #000;
+    font-family: 'Open Sans';
+    font-weight: 700;
+    margin-top: 0px;
+}
+.custom-event{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.mt-top{
+    margin-bottom: 18px;
+}
+.custom-label{
+    margin-top:5px
+}
+.custom-btn{
+    margin-top: 0;
+}
+h2{
+    margin-top:0px !important;
+}
+h4{
+    font-family:'Open Sans' !important;
+    font-size: 15px;
+    font-weight: 700;
+}
+.reset-btn{
+    background-color: #181F29;
+    margin-right:10px;
+}
+.last-acc{
+    font-family: 'Open Sans' !important;
+}
+.signUp-form-control{
+    margin-bottom: 10px !important;
+    border: 1px solid #2F3C4F !important;
+    background: #ffffff !important;
+    color: #181F29 !important;
+}
+.form-control:focus{
+    border: 2px solid #4AA0FF !important;
+    box-shadow: 0px 0px 2px 0px #4AA0FF !important;
+}
+::placeholder{
+    color: #181F29;
+    opacity: 0.7;
+}
+.card-register-membership label.form-check-label {
+    width: 100%;
+    border-radius: 5px;
+    text-align: center !important;
+    padding: 18px;
+    height: inherit;
+}
+@media only screen and (max-width: 500px) {
+    .card-register-membership.custom-set {
+      width:100%;
+      margin-bottom: 10px;
+    }
+    .custom-label{
+      margin-bottom: 35px;
+    }
+}
+.custom-set{
+    display: block;
+    width: 82px;
+    height: 229px;
+    /* background-color: gainsboro; */
+    cursor: pointer;
+    position: relative;
+    margin-top: 35px;
+}
+.custom-set input[type="radio"]{
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    display:none;
+}
+input[type="radio"]:checked + label{
+    border: #FF3636 2px solid;
+    background: #FF3636;
+    color: #fff !important;
+}
+input[type="radio"]:checked + label h4{
+    color: #fff !important;
+    font-weight: 700;
+}
+.form-check-label.card-label {
+    border: #111111 2px solid;
+    border-radius:30px !important;
+}
+.title.text-center{
+  padding:17px;
+}
+.signUp-form-control{
+    margin-bottom: 10px !important;
+    border: 0px !important;
+    background: #333333 !important;
+    color: #FFFFFF !important;
+  }
+.form-check-label.card-label h4{
+    margin-top: unset;
+}
+.mt-top-custom{
+    margin-top: 10px;
+}
+h4 {
+    color: #FF3636;
+    font-family: 'Open Sans';
+    font-weight: 700;
+}
+.card {
+    padding: 0px 25px 25px 25px;
+}
+.reset-btn{
+    background-color: #181F29;
+    margin-right:10px;
+}
+
+h5, h6{
+  font-family: 'Open Sans';
+}

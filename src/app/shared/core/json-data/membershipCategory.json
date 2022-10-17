@@ -1,0 +1,69 @@
+[
+  {
+    "Id":1,
+    "name": "Basic",
+    "amount": "",
+    "currency": "",
+    "planType": "Free",
+    "properties": [
+      "Create Multiple Profiles",
+      "Create Multiple Portfolios",
+      "Participate in Events",
+      "Storage Space: 500 MB"
+    ]
+  },
+  {
+    "Id":2,
+    "name": "Monthly",
+    "amount": "1",
+    "currency": "INR",
+    "planType": "",
+    "properties": [
+        "All Features of Basic",
+        "Create Multiple Events",
+        "View Analytics",
+        "Storage Space: 1 GB"
+    ]
+  },
+  {
+    "Id":3,
+    "name": "Quarterly",
+    "amount": "599",
+    "currency": "INR",
+    "planType": "",
+    "properties": [
+        "All Features of Basic",
+        "Create Multiple Events",
+        "View Analytics",
+        "Storage Space: 1 GB"
+    ]
+  },
+  {
+    "Id":4,
+    "name": "Semi Annual",
+    "amount": "1099",
+    "currency": "INR",
+    "planType": "",
+    "properties": [
+        "All Features of Basic",
+        "Create Multiple Events",
+        "View Analytics",
+        "Storage Space: 1 GB"
+    ]
+  },
+  {
+    "Id":5,
+    "name": "Annual",
+    "amount": "2099",
+    "currency": "INR",
+    "planType": "",
+    "properties": [
+        "All Features of Basic",
+        "Create Multiple Events",
+        "View Analytics",
+        "Storage Space: 1 GB"
+    ]
+  }
+  
+
+]

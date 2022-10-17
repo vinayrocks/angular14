@@ -1,0 +1,570 @@
+<div class="section section-team">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 card">
+                <form name="registerForm" class="registerForm" [formGroup]="registerFormGroup">
+                    <h4>Register as</h4><br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="pretty p-switch p-fill">
+                                <input type="radio" name="isUser" checked [value]="true" formControlName="isUser" 
+                                (change)="changeUserType($event)"/>
+                                <div class="state p-success">
+                                    <label>Individual</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="pretty p-switch p-fill">
+                                <input type="radio" name="isUser" [value]="false" formControlName="isUser" 
+                                (change)="changeUserType($event)"/>
+                                <div class="state p-success">
+                                    <label>Business</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 *ngIf="!registerForm.isUser.value">Organization Info</h4>
+                    <hr/>
+                    <div class="row" *ngIf="!registerForm.isUser.value">
+                        <div class="col-md-6">
+                            <label class="lbl-custom">Organization Name*</label>
+                            <div class="row"
+                                *ngIf="!registerForm.isUser.value && registerForm.organizationName.errors && (registerForm.organizationName.dirty || registerForm.organizationName.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Organization Name'"
+                                        *ngIf="registerForm.organizationName.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control"
+                                    formControlName="organizationName">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="lbl-custom">TIN/GSTIN Number</label>
+                            <div class="row"
+                                *ngIf="!registerForm.isUser.value && registerForm.uniqueNumber.errors && (registerForm.uniqueNumber.dirty || registerForm.uniqueNumber.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'TIN/GSTIN Number'"
+                                        *ngIf="registerForm.uniqueNumber.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control"
+                                    formControlName="uniqueNumber" maxlength="15">
+                            </div>
+                        </div>
+                    </div>
+                    <h4 *ngIf="registerForm.isUser.value">Full Name</h4>
+                    <h4 *ngIf="!registerForm.isUser.value">Contact Person Name</h4>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lbl-custom">First Name*</label>
+                            <div class="row"
+                                *ngIf="registerForm.firstName.errors && (registerForm.firstName.dirty || registerForm.firstName.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'First Name'"
+                                        *ngIf="registerForm.firstName.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control"
+                                    formControlName="firstName">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="lbl-custom">Middle Name</label>
+                            <div class="row"
+                                *ngIf="registerForm.middleName.errors && (registerForm.middleName.dirty || registerForm.middleName.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Middle Name'"
+                                        *ngIf="registerForm.middleName.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control"
+                                    formControlName="middleName">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="lbl-custom">Last Name*</label>
+                            <div class="row"
+                                *ngIf="registerForm.lastName.errors && (registerForm.lastName.dirty || registerForm.lastName.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Last Name'"
+                                        *ngIf="registerForm.lastName.errors.required"></app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control"
+                                    formControlName="lastName">
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Primary Address</h4>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lbl-custom">Country*</label>
+                            <div class="row"
+                                *ngIf="registerForm.country.errors && (registerForm.country.dirty || registerForm.country.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Country'"
+                                        *ngIf="registerForm.country.errors.required"></app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <select class="select-css" formControlName="country" name="country" (change)="getStates($event.target.value)">
+                                    <option value="" [disabled]="true" [selected]="true">Select</option>
+                                    <option *ngFor="let item of countryState" value="{{item.country}}">
+                                        {{item.country}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="lbl-custom">Apt/Street*</label>
+                            <div class="row"
+                                *ngIf="registerForm.street.errors && (registerForm.street.dirty || registerForm.street.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Apt/Street'"
+                                        *ngIf="registerForm.street.errors.required"></app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control"
+                                    formControlName="street">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="lbl-custom">City*</label>
+                            <div class="row"
+                                *ngIf="registerForm.city.errors && (registerForm.city.dirty || registerForm.city.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'City'"
+                                        *ngIf="registerForm.city.errors.required"></app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control"
+                                    formControlName="city">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lbl-custom">State*</label>
+                            <div class="row"
+                                *ngIf="registerForm.state.errors && (registerForm.state.dirty || registerForm.state.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'State'"
+                                        *ngIf="registerForm.state.errors.required"></app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <select class="select-css" formControlName="state" name="state">
+                                    <option value="" [disabled]="true" [selected]="true">Select</option>
+                                    <option *ngFor="let item of state" value="{{item}}">
+                                        {{item}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="lbl-custom">Zip / Pin Code*</label>
+                            <div class="row"
+                                *ngIf="registerForm.zip.errors && (registerForm.zip.dirty || registerForm.zip.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Zip/Pincode'"
+                                        *ngIf="registerForm.zip.errors.required"></app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="select" class="signUp-form-control form-control"
+                                    formControlName="zip" maxlength="7">
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Contact Numbers</h4>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row" *ngIf="(registerForm.mobileCountryCode.errors &&
+                            (registerForm.mobileCountryCode.dirty || registerForm.mobileCountryCode.touched))">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Code'"
+                                        *ngIf="registerForm.mobileCountryCode.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="row"
+                                *ngIf="(registerForm.cell.errors && (registerForm.cell.dirty || registerForm.cell.touched))">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Mobile Number'"
+                                        *ngIf="registerForm.cell.errors.required">
+                                    </app-required-validation-message>
+                                    <app-format-validation-message [fieldName]="'Mobile Number'"
+                                        *ngIf="registerForm.cell.errors?.pattern"></app-format-validation-message>
+                                </div>
+                            </div>
+                            <label class="lbl-custom">Mobile Number*</label>
+                            <div class="input-group">
+                                <select class="col-md-3 signUp-form-control form-control" formControlName="mobileCountryCode" name="mobileCountryCode">
+                                    <option value="" [disabled]="true" [selected]="true">Select</option>
+                                    <option *ngFor="let item of countryCode" value="{{item.dial_code}}">
+                                        {{item.code}} - ({{item.dial_code}})
+                                    </option>
+                                </select>
+                                <input type="text" maxlength="10" class="col-md-9
+                                 signUp-form-control form-control" formControlName="cell">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="lbl-custom">Alternate Mobile Number</label>
+                            <div class="input-group">
+                                <select class="col-md-3 signUp-form-control form-control" formControlName="altMmobileCountryCode" name="altMmobileCountryCode">
+                                    <option value="" [disabled]="true" [selected]="true">Select</option>
+                                    <option *ngFor="let item of countryCode" value="{{item.dial_code}}">
+                                        {{item.code}} - ({{item.dial_code}})
+                                    </option>
+                                </select>
+                                <input type="text" maxlength="10" class="col-md-9
+                                 signUp-form-control form-control" formControlName="altMobileNumber">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <h4>Prefered Membership Category</h4>
+                    <hr/>
+                    <div class="row"
+                        *ngIf="registerForm.memberShip.errors && (registerForm.memberShip.dirty || registerForm.memberShip.touched)">
+                        <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'MemberShip'"
+                                *ngIf="registerForm.memberShip.errors.required"></app-required-validation-message>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card-register-membership custom-set"  [ngClass]="membership.length>1 ? 'col-md-4' : 'col-md-12 db-center'" 
+                        *ngFor="let item of membership;let i=index;">
+                            <input #radioBtn id="radio{{i}}" type="radio" value="{{item.Id}}" formControlName="memberShip" (change)="onSelectMembership($event,item)">
+                            <label class="form-check-label card-label" for="radio{{i}}">
+                                <h4>{{item.name}}</h4>
+                                <h5>{{item.currency}} {{item.amount}}</h5><br />
+                                <h6 class="cstm-h6" *ngFor="let propItem of item.properties">{{propItem}}</h6>
+                                <span class="form-check-sign"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <br/>
+                    <h4>Create Login</h4>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lbl-custom">Email*</label>
+                            <div class="row"
+                                *ngIf="registerForm.email.errors && (registerForm.email.dirty || registerForm.email.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Email'"
+                                        *ngIf="registerForm.email.errors.required"></app-required-validation-message>
+                                    <app-format-validation-message [fieldName]="'Email'"
+                                        *ngIf="registerForm.email.errors?.pattern"></app-format-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control" formControlName="email" (blur)="checkEmailExists()">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="lbl-custom">Password*</label>
+                            <div class="row"
+                                *ngIf="registerForm.password.errors && (registerForm.password.dirty || registerForm.password.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Password'"
+                                        *ngIf="registerForm.password.errors.required"></app-required-validation-message>
+                                    <app-format-validation-message [fieldName]="'Password'"
+                                        *ngIf="registerForm.password.errors?.pattern"></app-format-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="password" class="signUp-form-control form-control" 
+                                    formControlName="password">
+                            </div>
+                        </div>
+                        <div class="col-md-4 custom-label" style="font-size: 12px;">
+                            <span><b>Password Requirements</b></span>
+                            <ul>
+                                <li>Is longer than 7 characters</li>
+                                <li>Should not match your username</li>
+                                <li>Should contain 1 Capital letter</li>
+                                <li>Should contain atlease 1 Special Character [!@#$%*]</li>
+                            </ul>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4" style="margin-top: -40px;">
+                            <label class="lbl-custom">Re-enter Password*</label>
+                            <div class="row"
+                                *ngIf="registerForm.confirmPassword.errors && (registerForm.confirmPassword.dirty || registerForm.confirmPassword.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Confirm Password'"
+                                        *ngIf="registerForm.confirmPassword.errors.required">
+                                    </app-required-validation-message>
+                                    <app-notmatched-validation-message [fieldName]="'Confirm Password'"
+                                        *ngIf="registerForm.password.value!==registerForm.confirmPassword.value">
+                                    </app-notmatched-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="password" class="signUp-form-control form-control"
+                                    formControlName="confirmPassword">
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Skills / Interests </h4>
+                    <hr/>
+                    <p style="margin-bottom: 0px;">[ Select your skillset. Upon registration, you will get to create
+                        multiple profiles. ]</p><br />
+                    <div class="row">
+                        <div class="col-md-5">
+                            <select class="select-css" matNativeControl placeholder="Specialities / Interests"
+                                formControlName="profileSkill" (change)="getSkillSubCategory($event.target.value)">
+                                <option value="" [selected]="true" [disabled]="true">Specialities / Interests*</option>
+                                <option *ngFor="let item of skills" value="{{item.radianSkillCategoryId}}">
+                                    {{item.radianSkillCategoryName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-7"
+                            *ngIf="registerForm.profileSkill.errors && (registerForm.profileSkill.dirty || registerForm.profileSkill.touched)">
+                            <app-required-validation-message [fieldName]="'Skill Category'"
+                                *ngIf="registerForm.profileSkill.errors.required"></app-required-validation-message>
+                        </div>
+                    </div><br />
+                    <div class="row" *ngIf="registerForm.profileSkillSubCategory.errors && (registerForm.profileSkillSubCategory.dirty
+                                 || registerForm.profileSkillSubCategory.touched)">
+                        <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Sub-Category'"
+                                *ngIf="registerForm.profileSkillSubCategory.errors.required">
+                            </app-required-validation-message>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pretty p-switch p-fill" *ngFor="let item of skillsSubcategory;let i=index;">
+                                <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)" />
+                                <div class="state p-success">
+                                    <label>{{item.subCategoryName}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <h4 matStepLabel>Payment Details</h4><br />
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="row"
+                                *ngIf="registerForm.cardName.errors && (registerForm.cardName.dirty || registerForm.cardName.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Name On Card'"
+                                        *ngIf="registerForm.cardName.errors.required"></app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control" placeholder="Name On Card"
+                                    formControlName="cardName">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row"
+                                *ngIf="registerForm.cardNumber.errors && (registerForm.cardNumber.dirty || registerForm.cardNumber.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Card Number'"
+                                        *ngIf="registerForm.cardNumber.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control" placeholder="Card Number"
+                                    formControlName="cardNumber">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row"
+                                *ngIf="registerForm.cardSecurity.errors && (registerForm.cardSecurity.dirty || registerForm.cardSecurity.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'CVV'"
+                                        *ngIf="registerForm.cardSecurity.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="password" class="signUp-form-control form-control" placeholder="******"
+                                    formControlName="cardSecurity">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row"
+                                *ngIf="registerForm.cardExpiry.errors && (registerForm.cardExpiry.dirty || registerForm.cardExpiry.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Card Expiry'"
+                                        *ngIf="registerForm.cardExpiry.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control" placeholder="Month/Year"
+                                    formControlName="cardExpiry">
+                            </div>
+                        </div>
+                    </div> -->
+                    <h4>Billing Address</h4>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- <h5><a target="_blank" [routerLink]="['/radian/term-of-use']"></a></h5> -->
+                            <div class="row"
+                                *ngIf="registerForm.billingAddress.errors && (registerForm.billingAddress.dirty || registerForm.billingAddress.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Billing Address'"
+                                        *ngIf="registerForm.billingAddress.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <label class="form-check-label">
+                                <input type="checkbox" formControlName="billingAddress" (change)="setBilingAddress()">
+                                Billing Address is same as my Primary Address given above.
+                                <span class="form-check-sign"></span>
+                            </label><br />
+                        </div>
+                    </div><br />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lbl-custom">Country*</label>
+                            <div class="row"
+                                *ngIf="registerForm.billCountry.errors && (registerForm.billCountry.dirty || registerForm.billCountry.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Billing Country'"
+                                        *ngIf="registerForm.billCountry.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <select class="select-css" formControlName="billCountry" name="billCountry"
+                                    placeholder="Country*" (change)="getBillingStates($event.target.value)">
+                                    <option value="" [disabled]="true" [selected]="true">Select</option>
+                                    <option *ngFor="let item of countryState" value="{{item.country}}">
+                                        {{item.country}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="lbl-custom">Apt/Street*</label>
+                            <div class="row"
+                                *ngIf="registerForm.billStreet.errors && (registerForm.billStreet.dirty || registerForm.billStreet.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Billing Apt/Street'"
+                                        *ngIf="registerForm.billStreet.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control"
+                                formControlName="billStreet">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="lbl-custom">City*</label>
+                            <div class="row"
+                                *ngIf="registerForm.billCity.errors && (registerForm.billCity.dirty || registerForm.billCity.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Billing City'"
+                                        *ngIf="registerForm.billCity.errors.required"></app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control"
+                                    formControlName="billCity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="lbl-custom">State*</label>
+                            <div class="row"
+                                *ngIf="registerForm.billState.errors && (registerForm.billState.dirty || registerForm.billState.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Billing State'"
+                                        *ngIf="registerForm.billState.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <select class="select-css" formControlName="billState" name="billState"
+                                    placeholder="State*">
+                                    <option value="" [disabled]="true" [selected]="true">Select</option>
+                                    <option *ngFor="let item of state" value="{{item}}">
+                                        {{item}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="lbl-custom">Zip / Pin Code*</label>
+                            <div class="row"
+                                *ngIf="registerForm.billZip.errors && (registerForm.billZip.dirty || registerForm.billZip.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Billing Zip/Pincode'"
+                                        *ngIf="registerForm.billZip.errors.required"></app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="select" class="signUp-form-control form-control"
+                                    formControlName="billZip">
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Terms & Condition</h4>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a target="_blank" [routerLink]="['/radian/term-of-use']">Click here to read Hunar Terms &
+                                Condition.</a><br /><br />
+                            <div class="row"
+                                *ngIf="registerForm.termCondition.errors && (registerForm.termCondition.dirty || registerForm.termCondition.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Term & Condition'"
+                                        *ngIf="registerForm.termCondition.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <label class="form-check-label">
+                                <input type="checkbox" formControlName="termCondition">
+                                I have read and agree to Hunar Terms & Conditions.
+                                <span class="form-check-sign"></span>
+                            </label>
+                        </div>
+                    </div><br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button mat-button class="btn btn-danger btn-round btn-margin reset-btn"
+                                (click)="reset()">Reset</button>
+                            <button class="btn btn-danger btn-round btn-float-right"
+                                (click)="onSubmit()">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

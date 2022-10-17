@@ -1,0 +1,159 @@
+<div class="section section-team">
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 card">
+                <div class="page-header page-header-small" filter-color="orange">
+                    <div class="page-header-image rellax-header custom-cover" data-rellax-speed="0">
+                        <img src="{{CoverPicture}}" alt="" *ngIf="CoverPicture!==''" class="custom-cover">
+                        <img src="./assets/img/default-cover-picture.jpg" alt="" *ngIf="CoverPicture===''" class="custom-cover">
+                    </div>
+                </div>
+                <br/>
+                <div class="team custom-paragraph">
+                    <div class="row"  style="margin-right: 0px; margin-left: 0px;">
+                        <div class="col-md-12">
+                            <h2 class="title" style="text-align: center">{{radianDetail.EventName}}</h2>
+                            <div class="separator separator-primary"></div>
+                        </div>
+                    </div>
+                    <div class="row"  style="margin-right: 0px; margin-left: 0px;">
+                        <div class="col-md-6">
+                            <p><img class="custom-clock" src="./assets/img/radian/lastAccessed.png">&nbsp;<label class="like-count-text-accessed">{{radianDetail.ModifiedDate|date:'dd MMM yyyy'}} at {{radianDetail.ModifiedDate|date:'hh:mm'}}</label></p>
+                        </div>
+                        <div class="col-md-6 custom-align">
+                            <table>
+
+                                <tr>
+                                    <td>
+                                        <div class="custom-like"><label class="like-count-text">{{radianDetail.LikeCount}}</label>&nbsp;&nbsp;</div>
+                                    </td>
+                                    <td *ngIf="radianLikeData.UserId!==''">
+                                        <a class="a-btn a-click" (click)="likeRadianEvent(true,radianDetail)" *ngIf="!UserLiked">
+                                            <img src="./assets/img/radian/like-icon.png">
+                                        </a>
+                                        <a class="a-btn a-click" (click)="likeRadianEvent(false,radianDetail)" *ngIf="UserLiked">
+                                            <img src="./assets/img/radian/like-icon-filled.png">
+                                        </a>&nbsp;
+                                        <a class="a-btn a-click" (click)="getShareLink()"><img class="custom-margin-icon" src="./assets/img/radian/shareIcon.png"></a>
+                                    </td>
+                                    <td *ngIf="radianLikeData.UserId===''">
+                                        <a class="a-btn" *ngIf="radianDetail.LikeCount==='0'">
+                                            <img src="./assets/img/radian/like-icon.png">
+                                        </a>
+                                        <a class="a-btn" *ngIf="radianDetail.LikeCount!=='0'">
+                                            <img src="./assets/img/radian/like-icon-filled.png">
+                                        </a>&nbsp;
+                                        <a class="a-btn a-click">
+                                            <img class="custom-margin-icon" src="./assets/img/radian/shareIcon.png">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- <div class="row" style="margin-right: 0px; margin-left: 0px;">
+                        <div class="col-md-2">
+                            <div class="portfolio-label">Event Status</div>
+                        </div>
+                          <div class="col-md-10">
+                            <div class="pretty p-switch p-fill">
+                              <input type="radio" disabled="true" [checked]="radianDetail.EventStatus"/>
+                              <div class="state p-success">
+                                <label>Active/De-active</label>
+                              </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="row"  style="margin-right: 0px; margin-left: 0px;">
+                        <div class="col-md-12 custom-editor">
+                            <!-- <h6>Event Description</h6> -->
+                            <textarea  class="txtarea-custom" [attr.disabled]="true" rows="8"
+                                [(ngModel)]="radianDetail.EventDescription" >
+                            </textarea>
+                            <!-- <p class="text-primary">{{radianDetail.EventDescription}}</p> -->
+                        </div>
+                    </div><br />
+                    <!-- <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="title">Event Categories</h5>
+                            <div class="pretty p-switch p-fill" *ngFor="let elem of radianDetail.EventCategories;let i=index;">
+                                <input type="radio" name="switch{{i+1}}" disabled="true" checked [value]="true"/>
+                                <div class="state p-success p-fill">
+                                    <label>{{elem.name}}</label>
+                                </div>
+                            </div>
+                            <p class="p-skill">
+                              <label *ngFor="let child of radianDetail.EventCategories">
+                                  {{child.name}}
+                              </label>
+                            </p>
+                        </div>
+                    </div><br /> -->
+                    <div class="row"  style="margin-right: 0px; margin-left: 0px;">
+                        <div class="col-md-12">
+                            <h5 class="title">Media</h5><br/>
+                            <div class="row">
+                                <div class="col-md-3" *ngFor="let elem of radianDetail.EventImages;let i=index;">
+                                    <div class="custom-photo-container">
+                                        <img src="{{elem.Name}}" alt="" class="img-raised" title="" (click)='openImageDialog(radianDetail.EventImages,i)'
+                                        *ngIf="elem.IsImage==='image'">
+                                        <a href="{{elem.Name}}" *ngIf="elem.IsImage==='pdf'" target="_blank">
+                                            <img src="assets/img/radian/document.png" alt="" class="img-raised">
+                                        </a>
+                                        <div *ngIf="elem.IsImage==='video'" class="video">
+                                            <img src="{{elem.Image}}" (click)='openImageDialog(radianDetail.EventImages,i)'>
+                                            <a></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br /><br />
+                    <div class="row"  style="margin-right: 0px; margin-left: 0px;">
+                        <div class="col-md-3">
+                            <div class="portfolio-label">Hosted by</div>
+                        </div>
+                        <div class="col-md-9">
+                            <p class=" text-primary">{{radianDetail.FirstName}} {{radianDetail.LastName}}</p>
+                        </div>
+                    </div>
+                    <div class="row"  style="margin-right: 0px; margin-left: 0px;" *ngIf="radianDetail.IsEmailShown==='true'">
+                        <div class="col-md-3">
+                            <div class="portfolio-label">Email Id</div>
+                        </div>
+                        <div class="col-md-9">
+                            <p class=" text-primary">{{radianDetail.Email}}</p>
+                        </div>
+                    </div>
+                    <div class="row"  style="margin-right: 0px; margin-left: 0px;" *ngIf="radianDetail.IsContactNumberShown==='true'">
+                        <div class="col-md-3">
+                            <div class="portfolio-label">Contact Details</div>
+                        </div>
+                        <div class="col-md-9">
+                            <p class=" text-primary">
+                                {{radianDetail.ContactDetails?.cellCode}}-{{radianDetail.ContactDetails?.cell}}</p>
+                        </div>
+                    </div><br />
+                    <div class="row"  style="margin-right: 0px; margin-left: 0px;" *ngIf="radianDetail.IsAddressShown==='true'">
+                        <div class="col-md-3">
+                            <div class="portfolio-label">Address</div>
+                        </div>
+                        <div class="col-md-9">
+                            <p class=" text-primary">
+                                {{radianDetail.EventLocation?.street}},{{radianDetail.EventLocation?.city}},
+                                {{radianDetail.EventLocation?.state}},{{radianDetail.EventLocation?.zip}},{{radianDetail.EventLocation?.country}}</p>
+                        </div>
+                    </div><br />
+                    <div class="row"  style="margin-right: 0px; margin-left: 0px;text-align: center;">
+                        <div class="col-md-12" *ngIf="radianDetail.EventStatus">
+                            <button class="btn btn-primary btn-round btn-margin" *ngIf="radianLikeData.UserId===''" (click)="welcomeMessage()">I'm Interested</button>&nbsp;
+                            <button class="btn btn-primary btn-round btn-margin" *ngIf="radianLikeData.UserId!==radianDetail.UserId && radianLikeData.UserId!==''" (click)="addEventParticipation()">I'm Interested</button>&nbsp;
+                            <button class="btn btn-primary btn-round btn-margin" *ngIf="radianLikeData.UserId!=='' && UserInterested">Already Interested</button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

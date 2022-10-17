@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="slider" [ngClass]="isCustomHeader ? 'custom-header' : ''">
+        <div class="box1 box">
+            <div class="bg page-header-image page-header-small rellax-header" style="background-image: url('assets/img/bg_rd1.jpg');"></div>
+            <div class="details">
+                <h1 class="custom-h1">Dream bold.........</h1>
+                <p class="custom-p1">
+                    and let us/we will help get your work sold.
+                </p><br/>
+                <button (click)="joinUs()" class="custom-btn btn btn-danger btn-round">Join Us</button>
+            </div>
+
+            <!-- <div class="illustration"><div class="inner"></div></div> -->
+        </div>
+
+
+        <div class="box2 box">
+            <div class="bg page-header-image page-header-small rellax-header" style="background-image: url('assets/img/rd_bg2.jpg');"></div>
+            <div class="details">
+                <h1>Perform your best...</h1>
+                <p>
+                    and let us help sell it to the best.
+                </p><br/>
+                <button (click)="joinUs()" class="btn btn-danger btn-round">Join Us</button>
+            </div>
+
+            <!-- <div class="illustration"><div class="inner"></div></div> -->
+        </div>
+
+        <div class="box3 box">
+            <div class="bg page-header-image page-header-small rellax-header" style="background-image: url('assets/img/rd_bg3.jpg');"></div>
+            <div class="details">
+                <h1 class="custom-header-h1">Pen the poetry from your heart...</h1>
+                <p>
+                    Give your dreams a vision and let us aid in showcasing and selling them beyond the horizon..
+                </p><br/>
+                <button (click)="joinUs()" class="btn btn-danger btn-round">Join Us</button>
+            </div>
+
+            <!-- <div class="illustration"><div class="inner"></div></div> -->
+        </div>
+    </div>
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" class="prev" 
+[ngClass]="isCustomHeader ? 'custom-header' : ''" width="56.898" height="91" viewBox="0 0 56.898 91"><path d="M45.5,0,91,56.9,48.452,24.068,0,56.9Z" transform="translate(0 91) rotate(-90)" fill="#fff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="next" 
+[ngClass]="isCustomHeader ? 'custom-header' : ''" width="56.898" height="91" viewBox="0 0 56.898 91"><path d="M45.5,0,91,56.9,48.452,24.068,0,56.9Z" transform="translate(56.898) rotate(90)" fill="#fff"/></svg>
+<!-- <div class="trail">
+        <div class="box1 active">1</div>
+        <div class="box2">2</div>
+        <div class="box3">3</div>
+</div> -->

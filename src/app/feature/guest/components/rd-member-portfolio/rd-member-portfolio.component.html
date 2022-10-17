@@ -1,0 +1,71 @@
+<div class="wrapper">
+    <div class="page-header page-header-small" filter-color="orange">
+        <div class="page-header-image rellax-header custom-cover" data-rellax-speed="0">
+            <img src="{{portfolioDetail.userPortfolioAttachment[0].Name}}" alt="">
+            <img src="{{portfolioDetail.userPortfolioAttachment[0].Name}}" alt="" class="img-raised" title=""
+            *ngIf="portfolioDetail.userPortfolioAttachment[0].IsImage==='image'">
+            <a *ngIf="portfolioDetail.userPortfolioAttachment[0].IsImage==='pdf'">
+                <img src="assets/img/radian/document.png" alt="" class="img-raised">
+            </a>
+            <div *ngIf="portfolioDetail.userPortfolioAttachment[0].IsImage==='video'" class="video">
+                <img src="{{portfolioDetail.userPortfolioAttachment[0].Image}}">
+                <a></a>
+            </div>
+        </div>
+    </div>
+    <div class="section section-team" style="background: url('./assets/img/home-section-01-bg.jpg')">
+        <div class="container-fluid">
+            <!-- <h2 class="title">How It Works</h2> -->
+            <div class="team custom-paragraph">
+                <h2 class="title" style="text-align: center">{{portfolioDetail.userPortfolioName}}</h2>
+                <!-- <p class="last-acc">Last Updated:{{portfolioDetail.userPortfolioModifiedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p> -->
+                <div class="separator separator-primary"></div>
+                <div class="row"  style="margin-right: 0px; margin-left: 0px;">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <!-- <div class="col-md-3">
+                                <div class="portfolio-label custom-desc">Description</div>
+                            </div> -->
+                            <div class="col-md-12 custom-editor">
+                                <textarea [attr.disabled]="true"
+                                            [(ngModel)]="portfolioDetail.userPortfolioDescription"  disabled="true">
+                                </textarea>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="portfolio-label">Media</div>
+                            </div>
+                        </div><br/>
+                        <div class="row">
+                            <div class="col-md-2"
+                                *ngFor="let elem of portfolioDetail.userPortfolioAttachment;let i=index;">
+                                <div class="custom-photo-container">
+                                    <!-- <img src="{{elem}}"
+                                        alt="" class="img-raised" title=""
+                                        (click)='openImageDialog(portfolioDetail.userPortfolioAttachment,i)'
+                                        *ngIf="(elem.indexOf('youtu.be')===-1 && elem.indexOf('youtube')===-1) && elem.indexOf('pdf')===-1">
+                                    <img src="assets/img/radian/document.png" alt=""
+                                        class="img-raised"
+                                        *ngIf="(elem.indexOf('youtu.be')===-1 && elem.indexOf('youtube')===-1)  && elem.indexOf('pdf')!==-1">
+                                    <div [innerHtml]="getVideo(elem)"
+                                        *ngIf="(elem.indexOf('youtu.be')!==-1 || elem.indexOf('youtube')!==-1)"></div> -->
+                                    <img src="{{elem.Name}}" alt="" class="img-raised" title="" 
+                                    (click)='openImageDialog(portfolioDetail.userPortfolioAttachment,i)'
+                                    *ngIf="elem.IsImage==='image'">
+                                    <a href="{{elem.Name}}" *ngIf="elem.IsImage==='pdf'" target="_blank">
+                                        <img src="assets/img/radian/document.png" alt="" class="img-raised">
+                                    </a>
+                                    <div *ngIf="elem.IsImage==='video'" class="video">
+                                        <img src="{{elem.Image}}" (click)='openImageDialog(portfolioDetail.userPortfolioAttachment,i)'>
+                                        <a></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

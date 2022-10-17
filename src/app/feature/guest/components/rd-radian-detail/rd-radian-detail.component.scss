@@ -1,0 +1,96 @@
+.content-header{
+    color:#b39595;
+}
+.txtarea-custom {
+  overflow: auto;
+  resize: vertical;
+  width: 100%;
+  margin-top: 15px;
+  padding: 5px 12px;
+  border-radius: 8px;
+}
+.custom-cover{
+  border-radius:8px;
+}
+.custom-margin-icon{
+  margin-top: 3px;
+}
+.like-count-text{
+  display: inline-block;
+  margin-bottom: 0px;
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.custom-clock{
+  height: 20px;
+  width: 20px;
+}
+.like-count-text-accessed {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.card {
+  border: 0;
+  padding: 25px;
+  border-radius: 0.1875rem;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0px 5px 25px 0px rgb(0 0 0 / 20%);
+}
+.p-skill label{
+  //border-radius: 10px;
+  //padding: 5px 8px 5px 8px;
+  margin-right: 20px;
+  font-weight: 900;
+  //border: 2px solid;
+}
+
+h5.title{
+  font-family: 'Open Sans';
+  margin-top: 10px;
+  text-align: left;
+}
+.like-btn{
+  background-color: #FF3636;
+  color:#ffffff;
+  margin-right:10px
+}
+.share-btn{
+  background-color: #111111;
+  color:#ffffff;
+}
+.center-center{
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  margin-bottom: 30px;;
+}
+.custom-align{
+  text-align: end;
+}
+.custom-align img{
+  height:25px;
+  max-height:25px;
+}
+.custom-cover img{
+  max-height: 400px;
+  min-height: auto;
+  height: inherit;
+  width: inherit;
+}
+table {
+  float:right;
+}
+.a-btn:hover{
+  color:#FF3636;
+  cursor: pointer;
+}
+
+

@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="row card portfolio">
+            <div class="tab-content">
+                <form class="form mb-search" name="addSettingForm" [formGroup]="addSettingFormGroup">
+                    <!--<p class="last-acc">Last Accessed: {{data| date:'MM/dd/yyyy hh:mm:ss'}}</p><br/>-->
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="pretty p-switch">
+                                <div class="pretty p-switch">
+                                    <input type="checkbox" name="IsViewerProfileShown"
+                                    formControlName="IsViewerProfileShown" [value]="true" [checked]="currentUser.isViewerProfileShown"/>
+                                    <div class="state p-success">
+                                        <label>Display my profile to all Hunar viewers</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="pretty p-switch">
+                                <input type="checkbox" name="IsRadianMemberProfileShown" 
+                                 formControlName="IsRadianMemberProfileShown" [value]="true" [checked]="currentUser.isRadianMemberProfileShown"/>
+                                <div class="state p-success  p-fill">
+                                    <label>Display my profile to only the Registered Members on Hunar</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br/>
+                    <h4>My Contact Details</h4><br/>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="pretty p-switch">
+                                <input type="checkbox" name="IsMailingAddressShown" 
+                                formControlName="IsMailingAddressShown" [value]="true" [checked]="currentUser.isMailingAddressShown"/>
+                                <div class="state p-success  p-fill">
+                                    <label>Display Address</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pretty p-switch">
+                                <input type="checkbox" name="IsAddressShown" 
+                                formControlName="IsAddressShown" [value]="true" [checked]="currentUser.isAddressShown"/>
+                                <div class="state p-success  p-fill">
+                                    <label>Display Contact Numbers</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pretty p-switch">
+                                <input type="checkbox" name="IsEmailShown" 
+                                    formControlName="IsEmailShown" [value]="true" [checked]="currentUser.isEmailShown"/>
+                                <div class="state p-success  p-fill">
+                                    <label>Display Email</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-md-12 flt-right">
+                          <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Submit</button>
+                        </div>
+                      </div>
+                </form>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+  </div>
+
+</div>

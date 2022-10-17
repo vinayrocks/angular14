@@ -1,0 +1,205 @@
+<div class="container-fluid">
+  <!-- <div class="button-container">
+    <a href="#button" class="btn btn-primary btn-round btn-lg">Edit Profile</a>
+  </div> -->
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+      <div class="row card portfolio">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- <a [routerLink]="['/member/radian_add']" class="btn btn-danger btn-round profile-label"><i class="fa fa-plus"></i>Create Profile</a> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <form class="form mb-search" name="editRadianForm" [formGroup]="editRadianFormGroup">
+                <div class="container-fluid">
+                  <div class="portfolio-label">Profile Name</div>
+                  <div class="row mt-top">
+                    <div class="col-md-12">
+                      <div class="input-group">
+                        <input type="text" class="signUp-form-control form-control" placeholder="Profile Name"
+                          formControlName="ProfileName" [attr.disabled]="true">
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <br>
+                  <div class="row mt-top"
+                    *ngIf="editRadianForm.ProfilePicture.errors && (editRadianForm.ProfilePicture.dirty || editRadianForm.ProfilePicture.touched)">
+                    <div class="col-md-12">
+                      <app-required-validation-message [fieldName]="'Image'"
+                        *ngIf="editRadianForm.ProfilePicture.errors.required"></app-required-validation-message>
+                    </div>
+                  </div>
+                  <div class="row mt-top">
+                    <div class="col-md-2 custom-label">
+                      <div class="portfolio-label">Profile Picture</div>
+                    </div>
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-3 custom-margin">
+                          <input type="file" (change)="fileChangeEvent($event)" />
+                        </div>
+                        <div class="col-md-9 custom-img-container">
+                          <div class="custom-photo-container">
+                            <img *ngIf="userProfile.ProfilePicture!==null"
+                              src="{{projectPath}}/{{projectFilePath}}/{{userProfile.ProfileName}}/ProfileImages/{{userProfile.ProfilePicture}}">
+                            <img class="rounded img-fluid img-raised" *ngIf="userProfile?.ProfilePicture===null"
+                              src="./assets/img/default-avatar.png" alt="">
+                            <i class="fa fa-bin"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="isUploaded">
+                        <div class="col-md-8">
+                          <h6>Crop Image</h6>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <image-cropper class="border-custom" [imageChangedEvent]="imageChangedEvent"
+                                [maintainAspectRatio]="true" [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png"
+                                (imageCropped)="imageCropped($event)"></image-cropper>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <h6>Preview</h6>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <img [src]="croppedImage" class="border-custom" />
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-top"
+                    *ngIf="editRadianForm.CoverPicture.errors && (editRadianForm.CoverPicture.dirty || editRadianForm.CoverPicture.touched)">
+                    <div class="col-md-12">
+                      <app-required-validation-message [fieldName]="'Cover Image'"
+                        *ngIf="editRadianForm.ProfilePicture.errors.required"></app-required-validation-message>
+
+                    </div>
+                  </div>
+                  <div class="row mt-top">
+                    <div class="col-md-2 custom-label">
+                      <div class="portfolio-label">Cover Picture</div>
+                    </div>
+                    <div class="col-md-10">
+                      <div class="row mt-top">
+                        <div class="col-md-3">
+                          <input type="file" (change)="CoverFileChangeEvent($event)" />
+                        </div>
+                        <div class="col-md-9 custom-img-container">
+                          <div class="custom-photo-container">
+                            <img *ngIf="userProfile.CoverPicture!==null"
+                              src="{{projectPath}}/{{projectFilePath}}/{{userProfile.ProfileName}}/CoverImages/{{userProfile.CoverPicture}}">
+                            <img *ngIf="userProfile?.CoverPicture===null" src="./assets/img/default-cover-picture.jpg">
+                            <i class="fa fa-bin"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <br>
+                  <div class="row mt-top">
+                    <div class="col-md-12">
+                      <div class="portfolio-label">About Profile</div>
+                      <div class="row"
+                        *ngIf="editRadianForm.ProfileDescription.errors && (editRadianForm.ProfileDescription.dirty || editRadianForm.ProfileDescription.touched)">
+                        <div class="col-md-12">
+                          <app-required-validation-message [fieldName]="'Description'"
+                            *ngIf="editRadianForm.ProfileDescription.errors.required"></app-required-validation-message>
+                        </div>
+                      </div>
+                      <textarea class="form-control" [placeholder]="'About Profile'"
+                        formControlName="ProfileDescription">
+                      </textarea>
+                    </div>
+                  </div>
+                  <br/>
+                  <div class="row mt-top"
+                    *ngIf="editRadianForm.LinkedPortfolio.errors && (editRadianForm.LinkedPortfolio.dirty || editRadianForm.LinkedPortfolio.touched)">
+                    <div class="col-md-12">
+                      <app-required-validation-message [fieldName]="'Portfolio'"
+                        *ngIf="editRadianForm.LinkedPortfolio.errors.required"></app-required-validation-message>
+
+                    </div>
+                  </div>
+                  <div class="row mt-top">
+                    <div class="col-md-2 custom-label">
+                      <div class="portfolio-label">Linked Portfolio</div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="pretty p-switch p-fill" *ngFor="let item of tempArrPortfolio;let i=index;">
+                        <input type="checkbox" name="switch{{i}}" [value]="true" [checked]="item.isChecked"
+                          (change)="onSelectPortfolio($event,item)" /><br />
+                        <div class="state p-success">
+                          <label>{{item.name}}</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5"></div>
+                  </div>
+                  <div class="row mt-top"
+                    *ngIf="editRadianForm.ProfileExpertise.errors && (editRadianForm.ProfileExpertise.dirty || editRadianForm.ProfileExpertise.touched)">
+                    <div class="col-md-12">
+                      <app-required-validation-message [fieldName]="'Experties'"
+                        *ngIf="editRadianForm.ProfileExpertise.errors.required"></app-required-validation-message>
+                    </div>
+                  </div>
+                  <div class="row mt-top">
+                    <div class="col-md-2 custom-label">
+                      <div class="portfolio-label">Skills</div>
+                    </div>
+
+                    <div class="col-md-5">
+                      <select class="select-css" placeholder="Skill/Art" formControlName="ProfileSkill"
+                        (change)="getSkillSubCategory($event.target.value)">
+                        <option value="">-Select</option>
+                        <option *ngFor="let item of skills" value="{{item.radianSkillCategoryId}}">
+                          {{item.radianSkillCategoryName}}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-md-5"></div>
+                  </div>
+                  <div class="row mt-top">
+                    <div class="col-md-2 custom-label">
+                      <div class="portfolio-label"></div>
+                    </div>
+
+                    <div class="col-md-10">
+                      <div class="pretty p-switch p-fill" *ngFor="let item of tempSubCategory;let i=index;">
+                        <input type="checkbox" name="switch{{i}}" [value]="true" [checked]="item.isChecked"
+                          (change)="onSelectExperties($event,item)" /><br />
+                        <div class="state p-success">
+                          <label>{{item.name}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 flt-right">
+                      <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Update</button>&nbsp;
+                      <a [routerLink]="['/member/hunar_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>
+</div>
