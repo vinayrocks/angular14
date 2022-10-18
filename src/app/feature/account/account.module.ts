@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { SelectDropDownModule } from 'ngx-select-dropdown'
 
 @NgModule({
   declarations: [RdSignupComponent, RdAccountLayoutComponent],
@@ -24,6 +24,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     MatAutocompleteModule,
     NgxSpinnerModule,
+    SelectDropDownModule,
     SharedModule.forRoot()
   ]
 })
