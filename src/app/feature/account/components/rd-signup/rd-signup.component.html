@@ -7,8 +7,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="pretty p-switch p-fill">
-                                <input type="radio" name="isUser" checked [value]="true" formControlName="isUser" 
-                                (change)="changeUserType($event)"/>
+                                <input type="radio" name="isUser" checked [value]="true" formControlName="isUser"
+                                    (change)="changeUserType($event)" />
                                 <div class="state p-success">
                                     <label>Individual</label>
                                 </div>
@@ -16,8 +16,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="pretty p-switch p-fill">
-                                <input type="radio" name="isUser" [value]="false" formControlName="isUser" 
-                                (change)="changeUserType($event)"/>
+                                <input type="radio" name="isUser" [value]="false" formControlName="isUser"
+                                    (change)="changeUserType($event)" />
                                 <div class="state p-success">
                                     <label>Business</label>
                                 </div>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <h4 *ngIf="!registerForm.isUser.value">Organization Info</h4>
-                    <hr/>
+                    <hr />
                     <div class="row" *ngIf="!registerForm.isUser.value">
                         <div class="col-md-6">
                             <label class="lbl-custom">Organization Name*</label>
@@ -60,7 +60,7 @@
                     </div>
                     <h4 *ngIf="registerForm.isUser.value">Full Name</h4>
                     <h4 *ngIf="!registerForm.isUser.value">Contact Person Name</h4>
-                    <hr/>
+                    <hr />
                     <div class="row">
                         <div class="col-md-4">
                             <label class="lbl-custom">First Name*</label>
@@ -73,8 +73,7 @@
                                 </div>
                             </div>
                             <div class="input-group">
-                                <input type="text" class="signUp-form-control form-control"
-                                    formControlName="firstName">
+                                <input type="text" class="signUp-form-control form-control" formControlName="firstName">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -102,13 +101,12 @@
                                 </div>
                             </div>
                             <div class="input-group">
-                                <input type="text" class="signUp-form-control form-control"
-                                    formControlName="lastName">
+                                <input type="text" class="signUp-form-control form-control" formControlName="lastName">
                             </div>
                         </div>
                     </div>
                     <h4>Primary Address</h4>
-                    <hr/>
+                    <hr />
                     <div class="row">
                         <div class="col-md-4">
                             <label class="lbl-custom">Country*</label>
@@ -119,14 +117,17 @@
                                         *ngIf="registerForm.country.errors.required"></app-required-validation-message>
                                 </div>
                             </div>
-                            <div class="input-group">
+                            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
+                                [config]="countryConfig" [options]="countryState" (change)="getStates($event)">
+                            </ngx-select-dropdown>
+                            <!-- <div class="input-group">
                                 <select class="select-css" formControlName="country" name="country" (change)="getStates($event.target.value)">
                                     <option value="" [disabled]="true" [selected]="true">Select</option>
                                     <option *ngFor="let item of countryState" value="{{item.country}}">
                                         {{item.country}}
                                     </option>
                                 </select>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-md-4">
                             <label class="lbl-custom">Apt/Street*</label>
@@ -138,8 +139,7 @@
                                 </div>
                             </div>
                             <div class="input-group">
-                                <input type="text" class="signUp-form-control form-control"
-                                    formControlName="street">
+                                <input type="text" class="signUp-form-control form-control" formControlName="street">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -152,8 +152,7 @@
                                 </div>
                             </div>
                             <div class="input-group">
-                                <input type="text" class="signUp-form-control form-control"
-                                    formControlName="city">
+                                <input type="text" class="signUp-form-control form-control" formControlName="city">
                             </div>
                         </div>
                     </div>
@@ -167,14 +166,16 @@
                                         *ngIf="registerForm.state.errors.required"></app-required-validation-message>
                                 </div>
                             </div>
-                            <div class="input-group">
+                            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="state"
+                                [config]="stateConfig" [options]="state"></ngx-select-dropdown>
+                            <!-- <div class="input-group">
                                 <select class="select-css" formControlName="state" name="state">
                                     <option value="" [disabled]="true" [selected]="true">Select</option>
                                     <option *ngFor="let item of state" value="{{item}}">
                                         {{item}}
                                     </option>
                                 </select>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-md-4">
                             <label class="lbl-custom">Zip / Pin Code*</label>
@@ -186,13 +187,13 @@
                                 </div>
                             </div>
                             <div class="input-group">
-                                <input type="select" class="signUp-form-control form-control"
-                                    formControlName="zip" maxlength="7">
+                                <input type="select" class="signUp-form-control form-control" formControlName="zip"
+                                    maxlength="7">
                             </div>
                         </div>
                     </div>
                     <h4>Contact Numbers</h4>
-                    <hr/>
+                    <hr />
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row" *ngIf="(registerForm.mobileCountryCode.errors &&
@@ -215,12 +216,15 @@
                             </div>
                             <label class="lbl-custom">Mobile Number*</label>
                             <div class="input-group">
-                                <select class="col-md-3 signUp-form-control form-control" formControlName="mobileCountryCode" name="mobileCountryCode">
+                                <!-- <select class="col-md-3 signUp-form-control form-control" formControlName="mobileCountryCode" name="mobileCountryCode">
                                     <option value="" [disabled]="true" [selected]="true">Select</option>
                                     <option *ngFor="let item of countryCode" value="{{item.dial_code}}">
                                         {{item.code}} - ({{item.dial_code}})
                                     </option>
-                                </select>
+                                </select> -->
+                                <ngx-select-dropdown class="mb-num" [instanceId]="'instance1'"
+                                    formControlName="mobileCountryCode" [config]="mobileConfig" [options]="countryCode">
+                                </ngx-select-dropdown>
                                 <input type="text" maxlength="10" class="col-md-9
                                  signUp-form-control form-control" formControlName="cell">
                             </div>
@@ -228,20 +232,23 @@
                         <div class="col-md-6">
                             <label class="lbl-custom">Alternate Mobile Number</label>
                             <div class="input-group">
-                                <select class="col-md-3 signUp-form-control form-control" formControlName="altMmobileCountryCode" name="altMmobileCountryCode">
+                                <!-- <select class="col-md-3 signUp-form-control form-control" formControlName="altMmobileCountryCode" name="altMmobileCountryCode">
                                     <option value="" [disabled]="true" [selected]="true">Select</option>
                                     <option *ngFor="let item of countryCode" value="{{item.dial_code}}">
                                         {{item.code}} - ({{item.dial_code}})
                                     </option>
-                                </select>
+                                </select> -->
+                                <ngx-select-dropdown class="mb-num" [instanceId]="'instance1'"
+                                    formControlName="altMmobileCountryCode" [config]="mobileConfig"
+                                    [options]="countryCode"></ngx-select-dropdown>
                                 <input type="text" maxlength="10" class="col-md-9
                                  signUp-form-control form-control" formControlName="altMobileNumber">
                             </div>
-                            
+
                         </div>
                     </div>
                     <h4>Prefered Membership Category</h4>
-                    <hr/>
+                    <hr />
                     <div class="row"
                         *ngIf="registerForm.memberShip.errors && (registerForm.memberShip.dirty || registerForm.memberShip.touched)">
                         <div class="col-md-12">
@@ -250,9 +257,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="card-register-membership custom-set"  [ngClass]="membership.length>1 ? 'col-md-4' : 'col-md-12 db-center'" 
-                        *ngFor="let item of membership;let i=index;">
-                            <input #radioBtn id="radio{{i}}" type="radio" value="{{item.Id}}" formControlName="memberShip" (change)="onSelectMembership($event,item)">
+                        <div class="card-register-membership custom-set"
+                            [ngClass]="membership.length>1 ? 'col-md-4' : 'col-md-12 db-center'"
+                            *ngFor="let item of membership;let i=index;">
+                            <input #radioBtn id="radio{{i}}" type="radio" value="{{item.Id}}"
+                                formControlName="memberShip" (change)="onSelectMembership($event,item)">
                             <label class="form-check-label card-label" for="radio{{i}}">
                                 <h4>{{item.name}}</h4>
                                 <h5>{{item.currency}} {{item.amount}}</h5><br />
@@ -261,9 +270,9 @@
                             </label>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <h4>Create Login</h4>
-                    <hr/>
+                    <hr />
                     <div class="row">
                         <div class="col-md-4">
                             <label class="lbl-custom">Email*</label>
@@ -277,7 +286,8 @@
                                 </div>
                             </div>
                             <div class="input-group">
-                                <input type="text" class="signUp-form-control form-control" formControlName="email" (blur)="checkEmailExists()">
+                                <input type="text" class="signUp-form-control form-control" formControlName="email"
+                                    (blur)="checkEmailExists()">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -292,7 +302,7 @@
                                 </div>
                             </div>
                             <div class="input-group">
-                                <input type="password" class="signUp-form-control form-control" 
+                                <input type="password" class="signUp-form-control form-control"
                                     formControlName="password">
                             </div>
                         </div>
@@ -305,7 +315,7 @@
                                 <li>Should contain atlease 1 Special Character [!@#$%*]</li>
                             </ul>
                         </div>
-                    </div><br/>
+                    </div><br />
                     <div class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-4" style="margin-top: -40px;">
@@ -328,18 +338,21 @@
                         </div>
                     </div>
                     <h4>Skills / Interests </h4>
-                    <hr/>
+                    <hr />
                     <p style="margin-bottom: 0px;">[ Select your skillset. Upon registration, you will get to create
                         multiple profiles. ]</p><br />
                     <div class="row">
                         <div class="col-md-5">
-                            <select class="select-css" matNativeControl placeholder="Specialities / Interests"
+                            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="profileSkillName"
+                                [config]="radianSkillConfig" [options]="skills"
+                                (change)="getSkillSubCategory($event.value)"></ngx-select-dropdown>
+                            <!-- <select class="select-css" matNativeControl placeholder="Specialities / Interests"
                                 formControlName="profileSkill" (change)="getSkillSubCategory($event.target.value)">
                                 <option value="" [selected]="true" [disabled]="true">Specialities / Interests*</option>
                                 <option *ngFor="let item of skills" value="{{item.radianSkillCategoryId}}">
                                     {{item.radianSkillCategoryName}}
                                 </option>
-                            </select>
+                            </select> -->
                         </div>
                         <div class="col-md-7"
                             *ngIf="registerForm.profileSkill.errors && (registerForm.profileSkill.dirty || registerForm.profileSkill.touched)">
@@ -428,7 +441,7 @@
                         </div>
                     </div> -->
                     <h4>Billing Address</h4>
-                    <hr/>
+                    <hr />
                     <div class="row">
                         <div class="col-md-12">
                             <!-- <h5><a target="_blank" [routerLink]="['/radian/term-of-use']"></a></h5> -->
@@ -458,7 +471,10 @@
                                     </app-required-validation-message>
                                 </div>
                             </div>
-                            <div class="input-group">
+                            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="billCountry"
+                                [config]="countryConfig" [options]="countryState"
+                                (change)="getBillingStates($event.value)"></ngx-select-dropdown>
+                            <!-- <div class="input-group">
                                 <select class="select-css" formControlName="billCountry" name="billCountry"
                                     placeholder="Country*" (change)="getBillingStates($event.target.value)">
                                     <option value="" [disabled]="true" [selected]="true">Select</option>
@@ -466,7 +482,7 @@
                                         {{item.country}}
                                     </option>
                                 </select>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-md-4">
                             <label class="lbl-custom">Apt/Street*</label>
@@ -480,7 +496,7 @@
                             </div>
                             <div class="input-group">
                                 <input type="text" class="signUp-form-control form-control"
-                                formControlName="billStreet">
+                                    formControlName="billStreet">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -493,8 +509,7 @@
                                 </div>
                             </div>
                             <div class="input-group">
-                                <input type="text" class="signUp-form-control form-control"
-                                    formControlName="billCity">
+                                <input type="text" class="signUp-form-control form-control" formControlName="billCity">
                             </div>
                         </div>
                     </div>
@@ -509,7 +524,9 @@
                                     </app-required-validation-message>
                                 </div>
                             </div>
-                            <div class="input-group">
+                            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="billState"
+                                [config]="stateConfig" [options]="state"></ngx-select-dropdown>
+                            <!-- <div class="input-group">
                                 <select class="select-css" formControlName="billState" name="billState"
                                     placeholder="State*">
                                     <option value="" [disabled]="true" [selected]="true">Select</option>
@@ -517,7 +534,7 @@
                                         {{item}}
                                     </option>
                                 </select>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-md-4">
                             <label class="lbl-custom">Zip / Pin Code*</label>
@@ -529,13 +546,99 @@
                                 </div>
                             </div>
                             <div class="input-group">
-                                <input type="select" class="signUp-form-control form-control"
-                                    formControlName="billZip">
+                                <input type="select" class="signUp-form-control form-control" formControlName="billZip">
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Portfolio</h4>
+                    <hr />
+                    <div class="row mt-top">
+                        <div class="col-md-6">
+                            <div class="portfolio-label">Portfolio Name*</div>
+                            <div class="row mt-top"
+                                *ngIf="registerForm.PortfolioName.errors && (registerForm.PortfolioName.dirty || registerForm.PortfolioName.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Portfolio Name'"
+                                        *ngIf="registerForm.PortfolioName.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="signUp-form-control form-control" placeholder="Portfolio Name"
+                                    formControlName="PortfolioName">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="portfolio-label">About Portfolio*</div>
+                            <div class="row mt-top"
+                                *ngIf="registerForm.PortfolioArtifacts.errors && (registerForm.PortfolioArtifacts.dirty || registerForm.PortfolioArtifacts.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'About Portfolio'"
+                                        *ngIf="registerForm.PortfolioArtifacts.errors.required">
+                                    </app-required-validation-message>
+                                </div>
+                            </div>
+                            <textarea class="form-control" [placeholder]="'About Portfolio'"
+                                formControlName="PortfolioArtifacts" placeholder="About Portfolio"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-top"
+                        *ngIf="registerForm.PortfolioMedia.errors && (registerForm.PortfolioMedia.dirty || registerForm.PortfolioMedia.touched)">
+                        <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Image'"
+                                *ngIf="registerForm.PortfolioMedia.errors.required">
+                            </app-required-validation-message>
+                        </div>
+                    </div>
+                    <div class="row mt-top">
+                        <div class="col-md-12">
+                            <div class="portfolio-label">Portfolio Media*</div>
+                            <div class="row" *ngFor="let item of addMoreImageArray;let i=index;">
+                                <div class="col-md-3" *ngIf="imageIndex===i">
+                                    <select id="select{{i}}" class="select-css" class="form-control"
+                                        (change)="selectMediaType($event.target)" placeholder="Select*">
+                                        <option value="image" selected="true">Image/Document
+                                        </option>
+                                        <option value="video">Video</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-7" *ngIf="isImageType && imageIndex===i">
+                                    <input id="file{{i}}" type="file" (change)="fileChangeEvent($event,i)"
+                                        accept="application/pdf, image/jpeg, image/png" />
+                                </div>
+                                <div class="col-md-7" *ngIf="!isImageType && imageIndex===i">
+                                    <div class="input-group">
+                                        <input id="video{{i}}" type="text" class="signUp-form-control form-control"
+                                            placeholder="YouTube Video Link" formControlName="linkURL">
+                                    </div>
+                                </div>
+                                <div class="col-md-2" *ngIf="!isImageType && imageIndex===i">
+                                    <input type="button" class="form-control"
+                                        class="btn btn-primary btn-round custom-btn" value="Add"
+                                        (click)="addMoreImage(i)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-top" *ngIf="isUploaded">
+                        <div class="col-md-2" *ngFor='let url of urls;let i =index;'>
+                            <div class="custom-photo-container">
+                                <span class="close"><a (click)="removeMedia(i)">&times;</a></span>
+                                <img src="{{url.Name}}" alt="" class="img-raised" title=""
+                                    *ngIf="url.IsImage==='image'">
+                                <a href="{{url.Name}}" *ngIf="url.IsImage==='pdf'" target="_blank">
+                                    <img src="assets/img/radian/document.png" alt="" class="img-raised">
+                                </a>
+                                <div *ngIf="url.IsImage==='video'" class="video">
+                                    <img src="{{url.Image}}" class="img-raised">
+                                    <a></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <h4>Terms & Condition</h4>
-                    <hr/>
+                    <hr />
                     <div class="row">
                         <div class="col-md-12">
                             <a target="_blank" [routerLink]="['/radian/term-of-use']">Click here to read Hunar Terms &

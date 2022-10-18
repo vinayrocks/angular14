@@ -47,8 +47,48 @@ export class RdSignupComponent implements OnInit {
   tempArr: any = [];
   setSameAddress: Boolean;
   @ViewChild('radioBtn') radioBtn: any;
-
-
+  countryConfig:any={
+    displayKey: "country",
+    search:true,
+    placeholder:'Select',
+    searchPlaceholder:'Search',
+    searchOnKey: 'country',
+    height: "150px"
+  }
+  stateConfig:any={
+    displayKey: "code",
+    search:true,
+    placeholder:'Select',
+    searchPlaceholder:'Search',
+    searchOnKey: 'country',
+    height: "150px"
+  }
+  mobileConfig:any={
+    displayKey: "dial_code",
+    search:true,
+    placeholder:'Select',
+    searchPlaceholder:'Search',
+    searchOnKey: 'dial_code',
+    height: "150px"
+  }
+ radianSkillConfig:any={
+    displayKey: "radianSkillCategoryName",
+    search:true,
+    placeholder:'Select',
+    searchPlaceholder:'Search',
+    searchOnKey: 'radianSkillCategoryName',
+    height: "150px"
+  }
+  focusPortfolioName:any='';
+  focusPortfolioArtifacts:any='';
+  isUploaded: Boolean = false;
+  urls :any= [];
+  addMoreImageArray:any=[1];
+  isImageType:Boolean=true;
+  imageIndex:Number=0;
+  linkURL:String='';
+  serverFile:any=[];
+  PortfolioMediaModel:any=[];
   
 
 
@@ -115,14 +155,14 @@ export class RdSignupComponent implements OnInit {
       billState: ['', Validators.required],
       billZip: ['', Validators.required],
       termCondition: ['', Validators.required],
-      //phoneCode: ['', [Validators.required, codeValidation]],
-      //phone: ['', [Validators.required, numberValidation]],
       mobileCountryCode: ['', [Validators.required]],
       cell: ['', [Validators.required, numberValidation]],
       altMmobileCountryCode: [''],
       altMobileNumber: [''],
-      //faxCode: ['', [codeValidation]],
-      //fax: ['', [numberValidation]],
+      PortfolioName: new FormControl('', Validators.compose([Validators.required])),
+      PortfolioArtifacts: new FormControl('', Validators.compose([Validators.required])),
+      PortfolioMedia: new FormControl(''),
+      linkURL:new FormControl('')
     });
     
   }
@@ -328,6 +368,89 @@ export class RdSignupComponent implements OnInit {
     this.spinner.hide();
     this.router.navigate(['/home']);
   }
+  fileChangeEvent(event: any, index: number): void {
+    const data: any = [];
+    const serverData: any = [];
+    if (event.target.files && event.target.files[0]) {
+      var filesAmount = event.target.files.length;
+      for (let i = 0; i < filesAmount; i++) {
+        serverData.File = event.target.files[i];
+        this.serverFile.push(serverData);
+        if (event.target.files[i].type === 'image/jpeg' || event.target.files[i].type === 'image/png') {
+          data.type = 'image';
+          var reader = new FileReader();
+          reader.onload = (event: any) => {
+            // data.imageMovieURL = event.target.result;
+            this.urls.push({Name:event.target.result,IsImage:'image'});
+            // this.urls.push(data);
+          }
+          reader.readAsDataURL(event.target.files[i]);
+        }else if(event.target.files[i].type==='application/pdf'){
+          // data.type='document';
+          // data.imageMovieURL='';
+          this.urls.push({Name:'',IsImage:'pdf'});
+        } else {
+          this.notificationService.warn('File format not accepted [Valid format: .jpg, .png, .pdf]')
+        }
+      }
+      this.isUploaded = true;
+      this.imageIndex=index+1;
+      this.addMoreImageArray.push(index+1);
+
+    }
+
+
+  }
+  removeMedia(index:any){
+    this.urls.splice(index,1);
+    this.serverFile.splice(index,1);
+  }
+  getVideo(url:any){
+    return this.embedService.embed(url);
+  }
+  selectMediaType(event: any){
+    if(event.value!=='image'){
+      this.isImageType=false;
+
+    } else {
+      this.isImageType=true;
+    }
+  }
+  addMoreImage(index:number){
+    const data: any = [];
+    if (this.validateYouTubeUrl(index)) {
+      data.type = 'video';
+      data.imageMovieURL = this.registerForm.controls['linkURL'].value;
+      const img = this.embedService.embed_image(this.registerForm.controls['linkURL'].value, { image: 'mqdefault' })
+      .then((res:any) => {
+        this.urls.push({Name:this.embedService.embed(data.imageMovieURL),IsImage:'video',
+        Image:res.link});
+      });
+      // this.urls.push({Name:this.embedService.embed(this.editPortfolioForm.controls['linkURL'].value),IsImage:'video',
+      // Image:res.link});
+      this.imageIndex = index + 1;
+      this.addMoreImageArray.push(index + 1);
+      this.isImageType = true;
+      this.isUploaded = true;
+      this.PortfolioMediaModel.push(data.imageMovieURL);
+      this.registerForm.controls['linkURL'].setValue('');
+    } else {
+      this.notificationService.error('Not a valid link.Please try again.');
+      this.registerForm.controls['linkURL'].setValue('');
+    }
+  }
+  validateYouTubeUrl(index:number)
+  {
+    if (this.registerForm.controls['linkURL'].value != undefined || this.registerForm.controls['linkURL'].value != '') {
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+        var match = this.registerForm.controls['linkURL'].value.match(regExp);
+        if (match && match[2].length == 11) {
+          return true;
+        }
+        return false;
+    }
+    return false;
+  }
   validateAllFormFields(formGroup: FormGroup) {
     //{1}
     Object.keys(formGroup.controls).forEach((field) => {
@@ -343,6 +466,7 @@ export class RdSignupComponent implements OnInit {
     });
   }
   reset() {
+    this.urls=[];
     this.initRegisterForm();
   }
   requiredIfValidator(predicate) {
