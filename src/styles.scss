@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,300&display=swap');
 body{
   overflow-x: hidden;
+  font-family: 'Open Sans';
 }
 .form-control{
     height:inherit !important;
@@ -571,3 +572,20 @@ textarea.form-control {
     height: 40px !important;
   }
  }
+ .navbar a {
+  padding-top: 0.5rem;
+}
+.navbar p{
+  padding: 7px 15px !important;
+}
+.nav-item{
+  padding-right: 10px;
+}
+.mb-4 {
+  margin-bottom: 1.5rem!important;
+  font-family: 'Open Sans';
+  font-weight: 500;
+}
+a{
+  text-decoration: none;
+}

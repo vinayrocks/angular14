@@ -166,3 +166,131 @@ th {
 .table-striped tbody tr:nth-of-type(odd){
   background-color: rgba(0, 0, 0, 0.1);
 }
+.about-start,
+.about-end {
+    background-color: #c4aeef;
+    background-size: contain;
+    border-radius: 10px;
+}
+@media (min-width: 992px) {
+  .about-start {
+      position: relative;
+      margin-right: -90px;
+      z-index: 1;
+      border-radius: 10px;
+  }
+
+  .about-end {
+      position: relative;
+      margin-left: -90px;
+      z-index: 1;
+  }
+}
+.service-item,
+.contact-item {
+    background-color: #c9e265;
+    background-size: cover;
+    transition: .5s;
+}
+
+.service-item:hover,
+.contact-item:hover {
+  background-color: #ffde59;
+  background-size: cover;
+}
+
+.service-item .service-icon,
+.contact-item .contact-icon {
+    margin-top: -50px;
+    width: 100px;
+    height: 100px;
+    color: var(--secondary);
+    background: #FFFFFF;
+    transform: rotate(-45deg);
+}
+
+.service-item .service-icon div,
+.contact-item .contact-icon div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #c9e265;
+    transition: .5s;
+}
+
+.service-item .service-icon i,
+.contact-item .contact-icon i {
+    transform: rotate(45deg);
+    transition: .5s;
+}
+
+.service-item:hover .service-icon div,
+.contact-item:hover .contact-icon div {
+    background: #ffde59;
+}
+
+.service-item:hover .service-icon i,
+.contact-item:hover .contact-icon i {
+    color: #000000;
+}
+
+.service-item a.btn {
+    position: relative;
+    bottom: -30px;
+    opacity: 0;
+    font-size: 15px;
+    background-color: #FFFFFF;
+    padding: 15px 25px;
+    color: #2c2c2c;
+    font-weight: 600;
+}
+
+.service-item:hover a.btn {
+    bottom: 0;
+    opacity: 1;
+}
+h2.title{
+  font-family: 'Open Sans' !important;
+  font-weight: 600;
+}
+.mt-5{
+  font-family: 'Open Sans' !important;
+  font-weight: 600;
+}
+.blog-item{
+  background-color: #FFFFFF;
+  border-bottom-left-radius:10px;
+  border-bottom-right-radius:10px;
+}
+.bg-secondary{
+  background-color: #c9e265 !important;
+}
+.text-white{
+  color: #231f20 !important;
+  font-weight: 600;
+}
+.img-raised{
+  box-shadow: none;
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
+}
+h6.title{
+  font-family: 'Open Sans' !important;
+  font-weight: 600;
+}
+small{
+  font-size: 85% !important;
+  font-weight: 600;
+}
+.img-event{
+  border-top-left-radius: 10px;
+  border-top-right-radius:10px;
+}
+.bg-a:hover{
+  color: #ff1616;
+}
+.position-absolute{
+  border-radius: 10px;
+}
