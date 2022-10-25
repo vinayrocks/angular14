@@ -77,11 +77,11 @@ h6 {
 .main-timeline10 .year:after,.main-timeline10 .year:before{position:absolute;top:-19px;content:""}
 .main-timeline10 .year:before{right:0;border:10px solid transparent;border-bottom:10px solid #38b6ff;border-right:10px solid #38b6ff}
 .main-timeline10 .year:after{width:25px;height:19px;border-radius:0 0 20px;background:#fff;right:1px}
-.main-timeline10 .timeline-content{padding:10px 10px 30px;border-left:3px solid #38b6ff;position:relative}
+.main-timeline10 .timeline-content{padding:10px 10px 30px;border-left:3px solid #38b6ff;position:relative;font-weight: 600;}
 .main-timeline10 .timeline-content:before{content:"";position:absolute;top:0;left:-1px;border:10px solid transparent;border-top:10px solid #38b6ff;border-left:10px solid #38b6ff}
 .main-timeline10 .timeline-content:after{content:"";width:25px;height:19px;border-radius:20px 0 0;background:#fff;position:absolute;top:0;left:0}
 .main-timeline10 .post{font-size:22px;color:#333; margin-top: 12px;}
-.main-timeline10 .description{font-size:14px;color:#333; margin-top: 18px;}
+.main-timeline10 .description{font-size:14px;color:#333; margin-top: 18px;font-weight: 600;}
 .main-timeline10 .timeline-icon{width:70px;height:70px;line-height:60px;border-radius:50%;border:5px solid #38b6ff;background:#fff;font-size:30px;color:#555;z-index:1;position:absolute;bottom:-35px;left:-35px}
 .main-timeline10 .timeline:nth-child(2n) .year{background:#7ed957}
 .main-timeline10 .timeline:nth-child(2n) .year:before{border-bottom-color:#7ed957;border-right-color:#7ed957}
@@ -115,4 +115,7 @@ h6 {
 .main-timeline10 .timeline-inner:after,.main-timeline10 .timeline:nth-child(2n) .timeline-inner:after{width:100%;height:3px;left:0}
 }
 
-
+h2.title{
+  font-family: 'Open Sans' !important;
+  font-weight: 600;
+}
