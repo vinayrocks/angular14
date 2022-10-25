@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
-                                [config]="countryConfig" [options]="countryState" (change)="getStates($event)">
+                                [config]="countryConfig" [options]="countryState" (change)="getStates($event.value)">
                             </ngx-select-dropdown>
                             <!-- <div class="input-group">
                                 <select class="select-css" formControlName="country" name="country" (change)="getStates($event.target.value)">
@@ -166,7 +166,7 @@
                                         *ngIf="registerForm.state.errors.required"></app-required-validation-message>
                                 </div>
                             </div>
-                            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="state"
+                            <ngx-select-dropdown [instanceId]="'instance2'" formControlName="state"
                                 [config]="stateConfig" [options]="state"></ngx-select-dropdown>
                             <!-- <div class="input-group">
                                 <select class="select-css" formControlName="state" name="state">
@@ -222,7 +222,7 @@
                                         {{item.code}} - ({{item.dial_code}})
                                     </option>
                                 </select> -->
-                                <ngx-select-dropdown class="mb-num" [instanceId]="'instance1'"
+                                <ngx-select-dropdown class="mb-num" [instanceId]="'instance3'"
                                     formControlName="mobileCountryCode" [config]="mobileConfig" [options]="countryCode">
                                 </ngx-select-dropdown>
                                 <input type="text" maxlength="10" class="col-md-9
@@ -238,7 +238,7 @@
                                         {{item.code}} - ({{item.dial_code}})
                                     </option>
                                 </select> -->
-                                <ngx-select-dropdown class="mb-num" [instanceId]="'instance1'"
+                                <ngx-select-dropdown class="mb-num" [instanceId]="'instance4'"
                                     formControlName="altMmobileCountryCode" [config]="mobileConfig"
                                     [options]="countryCode"></ngx-select-dropdown>
                                 <input type="text" maxlength="10" class="col-md-9
@@ -343,7 +343,7 @@
                         multiple profiles. ]</p><br />
                     <div class="row">
                         <div class="col-md-5">
-                            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="profileSkillName"
+                            <ngx-select-dropdown [instanceId]="'instance5'" formControlName="profileSkillName"
                                 [config]="radianSkillConfig" [options]="skills"
                                 (change)="getSkillSubCategory($event.value)"></ngx-select-dropdown>
                             <!-- <select class="select-css" matNativeControl placeholder="Specialities / Interests"
@@ -471,7 +471,7 @@
                                     </app-required-validation-message>
                                 </div>
                             </div>
-                            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="billCountry"
+                            <ngx-select-dropdown [instanceId]="'instance6'" formControlName="billCountry"
                                 [config]="countryConfig" [options]="countryState"
                                 (change)="getBillingStates($event.value)"></ngx-select-dropdown>
                             <!-- <div class="input-group">
@@ -524,8 +524,8 @@
                                     </app-required-validation-message>
                                 </div>
                             </div>
-                            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="billState"
-                                [config]="stateConfig" [options]="state"></ngx-select-dropdown>
+                            <ngx-select-dropdown [instanceId]="'instance7'" formControlName="billState"
+                                [config]="stateConfig" [options]="billStates"></ngx-select-dropdown>
                             <!-- <div class="input-group">
                                 <select class="select-css" formControlName="billState" name="billState"
                                     placeholder="State*">
