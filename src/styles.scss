@@ -425,10 +425,10 @@ textarea.form-control {
   padding: 10px !important;
   resize: none;
   border: none;
-  border: 1px solid #E3E3E3 !important;
-  border-radius: 5px !important;
+  border: 1px solid #2F3C4F !important;
   line-height: 1.5 !important;
-  font-size: 14px !important;
+  font-size: .8571em !important;
+  margin-bottom: 20px !important;
 }
 .select-css {
   display: block;
@@ -588,4 +588,41 @@ textarea.form-control {
 }
 a{
   text-decoration: none;
+}
+.ngx-dropdown-container{
+  margin-bottom: 10px !important;
+}
+.ngx-dropdown-button{
+  width: 100%;
+  padding: 9px 18px !important;
+  background-color: #FFF;
+  border: 1px solid #2F3C4F!important;
+  border-radius: 0px !important;
+  font-size: .8571em !important;
+  margin-bottom: 20px;
+}
+.nsdicon-angle-down{
+  right: 5px;
+  position: relative;
+  float: right;
+  transition: transform .2s ease;
+  top: 2px !important;
+}
+.ngx-dropdown-list-container{
+  box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  z-index: 999999999;
+  width: 100%;
+  background-clip: padding-box;
+  background: white;
+  position: absolute;
+  box-shadow: 5px 5px 5px #00000036;
+  overflow-y: auto;
+  font-size: .8571em !important;
+}
+.mb-num{
+  margin-right: 20px !important;
 }

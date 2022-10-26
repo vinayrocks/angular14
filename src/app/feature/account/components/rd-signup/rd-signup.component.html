@@ -553,7 +553,7 @@
                     <h4>Portfolio</h4>
                     <hr />
                     <div class="row mt-top">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="portfolio-label">Portfolio Name*</div>
                             <div class="row mt-top"
                                 *ngIf="registerForm.PortfolioName.errors && (registerForm.PortfolioName.dirty || registerForm.PortfolioName.touched)">
@@ -568,7 +568,9 @@
                                     formControlName="PortfolioName">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <div class="row mt-top">
+                        <div class="col-md-12">
 
                             <div class="portfolio-label">About Portfolio*</div>
                             <div class="row mt-top"
@@ -579,10 +581,10 @@
                                     </app-required-validation-message>
                                 </div>
                             </div>
-                            <textarea class="form-control" [placeholder]="'About Portfolio'"
-                                formControlName="PortfolioArtifacts" placeholder="About Portfolio"></textarea>
+                            <textarea class="form-control"
+                                formControlName="PortfolioArtifacts"></textarea>
                         </div>
-                    </div>
+                    </div>                
                     <div class="row mt-top"
                         *ngIf="registerForm.PortfolioMedia.errors && (registerForm.PortfolioMedia.dirty || registerForm.PortfolioMedia.touched)">
                         <div class="col-md-12">
@@ -596,24 +598,24 @@
                             <div class="portfolio-label">Portfolio Media*</div>
                             <div class="row" *ngFor="let item of addMoreImageArray;let i=index;">
                                 <div class="col-md-3" *ngIf="imageIndex===i">
-                                    <select id="select{{i}}" class="select-css" class="form-control"
+                                    <select id="select{{i}}" class="select-css" class="form-control custome-css-select"
                                         (change)="selectMediaType($event.target)" placeholder="Select*">
                                         <option value="image" selected="true">Image/Document
                                         </option>
                                         <option value="video">Video</option>
                                     </select>
                                 </div>
-                                <div class="col-md-7" *ngIf="isImageType && imageIndex===i">
+                                <div class="col-md-8" *ngIf="isImageType && imageIndex===i">
                                     <input id="file{{i}}" type="file" (change)="fileChangeEvent($event,i)"
                                         accept="application/pdf, image/jpeg, image/png" />
                                 </div>
-                                <div class="col-md-7" *ngIf="!isImageType && imageIndex===i">
+                                <div class="col-md-8" *ngIf="!isImageType && imageIndex===i">
                                     <div class="input-group">
                                         <input id="video{{i}}" type="text" class="signUp-form-control form-control"
                                             placeholder="YouTube Video Link" formControlName="linkURL">
                                     </div>
                                 </div>
-                                <div class="col-md-2" *ngIf="!isImageType && imageIndex===i">
+                                <div class="col-md-1" *ngIf="!isImageType && imageIndex===i">
                                     <input type="button" class="form-control"
                                         class="btn btn-primary btn-round custom-btn" value="Add"
                                         (click)="addMoreImage(i)" />
