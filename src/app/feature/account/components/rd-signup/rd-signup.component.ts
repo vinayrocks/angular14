@@ -182,11 +182,7 @@ export class RdSignupComponent implements OnInit {
     this.registerForm.billState.setValue("");
   }
   getSkillSubCategory(event: any) {
-    if (this.registerForm.profileSkill.value !== "") {
-      this.skillsSubcategory = this.skills.filter(function (item) {
-        return item.radianSkillCategoryId === event;
-      })[0].radianSkillSubCategories;
-    }
+    this.skillsSubcategory = event.radianSkillSubCategories;
   }
   onSelectExperties(event, item: any) {
     if (event.target.checked) {
