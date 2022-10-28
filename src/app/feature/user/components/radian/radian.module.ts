@@ -14,6 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { RadianLayoutComponent } from './radian-layout/radian-layout.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 @NgModule({
   declarations: [RdRadianListComponent, RdRadianAddComponent, RdRadianEditComponent, RadianLayoutComponent],
   imports: [
@@ -28,7 +29,8 @@ import { RadianLayoutComponent } from './radian-layout/radian-layout.component';
     ReactiveFormsModule,
     SharedModule.forRoot(),
     AngularEditorModule,
-    ImageCropperModule
+    ImageCropperModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [EmbedVideoService],
 })

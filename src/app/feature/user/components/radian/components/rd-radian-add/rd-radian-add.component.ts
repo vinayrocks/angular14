@@ -45,11 +45,14 @@ export class RdRadianAddComponent implements OnInit {
         'insertHorizontalRule',]
     ]
   };
+  maxDate = new Date();
+  minDate = new Date();
   constructor(private _formBuilder: FormBuilder, private rdUserService: RdUserService,
     private spinner:NgxSpinnerService,
     private notificationService: NotificationService, private router: Router) {
     this.skills =(skillsInterest as any).default;
-   this.createFormGroup();
+    this.createFormGroup();
+    this.minDate.setFullYear(this.minDate.getFullYear() - 40);
   }
   ngOnInit() {
     var rellaxHeader = new Rellax('.rellax-header');
@@ -285,5 +288,12 @@ export class RdRadianAddComponent implements OnInit {
   }
   getExperienceControls() {
     return (this.addRadianFormGroup.get('Experience') as FormArray).controls;
+  }
+
+  onOpenCalendar(container) {
+    container.monthSelectHandler = (event: any): void => {
+      container._store.dispatch(container._actions.select(event.date));
+    };
+    container.setViewMode('year');
   }
 }
