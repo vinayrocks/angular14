@@ -125,6 +125,211 @@
                   <br />
                   <div class="row mt-top">
                     <div class="col-md-2 custom-label">
+                      <div class="portfolio-label">Education</div>
+                    </div>
+                    <div class="row" *ngFor="let item of getEducationControls();let i = index">
+                      <div class="col-md-4">
+                        <div class="portfolio-label">Education Name</div>
+                        <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                          <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Profile Name'"
+                              *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                          </div>
+                        </div> -->
+                        <div class="row mt-top">
+                          <div class="col-md-12">
+                            <div class="input-group">
+                              <!-- <input type="text" class="signUp-form-control form-control" placeholder="Education Name"> -->
+                              <select class="select-css">
+                                <option value="''" selected="true">Select</option>
+                                <option value="1">Phd</option>
+                                <option value="2">Masters</option>
+                                <option value="3">Bachelors</option>
+                                <option value="4">12th</option>
+                                <option value="5">10th</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="portfolio-label">Starts On</div>
+                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                          <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Profile Name'"
+                              *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                          </div>
+                        </div> -->
+                        <div class="row mt-top">
+                          <div class="col-md-12">
+                            <div class="input-group">
+                              <input type="text" class="signUp-form-control form-control" placeholder="Starts On">
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="col-md-3">
+                        <div class="portfolio-label">Ends On</div>
+                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                          <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Profile Name'"
+                              *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                          </div>
+                        </div> -->
+                        <div class="row mt-top">
+                          <div class="col-md-12">
+                            <div class="input-group">
+                              <input type="text" class="signUp-form-control form-control" placeholder="Ends ON">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-2"  *ngIf="getEducationControls().length>1">
+                        <button class="btn btn-primary btn-round reset-btn">Delete</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 flt-right">
+                        <button class="btn btn-primary btn-round btn-margin" (click)="addEducation()">Add More</button>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="row mt-top">
+                    <div class="col-md-2 custom-label">
+                      <div class="portfolio-label">Certification & Licensed</div>
+                    </div>
+                    <div class="row" *ngFor="let item of getCertificationLicensedControls();let i = index">
+                      <div class="col-md-4">
+                        <div class="portfolio-label">Certification Name</div>
+                        <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                          <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Profile Name'"
+                              *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                          </div>
+                        </div> -->
+                        <div class="row mt-top">
+                          <div class="col-md-12">
+                            <div class="input-group">
+                              <input type="text" class="signUp-form-control form-control" placeholder="Certification Name">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="portfolio-label">Certification Date</div>
+                        <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                          <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Profile Name'"
+                              *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                          </div>
+                        </div> -->
+                        <div class="row mt-top">
+                          <div class="col-md-12">
+                            <div class="input-group">
+                              <input type="text" class="signUp-form-control form-control" placeholder="Certification Date">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="portfolio-label">Licensed Number</div>
+                        <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                          <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Profile Name'"
+                              *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                          </div>
+                        </div> -->
+                        <div class="row mt-top">
+                          <div class="col-md-12">
+                            <div class="input-group">
+                              <input type="text" class="signUp-form-control form-control" placeholder="Licensed Number">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-2"  *ngIf="getCertificationLicensedControls().length>1">
+                        <button class="btn btn-primary btn-round reset-btn">Delete</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 flt-right">
+                        <button class="btn btn-primary btn-round btn-margin" (click)="addCertificationLicensed()">Add More</button>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="row mt-top">
+                    <div class="col-md-2 custom-label">
+                      <div class="portfolio-label">Experience</div>
+                    </div>
+                    <div class="row" *ngFor="let item of getExperienceControls();let i = index">
+                      <div class="col-md-4">
+                        <div class="portfolio-label">Experience As</div>
+                        <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                          <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Profile Name'"
+                              *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                          </div>
+                        </div> -->
+                        <div class="row mt-top">
+                          <div class="col-md-12">
+                            <div class="input-group">
+                              <input type="text" class="signUp-form-control form-control" placeholder="Experience As">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="portfolio-label">Starts On</div>
+                        <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                          <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Profile Name'"
+                              *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                          </div>
+                        </div> -->
+                        <div class="row mt-top">
+                          <div class="col-md-12">
+                            <div class="input-group">
+                              <input type="text" class="signUp-form-control form-control" placeholder="Starts On">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="portfolio-label">Ends On</div>
+                        <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                          <div class="col-md-12">
+                            <app-required-validation-message [fieldName]="'Profile Name'"
+                              *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                          </div>
+                        </div> -->
+                        <div class="row mt-top">
+                          <div class="col-md-12">
+                            <div class="input-group">
+                              <input type="text" class="signUp-form-control form-control" placeholder="Ends On">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-2"  *ngIf="getExperienceControls().length>1">
+                        <button class="btn btn-primary btn-round reset-btn">Delete</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 flt-right">
+                        <button class="btn btn-primary btn-round btn-margin" (click)="addExperience()">Add More</button>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <br />
+                  <div class="row mt-top">
+                    <div class="col-md-2 custom-label">
                       <div class="portfolio-label">Linked Portfolio</div>
                     </div>
                     <div class="col-md-5">
