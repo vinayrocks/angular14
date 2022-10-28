@@ -163,7 +163,20 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                              <input type="text" class="signUp-form-control form-control" placeholder="Starts On">
+                              <input
+                              type="text"
+                              class="form-control"
+                              autocomplete="off"
+                              #dp="bsDatepicker"
+                              [minDate]="minDate"
+                              [maxDate]="maxDate"
+                              [bsConfig]="{
+                                isAnimated: true,
+                                minMode: 'year',
+                                dateInputFormat: 'YYYY'
+                              }"
+                              bsDatepicker
+                              (onShown)="onOpenCalendar($event)">
                             </div>
                           </div>
                         </div>
@@ -180,7 +193,20 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                              <input type="text" class="signUp-form-control form-control" placeholder="Ends ON">
+                              <input
+                              type="text"
+                              class="form-control"
+                              autocomplete="off"
+                              #dp="bsDatepicker"
+                              [minDate]="minDate"
+                              [maxDate]="maxDate"
+                              [bsConfig]="{
+                                isAnimated: true,
+                                minMode: 'year',
+                                dateInputFormat: 'YYYY'
+                              }"
+                              bsDatepicker
+                              (onShown)="onOpenCalendar($event)">
                             </div>
                           </div>
                         </div>
@@ -228,7 +254,18 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                              <input type="text" class="signUp-form-control form-control" placeholder="Certification Date">
+                             
+                              <input
+                              type="text"
+                              class="form-control"
+                              #dp="bsDatepicker"
+                              [minDate]="minDate"
+                              [maxDate]="maxDate"
+                              [bsConfig]="{
+                                isAnimated: true,
+                                dateInputFormat: 'DD/MM/YYYY'
+                              }"
+                              bsDatepicker>
                             </div>
                           </div>
                         </div>
@@ -292,7 +329,21 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                              <input type="text" class="signUp-form-control form-control" placeholder="Starts On">
+                              <!-- <input type="text" class="signUp-form-control form-control" placeholder="Starts On"> -->
+                              <input
+                              type="text"
+                              class="form-control"
+                              autocomplete="off"
+                              #dp="bsDatepicker"
+                              [minDate]="minDate"
+                              [maxDate]="maxDate"
+                              [bsConfig]="{
+                                isAnimated: true,
+                                minMode: 'year',
+                                dateInputFormat: 'YYYY'
+                              }"
+                              bsDatepicker
+                              (onShown)="onOpenCalendar($event)">
                             </div>
                           </div>
                         </div>
@@ -308,7 +359,20 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                              <input type="text" class="signUp-form-control form-control" placeholder="Ends On">
+                              <input
+                              type="text"
+                              class="form-control"
+                              autocomplete="off"
+                              #dp="bsDatepicker"
+                              [minDate]="minDate"
+                              [maxDate]="maxDate"
+                              [bsConfig]="{
+                                isAnimated: true,
+                                minMode: 'year',
+                                dateInputFormat: 'YYYY'
+                              }"
+                              bsDatepicker
+                              (onShown)="onOpenCalendar($event)">
                             </div>
                           </div>
                         </div>

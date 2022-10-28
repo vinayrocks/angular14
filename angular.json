@@ -30,6 +30,7 @@
               "src/styles.scss",
               "src/assets/sass/now-ui-kit.scss",
               "src/assets/css/demo.css",
+              "src/assets/css/bs-datepicker.css",
               "node_modules/font-awesome/css/font-awesome.min.css"
             ],
             "scripts": [
@@ -50,7 +51,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -65,6 +65,10 @@
                       "maximumError": "5mb"
                   }
               ]
+            },
+            "development":{
+              "sourceMap": true,
+              "optimization": false
             }
           }
         },
@@ -100,6 +104,7 @@
               "src/styles.scss",
               "src/assets/sass/now-ui-kit.scss",
               "src/assets/css/demo.css",
+              "src/assets/css/bs-datepicker.css",
               "node_modules/font-awesome/css/font-awesome.min.css"
             ],
             "scripts": [
