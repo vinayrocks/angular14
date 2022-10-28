@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Rellax from 'rellax';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { RdUserService } from 'src/app/shared/services/user/rd-user-service';
 import * as  skillsInterest from 'src/app/shared/core/json-data/skillsInterest.json';
 import { first } from 'rxjs/operators';
@@ -49,7 +49,7 @@ export class RdRadianAddComponent implements OnInit {
     private spinner:NgxSpinnerService,
     private notificationService: NotificationService, private router: Router) {
     this.skills =(skillsInterest as any).default;
-    // 
+   this.createFormGroup();
   }
   ngOnInit() {
     var rellaxHeader = new Rellax('.rellax-header');
@@ -57,6 +57,14 @@ export class RdRadianAddComponent implements OnInit {
     body.classList.add('profile-page');
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.add('navbar-transparent');
+    this.getUserPorfolio();
+    this.addEducation();
+    this.addCertificationLicensed();
+    this.addExperience();
+  }
+  get addRadianForm() { return this.addRadianFormGroup.controls; }
+
+  createFormGroup(){
     this.addRadianFormGroup = this._formBuilder.group({
       ProfileName: ['', Validators.required],
       ProfilePicture: [''],
@@ -64,11 +72,13 @@ export class RdRadianAddComponent implements OnInit {
       ProfileDescription: ['', Validators.required],
       ProfileSkill: [''],
       ProfileExpertise: ['', Validators.required],
-      LinkedPortfolio: ['', Validators.required]
+      LinkedPortfolio: ['', Validators.required],
+      Education:this._formBuilder.array([]),
+      CertificationLicensed:this._formBuilder.array([]),
+      Experience:this._formBuilder.array([])
     });
-    this.getUserPorfolio();
   }
-  get addRadianForm() { return this.addRadianFormGroup.controls; }
+
   getSkillSubCategory(event: any) {
     if (this.addRadianForm.ProfileSkill.value !== '') {
       this.skillsSubcategory = this.skills.filter(function (item) {
@@ -217,5 +227,63 @@ export class RdRadianAddComponent implements OnInit {
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
+  }
+
+
+  educationFormarray() : FormArray {
+    debugger 
+    console.log(this.addRadianFormGroup);
+    return this.addRadianFormGroup.get("Education") as FormArray  
+  }  
+  newEducation(): FormGroup {  
+    return this._formBuilder.group({  
+      Education: ['',Validators.required],  
+      StartsOn: ['',Validators.required],
+      EndsOn:['',Validators.required]  
+    })  
+  }  
+     
+  addEducation() {  
+    debugger
+    this.educationFormarray().push(this.newEducation());  
+  }
+  getEducationControls() {
+    return (this.addRadianFormGroup.get('Education') as FormArray).controls;
+  }
+
+  CertificationLicensedFormarray() : FormArray {  
+    return this.addRadianFormGroup.get("CertificationLicensed") as FormArray  
+  }  
+  newCertificationLicensed(): FormGroup {  
+    return this._formBuilder.group({  
+      CertificationName: ['',Validators.required],  
+      CertifiedDate: ['',Validators.required],
+      CertificationLicensedNumber:['']  
+    })  
+  }  
+     
+  addCertificationLicensed() {  
+    this.CertificationLicensedFormarray().push(this.newCertificationLicensed());  
+  }
+  getCertificationLicensedControls() {
+    return (this.addRadianFormGroup.get('CertificationLicensed') as FormArray).controls;
+  }
+
+  ExperienceFormarray() : FormArray {  
+    return this.addRadianFormGroup.get("Experience") as FormArray  
+  }  
+  newExperience(): FormGroup {  
+    return this._formBuilder.group({  
+      ExperienceName: ['',Validators.required],  
+      StartDate: ['',Validators.required],
+      ToDate:['',Validators.required]  
+    })  
+  }  
+     
+  addExperience() {  
+    this.ExperienceFormarray().push(this.newExperience());  
+  }
+  getExperienceControls() {
+    return (this.addRadianFormGroup.get('Experience') as FormArray).controls;
   }
 }
