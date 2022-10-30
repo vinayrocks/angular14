@@ -51,7 +51,7 @@ color-on-scroll="500" appBlockCopy>
       <li class="nav-item" *ngIf="isLoggedIn">
         <div class="dropdown button-dropdown nav-link">
           <div ngbDropdown>
-            <a ngbDropdownToggle routerLinkActive="active" class="custom-link nav-link" (click)="_open=false">
+            <a ngbDropdownToggle routerLinkActive="active" class="custom-link nav-link dropdown-toggle" (click)="_open=false">
               <p class="navbar-font-logged-in">{{currentUser?.firstName }} {{currentUser?.lastName}}</p>
             </a>
             <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
