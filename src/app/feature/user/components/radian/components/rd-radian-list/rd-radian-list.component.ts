@@ -39,6 +39,7 @@ export class RdRadianListComponent implements OnInit {
       ['fontSize', 'insertImage','insertVideo','insertHorizontalRule',]
     ]
   };
+  responsiveOptions:any=[];
   constructor(private rdUserService: RdUserService, private router: Router,
     private _encryptDecryptService: RdEncryptDecryptService,
     private spinner: NgxSpinnerService,public matDialog: MatDialog,
@@ -50,7 +51,23 @@ export class RdRadianListComponent implements OnInit {
       this.projectFilePath = this.currentUser.firstName + '_' + this.currentUser.username.split('@')[0] + '/Profile';
       this.routerData.UserId = this.currentUser.id;
     }
-    
+    this.responsiveOptions = [
+      {
+          breakpoint: '1024px',
+          numVisible: 3,
+          numScroll: 3
+      },
+      {
+          breakpoint: '768px',
+          numVisible: 2,
+          numScroll: 2
+      },
+      {
+          breakpoint: '560px',
+          numVisible: 1,
+          numScroll: 1
+      }
+  ];
   }
   ngOnInit() {
     var body = document.getElementsByTagName('body')[0];
