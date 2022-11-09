@@ -10,6 +10,11 @@ import { SharedModule } from './shared/shared.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RdResetPasswordComponent } from './rd-reset-password/rd-reset-password.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { CarouselModule }  from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +29,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CoreModule,
     HttpClientModule,
     NgxSpinnerModule,
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    CarouselModule,
+    ButtonModule,
+    ToastModule
   ],
   providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
