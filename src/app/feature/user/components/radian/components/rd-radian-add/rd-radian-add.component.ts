@@ -234,7 +234,6 @@ export class RdRadianAddComponent implements OnInit {
 
 
   educationFormarray() : FormArray {
-    debugger 
     console.log(this.addRadianFormGroup);
     return this.addRadianFormGroup.get("Education") as FormArray  
   }  
@@ -247,7 +246,6 @@ export class RdRadianAddComponent implements OnInit {
   }  
      
   addEducation() {  
-    debugger
     this.educationFormarray().push(this.newEducation());  
   }
   getEducationControls() {

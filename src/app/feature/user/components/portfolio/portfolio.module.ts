@@ -13,6 +13,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { EmbedVideoService } from 'ngx-embed-video';
+import { CarouselModule } from 'primeng/carousel';
 @NgModule({
   declarations: [RdPortfolioListComponent, RdPortfolioAddComponent, RdPortfolioEditComponent],
   imports: [
@@ -26,7 +27,8 @@ import { EmbedVideoService } from 'ngx-embed-video';
     ReactiveFormsModule,
     SharedModule.forRoot(),
     AngularEditorModule,
-    ImageCropperModule
+    ImageCropperModule,
+    CarouselModule
   ],
   providers: [EmbedVideoService]
 })

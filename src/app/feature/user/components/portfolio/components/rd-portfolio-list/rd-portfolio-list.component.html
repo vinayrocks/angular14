@@ -21,7 +21,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <mat-vertical-stepper #stepper>
+                            <!-- <mat-vertical-stepper #stepper>
                                 <mat-step *ngFor="let item of userPortfolio;let i = index" [completed]="false">
                                     <ng-template class="row" matStepLabel>
                                         <div class="row">
@@ -34,9 +34,6 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                         <div class="portfolio-label">About Portfolio</div>
-                                        <!-- <textarea class="form-control white-board" [attr.disabled]="true">
-                                            {{item.PortfolioArtifacts}}
-                                        </textarea> -->
                                         <textarea class="form-control txtarea-custom" style="font-family: Open Sans !important;"
                                             [(ngModel)]="item.PortfolioArtifacts"  disabled="true">
                                         </textarea>
@@ -72,7 +69,33 @@
                                         </div>
                                     </div>
                                 </mat-step>
-                            </mat-vertical-stepper>
+                            </mat-vertical-stepper> -->
+
+                            <p-carousel [value]="userPortfolio" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1" [circular]="true" 
+                                [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+                                    <!-- <ng-template pTemplate="header">
+                                        <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
+                                    </ng-template> -->
+                                    <ng-template let-product pTemplate="item">
+                                        <div class="product-item">
+                                            <div class="product-item-content">
+                                                <div class="p-mb-3">
+                                                </div>
+                                                <div>
+                                                    <h4 class="p-mb-1">{{product.PortfolioName}}</h4>
+                                                    <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                                                    <span [class]="'product-badge status-'+product.PortfolioName.toLowerCase()">{{product.PortfolioArtifacts}}</span>
+                                                    <div class="car-buttons p-mt-5">
+                                                        <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                                                        <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
+                                                        <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-carousel>
+
                         </div>
                     </div>
                 </div>

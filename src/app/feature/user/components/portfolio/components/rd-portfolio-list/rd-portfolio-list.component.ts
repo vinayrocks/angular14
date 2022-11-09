@@ -44,10 +44,28 @@ export class RdPortfolioListComponent implements OnInit {
       ['fontSize', 'insertImage','insertVideo','insertHorizontalRule',]
     ]
   };
+  responsiveOptions:any=[];
   constructor(private rdUserService: RdUserService, public matDialog: MatDialog,
     private embedService: EmbedVideoService,private router: Router,
     private _encryptDecryptService: RdEncryptDecryptService,private spinner:NgxSpinnerService,
     private rdAuthenticateService: RdAuthenticateService) {
+      this.responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 3,
+            numScroll: 3
+        },
+        {
+            breakpoint: '768px',
+            numVisible: 2,
+            numScroll: 2
+        },
+        {
+            breakpoint: '560px',
+            numVisible: 1,
+            numScroll: 1
+        }
+    ];
       
   }
   ngOnInit() {
