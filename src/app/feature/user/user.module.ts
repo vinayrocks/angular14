@@ -10,6 +10,11 @@ import { NgxMatDateFormats, NgxMatDatetimePickerModule, NGX_MAT_DATE_FORMATS } f
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RadianAccountModule } from './components/radian-account/radian-account.module';
+
+import { CarouselModule }  from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
     dateInput: 'l, LTS'
@@ -34,7 +39,10 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     NgxMatDatetimePickerModule,
     NgxMatMomentModule,
     MatDatepickerModule,
-    RadianAccountModule
+    RadianAccountModule,
+    CarouselModule,
+    ButtonModule,
+    ToastModule
   ],
   providers: [{ provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }]
 })
