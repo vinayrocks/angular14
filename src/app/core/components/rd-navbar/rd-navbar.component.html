@@ -54,7 +54,7 @@ color-on-scroll="500" appBlockCopy>
             <a ngbDropdownToggle routerLinkActive="active" class="custom-link nav-link dropdown-toggle" (click)="_open=false">
               <p class="navbar-font-logged-in">{{currentUser?.firstName }} {{currentUser?.lastName}}</p>
             </a>
-            <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
+            <div ngbDropdownMenu class="dropdown-menu dropdown-menu-left">
               <a class="nav-link dropdown-item" [routerLink]="['/member/hunar_view']" (click)="_open=false"><p class="navbar-font-logged-in">My Profiles</p></a>
               <a class="nav-link dropdown-item" [routerLink]="['/member/portfolio_view']" (click)="_open=false"><p class="navbar-font-logged-in">My Portfolios</p></a>
               <a class="nav-link dropdown-item" [routerLink]="['/member/event_view']" *ngIf="currentUser?.membershipDuration!=='Basic'" (click)="_open=false"><p class="navbar-font-logged-in">My Events</p></a>

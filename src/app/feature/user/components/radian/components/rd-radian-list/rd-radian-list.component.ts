@@ -24,6 +24,8 @@ export class RdRadianListComponent implements OnInit {
   routerData: any = [];
   projectFilePath: String = '';
   projectPath: String = '';
+  profileImagePath:string;
+  coverImagePath:string
   currentUser: any;
   config: AngularEditorConfig = {
     editable: false,
@@ -74,8 +76,21 @@ export class RdRadianListComponent implements OnInit {
     body.classList.add('profile-page');
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.add('navbar-transparent');
-    this.getUserProfiles()
+    this.getUserProfiles();
+
+    if(this.currentUser!==null){
+      this.profileImagePath = this.GetProfilePath();
+      this.coverImagePath = this.GetCoverPicture();
+    };
   }
+
+  GetProfilePath(){
+    return 'http://itechprovisions.com/radianApi/media/'+this.currentUser.firstName + '_'+this.currentUser.username.split('@')[0]+'/Profile/'+this.currentUser.ProfileName+'/ProfileImages/'+this.currentUser.ProfilePicture;
+  }
+  GetCoverPicture(){
+    return 'http://itechprovisions.com/radianApi/media/'+this.currentUser.firstName + '_'+this.currentUser.username.split('@')[0]+'/Profile/'+this.currentUser.ProfileName+'/CoverImages/'+this.currentUser.CoverPicture;
+  }
+
   getUserProfiles() {
     this.spinner.show()
     this.userProfiles=[];

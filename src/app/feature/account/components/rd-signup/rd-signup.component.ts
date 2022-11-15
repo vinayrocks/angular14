@@ -529,10 +529,10 @@ export class RdSignupComponent implements OnInit {
     } else {
       this.membership = (memberShipCategory as any).default.filter(
         (x: any) =>
-          x.name === "Monthly" ||
-          x.name === "Quarterly" ||
-          x.name === "Semi Annual" ||
-          x.name === "Annual"
+          x.name === "Premium Monthly" ||
+          x.name === "Premium Annual" ||
+          x.name === "Corporate Monthly" ||
+          x.name === "Corporate Annual"
       );
       this.membership = [...this.membership];
       this.registerForm.memberShip.setValue(this.membership[0].Id);
