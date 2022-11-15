@@ -2,66 +2,81 @@
   {
     "Id":1,
     "name": "Basic",
-    "amount": "",
+    "amount": "Free",
     "currency": "",
     "planType": "Free",
     "properties": [
       "Create Multiple Profiles",
       "Create Multiple Portfolios",
       "Participate in Events",
+      "Connect with Peers",
       "Storage Space: 500 MB"
     ]
   },
   {
     "Id":2,
-    "name": "Monthly",
-    "amount": "1",
+    "name": "Premium Monthly",
+    "amount": "1000",
     "currency": "INR",
     "planType": "",
     "properties": [
-        "All Features of Basic",
-        "Create Multiple Events",
-        "View Analytics",
-        "Storage Space: 1 GB"
+      "Create Multiple Profiles",
+      "Create Multiple Portfolios",
+      "Participate in Events",
+      "Connect with Peers",
+      "Request Reviews",
+      "Attend Trainings",
+      "Storage Space: 1 GB"
     ]
   },
   {
     "Id":3,
-    "name": "Quarterly",
-    "amount": "599",
+    "name": "Premium Annual",
+    "amount": "10000",
     "currency": "INR",
     "planType": "",
     "properties": [
-        "All Features of Basic",
-        "Create Multiple Events",
-        "View Analytics",
-        "Storage Space: 1 GB"
+      "Create Multiple Profiles",
+      "Create Multiple Portfolios",
+      "Participate in Events",
+      "Connect with Peers",
+      "Request Reviews",
+      "Attend Trainings",
+      "Storage Space: 1 GB"
     ]
   },
   {
     "Id":4,
-    "name": "Semi Annual",
-    "amount": "1099",
+    "name": "Corporate Monthly",
+    "amount": "5000",
     "currency": "INR",
     "planType": "",
     "properties": [
-        "All Features of Basic",
-        "Create Multiple Events",
-        "View Analytics",
-        "Storage Space: 1 GB"
+      "Create Multiple Profiles",
+      "Create Multiple Portfolios",
+      "Participate in Events",
+      "Create Events",
+      "Connect with Peers",
+      "Offer Training [Online or Offline",
+      "Analytics, Reports, Dashboards",
+      "Storage Space: 100 GB"
     ]
   },
   {
     "Id":5,
-    "name": "Annual",
-    "amount": "2099",
+    "name": "Corporate Annual",
+    "amount": "50000",
     "currency": "INR",
     "planType": "",
     "properties": [
-        "All Features of Basic",
-        "Create Multiple Events",
-        "View Analytics",
-        "Storage Space: 1 GB"
+      "Create Multiple Profiles",
+      "Create Multiple Portfolios",
+      "Participate in Events",
+      "Create Events",
+      "Connect with Peers",
+      "Offer Training [Online or Offline]",
+      "Analytics, Reports, Dashboards",
+      "Storage Space: 100 GB"
     ]
   }
   

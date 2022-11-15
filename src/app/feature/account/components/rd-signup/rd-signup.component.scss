@@ -3,7 +3,8 @@
     border-radius: 5px;
     text-align: center !important;
     padding: 18px;
-    height: inherit;
+    height: 350px;
+    margin-bottom: 30px
 }
 .lbl-custom{
   font-weight: 700;
@@ -40,6 +41,7 @@
     cursor: pointer;
     position: relative;
     margin-top: 35px;
+    margin-bottom: 130px;
 }
 .custom-set input[type="radio"]{
     position: absolute;
@@ -123,4 +125,13 @@ h5, h6{
 }
 .custom-btn{
   margin-top: 0px !important;
+}
+.card {
+  border: 0;
+  border-radius: 0.1875rem;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: none !important;
 }
