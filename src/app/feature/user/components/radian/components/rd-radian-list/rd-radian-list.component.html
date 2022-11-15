@@ -24,7 +24,7 @@
     <div class="card-body">
       <div class="wrapper">
         <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
-        <h3 class="title">Vinay Pardeshi</h3>
+        <h3 class="title">{{selectedUser.ProfileName}}</h3>
         <p>Visual</p>
       </div>
       <a [routerLink]="['/member/hunar_add']" class="btn btn-danger btn-round profile-label">Create New
@@ -32,116 +32,373 @@
       <div class="row ">
         <div class="col-lg-12">
           <ul class=" nav nav-tabs justify-content-center s-nav">
-            <li><a class="active" href="#">About</a></li>
-            <li><a class="" href="#">Education</a></li>
-            <li><a href="#">Certification & Licenses</a></li>
-            <li><a href="#">Experiences</a></li>
+            <li><a [ngClass]="{'active':_istab===1}" (click)="_istab=1">About</a></li>
+            <li><a [ngClass]="{'active':_istab===2}"(click)="_istab=2">Education</a></li>
+            <li><a [ngClass]="{'active':_istab===3}" (click)="_istab=3">Certification & Licenses</a></li>
+            <li><a [ngClass]="{'active':_istab===4}" (click)="_istab=4">Experiences</a></li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" [@enterAnimation] *ngIf="_istab===1">
     <div class="col-md-12">
-      <div class="row card portfolio">
-        <h4>About Profile</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row card portfolio">
+            <h4>About Profile</h4>
+            <p>{{selectedUser.ProfileDescription}}</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row card portfolio">
-        <h4>Skills</h4>
-        <div class="row">
-          <div class="col-md-4 custom-col-skills">
-            <i class="fa fa-camera-retro"></i>
-            <br />
-            <h5 class="h5-custom">Photography</h5>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row card portfolio">
+            <h4>Skills</h4>
+            <div class="row">
+              <div class="col-md-4 custom-col-skills">
+                <i class="fa fa-camera-retro"></i>
+                <br />
+                <h5 class="h5-custom">{{selectedUser?.ProfileSkill.name}}</h5>
+              </div>
+            </div>
           </div>
-          <div class="col-md-4 custom-col-skills">
-            <i class="fa fa-paint-brush"></i>
-            <br />
-            <h5 class="h5-custom">Painting</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row card portfolio">
+            <h4>Linked Portfolios</h4>
+            <p-carousel [value]="selectedUser.LinkedPortfolio" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
+              [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+              <!-- <ng-template pTemplate="header">
+                  <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
+              </ng-template> -->
+              <ng-template let-product pTemplate="item">
+                <div class="product-item">
+                  <div class="product-item-content">
+                    <div class="p-mb-3">
+                    </div>
+                    <div>
+                      <h4 class="p-mb-1">{{product.name}}</h4>
+                      <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                      <!-- <span
+                        [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
+                      <div class="car-buttons p-mt-5">
+                        <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                                  <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
+                                  <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </p-carousel>
           </div>
-          <div class="col-md-4 custom-col-skills">
-            <i class="fa fa fa-picture-o"></i>
-            <br />
-            <h5 class="h5-custom">Animation</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row card portfolio">
+            <h4>Other Profiles</h4>
+            <p-carousel [value]="userProfiles" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
+              [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+              <!-- <ng-template pTemplate="header">
+                  <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
+              </ng-template> -->
+              <ng-template let-product pTemplate="item">
+                <div class="product-item">
+                  <div class="product-item-content">
+                    <div class="p-mb-3">
+                    </div>
+                    <div>
+                      <a (click)="selectedUser=product"><h4 class="p-mb-1">{{product.ProfileName}}</h4></a>
+                      
+                      <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                      <span
+                        [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
+                      <div class="car-buttons p-mt-5">
+                        <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                                  <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
+                                  <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </p-carousel>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row card portfolio">
-        <h4>Linked Portfolios</h4>
-        <p-carousel [value]="userProfiles" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
-          [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-          <!-- <ng-template pTemplate="header">
-              <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
-          </ng-template> -->
-          <ng-template let-product pTemplate="item">
-            <div class="product-item">
-              <div class="product-item-content">
-                <div class="p-mb-3">
-                </div>
-                <div>
-                  <h4 class="p-mb-1">{{product.ProfileName}}</h4>
-                  <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
-                  <span
-                    [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
-                  <div class="car-buttons p-mt-5">
-                    <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
-                              <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
-                              <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button> -->
+  <div class="row" [@enterAnimation] *ngIf="_istab===2"><div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>About Profile</h4>
+          <p>{{selectedUser.ProfileDescription}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>Skills</h4>
+          <div class="row">
+            <div class="col-md-4 custom-col-skills">
+              <i class="fa fa-camera-retro"></i>
+              <br />
+              <h5 class="h5-custom">{{selectedUser?.ProfileSkill.name}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>Linked Portfolios</h4>
+          <p-carousel [value]="selectedUser.LinkedPortfolio" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
+            [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+            <!-- <ng-template pTemplate="header">
+                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
+            </ng-template> -->
+            <ng-template let-product pTemplate="item">
+              <div class="product-item">
+                <div class="product-item-content">
+                  <div class="p-mb-3">
+                  </div>
+                  <div>
+                    <h4 class="p-mb-1">{{product.name}}</h4>
+                    <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                    <!-- <span
+                      [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
+                    <div class="car-buttons p-mt-5">
+                      <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
+                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
+                    </div> -->
                   </div>
                 </div>
               </div>
-            </div>
-          </ng-template>
-        </p-carousel>
+            </ng-template>
+          </p-carousel>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row card portfolio">
-        <h4>Other Profiles</h4>
-        <p-carousel [value]="userProfiles" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
-          [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-          <!-- <ng-template pTemplate="header">
-              <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
-          </ng-template> -->
-          <ng-template let-product pTemplate="item">
-            <div class="product-item">
-              <div class="product-item-content">
-                <div class="p-mb-3">
-                </div>
-                <div>
-                  <h4 class="p-mb-1">{{product.ProfileName}}</h4>
-                  <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
-                  <span
-                    [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
-                  <div class="car-buttons p-mt-5">
-                    <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
-                              <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
-                              <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button> -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>Other Profiles</h4>
+          <p-carousel [value]="userProfiles" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
+            [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+            <!-- <ng-template pTemplate="header">
+                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
+            </ng-template> -->
+            <ng-template let-product pTemplate="item">
+              <div class="product-item">
+                <div class="product-item-content">
+                  <div class="p-mb-3">
+                  </div>
+                  <div>
+                    <a (click)="selectedUser=product"><h4 class="p-mb-1">{{product.ProfileName}}</h4></a>
+                    
+                    <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                    <span
+                      [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
+                    <div class="car-buttons p-mt-5">
+                      <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
+                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button> -->
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ng-template>
-        </p-carousel>
+            </ng-template>
+          </p-carousel>
+        </div>
       </div>
     </div>
-  </div>
+  </div></div>
+  <div class="row" [@enterAnimation] *ngIf="_istab===3"><div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>About Profile</h4>
+          <p>{{selectedUser.ProfileDescription}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>Skills</h4>
+          <div class="row">
+            <div class="col-md-4 custom-col-skills">
+              <i class="fa fa-camera-retro"></i>
+              <br />
+              <h5 class="h5-custom">{{selectedUser?.ProfileSkill.name}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>Linked Portfolios</h4>
+          <p-carousel [value]="selectedUser.LinkedPortfolio" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
+            [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+            <!-- <ng-template pTemplate="header">
+                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
+            </ng-template> -->
+            <ng-template let-product pTemplate="item">
+              <div class="product-item">
+                <div class="product-item-content">
+                  <div class="p-mb-3">
+                  </div>
+                  <div>
+                    <h4 class="p-mb-1">{{product.name}}</h4>
+                    <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                    <!-- <span
+                      [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
+                    <div class="car-buttons p-mt-5">
+                      <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
+                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>Other Profiles</h4>
+          <p-carousel [value]="userProfiles" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
+            [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+            <!-- <ng-template pTemplate="header">
+                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
+            </ng-template> -->
+            <ng-template let-product pTemplate="item">
+              <div class="product-item">
+                <div class="product-item-content">
+                  <div class="p-mb-3">
+                  </div>
+                  <div>
+                    <a (click)="selectedUser=product"><h4 class="p-mb-1">{{product.ProfileName}}</h4></a>
+                    
+                    <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                    <span
+                      [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
+                    <div class="car-buttons p-mt-5">
+                      <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
+                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <div class="row" [@enterAnimation] *ngIf="_istab===4"><div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>About Profile</h4>
+          <p>{{selectedUser.ProfileDescription}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>Skills</h4>
+          <div class="row">
+            <div class="col-md-4 custom-col-skills">
+              <i class="fa fa-camera-retro"></i>
+              <br />
+              <h5 class="h5-custom">{{selectedUser?.ProfileSkill.name}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>Linked Portfolios</h4>
+          <p-carousel [value]="selectedUser.LinkedPortfolio" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1"
+            [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+            <!-- <ng-template pTemplate="header">
+                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
+            </ng-template> -->
+            <ng-template let-product pTemplate="item">
+              <div class="product-item">
+                <div class="product-item-content">
+                  <div class="p-mb-3">
+                  </div>
+                  <div>
+                    <h4 class="p-mb-1">{{product.name}}</h4>
+                    <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                    <!-- <span
+                      [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
+                    <div class="car-buttons p-mt-5">
+                      <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
+                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio">
+          <h4>Other Profiles</h4>
+          <p-carousel [value]="userProfiles" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
+            [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+            <!-- <ng-template pTemplate="header">
+                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
+            </ng-template> -->
+            <ng-template let-product pTemplate="item">
+              <div class="product-item">
+                <div class="product-item-content">
+                  <div class="p-mb-3">
+                  </div>
+                  <div>
+                    <a (click)="selectedUser=product"><h4 class="p-mb-1">{{product.ProfileName}}</h4></a>
+                    
+                    <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                    <span
+                      [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
+                    <div class="car-buttons p-mt-5">
+                      <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
+                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
+    </div>
+  </div></div>
   <!-- <div class="row">
     <div class="col-md-12">
       <div class="row card portfolio">
