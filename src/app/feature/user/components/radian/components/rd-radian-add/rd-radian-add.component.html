@@ -212,7 +212,7 @@
                         </div>
                       </div>
                       <div class="col-md-2"  *ngIf="getEducationControls().length>1">
-                        <button class="btn btn-primary btn-round reset-btn">Delete</button>
+                        <button class="btn btn-primary btn-round reset-btn" (click)="deleteEducation(i)">Delete</button>
                       </div>
                     </div>
                     <div class="row">
@@ -238,7 +238,7 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                              <input type="text" class="signUp-form-control form-control" placeholder="Certification Name">
+                              <input type="text" class="signUp-form-control form-control" placeholder="Certification Namex">
                             </div>
                           </div>
                         </div>
@@ -287,7 +287,7 @@
                         </div>
                       </div>
                       <div class="col-md-2"  *ngIf="getCertificationLicensedControls().length>1">
-                        <button class="btn btn-primary btn-round reset-btn">Delete</button>
+                        <button class="btn btn-primary btn-round reset-btn" (click)="deleteCertificationLicensed(i)">Delete</button>
                       </div>
                     </div>
                     <div class="row">
@@ -378,7 +378,7 @@
                         </div>
                       </div>
                       <div class="col-md-2"  *ngIf="getExperienceControls().length>1">
-                        <button class="btn btn-primary btn-round reset-btn">Delete</button>
+                        <button class="btn btn-primary btn-round reset-btn" (click)="deleteExperience(i)">Delete</button>
                       </div>
                     </div>
                     <div class="row">
