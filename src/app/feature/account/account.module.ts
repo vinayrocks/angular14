@@ -11,10 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { SelectDropDownModule } from 'ngx-select-dropdown'
+import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { LoginComponent } from './components/login/login.component'
 
 @NgModule({
-  declarations: [RdSignupComponent, RdAccountLayoutComponent],
+  declarations: [RdSignupComponent, RdAccountLayoutComponent, LoginComponent],
   imports: [
     CommonModule,
     AccountRoutingModule,

@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AccountModule } from './feature/account/account.module';
-import { GuestModule } from './feature/guest/guest.module';
-import { UserModule } from './feature/user/user.module';
 import { RdResetPasswordComponent } from './rd-reset-password/rd-reset-password.component';
 import { RdAuthGuard } from './shared/authentication/guard/rd-auth.guard';
 
