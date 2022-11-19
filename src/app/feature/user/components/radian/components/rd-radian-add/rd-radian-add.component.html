@@ -440,13 +440,20 @@
                       <div class="portfolio-label">Skills</div>
                     </div>
                     <div class="col-md-5">
-                      <select class="select-css" placeholder="Skill/Art" formControlName="ProfileSkill"
+                      <!-- <select class="select-css" placeholder="Skill/Art" formControlName="ProfileSkill"
                         (change)="getSkillSubCategory($event.target.value)">
                         <option value="" [selected]="true">Select</option>
                         <option *ngFor="let item of skills" value="{{item.radianSkillCategoryId}}">
                           {{item.radianSkillCategoryName}}
                         </option>
-                      </select>
+                      </select> -->
+                      <ngx-select-dropdown (change)="getSkillSubCategory($event.target.value)"
+                              class="ngx-select"
+                              [instanceId]="'instance1'" 
+                              formControlName="ProfileSkill" 
+                              [config]="skillConfig" 
+                              [options]="skills">
+                            </ngx-select-dropdown>
                     </div>
                     <div class="col-md-5"></div>
                   </div>

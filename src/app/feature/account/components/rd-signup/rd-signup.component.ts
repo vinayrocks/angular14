@@ -439,11 +439,8 @@ export class RdSignupComponent implements OnInit {
     return this.embedService.embed(url);
   }
   selectMediaType(event: any) {
-    if (event.value !== "image") {
-      this.isImageType = false;
-    } else {
-      this.isImageType = true;
-    }
+    this.isImageType = event;
+    console.log( this.isImageType)
   }
   addMoreImage(index: number) {
     const data: any = [];

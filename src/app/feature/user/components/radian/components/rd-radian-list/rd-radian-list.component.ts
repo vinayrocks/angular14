@@ -99,7 +99,6 @@ export class RdRadianListComponent implements OnInit {
     body.classList.add("profile-page");
     var navbar = document.getElementsByTagName("nav")[0];
     navbar.classList.add("navbar-transparent");
-    debugger
     this.getUserProfiles();
 
     if (this.currentUser !== null) {
@@ -136,7 +135,6 @@ export class RdRadianListComponent implements OnInit {
   getUserProfiles() {
     this.spinner.show();
     this.userProfiles = [];
-    debugger
     this.rdUserService
       .getUserProfiles(new RdCommon(this.routerData))
       .pipe(first())

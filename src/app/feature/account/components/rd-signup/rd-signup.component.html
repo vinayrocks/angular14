@@ -598,14 +598,35 @@
                             <div class="portfolio-label">Portfolio Media*</div>
                             <div class="row" *ngFor="let item of addMoreImageArray;let i=index;">
                                 <div class="col-md-3" *ngIf="imageIndex===i">
-                                    <select id="select{{i}}" class="select-css" class="form-control custome-css-select"
+                                    <!-- <select id="select{{i}}" class="select-css" class="form-control custome-css-select"
                                         (change)="selectMediaType($event.target)" placeholder="Select*">
                                         <option value="image" selected="true">Image/Document
                                         </option>
                                         <option value="video">Video</option>
-                                    </select>
+                                    </select> -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="pretty p-switch p-fill">
+                                                <input type="radio" name="isUser" checked value="true" 
+                                                (change)="selectMediaType($event.target.value)"/>
+                                                <div class="state p-success">
+                                                    <label>Image</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="pretty p-switch p-fill">
+                                                <input type="radio" name="isUser" value="false"
+                                                (change)="selectMediaType($event.target.value)"/>
+                                                <div class="state p-success">
+                                                    <label>Video</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
-                                <div class="col-md-8" *ngIf="isImageType && imageIndex===i">
+                                <div class="col-md-8" *ngIf="isImageType">
                                     <input id="file{{i}}" type="file" (change)="fileChangeEvent($event,i)"
                                         accept="application/pdf, image/jpeg, image/png" />
                                 </div>

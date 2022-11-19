@@ -46,8 +46,28 @@ export class RdRadianAddComponent implements OnInit {
     ]
   };
 
-  eduNameConfig: any = {};
-  degreeName: any[];
+  eduNameConfig: any = {  
+  displayKey: "name",
+  search: true,
+  placeholder: "Select",
+  searchPlaceholder: "Search",
+  searchOnKey: "name",
+  height: "150px",}
+  skillConfig: any = {  
+    displayKey: "radianSkillCategoryName",
+    search: true,
+    placeholder: "Select",
+    searchPlaceholder: "Search",
+    searchOnKey: "radianSkillCategoryName",
+    height: "150px",};
+  degreeName: any=[
+    { id: 10, name: 'SSC', status: 'enabled' },
+    { id: 11, name: 'HSC', status: 'enabled' },
+    { id: 12, name: 'Graduate', status: 'enabled' },
+    { id: 13, name: 'Post Graduate', status: 'enabled' },
+    { id: 14, name: 'PhD', status: 'enabled' },
+    { id: 15, name: 'Others', status: 'enabled' },
+  ];
 
   maxDate = new Date();
   minDate = new Date();
@@ -69,23 +89,23 @@ export class RdRadianAddComponent implements OnInit {
     this.addCertificationLicensed();
     this.addExperience();
 
-    this.eduNameConfig = {
-      displayKey: "educationName",
-      search: true,
-      placeholder: "Select",
-      searchPlaceholder: "Search",
-      searchOnKey: "educationName",
-      height: "150px",
-    };
+    // this.eduNameConfig = {
+    //   displayKey: "educationName",
+    //   search: true,
+    //   placeholder: "Select",
+    //   searchPlaceholder: "Search",
+    //   searchOnKey: "educationName",
+    //   height: "150px",
+    // };
 
-    this.degreeName = [
-      { id: 10, name: 'SSC', status: 'enabled' },
-      { id: 11, name: 'HSC', status: 'enabled' },
-      { id: 12, name: 'Graduate', status: 'enabled' },
-      { id: 13, name: 'Post Graduate', status: 'enabled' },
-      { id: 14, name: 'PhD', status: 'enabled' },
-      { id: 15, name: 'Others', status: 'enabled' },
-    ];
+    // this.degreeName = [
+    //   { id: 10, name: 'SSC', status: 'enabled' },
+    //   { id: 11, name: 'HSC', status: 'enabled' },
+    //   { id: 12, name: 'Graduate', status: 'enabled' },
+    //   { id: 13, name: 'Post Graduate', status: 'enabled' },
+    //   { id: 14, name: 'PhD', status: 'enabled' },
+    //   { id: 15, name: 'Others', status: 'enabled' },
+    // ];
 
   }
   get addRadianForm() { return this.addRadianFormGroup.controls; }
