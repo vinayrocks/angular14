@@ -45,6 +45,10 @@ export class RdRadianAddComponent implements OnInit {
         'insertHorizontalRule',]
     ]
   };
+
+  eduNameConfig: any = {};
+  degreeName: any[];
+
   maxDate = new Date();
   minDate = new Date();
   constructor(private _formBuilder: FormBuilder, private rdUserService: RdUserService,
@@ -64,6 +68,25 @@ export class RdRadianAddComponent implements OnInit {
     this.addEducation();
     this.addCertificationLicensed();
     this.addExperience();
+
+    this.eduNameConfig = {
+      displayKey: "educationName",
+      search: true,
+      placeholder: "Select",
+      searchPlaceholder: "Search",
+      searchOnKey: "educationName",
+      height: "150px",
+    };
+
+    this.degreeName = [
+      { id: 10, name: 'SSC', status: 'enabled' },
+      { id: 11, name: 'HSC', status: 'enabled' },
+      { id: 12, name: 'Graduate', status: 'enabled' },
+      { id: 13, name: 'Post Graduate', status: 'enabled' },
+      { id: 14, name: 'PhD', status: 'enabled' },
+      { id: 15, name: 'Others', status: 'enabled' },
+    ];
+
   }
   get addRadianForm() { return this.addRadianFormGroup.controls; }
 

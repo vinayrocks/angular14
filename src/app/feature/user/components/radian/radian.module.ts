@@ -16,6 +16,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { RadianLayoutComponent } from './radian-layout/radian-layout.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {CarouselModule} from 'primeng/carousel';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 @NgModule({
   declarations: [RdRadianListComponent, RdRadianAddComponent, RdRadianEditComponent, RadianLayoutComponent],
   imports: [
@@ -32,7 +33,8 @@ import {CarouselModule} from 'primeng/carousel';
     AngularEditorModule,
     ImageCropperModule,
     BsDatepickerModule.forRoot(),
-    CarouselModule
+    CarouselModule,
+    SelectDropDownModule
   ],
   providers: [EmbedVideoService],
 })
