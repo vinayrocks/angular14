@@ -1,11 +1,24 @@
-<div class="container-fluid">
+<div class="container">
   <!-- <div class="button-container">
     <a href="#button" class="btn btn-primary btn-round btn-lg">New Profile</a>
   </div> -->
-  <div class="row">
-    <div class="col-md-1">
+  <div class="img default-cover">
+    <div class="edit-btn">
+      <a [routerLink]="['/member/hunar_add']" class="btn btn-primary btn-round btn-margin reset-btn">
+        <i class="pi pi-camera"></i>Select Cover Image</a>
     </div>
-    <div class="col-md-10">
+  </div>
+  <div class="card social-prof">
+    <div class="card-body">
+      <div class="wrapper">
+        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+        <h3 class="title">[Vinay Pardeshi]</h3>
+        <p>[Visual]</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
       <div class="row card portfolio">
         <div class="col-md-12">
           <div class="row">
@@ -140,14 +153,21 @@
                           <div class="col-md-12">
                             <div class="input-group">
                               <!-- <input type="text" class="signUp-form-control form-control" placeholder="Education Name"> -->
-                              <select class="select-css">
+                              <!-- <select class="select-css">
                                 <option value="''" selected="true">Select</option>
                                 <option value="1">Phd</option>
                                 <option value="2">Masters</option>
                                 <option value="3">Bachelors</option>
                                 <option value="4">12th</option>
                                 <option value="5">10th</option>
-                              </select>
+                              </select> -->
+                              <ngx-select-dropdown
+                              class="ngx-select"
+                              [instanceId]="'instance1'" 
+                              formControlName="educationName" 
+                              [config]="eduNameConfig" 
+                              [options]="degreeName">
+                            </ngx-select-dropdown>
                             </div>
                           </div>
                         </div>
@@ -457,8 +477,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-1">
     </div>
   </div>
 </div>

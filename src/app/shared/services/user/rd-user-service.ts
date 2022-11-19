@@ -15,7 +15,7 @@ export class RdUserService {
   }
 
   getUserProfiles(rdCommon) {
-    
+    debugger
     return this.http.post<any>(environment.apiCommon+'radianApi/Profiles/getProfiles.php',
     JSON.stringify(this._encryptDecryptService.ecryptModel(rdCommon)))
       .pipe(map(res => {
@@ -23,7 +23,7 @@ export class RdUserService {
       }));
   }
   getUserProfile(rdCommon) {
-    
+    debugger
     rdCommon.UserId=rdCommon.UserId;
     return this.http.post<any>(environment.apiCommon+'radianApi/Profiles/getProfiles.php', 
     JSON.stringify(this._encryptDecryptService.ecryptModel(rdCommon)))
