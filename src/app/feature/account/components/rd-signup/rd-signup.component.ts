@@ -195,7 +195,6 @@ export class RdSignupComponent implements OnInit {
     }
     this.registerForm.profileSkillSubCategory.setValue(this.tempArr.join(","));
   }
-
   onSelectMembership(event, item: any) {
     if (event.target.checked) {
       this.registerForm.membershipAmount.setValue(item.amount);

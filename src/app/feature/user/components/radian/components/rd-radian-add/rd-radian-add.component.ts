@@ -45,7 +45,6 @@ export class RdRadianAddComponent implements OnInit {
         'insertHorizontalRule',]
     ]
   };
-
   eduNameConfig: any = {  
   displayKey: "name",
   search: true,
