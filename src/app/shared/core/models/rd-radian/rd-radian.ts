@@ -8,6 +8,15 @@ export class RdRadian {
   ProfileExpertise: String='';
   LinkedPortfolio: String='';
   UserId:Number=0;
+  EducationName: String='';
+  EducationStartYear: string;
+  EducationEndYear: string;
+  CertificationName: String='';
+  CertificationDate: string;
+  CertificateLicenseNumber: String='';
+  UserExperience: String='';
+  UserExperienceStartYear: string;
+  UserExperienceEndYear: string;
   Email:String='';
   FirstName:String='';
   isDefaultProfile:Number=0;
