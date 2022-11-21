@@ -1,17 +1,91 @@
 <div class="container">
-  <!-- <div class="button-container">
-    <a href="#button" class="btn btn-primary btn-round btn-lg">New Profile</a>
-  </div> -->
+  <ng-template #contentProfile let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Profile Picture</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row mt-top"
+        *ngIf="addRadianForm.ProfilePicture.errors && (addRadianForm.ProfilePicture.dirty || addRadianForm.ProfilePicture.touched)">
+        <div class="col-md-12">
+          <app-required-validation-message [fieldName]="'Image'" *ngIf="addRadianForm.ProfilePicture.errors.required">
+          </app-required-validation-message>
+        </div>
+      </div>
+      <div class="row mt-top">
+        <div class="col-md-10">
+          <div class="row mt-top">
+            <div class="col-md-12">
+              <input type="file" (change)="fileChangeEvent($event,contentProfile)" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row mt-top model-profile" *ngIf="isUploaded">
+        <div class="col-md-8">
+          <h6>Crop Image</h6>
+          <div class="row">
+            <div class="col-md-12">
+              <image-cropper class="border-custom" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)">
+              </image-cropper>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h6>Preview</h6>
+          <div class="row">
+            <div class="col-md-12">
+              <img [src]="croppedImage" class="border-custom" />
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+  <ng-template #contentCover let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Cover Picture</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row mt-top"
+        *ngIf="addRadianForm.CoverPicture.errors && (addRadianForm.CoverPicture.dirty || addRadianForm.CoverPicture.touched)">
+        <div class="col-md-12">
+          <app-required-validation-message [fieldName]="'Cover Image'"
+            *ngIf="addRadianForm.ProfilePicture.errors.required"></app-required-validation-message>
+        </div>
+      </div>
+      <div class="row mt-top">
+        <div class="col-md-2 custom-label">
+          <div class="portfolio-label">Cover Picture</div>
+        </div>
+        <div class="col-md-10">
+          <div class="row mt-top">
+            <div class="col-md-12">
+              <input type="file" (change)="CoverFileChangeEvent($event)" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
   <div class="img default-cover">
     <div class="edit-btn">
-      <a [routerLink]="['/member/hunar_add']" class="btn btn-primary btn-round btn-margin reset-btn">
+      <a (click)="openCoverPopup(contentCover)" class="btn btn-primary btn-round btn-margin reset-btn">
         <i class="pi pi-camera"></i>Select Cover Image</a>
     </div>
   </div>
   <div class="card social-prof">
     <div class="card-body">
       <div class="wrapper">
-        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+        <a (click)="openProfilePopup(contentProfile)">
+          <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+        </a>
+
         <h3 class="title">[Vinay Pardeshi]</h3>
         <p>[Visual]</p>
       </div>
@@ -48,70 +122,6 @@
                     </div>
                   </div>
                   <hr />
-                  <br />
-                  <div class="row mt-top"
-                    *ngIf="addRadianForm.ProfilePicture.errors && (addRadianForm.ProfilePicture.dirty || addRadianForm.ProfilePicture.touched)">
-                    <div class="col-md-12">
-                      <app-required-validation-message [fieldName]="'Image'"
-                        *ngIf="addRadianForm.ProfilePicture.errors.required"></app-required-validation-message>
-                    </div>
-                  </div>
-                  <div class="row mt-top">
-                    <div class="col-md-2 custom-label">
-                      <div class="portfolio-label">Profile Picture</div>
-                    </div>
-                    <div class="col-md-10">
-                      <div class="row mt-top">
-                        <div class="col-md-12">
-                          <input type="file" (change)="fileChangeEvent($event)" />
-                        </div>
-                      </div>
-                      <div class="row mt-top" *ngIf="isUploaded">
-                        <div class="col-md-8">
-                          <h6>Crop Image</h6>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <image-cropper class="border-custom" [imageChangedEvent]="imageChangedEvent"
-                                [maintainAspectRatio]="true" [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png"
-                                (imageCropped)="imageCropped($event)"></image-cropper>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <h6>Preview</h6>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <img [src]="croppedImage" class="border-custom" />
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row mt-top"
-                    *ngIf="addRadianForm.CoverPicture.errors && (addRadianForm.CoverPicture.dirty || addRadianForm.CoverPicture.touched)">
-                    <div class="col-md-12">
-                      <app-required-validation-message [fieldName]="'Cover Image'"
-                        *ngIf="addRadianForm.ProfilePicture.errors.required"></app-required-validation-message>
-
-                    </div>
-                  </div>
-                  <div class="row mt-top">
-                    <div class="col-md-2 custom-label">
-                      <div class="portfolio-label">Cover Picture</div>
-                    </div>
-                    <div class="col-md-10">
-                      <div class="row mt-top">
-                        <div class="col-md-12">
-                          <input type="file" (change)="CoverFileChangeEvent($event)" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <hr />
-                  <br />
 
                   <div class="row mt-top">
                     <div class="col-md-12">
@@ -161,20 +171,16 @@
                                 <option value="4">12th</option>
                                 <option value="5">10th</option>
                               </select> -->
-                              <ngx-select-dropdown
-                              class="ngx-select"
-                              [instanceId]="'instance1'" 
-                              formControlName="educationName" 
-                              [config]="eduNameConfig" 
-                              [options]="degreeName">
-                            </ngx-select-dropdown>
+                              <ngx-select-dropdown class="ngx-select" [instanceId]="'instance1'"
+                                formControlName="educationName" [config]="eduNameConfig" [options]="degreeName">
+                              </ngx-select-dropdown>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-3">
                         <div class="portfolio-label">Starts On</div>
-                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                        <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
                           <div class="col-md-12">
                             <app-required-validation-message [fieldName]="'Profile Name'"
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
@@ -183,28 +189,20 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                              <input
-                              type="text"
-                              class="form-control"
-                              autocomplete="off"
-                              #dp="bsDatepicker"
-                              [minDate]="minDate"
-                              [maxDate]="maxDate"
-                              [bsConfig]="{
+                              <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
+                                [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="{
                                 isAnimated: true,
                                 minMode: 'year',
                                 dateInputFormat: 'YYYY'
-                              }"
-                              bsDatepicker
-                              (onShown)="onOpenCalendar($event)">
+                              }" bsDatepicker (onShown)="onOpenCalendar($event)">
                             </div>
                           </div>
                         </div>
-                        
+
                       </div>
                       <div class="col-md-3">
                         <div class="portfolio-label">Ends On</div>
-                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                        <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
                           <div class="col-md-12">
                             <app-required-validation-message [fieldName]="'Profile Name'"
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
@@ -213,25 +211,17 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                              <input
-                              type="text"
-                              class="form-control"
-                              autocomplete="off"
-                              #dp="bsDatepicker"
-                              [minDate]="minDate"
-                              [maxDate]="maxDate"
-                              [bsConfig]="{
+                              <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
+                                [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="{
                                 isAnimated: true,
                                 minMode: 'year',
                                 dateInputFormat: 'YYYY'
-                              }"
-                              bsDatepicker
-                              (onShown)="onOpenCalendar($event)">
+                              }" bsDatepicker (onShown)="onOpenCalendar($event)">
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-2"  *ngIf="getEducationControls().length>1">
+                      <div class="col-md-2" *ngIf="getEducationControls().length>1">
                         <button class="btn btn-primary btn-round reset-btn" (click)="deleteEducation(i)">Delete</button>
                       </div>
                     </div>
@@ -258,7 +248,8 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                              <input type="text" class="signUp-form-control form-control" placeholder="Certification Namex">
+                              <input type="text" class="signUp-form-control form-control"
+                                placeholder="Certification Namex">
                             </div>
                           </div>
                         </div>
@@ -274,18 +265,12 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                             
-                              <input
-                              type="text"
-                              class="form-control"
-                              #dp="bsDatepicker"
-                              [minDate]="minDate"
-                              [maxDate]="maxDate"
-                              [bsConfig]="{
+
+                              <input type="text" class="form-control" #dp="bsDatepicker" [minDate]="minDate"
+                                [maxDate]="maxDate" [bsConfig]="{
                                 isAnimated: true,
                                 dateInputFormat: 'DD/MM/YYYY'
-                              }"
-                              bsDatepicker>
+                              }" bsDatepicker>
                             </div>
                           </div>
                         </div>
@@ -306,13 +291,15 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-2"  *ngIf="getCertificationLicensedControls().length>1">
-                        <button class="btn btn-primary btn-round reset-btn" (click)="deleteCertificationLicensed(i)">Delete</button>
+                      <div class="col-md-2" *ngIf="getCertificationLicensedControls().length>1">
+                        <button class="btn btn-primary btn-round reset-btn"
+                          (click)="deleteCertificationLicensed(i)">Delete</button>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-12 flt-right">
-                        <button class="btn btn-primary btn-round btn-margin" (click)="addCertificationLicensed()">Add More</button>
+                        <button class="btn btn-primary btn-round btn-margin" (click)="addCertificationLicensed()">Add
+                          More</button>
                       </div>
                     </div>
                   </div>
@@ -350,20 +337,12 @@
                           <div class="col-md-12">
                             <div class="input-group">
                               <!-- <input type="text" class="signUp-form-control form-control" placeholder="Starts On"> -->
-                              <input
-                              type="text"
-                              class="form-control"
-                              autocomplete="off"
-                              #dp="bsDatepicker"
-                              [minDate]="minDate"
-                              [maxDate]="maxDate"
-                              [bsConfig]="{
+                              <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
+                                [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="{
                                 isAnimated: true,
                                 minMode: 'year',
                                 dateInputFormat: 'YYYY'
-                              }"
-                              bsDatepicker
-                              (onShown)="onOpenCalendar($event)">
+                              }" bsDatepicker (onShown)="onOpenCalendar($event)">
                             </div>
                           </div>
                         </div>
@@ -379,26 +358,19 @@
                         <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
-                              <input
-                              type="text"
-                              class="form-control"
-                              autocomplete="off"
-                              #dp="bsDatepicker"
-                              [minDate]="minDate"
-                              [maxDate]="maxDate"
-                              [bsConfig]="{
+                              <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
+                                [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="{
                                 isAnimated: true,
                                 minMode: 'year',
                                 dateInputFormat: 'YYYY'
-                              }"
-                              bsDatepicker
-                              (onShown)="onOpenCalendar($event)">
+                              }" bsDatepicker (onShown)="onOpenCalendar($event)">
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-2"  *ngIf="getExperienceControls().length>1">
-                        <button class="btn btn-primary btn-round reset-btn" (click)="deleteExperience(i)">Delete</button>
+                      <div class="col-md-2" *ngIf="getExperienceControls().length>1">
+                        <button class="btn btn-primary btn-round reset-btn"
+                          (click)="deleteExperience(i)">Delete</button>
                       </div>
                     </div>
                     <div class="row">
@@ -447,13 +419,10 @@
                           {{item.radianSkillCategoryName}}
                         </option>
                       </select> -->
-                      <ngx-select-dropdown (change)="getSkillSubCategory($event.target.value)"
-                              class="ngx-select"
-                              [instanceId]="'instance1'" 
-                              formControlName="ProfileSkill" 
-                              [config]="skillConfig" 
-                              [options]="skills">
-                            </ngx-select-dropdown>
+                      <ngx-select-dropdown (change)="getSkillSubCategory($event.target.value)" class="ngx-select"
+                        [instanceId]="'instance1'" formControlName="ProfileSkill" [config]="skillConfig"
+                        [options]="skills">
+                      </ngx-select-dropdown>
                     </div>
                     <div class="col-md-5"></div>
                   </div>
