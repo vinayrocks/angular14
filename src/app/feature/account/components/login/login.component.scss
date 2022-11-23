@@ -62,8 +62,8 @@ input[type="radio"]:checked + label h4{
     border: #111111 2px solid;
     border-radius:30px !important;
 }
-.title.text-center{
-  padding:17px;
+.title{
+  text-align: center;
 }
 .signUp-form-control{
     margin-bottom: 10px !important;
@@ -81,9 +81,12 @@ h4 {
     color: #FF3636;
     font-family: 'Open Sans';
     font-weight: 700;
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 35px;
 }
 .card {
-    padding: 0px 25px 25px 25px;
+    padding: 75px 40px;
 }
 .reset-btn{
     background-color: #181F29;
@@ -132,6 +135,20 @@ h5, h6{
   display: inline-block;
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: 50%;
   box-shadow: none !important;
+}
+.section{
+  min-height: 1080px;
+}
+.custom-row{
+  justify-content: center;
+  align-items: center;
+  margin-top: 15%;
+}
+.login-btn-custom{
+  width:50%;
+}
+.email-lg{
+  margin-bottom: 28px;
 }

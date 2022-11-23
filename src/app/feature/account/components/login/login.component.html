@@ -1,6 +1,6 @@
-<div class="section section-team" style="background-color: #F2F3F5;">
+<div class="section" style="background: url('https://redpithemes.com/Documentation/assets/img/page_bg/page_bg_00.jpg');">
     <div class="container">
-        <div class="row">
+        <div class="row custom-row">
             <div class="col-md-12 card">
                 <form name="registerForm" class="registerForm" [formGroup]="loginFormGroup">
                     <div class="title">
@@ -16,7 +16,7 @@
                                     *ngIf="loginForm.email.errors?.pattern"></app-format-validation-message>
                             </div>
                         </div>
-                        <div class="input-group input-lg"
+                        <div class="input-group input-lg email-lg"
                             [ngClass]="{'input-group-focus':focusEmail===true}">
                             <input type="text" class="signUp-form-control form-control" placeholder="Email..." formControlName="email">
                         </div>
@@ -38,7 +38,7 @@
                         
                     </div>
                     <div class="footer text-center">
-                        <button class="btn btn-danger btn-round" 
+                        <button class="btn btn-danger btn-round login-btn-custom" 
                         (click)="onSubmit()">Login</button>
                     </div>
                 </form>
@@ -46,12 +46,12 @@
                     <div class="col-md-12">
                         <div class="pull-right">
                             <h6>
-                                <a (click)="openForgotPassword()" class="link">Forgot Password?</a>
+                                <button class="btn btn-danger btn-round" (click)="openForgotPassword()">Forgot Password?</button>
                             </h6>
                         </div>
                         <div class="pull-left">
                             <h6>
-                                <a (click)="openSignup()" class="link">Create Account</a>
+                                <button class="btn btn-danger btn-round" (click)="openSignup()">Create Account</button>
                             </h6>
                         </div>
                     </div>
