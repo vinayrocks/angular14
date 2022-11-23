@@ -160,6 +160,8 @@ export class RdAuthenticateService {
   }
   setLocalStorageData(data) {
     if (data !== null) {
+      data.isPortfolio = JSON.parse(data.LinkedPortfolio).length>0?true:false;
+      data.isLoggedIn = true;
       localStorage.setItem('currentUser', JSON.stringify(data));
     }
   }

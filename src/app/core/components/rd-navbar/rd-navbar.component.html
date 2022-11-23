@@ -4,13 +4,13 @@ color-on-scroll="500" appBlockCopy>
   <!-- LOGO -->
   <div class="logo"><a [routerLink]="['/home']"><img src="assets/img/radian/miraculum.png" /></a></div>
   <!-- NAVIGATION MENU -->
-  <ul class="nav-links" [ngClass]="isLoggedIn?'custom-nav-link':''">
+  <ul class="nav-links" [ngClass]="currentUser.isLoggedIn?'custom-nav-link':''">
     <!-- USING CHECKBOX HACK -->
     <input type="checkbox" id="checkbox_toggle" [checked]="_open" (click)="_open=_open==false?true:_open"/>
     <label for="checkbox_toggle" class="hamburger">&#9776;</label>
     <!-- NAVIGATION MENUS -->
     <div class="menu">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="(currentUser.isLoggedIn && currentUser.isPortfolio) || !currentUser.isLoggedIn">
         <div class="dropdown button-dropdown">
           <div ngbDropdown>
             <a class="nav-link dropdown-toggle" ngbDropdownToggle>
@@ -24,49 +24,49 @@ color-on-scroll="500" appBlockCopy>
           </div>
         </div>
       </li>
-      <li class="nav-item" *ngIf="!isLoggedIn">
+      <li class="nav-item" *ngIf="!currentUser.isLoggedIn">
         <a class="nav-link" [routerLink]="['/account/signup']" routerLinkActive="active" (click)="_open=false">
           <!-- <i class="now-ui-icons tech_mobile"></i> -->
           <p class="navbar-font">JOIN US</p>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="(currentUser.isLoggedIn && currentUser.isPortfolio) || !currentUser.isLoggedIn">
         <a class="nav-link" [routerLink]="['/updates']" routerLinkActive="active" (click)="_open=false">
           <!-- <i class="now-ui-icons users_single-02"></i> -->
           <p class="navbar-font">EVENTS</p>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="(currentUser.isLoggedIn && currentUser.isPortfolio) || !currentUser.isLoggedIn">
         <a class="nav-link" [routerLink]="['/search']" routerLinkActive="active"(click)="_open=false">
           <!-- <i class="now-ui-icons users_single-02"></i> -->
           <p class="navbar-font">SEARCH</p>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="(currentUser.isLoggedIn && currentUser.isPortfolio) || !currentUser.isLoggedIn">
         <a class="nav-link" [routerLink]="['/conversations']" routerLinkActive="" (click)="_open=false">
           <!-- <i class="now-ui-icons users_single-02"></i> -->
           <p class="navbar-font">CONVERSATIONS</p>
         </a>
       </li>
-      <li class="nav-item" *ngIf="isLoggedIn">
+      <li class="nav-item" *ngIf="currentUser.isLoggedIn">
         <div class="dropdown button-dropdown nav-link">
           <div ngbDropdown>
             <a ngbDropdownToggle routerLinkActive="active" class="custom-link nav-link dropdown-toggle" (click)="_open=false">
               <p class="navbar-font-logged-in">{{currentUser?.firstName }} {{currentUser?.lastName}}</p>
             </a>
             <div ngbDropdownMenu class="dropdown-menu dropdown-menu-left">
-              <a class="nav-link dropdown-item" [routerLink]="['/member/hunar_view']" (click)="_open=false"><p class="navbar-font-logged-in">My Profiles</p></a>
-              <a class="nav-link dropdown-item" [routerLink]="['/member/portfolio_view']" (click)="_open=false"><p class="navbar-font-logged-in">My Portfolios</p></a>
-              <a class="nav-link dropdown-item" [routerLink]="['/member/event_view']" *ngIf="currentUser?.membershipDuration!=='Basic'" (click)="_open=false"><p class="navbar-font-logged-in">My Events</p></a>
-              <a class="nav-link dropdown-item" [routerLink]="['/member/my_account']" (click)="_open=false"><p class="navbar-font-logged-in">My Account</p></a>
-              <a class="nav-link dropdown-item" [routerLink]="['/member/setting_view']" (click)="_open=false"><p class="navbar-font-logged-in">Settings</p></a>
+              <a class="nav-link dropdown-item" *ngIf="currentUser.isPortfolio" [routerLink]="['/member/hunar_view']" (click)="_open=false"><p class="navbar-font-logged-in">My Profiles</p></a>
+              <a class="nav-link dropdown-item" *ngIf="currentUser.isPortfolio" [routerLink]="['/member/portfolio_view']" (click)="_open=false"><p class="navbar-font-logged-in">My Portfolios</p></a>
+              <a class="nav-link dropdown-item"  [routerLink]="['/member/event_view']" *ngIf="currentUser?.membershipDuration!=='Basic' && currentUser.isPortfolio" (click)="_open=false"><p class="navbar-font-logged-in">My Events</p></a>
+              <a class="nav-link dropdown-item" *ngIf="currentUser.isPortfolio" [routerLink]="['/member/my_account']" (click)="_open=false"><p class="navbar-font-logged-in">My Account</p></a>
+              <a class="nav-link dropdown-item" *ngIf="currentUser.isPortfolio" [routerLink]="['/member/setting_view']" (click)="_open=false"><p class="navbar-font-logged-in">Settings</p></a>
               <a class="nav-link dropdown-item" (click)="logout()"><p class="navbar-font-logged-in">Logout</p></a>
 
             </div>
           </div>
         </div>
       </li>
-      <li class="nav-item" *ngIf="!isLoggedIn">
+      <li class="nav-item" *ngIf="!currentUser.isLoggedIn">
         <a class="nav-link nav_custom" [routerLink]="['/account/login']" routerLinkActive="active">
           <!-- <i class="now-ui-icons users_circle-08"></i> -->
           <p class="navbar-font">LOGIN</p>
