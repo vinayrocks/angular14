@@ -30,9 +30,20 @@ export class RdUserLayoutComponent implements OnInit {
   }
 
   checkCurrentRoute() {
-    this.activatedRoute.children[0].data.subscribe(data=>{
-      this.pageLabel = data.name;
-    });
+    this.currentUser = this.rdAuthenticateService.getLocalStorageData();
+    if(this.currentUser!==null){
+      if(this.currentUser.isPortfolio){
+        this.activatedRoute.children[0].data.subscribe(data=>{
+          this.pageLabel = data.name;
+        });
+      } else {
+        this.activatedRoute.children[0].data.subscribe(data=>{
+          this.pageLabel = data.name;
+        });
+        this.router.navigate(['/member/portfolio_add']);
+      }
+    }
+    
   } 
 
   GetProfilePath(){

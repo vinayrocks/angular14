@@ -13,25 +13,29 @@ import { Subscription } from 'rxjs';
 })
 export class RdNavbarComponent implements OnInit {
     private _router: Subscription;
-    currentUser: any;
+    currentUser: any ={
+        isLoggedIn:false,
+        isPortfolio:false
+    }
     isLoggedIn:Boolean=false;
     _open:boolean=false;
+    isPortfolio:boolean=false;
     constructor(public location: Location,public matDialog: MatDialog, private authenticationService: RdAuthenticateService,private router: Router) {
-        // redirect to home if already logged in
+        const ctx = this.authenticationService.getLocalStorageData();
+        if(ctx!==null){
+            this.currentUser =ctx;
+            if(!this.currentUser.isPortfolio){
+                this.router.navigate(['/member/portfolio_add']);
+            }
+        } else {
+            this.currentUser.isLoggedIn=false;
+            this.currentUser.isPortfolio = false;
+        }
+        
     }
 
     ngOnInit() {
-        this.router.events.pipe(
-            filter(event => event instanceof NavigationEnd)
-        ).subscribe((event: NavigationEnd) => {
-            this.currentUser = this.authenticationService.getLocalStorageData();
-            this.authenticationService.setLocalStorageData(this.currentUser);
-            if(this.currentUser!==null){
-                this.isLoggedIn=true;
-            } else {
-                this.isLoggedIn=false;
-            }
-        });
+       
     }
 
     openDialog() {
@@ -46,7 +50,9 @@ export class RdNavbarComponent implements OnInit {
     logout() {
         this._open=false
         this.authenticationService.logout();
-        this.isLoggedIn=false;
-        this.router.navigate(['/home']);
+        this.currentUser.isLoggedIn=false;
+        this.currentUser.isPortfolio = false;
+        window.location.href = '/home'
+        // this.router.navigate(['/home']);
     }
 }
