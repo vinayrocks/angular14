@@ -91,14 +91,407 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <form class="form" name="addRadianForm" [formGroup]="addRadianFormGroup">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio portfolio-custom">
+          <div class="col-md-12">
+            <h4>Profile Details</h4>
+            <div class="portfolio-label">Profile Name</div>
+            <div class="row"
+              *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+              <div class="col-md-12">
+                <app-required-validation-message [fieldName]="'Profile Name'"
+                  *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+              </div>
+            </div>
+            <div class="row mt-top">
+              <div class="col-md-12">
+
+                <div class="input-group">
+                  <input type="text" class="signUp-form-control form-control" placeholder=""
+                    formControlName="ProfileName">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-top">
+              <div class="col-md-12">
+                <div class="portfolio-label">About Profile</div>
+                <div class="row"
+                  *ngIf="addRadianForm.ProfileDescription.errors && (addRadianForm.ProfileDescription.dirty || addRadianForm.ProfileDescription.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Description'"
+                      *ngIf="addRadianForm.ProfileDescription.errors.required"></app-required-validation-message>
+                  </div>
+                </div>
+                <textarea class="form-control" [placeholder]="" formControlName="ProfileDescription">
+                  </textarea>
+              </div>
+            </div>
+            <div class="row mt-top"
+              *ngIf="addRadianForm.LinkedPortfolio.errors && (addRadianForm.LinkedPortfolio.dirty || addRadianForm.LinkedPortfolio.touched)">
+              <div class="col-md-12">
+                <app-required-validation-message [fieldName]="'Portfolio'"
+                  *ngIf="addRadianForm.LinkedPortfolio.errors.required"></app-required-validation-message>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio portfolio-custom">
+          <div class="col-md-12">
+            <h4>Education Details</h4>
+            <div class="row" *ngFor="let item of getEducationControls();let i = index">
+              <div class="col-md-3">
+                <div class="portfolio-label">Education Name</div>
+                <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Profile Name'"
+                      *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                  </div>
+                </div> -->
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <!-- <input type="text" class="signUp-form-control form-control" placeholder="Education Name"> -->
+                      <!-- <select class="select-css">
+                        <option value="''" selected="true">Select</option>
+                        <option value="1">Phd</option>
+                        <option value="2">Masters</option>
+                        <option value="3">Bachelors</option>
+                        <option value="4">12th</option>
+                        <option value="5">10th</option>
+                      </select> -->
+                      <ngx-select-dropdown class="ngx-select" [instanceId]="'instance1'" formControlName="educationName"
+                        [config]="eduNameConfig" [options]="degreeName">
+                      </ngx-select-dropdown>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                    <div class="col-md-12">
+                      <app-required-validation-message [fieldName]="'Profile Name'"
+                        *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                    </div>
+                  </div> -->
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="signUp-form-control form-control other-custom" placeholder="Others"
+                        disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="portfolio-label">From</div>
+                <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Profile Name'"
+                      *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                  </div>
+                </div> -->
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                        [maxDate]="maxDate" [bsConfig]="{
+                        isAnimated: true,
+                        minMode: 'year',
+                        dateInputFormat: 'YYYY'
+                      }" bsDatepicker (onShown)="onOpenCalendar($event)">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-2">
+                <div class="portfolio-label">To</div>
+                <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Profile Name'"
+                      *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                  </div>
+                </div> -->
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                        [maxDate]="maxDate" [bsConfig]="{
+                        isAnimated: true,
+                        minMode: 'year',
+                        dateInputFormat: 'YYYY'
+                      }" bsDatepicker (onShown)="onOpenCalendar($event)">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1" *ngIf="getEducationControls().length>1">
+                <button class="btn btn-primary btn-round del-btn" (click)="deleteEducation(i)">Delete</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-primary btn-round btn-margin" (click)="addEducation()"><i
+                    class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio portfolio-custom">
+          <div class="col-md-12">
+            <h4>Certification & Licenses</h4>
+            <div class="row" *ngFor="let item of getCertificationLicensedControls();let i = index">
+              <div class="col-md-5">
+                <div class="portfolio-label">Certification Name</div>
+                <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                    <div class="col-md-12">
+                      <app-required-validation-message [fieldName]="'Profile Name'"
+                        *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                    </div>
+                  </div> -->
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="signUp-form-control form-control" placeholder="Certification Name">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="portfolio-label">Certification Date</div>
+                <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                    <div class="col-md-12">
+                      <app-required-validation-message [fieldName]="'Profile Name'"
+                        *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                    </div>
+                  </div> -->
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+
+                      <input type="text" class="form-control" #dp="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate"
+                        [bsConfig]="{
+                          isAnimated: true,
+                          dateInputFormat: 'DD/MM/YYYY'
+                        }" bsDatepicker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="portfolio-label">License Number</div>
+                <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                    <div class="col-md-12">
+                      <app-required-validation-message [fieldName]="'Profile Name'"
+                        *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                    </div>
+                  </div> -->
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="signUp-form-control form-control" placeholder="License Number">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1" *ngIf="getCertificationLicensedControls().length>1">
+                <button class="btn btn-primary btn-round del-btn"
+                  (click)="deleteCertificationLicensed(i)">Delete</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-primary btn-round btn-margin" (click)="addCertificationLicensed()"><i
+                    class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio portfolio-custom">
+          <div class="col-md-12">
+            <h4>Experiences</h4>
+            <div class="row" *ngFor="let item of getExperienceControls();let i = index">
+              <div class="col-md-5">
+                <div class="portfolio-label">Experience As</div>
+                <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Profile Name'"
+                      *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                  </div>
+                </div> -->
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="signUp-form-control form-control" placeholder="Experience As">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="portfolio-label">From</div>
+                <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Profile Name'"
+                      *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                  </div>
+                </div> -->
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <!-- <input type="text" class="signUp-form-control form-control" placeholder="Starts On"> -->
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                        [maxDate]="maxDate" [bsConfig]="{
+                        isAnimated: true,
+                        minMode: 'year',
+                        dateInputFormat: 'YYYY'
+                      }" bsDatepicker (onShown)="onOpenCalendar($event)">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="portfolio-label">To</div>
+                <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Profile Name'"
+                      *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
+                  </div>
+                </div> -->
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                        [maxDate]="maxDate" [bsConfig]="{
+                        isAnimated: true,
+                        minMode: 'year',
+                        dateInputFormat: 'YYYY'
+                      }" bsDatepicker (onShown)="onOpenCalendar($event)">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1" *ngIf="getExperienceControls().length>1">
+                <button class="btn btn-primary btn-round del-btn" (click)="deleteExperience(i)">Delete</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-primary btn-round btn-margin" (click)="addExperience()"><i
+                    class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;&nbsp;Add More</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio portfolio-custom">
+          <div class="col-md-12">
+            <h4>Linked Portfolios</h4>
+            <div class="row mt-top">
+              <div class="col-md-12">
+                <div class="pretty p-switch p-fill" *ngFor="let item of userPortfolio;let i=index;">
+                  <input type="checkbox" name="switch{{i}}" (change)="onSelectPortfolio($event,item)" /><br />
+                  <div class="state p-success">
+                    <label>{{item.PortfolioName}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio portfolio-custom">
+          <div class="col-md-12">
+            <h4>Skills</h4>
+            <div class="row mt-top"
+              *ngIf="addRadianForm.ProfileExpertise.errors && (addRadianForm.ProfileExpertise.dirty || addRadianForm.ProfileExpertise.touched)">
+              <div class="col-md-12">
+                <app-required-validation-message [fieldName]="'Experties'"
+                  *ngIf="addRadianForm.ProfileExpertise.errors.required"></app-required-validation-message>
+              </div>
+            </div>
+            <div class="row mt-top">
+              <div class="col-md-3">
+                <!-- <select class="select-css" placeholder="Skill/Art" formControlName="ProfileSkill"
+                        (change)="getSkillSubCategory($event.target.value)">
+                        <option value="" [selected]="true">Select</option>
+                        <option *ngFor="let item of skills" value="{{item.radianSkillCategoryId}}">
+                          {{item.radianSkillCategoryName}}
+                        </option>
+                      </select> -->
+                <ngx-select-dropdown (change)="getSkillSubCategory($event.target.value)" class="ngx-select"
+                  [instanceId]="'instance1'" formControlName="ProfileSkill" [config]="skillConfig" [options]="skills">
+                </ngx-select-dropdown>
+              </div>
+              <div class="col-md-9">
+                <div class="pretty p-switch p-fill" *ngFor="let item of skillsSubcategory;let i=index;">
+                  <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)" /><br />
+                  <div class="state p-success">
+                    <label>{{item.subCategoryName}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--<div class="row mt-top">
+              <div class="col-md-2 custom-label">
+                <div class="portfolio-label"></div>
+              </div>
+              <div class="col-md-10">
+                <div class="pretty p-switch p-fill" *ngFor="let item of skillsSubcategory;let i=index;">
+                  <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)" /><br />
+                  <div class="state p-success">
+                    <label>{{item.subCategoryName}}</label>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row card portfolio portfolio-custom">
+          <div class="col-md-12">
+              <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Create</button>&nbsp;
+                <a [routerLink]="['/member/hunar_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>  
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+
+
+  <!-- <div class="row">
     <div class="col-md-12">
       <div class="row card portfolio">
         <div class="col-md-12">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12">-->
               <!-- <a [routerLink]="['/member/radian_add']" class="btn btn-danger btn-round profile-label"><i class="fa fa-plus"></i>Create Profile</a> -->
-            </div>
+          <!--  </div>
           </div>
           <div class="row">
             <div class="col-md-12">
@@ -123,7 +516,7 @@
                   </div>
                   <hr />
 
-                  <div class="row mt-top">
+              <!--  <div class="row mt-top">
                     <div class="col-md-12">
                       <div class="portfolio-label">About Profile</div>
                       <div class="row"
@@ -152,16 +545,16 @@
                     </div>
                     <div class="row" *ngFor="let item of getEducationControls();let i = index">
                       <div class="col-md-4">
-                        <div class="portfolio-label">Education Name</div>
+                        <div class="portfolio-label">Education Name</div> -->
                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
                           <div class="col-md-12">
                             <app-required-validation-message [fieldName]="'Profile Name'"
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
                           </div>
                         </div> -->
-                        <div class="row mt-top">
+                    <!--    <div class="row mt-top">
                           <div class="col-md-12">
-                            <div class="input-group">
+                            <div class="input-group"> -->
                               <!-- <input type="text" class="signUp-form-control form-control" placeholder="Education Name"> -->
                               <!-- <select class="select-css">
                                 <option value="''" selected="true">Select</option>
@@ -172,6 +565,7 @@
                                 <option value="5">10th</option>
                               </select> -->
                               <ngx-select-dropdown class="ngx-select" [instanceId]="'instance1'"
+
                                 formControlName="educationName" [config]="eduNameConfig" [options]="degreeName">
                               </ngx-select-dropdown>
                             </div>
@@ -186,7 +580,7 @@
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
                           </div>
                         </div> -->
-                        <div class="row mt-top">
+                        <!--<div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
                               <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
@@ -202,13 +596,14 @@
                       </div>
                       <div class="col-md-3">
                         <div class="portfolio-label">Ends On</div>
+
                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
                           <div class="col-md-12">
                             <app-required-validation-message [fieldName]="'Profile Name'"
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
                           </div>
                         </div> -->
-                        <div class="row mt-top">
+                        <!--<div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
                               <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
@@ -238,14 +633,14 @@
                     </div>
                     <div class="row" *ngFor="let item of getCertificationLicensedControls();let i = index">
                       <div class="col-md-4">
-                        <div class="portfolio-label">Certification Name</div>
+                        <div class="portfolio-label">Certification Name</div> -->
                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
                           <div class="col-md-12">
                             <app-required-validation-message [fieldName]="'Profile Name'"
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
                           </div>
                         </div> -->
-                        <div class="row mt-top">
+                      <!--  <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
                               <input type="text" class="signUp-form-control form-control"
@@ -255,14 +650,14 @@
                         </div>
                       </div>
                       <div class="col-md-3">
-                        <div class="portfolio-label">Certification Date</div>
+                        <div class="portfolio-label">Certification Date</div> -->
                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
                           <div class="col-md-12">
                             <app-required-validation-message [fieldName]="'Profile Name'"
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
                           </div>
                         </div> -->
-                        <div class="row mt-top">
+                      <!--  <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
 
@@ -276,14 +671,14 @@
                         </div>
                       </div>
                       <div class="col-md-3">
-                        <div class="portfolio-label">Licensed Number</div>
+                        <div class="portfolio-label">Licensed Number</div> -->
                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
                           <div class="col-md-12">
                             <app-required-validation-message [fieldName]="'Profile Name'"
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
                           </div>
                         </div> -->
-                        <div class="row mt-top">
+                      <!--  <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
                               <input type="text" class="signUp-form-control form-control" placeholder="Licensed Number">
@@ -310,14 +705,14 @@
                     </div>
                     <div class="row" *ngFor="let item of getExperienceControls();let i = index">
                       <div class="col-md-4">
-                        <div class="portfolio-label">Experience As</div>
+                        <div class="portfolio-label">Experience As</div> -->
                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
                           <div class="col-md-12">
                             <app-required-validation-message [fieldName]="'Profile Name'"
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
                           </div>
                         </div> -->
-                        <div class="row mt-top">
+                      <!--  <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
                               <input type="text" class="signUp-form-control form-control" placeholder="Experience As">
@@ -326,18 +721,19 @@
                         </div>
                       </div>
                       <div class="col-md-3">
-                        <div class="portfolio-label">Starts On</div>
+                        <div class="portfolio-label">Starts On</div> -->
                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
                           <div class="col-md-12">
                             <app-required-validation-message [fieldName]="'Profile Name'"
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
                           </div>
                         </div> -->
-                        <div class="row mt-top">
+                      <!--  <div class="row mt-top">
                           <div class="col-md-12">
-                            <div class="input-group">
+                            <div class="input-group"> -->
                               <!-- <input type="text" class="signUp-form-control form-control" placeholder="Starts On"> -->
                               <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
+
                                 [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="{
                                 isAnimated: true,
                                 minMode: 'year',
@@ -348,14 +744,14 @@
                         </div>
                       </div>
                       <div class="col-md-3">
-                        <div class="portfolio-label">Ends On</div>
+                        <div class="portfolio-label">Ends On</div> -->
                         <!-- <div class="row" *ngIf="addRadianForm.ProfileName.errors && (addRadianForm.ProfileName.dirty || addRadianForm.ProfileName.touched)">
                           <div class="col-md-12">
                             <app-required-validation-message [fieldName]="'Profile Name'"
                               *ngIf="addRadianForm.ProfileName.errors.required"></app-required-validation-message>
                           </div>
                         </div> -->
-                        <div class="row mt-top">
+                      <!--  <div class="row mt-top">
                           <div class="col-md-12">
                             <div class="input-group">
                               <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
@@ -398,20 +794,18 @@
                     </div>
                     <div class="col-md-5"></div>
                   </div>
-
                   <div class="row mt-top"
                     *ngIf="addRadianForm.ProfileExpertise.errors && (addRadianForm.ProfileExpertise.dirty || addRadianForm.ProfileExpertise.touched)">
                     <div class="col-md-12">
                       <app-required-validation-message [fieldName]="'Experties'"
                         *ngIf="addRadianForm.ProfileExpertise.errors.required"></app-required-validation-message>
-
                     </div>
                   </div>
                   <div class="row mt-top">
                     <div class="col-md-2 custom-label">
                       <div class="portfolio-label">Skills</div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5"> -->
                       <!-- <select class="select-css" placeholder="Skill/Art" formControlName="ProfileSkill"
                         (change)="getSkillSubCategory($event.target.value)">
                         <option value="" [selected]="true">Select</option>
@@ -420,6 +814,7 @@
                         </option>
                       </select> -->
                       <ngx-select-dropdown (change)="getSkillSubCategory($event.target.value)" class="ngx-select"
+
                         [instanceId]="'instance1'" formControlName="ProfileSkill" [config]="skillConfig"
                         [options]="skills">
                       </ngx-select-dropdown>
@@ -453,5 +848,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 </div>
