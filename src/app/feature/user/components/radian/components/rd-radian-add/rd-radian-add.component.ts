@@ -11,6 +11,7 @@ import { RdCommon } from 'src/app/shared/core/models/rd-common/rd-common';
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-rd-radian-add',
   templateUrl: './rd-radian-add.component.html',
@@ -71,7 +72,7 @@ export class RdRadianAddComponent implements OnInit {
   maxDate = new Date();
   minDate = new Date();
   constructor(private _formBuilder: FormBuilder, private rdUserService: RdUserService,
-    private spinner:NgxSpinnerService,
+    private spinner:NgxSpinnerService,private modalService: NgbModal,
     private notificationService: NotificationService, private router: Router) {
     this.skills =(skillsInterest as any).default;
     this.createFormGroup();
@@ -265,15 +266,19 @@ export class RdRadianAddComponent implements OnInit {
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.remove('navbar-transparent');
   }
-
-  fileChangeEvent(event: any): void {
+  openProfilePopup(content:any){
+    this.modalService.open(content, { centered: true,size: 'lg' })
+  }
+  fileChangeEvent(event: any,content:any): void {
     this.imageChangedEvent = event;
     this.isUploaded = true;
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
   }
-
+  openCoverPopup(content:any){
+    this.modalService.open(content, { centered: true,size: 'lg' })
+  }
 
   educationFormarray() : FormArray {
     console.log(this.addRadianFormGroup);

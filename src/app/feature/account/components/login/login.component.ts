@@ -26,7 +26,12 @@ export class LoginComponent implements OnInit, OnDestroy  {
     // redirect to home if already logged in
     this.currentUser = this.authenticationService.getLocalStorageData();
     if (this.currentUser !== null) {
-      this.router.navigate(['/home']);
+      if(this.currentUser.isPortfolio){
+        this.router.navigate(['/home']);
+      } else {
+
+      }
+    
     }
   }
 
@@ -56,9 +61,16 @@ export class LoginComponent implements OnInit, OnDestroy  {
       .pipe(first())
       .subscribe(res => {
         if (res.status) {
-          this.matDialog.closeAll();
+         const dx =this.authenticationService.getLocalStorageData();
           this.notificationService.success(res.message);
-          this.router.navigate(['/member/hunar_view']);
+          if(dx.isPortfolio){
+           // this.router.navigate(['/member/hunar_view']);
+            window.location.href = '/member/hunar_view'
+          } else {
+            window.location.href = '/member/portfolio_add'
+            // this.router.navigate(['/member/portfolio_add']);
+          }
+         
         } else {
           this.notificationService.error(res.message);
         }
