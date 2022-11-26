@@ -45,7 +45,7 @@ color-on-scroll="500" appBlockCopy>
       <li class="nav-item" *ngIf="(currentUser.isLoggedIn && currentUser.isPortfolio) || !currentUser.isLoggedIn">
         <a class="nav-link" [routerLink]="['/conversations']" routerLinkActive="" (click)="_open=false">
           <!-- <i class="now-ui-icons users_single-02"></i> -->
-          <p class="navbar-font">CONVERSATIONS</p>
+          <p class="navbar-font">TRAININGS</p>
         </a>
       </li>
       <li class="nav-item" *ngIf="currentUser.isLoggedIn">

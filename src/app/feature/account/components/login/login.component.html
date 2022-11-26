@@ -1,58 +1,72 @@
-<div class="section" style="background: url('https://redpithemes.com/Documentation/assets/img/page_bg/page_bg_00.jpg');">
+<div class="section" style="background-image:url('https://static.vecteezy.com/system/resources/previews/006/834/488/original/abstract-backgrounds-black-colorful-brick-wall-texture-surface-wallpaper-backdrop-template-architecture-interior-pattern-scenery-illustration-eps10-vector.jpg')">
     <div class="container">
-        <div class="row custom-row">
-            <div class="col-md-12 card">
-                <form name="registerForm" class="registerForm" [formGroup]="loginFormGroup">
-                    <div class="title">
-                        <h4>Login</h4>
-                    </div>
-                    <div class="content">
-                        <div class="row"
-                            *ngIf="loginForm.email.errors && (loginForm.email.dirty || loginForm.email.touched)">
-                            <div class="col-md-12">
-                                <app-required-validation-message [fieldName]="'Email'"
-                                    *ngIf="loginForm.email.errors.required"></app-required-validation-message>
-                                <app-format-validation-message [fieldName]="'Email'"
-                                    *ngIf="loginForm.email.errors?.pattern"></app-format-validation-message>
-                            </div>
-                        </div>
-                        <div class="input-group input-lg email-lg"
-                            [ngClass]="{'input-group-focus':focusEmail===true}">
-                            <input type="text" class="signUp-form-control form-control" placeholder="Email..." formControlName="email">
-                        </div>
-                        <div class="row"
-                            *ngIf="loginForm.password.errors && (loginForm.password.dirty || loginForm.password.touched)">
-                            <div class="col-md-12">
-                                <app-required-validation-message [fieldName]="'Password'"
-                                    *ngIf="loginForm.password.errors.required"></app-required-validation-message>
-                                <app-format-validation-message [fieldName]="'Password'"
-                                    *ngIf="loginForm.password.errors?.pattern"></app-format-validation-message>
-                            </div>
-                        </div>
-                        <div class="input-group input-lg"
-                            [ngClass]="{'input-group-focus':focusPassword===true}">
-                            
-                            <input type="password" placeholder="Password..." class="signUp-form-control form-control"
-                                 formControlName="password" />
-                        </div>
-                        
-                    </div>
-                    <div class="footer text-center">
-                        <button class="btn btn-danger btn-round login-btn-custom" 
-                        (click)="onSubmit()">Login</button>
-                    </div>
-                </form>
+        <div class="row">
+            <div class="sign-in-content">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="pull-right">
-                            <h6>
-                                <button class="btn btn-danger btn-round" (click)="openForgotPassword()">Forgot Password?</button>
-                            </h6>
+                    <div class="col-md-6 img-login-custom">
+                        <img src="./././././assets/img/radian/1.png" />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-3 butterfly-custom">
+                            <img src="./././././assets/img/radian/butterfly.png" />
                         </div>
-                        <div class="pull-left">
-                            <h6>
-                                <button class="btn btn-danger btn-round" (click)="openSignup()">Create Account</button>
-                            </h6>
+                        <div class="card">
+                            <form name="registerForm" class="registerForm" [formGroup]="loginFormGroup">
+                                <div class="title">
+                                    <h4>Login to continue...</h4>
+                                </div>
+                                <div class="row"
+                                    *ngIf="loginForm.email.errors && (loginForm.email.dirty || loginForm.email.touched)">
+                                    <div class="col-md-12">
+                                        <app-required-validation-message [fieldName]="'Email'"
+                                            *ngIf="loginForm.email.errors.required">
+                                        </app-required-validation-message>
+                                        <app-format-validation-message [fieldName]="'Email'"
+                                            *ngIf="loginForm.email.errors?.pattern"></app-format-validation-message>
+                                    </div>
+                                </div>
+                                <div class="input-group input-lg email-lg"
+                                    [ngClass]="{'input-group-focus':focusEmail===true}">
+                                    <input type="text" class="signUp-form-control form-control" placeholder="Email..."
+                                        formControlName="email">
+                                </div>
+                                <div class="row"
+                                    *ngIf="loginForm.password.errors && (loginForm.password.dirty || loginForm.password.touched)">
+                                    <div class="col-md-12">
+                                        <app-required-validation-message [fieldName]="'Password'"
+                                            *ngIf="loginForm.password.errors.required">
+                                        </app-required-validation-message>
+                                        <app-format-validation-message [fieldName]="'Password'"
+                                            *ngIf="loginForm.password.errors?.pattern">
+                                        </app-format-validation-message>
+                                    </div>
+                                </div>
+                                <div class="input-group input-lg"
+                                    [ngClass]="{'input-group-focus':focusPassword===true}">
+
+                                    <input type="password" placeholder="Password..."
+                                        class="signUp-form-control form-control" formControlName="password" />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-right">
+                                            <h6>
+                                                <a style="float: right;" (click)="openForgotPassword()">Forgot Password?</a>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row custom-btn-row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-danger btn-round login-btn-custom"
+                                (click)="onSubmit()">Login</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-danger btn-round del-btn"
+                                        (click)="openSignup()">Create Account</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -60,3 +74,72 @@
         </div>
     </div>
 </div>
+
+
+<!-- <div class="section" style="background-color: #FFFFFF;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6 card">
+                    <form name="registerForm" class="registerForm" [formGroup]="loginFormGroup">
+                        <div class="title">
+                            <h4>Login</h4>
+                        </div>
+                        <div class="content">
+                            <div class="row"
+                                *ngIf="loginForm.email.errors && (loginForm.email.dirty || loginForm.email.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Email'"
+                                        *ngIf="loginForm.email.errors.required"></app-required-validation-message>
+                                    <app-format-validation-message [fieldName]="'Email'"
+                                        *ngIf="loginForm.email.errors?.pattern"></app-format-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group input-lg email-lg"
+                                [ngClass]="{'input-group-focus':focusEmail===true}">
+                                <input type="text" class="signUp-form-control form-control" placeholder="Email..." formControlName="email">
+                            </div>
+                            <div class="row"
+                                *ngIf="loginForm.password.errors && (loginForm.password.dirty || loginForm.password.touched)">
+                                <div class="col-md-12">
+                                    <app-required-validation-message [fieldName]="'Password'"
+                                        *ngIf="loginForm.password.errors.required"></app-required-validation-message>
+                                    <app-format-validation-message [fieldName]="'Password'"
+                                        *ngIf="loginForm.password.errors?.pattern"></app-format-validation-message>
+                                </div>
+                            </div>
+                            <div class="input-group input-lg"
+                                [ngClass]="{'input-group-focus':focusPassword===true}">
+                                
+                                <input type="password" placeholder="Password..." class="signUp-form-control form-control"
+                                    formControlName="password" />
+                            </div>
+                            
+                        </div>
+                        <div class="footer text-center">
+                            <button class="btn btn-danger btn-round login-btn-custom" 
+                            (click)="onSubmit()">Login</button>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <h6>
+                                    <button class="btn btn-danger btn-round" (click)="openForgotPassword()">Forgot Password?</button>
+                                </h6>
+                            </div>
+                            <div class="pull-left">
+                                <h6>
+                                    <a (click)="openSignup()">Create Account</a>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    Test Test
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

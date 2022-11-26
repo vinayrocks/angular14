@@ -1,121 +1,117 @@
-<div class="container-fluid">
-  <!-- <div class="button-container">
-    <a href="#button" class="btn btn-primary btn-round btn-lg">New Portfolio</a>
-  </div> -->
-  <div class="row">
-    <div class="col-md-1">
+<div class="container">
+  <div class="img default-cover">
+  </div>
+  <div class="card social-prof">
+    <div class="card-body">
+      <div class="wrapper">
+        <a>
+          <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+        </a>
+        <h3 class="title">[Vinay Pardeshi]</h3>
+        <p>[Visual]</p>
+      </div>
     </div>
-    <div class="col-md-10">
-      <div class="row card portfolio">
-        <div class="col-md-12 ">
-          <div class="row">
+  </div>
+  <div class="row card portfolio">
+    <div class="col-md-12">
+      <form class="form mb-search" name="addPortfolioForm" [formGroup]="addPortfolioFormGroup">
+        <div class="container-fluid">
+          <div class="row mt-top">
+            <div class="col-md-6">
+              <div class="portfolio-label">Portfolio Name</div>
+              <div class="row mt-top"
+                *ngIf="addPortfolioForm.PortfolioName.errors && (addPortfolioForm.PortfolioName.dirty || addPortfolioForm.PortfolioName.touched)">
+                <div class="col-md-12">
+                  <app-required-validation-message [fieldName]="'Portfolio Name'"
+                    *ngIf="addPortfolioForm.PortfolioName.errors.required"></app-required-validation-message>
+                </div>
+              </div>
+              <div class="input-group">
+                <input type="text" class="signUp-form-control form-control" placeholder=""
+                  formControlName="PortfolioName">
+              </div>
+            </div>
+            <div class="col-md-6">
+
+              <div class="portfolio-label">About Portfolio</div>
+              <div class="row mt-top"
+                *ngIf="addPortfolioForm.PortfolioArtifacts.errors && (addPortfolioForm.PortfolioArtifacts.dirty || addPortfolioForm.PortfolioArtifacts.touched)">
+                <div class="col-md-12">
+                  <app-required-validation-message [fieldName]="'About Portfolio'"
+                    *ngIf="addPortfolioForm.PortfolioArtifacts.errors.required">
+                  </app-required-validation-message>
+                </div>
+              </div>
+              <textarea class="form-control" [placeholder]="'About Portfolio'" formControlName="PortfolioArtifacts">
+              </textarea>
+
+            </div>
+          </div>
+          <br />
+          <hr /><br />
+          <div class="row mt-top"
+            *ngIf="addPortfolioForm.PortfolioMedia.errors && (addPortfolioForm.PortfolioMedia.dirty || addPortfolioForm.PortfolioMedia.touched)">
             <div class="col-md-12">
-              <form class="form mb-search" name="addPortfolioForm" [formGroup]="addPortfolioFormGroup">
-                <div class="container-fluid">
-                  <div class="row mt-top">
-                    <div class="col-md-6">
-                      <div class="portfolio-label">Portfolio Name</div>
-                      <div class="row mt-top"
-                        *ngIf="addPortfolioForm.PortfolioName.errors && (addPortfolioForm.PortfolioName.dirty || addPortfolioForm.PortfolioName.touched)">
-                        <div class="col-md-12">
-                          <app-required-validation-message [fieldName]="'Portfolio Name'"
-                            *ngIf="addPortfolioForm.PortfolioName.errors.required"></app-required-validation-message>
-                        </div>
-                      </div>
-                      <div class="input-group">
-                        <input type="text" class="signUp-form-control form-control" placeholder=""
-                          formControlName="PortfolioName">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
+              <app-required-validation-message [fieldName]="'Image'"
+                *ngIf="addPortfolioForm.PortfolioMedia.errors.required"></app-required-validation-message>
 
-                      <div class="portfolio-label">About Portfolio</div>
-                      <div class="row mt-top"
-                        *ngIf="addPortfolioForm.PortfolioArtifacts.errors && (addPortfolioForm.PortfolioArtifacts.dirty || addPortfolioForm.PortfolioArtifacts.touched)">
-                        <div class="col-md-12">
-                          <app-required-validation-message [fieldName]="'About Portfolio'"
-                            *ngIf="addPortfolioForm.PortfolioArtifacts.errors.required">
-                          </app-required-validation-message>
-                        </div>
-                      </div>
-                      <textarea class="form-control" [placeholder]="'About Portfolio'"
-                        formControlName="PortfolioArtifacts">
-                      </textarea>
-
-                    </div>
-                  </div>
-                  <br />
-                  <hr /><br />
-                  <div class="row mt-top"
-                    *ngIf="addPortfolioForm.PortfolioMedia.errors && (addPortfolioForm.PortfolioMedia.dirty || addPortfolioForm.PortfolioMedia.touched)">
-                    <div class="col-md-12">
-                      <app-required-validation-message [fieldName]="'Image'"
-                        *ngIf="addPortfolioForm.PortfolioMedia.errors.required"></app-required-validation-message>
-
-                    </div>
-                  </div>
-                  <div class="row mt-top">
-                    <div class="col-md-12">
-                      <div class="portfolio-label">Portfolio Media</div>
-                      <div class="row" *ngFor="let item of addMoreImageArray;let i=index;">
-                        <div class="col-md-3" *ngIf="imageIndex===i">
-                          <select id="select{{i}}" class="select-css" (change)="selectMediaType($event.target.value)">
-                            <option value="image" selected="true">Image/Document</option>
-                            <option value="video">Video</option>
-                          </select>
-                        </div>
-                        <div class="col-md-7" *ngIf="isImageType && imageIndex===i">
-                          <input id="file{{i}}" type="file" (change)="fileChangeEvent($event,i)"
-                            accept="application/pdf, image/jpeg, image/png" />
-                        </div>
-                        <div class="col-md-7" *ngIf="!isImageType && imageIndex===i">
-                          <div class="input-group">
-                            <input id="video{{i}}" type="text" class="signUp-form-control form-control"
-                              placeholder="YouTube Video Link" formControlName="linkURL">
-                          </div>
-                        </div>
-                        <div class="col-md-2" *ngIf="!isImageType && imageIndex===i">
-                          <input type="button" class="btn btn-primary btn-round custom-btn" value="Add"
-                            (click)="addMoreImage(i)" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mt-top" *ngIf="isUploaded">
-                    <div class="col-md-2" *ngFor='let url of urls;let i =index;'>
-                      <div class="custom-photo-container">
-                        <span class="close"><a (click)="removeMedia(i)">&times;</a></span>
-                        <!-- <img src="{{url.imageMovieURL}}" alt="" class="img-raised" *ngIf="url.type==='image'">
-                        <img src="assets/img/radian/document.png" alt="" class="img-raised" *ngIf="url.type==='document'">
-                        <div *ngIf="url.type==='video'">
-                          <div [innerHtml]="getVideo(url.imageMovieURL)" ></div>
-                        </div> -->
-                        <img src="{{url.Name}}" alt="" class="img-raised" title="" *ngIf="url.IsImage==='image'">
-                        <a href="{{url.Name}}" *ngIf="url.IsImage==='pdf'" target="_blank">
-                          <img src="assets/img/radian/document.png" alt="" class="img-raised">
-                        </a>
-                        <div *ngIf="url.IsImage==='video'" class="video">
-                          <img src="{{url.Image}}" class="img-raised">
-                          <a></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12 flt-right">
-                      <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Create</button>&nbsp;
-                      <a [routerLink]="['/member/portfolio_view']"
-                        class="btn btn-primary btn-round reset-btn">Cancel</a>
-                    </div>
+            </div>
+          </div>
+          <div class="row mt-top">
+            <div class="col-md-12">
+              <div class="portfolio-label">Portfolio Media</div>
+              <div class="row" *ngFor="let item of addMoreImageArray;let i=index;">
+                <div class="col-md-3" *ngIf="imageIndex===i">
+                  <select id="select{{i}}" class="select-css" (change)="selectMediaType($event.target.value)">
+                    <option value="image" selected="true">Image/Document</option>
+                    <option value="video">Video</option>
+                  </select>
+                </div>
+                <div class="col-md-7" *ngIf="isImageType && imageIndex===i">
+                  <input id="file{{i}}" type="file" (change)="fileChangeEvent($event,i)"
+                    accept="application/pdf, image/jpeg, image/png" />
+                </div>
+                <div class="col-md-7" *ngIf="!isImageType && imageIndex===i">
+                  <div class="input-group">
+                    <input id="video{{i}}" type="text" class="signUp-form-control form-control"
+                      placeholder="YouTube Video Link" formControlName="linkURL">
                   </div>
                 </div>
-              </form>
+                <div class="col-md-2" *ngIf="!isImageType && imageIndex===i">
+                  <input type="button" class="btn btn-primary btn-round custom-btn" value="Add"
+                    (click)="addMoreImage(i)" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-top" *ngIf="isUploaded">
+            <div class="col-md-2" *ngFor='let url of urls;let i =index;'>
+              <div class="custom-photo-container">
+                <span class="close"><a (click)="removeMedia(i)">&times;</a></span>
+                <!-- <img src="{{url.imageMovieURL}}" alt="" class="img-raised" *ngIf="url.type==='image'">
+                <img src="assets/img/radian/document.png" alt="" class="img-raised" *ngIf="url.type==='document'">
+                <div *ngIf="url.type==='video'">
+                  <div [innerHtml]="getVideo(url.imageMovieURL)" ></div>
+                </div> -->
+                <img src="{{url.Name}}" alt="" class="img-raised" title="" *ngIf="url.IsImage==='image'">
+                <a href="{{url.Name}}" *ngIf="url.IsImage==='pdf'" target="_blank">
+                  <img src="assets/img/radian/document.png" alt="" class="img-raised">
+                </a>
+                <div *ngIf="url.IsImage==='video'" class="video">
+                  <img src="{{url.Image}}" class="img-raised">
+                  <a></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 flt-right">
+              <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Create</button>&nbsp;
+              <a [routerLink]="['/member/portfolio_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-1">
+      </form>
     </div>
   </div>
 </div>
