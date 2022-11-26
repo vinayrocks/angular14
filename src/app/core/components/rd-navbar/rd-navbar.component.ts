@@ -52,7 +52,7 @@ export class RdNavbarComponent implements OnInit {
         this.authenticationService.logout();
         this.currentUser.isLoggedIn=false;
         this.currentUser.isPortfolio = false;
-        window.location.href = '/home'
+        window.location.href = '/account/login'
         // this.router.navigate(['/home']);
     }
 }

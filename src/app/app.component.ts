@@ -15,7 +15,7 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements OnInit, AfterViewInit {
     title = 'radian';
     private _router: Subscription;
-    currentUser: any;
+    currentUser: any=[];
     loading: any;
     // @ViewChild(RdNavbarComponent) navbar: RdNavbarComponent;
 

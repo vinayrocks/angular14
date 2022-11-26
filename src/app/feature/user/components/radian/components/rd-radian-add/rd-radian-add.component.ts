@@ -188,7 +188,6 @@ export class RdRadianAddComponent implements OnInit {
         });
   }
   onSubmit() {
-    this.spinner.show()
     // stop here if form is invalid
     if (this.addRadianFormGroup.invalid) {
 
@@ -197,6 +196,7 @@ export class RdRadianAddComponent implements OnInit {
       return;
     }
     if (this.serverFile.length > 0) {
+      this.spinner.show()
       this.rdUserService.UploadUserRadianProfileImage(this.croppedImage, this.serverFile, this.addRadianForm.ProfileName.value)
         .pipe(first())
         .subscribe(

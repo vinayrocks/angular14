@@ -10,7 +10,7 @@ const routes: Routes = [
     path:'',
     component: RdAccountLayoutComponent,
     children: [
-     {path: '', redirectTo: 'signup'},
+     {path: '', redirectTo: 'login'},
      {path: 'login', component:LoginComponent},
      {path:'signup',component:RdSignupComponent}
     ]
