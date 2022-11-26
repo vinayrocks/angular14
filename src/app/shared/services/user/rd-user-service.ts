@@ -159,7 +159,6 @@ export class RdUserService {
     rdPortfolio.Email = this.currentUserSubject.username;
     rdPortfolio.FirstName = this.currentUserSubject.firstName;
     var data = this._encryptDecryptService.ecryptModel(rdPortfolio);
-    console.log(data);
     return this.http.post<any>(environment.apiCommon+'radianApi/Portfolios/createPortfolio.php', 
     JSON.stringify(data));
   }
