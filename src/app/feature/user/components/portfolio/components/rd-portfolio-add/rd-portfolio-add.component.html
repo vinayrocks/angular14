@@ -17,7 +17,7 @@
       <form class="form mb-search" name="addPortfolioForm" [formGroup]="addPortfolioFormGroup">
         <div class="container-fluid">
           <div class="row mt-top">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="portfolio-label">Portfolio Name</div>
               <div class="row mt-top"
                 *ngIf="addPortfolioForm.PortfolioName.errors && (addPortfolioForm.PortfolioName.dirty || addPortfolioForm.PortfolioName.touched)">
@@ -31,7 +31,7 @@
                   formControlName="PortfolioName">
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
 
               <div class="portfolio-label">About Portfolio</div>
               <div class="row mt-top"
