@@ -45,6 +45,22 @@ export class RdEventListComponent implements OnInit {
       ['fontSize', 'insertImage', 'insertVideo', 'insertHorizontalRule',]
     ]
   };
+  responsiveOptions: any = [{
+    breakpoint: "1024px",
+    numVisible: 3,
+    numScroll: 3,
+  },
+  {
+    breakpoint: "768px",
+    numVisible: 2,
+    numScroll: 2,
+  },
+  {
+    breakpoint: "560px",
+    numVisible: 1,
+    numScroll: 1,
+  }];
+  selectedEvent:any=[];
   constructor(private rdUserService: RdUserService, public matDialog: MatDialog,private activatedRoute:ActivatedRoute,
     private embedService: EmbedVideoService, private router: Router,
     private _encryptDecryptService: RdEncryptDecryptService,
@@ -81,6 +97,8 @@ export class RdEventListComponent implements OnInit {
           });
           this.projectPath = res.projectPath;
           this.userEvents = res.data;
+          this.selectedEvent = res.data[0];
+          console.log(this.selectedEvent)
           // ();
         }
 
