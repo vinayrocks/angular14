@@ -188,6 +188,10 @@ export class RdRadianAddComponent implements OnInit {
       dxData.Experience.map((x:any)=>x.StartDate = new Date(x.StartDate).getFullYear());
       dxData.Experience.map((x:any)=>x.ToDate = new Date(x.ToDate).getFullYear());
       dxData.CertificationLicense.map((x:any)=>x.CertifiedDate = moment(x.CertifiedDate).format('YYYY-MM-DD'));
+
+      dxData.Education = JSON.stringify(dxData.Education);
+      dxData.Experience = JSON.stringify(dxData.Experience);
+      dxData.CertificationLicense = JSON.stringify(dxData.CertificationLicense);
     }
     if (this.serverFile.length > 0) {
       this.spinner.show()
@@ -202,7 +206,7 @@ export class RdRadianAddComponent implements OnInit {
             dxData.CoverPicture = res.data.CoverPicture
             // this.addRadianForm.ProfilePicture.setValue(pp);
             // this.addRadianForm.CoverPicture.setValue(cc);
-            this.rdUserService.addUserProfile(dxData)
+            this.rdUserService.addUserProfile(new RdRadian(dxData))
               .subscribe(res => {
       
                 if (res.status) {
@@ -222,7 +226,7 @@ export class RdRadianAddComponent implements OnInit {
       this.spinner.show()
       dxData.ProfilePicture = '';
       dxData.CoverPicture = ''
-      this.rdUserService.addUserProfile(dxData)
+      this.rdUserService.addUserProfile(new RdRadian(dxData))
         .subscribe(res => {
           this.spinner.hide()
           if (res.status) {
