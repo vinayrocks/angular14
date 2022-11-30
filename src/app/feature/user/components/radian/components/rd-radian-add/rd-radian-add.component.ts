@@ -196,14 +196,6 @@ export class RdRadianAddComponent implements OnInit {
         .subscribe(
           res => {
             this.spinner.hide()
-<<<<<<< HEAD
-            const pp = res.data.ProfilePicture;
-            const cc = res.data.CoverPicture;
-            this.addRadianForm.ProfilePicture.setValue(pp);
-            this.addRadianForm.CoverPicture.setValue(cc);
-            console.log(new RdRadian(this.addRadianFormGroup.value))
-            this.rdUserService.addUserProfile(new RdRadian(this.addRadianFormGroup.value))
-=======
             // const pp = res.data.ProfilePicture;
             // const cc = res.data.CoverPicture;
             dxData.ProfilePicture = res.data.ProfilePicture;
@@ -211,7 +203,6 @@ export class RdRadianAddComponent implements OnInit {
             // this.addRadianForm.ProfilePicture.setValue(pp);
             // this.addRadianForm.CoverPicture.setValue(cc);
             this.rdUserService.addUserProfile(dxData)
->>>>>>> 2a458c768cc562cfa9d5d1557ebcc56f07188a2b
               .subscribe(res => {
       
                 if (res.status) {
