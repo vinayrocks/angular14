@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
+import { DefaultNgxMatCalendarRangeStrategy } from '@angular-material-components/datetime-picker';
+import { stringify } from 'querystring';
 @Component({
   selector: 'app-rd-radian-add',
   templateUrl: './rd-radian-add.component.html',
@@ -71,6 +74,7 @@ export class RdRadianAddComponent implements OnInit {
 
   maxDate = new Date();
   minDate = new Date();
+  _disableOther:boolean=false;
   constructor(private _formBuilder: FormBuilder, private rdUserService: RdUserService,
     private spinner:NgxSpinnerService,private modalService: NgbModal,
     private notificationService: NotificationService, private router: Router) {
@@ -89,48 +93,27 @@ export class RdRadianAddComponent implements OnInit {
     this.addCertificationLicensed();
     this.addExperience();
 
-    // this.eduNameConfig = {
-    //   displayKey: "educationName",
-    //   search: true,
-    //   placeholder: "Select",
-    //   searchPlaceholder: "Search",
-    //   searchOnKey: "educationName",
-    //   height: "150px",
-    // };
-
-    // this.degreeName = [
-    //   { id: 10, name: 'SSC', status: 'enabled' },
-    //   { id: 11, name: 'HSC', status: 'enabled' },
-    //   { id: 12, name: 'Graduate', status: 'enabled' },
-    //   { id: 13, name: 'Post Graduate', status: 'enabled' },
-    //   { id: 14, name: 'PhD', status: 'enabled' },
-    //   { id: 15, name: 'Others', status: 'enabled' },
-    // ];
-
   }
-  get addRadianForm() { return this.addRadianFormGroup.controls; }
 
   createFormGroup(){
     this.addRadianFormGroup = this._formBuilder.group({
-      ProfileName: ['', Validators.required],
-      ProfilePicture: [''],
-      CoverPicture: [''],
-      ProfileDescription: ['', Validators.required],
-      ProfileSkill: [''],
-      ProfileExpertise: ['', Validators.required],
-      LinkedPortfolio: ['', Validators.required],
-      Education:this._formBuilder.array([]),
-      CertificationLicensed:this._formBuilder.array([]),
-      Experience:this._formBuilder.array([])
+      ProfileName: new FormControl('', Validators.required),
+      ProfilePicture: new FormControl(''),
+      CoverPicture: new FormControl(''),
+      ProfileDescription: new FormControl('', Validators.required),
+      ProfileSkill: new FormControl(''),
+      ProfileExpertise:new FormControl('', Validators.required),
+      LinkedPortfolio:new FormControl('', Validators.required),
+      Education: this._formBuilder.array([]),
+      CertificationLicense: this._formBuilder.array([]),
+      Experience: this._formBuilder.array([])
     });
   }
 
   getSkillSubCategory(event: any) {
-    if (this.addRadianForm.ProfileSkill.value !== '') {
-      this.skillsSubcategory = this.skills.filter(function (item) {
-        return item.radianSkillCategoryId === event;
-      })[0].radianSkillSubCategories;
-    }
+    this.skillsSubcategory = this.skills.filter(function (item) {
+      return item.radianSkillCategoryId === event.radianSkillCategoryId;
+    })[0].radianSkillSubCategories;
   }
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
@@ -160,7 +143,7 @@ export class RdRadianAddComponent implements OnInit {
         this.tempArr.splice(index, 1);
       }
     }
-    this.addRadianForm.ProfileExpertise.setValue(this.tempArr.join(','));
+    this.addRadianFormGroup.controls['ProfileExpertise'].setValue(this.tempArr.join(','));
   }
   onSelectPortfolio(event, item: any){
     if (event.target.checked) {
@@ -171,7 +154,7 @@ export class RdRadianAddComponent implements OnInit {
         this.tempArrPortfolio.splice(index, 1);
       }
     }
-    this.addRadianForm.LinkedPortfolio.setValue(this.tempArrPortfolio.join(','));
+    this.addRadianFormGroup.controls['LinkedPortfolio'].setValue(this.tempArrPortfolio.join(','));
   }
   getUserPorfolio() {
     this.spinner.show()
@@ -188,26 +171,47 @@ export class RdRadianAddComponent implements OnInit {
         });
   }
   onSubmit() {
+    const dxData = this.addRadianFormGroup.value;
     // stop here if form is invalid
+    this.checkChildArrayValidation();
     if (this.addRadianFormGroup.invalid) {
-
+      console.log(this.addRadianFormGroup);
       this.notificationService.error('Please fill in the required fields');
       this.validateAllFormFields(this.addRadianFormGroup);
+      
       return;
+    } else {
+      dxData.ProfileSkill = dxData.ProfileSkill.radianSkillCategoryId;
+      dxData.Education.map((x:any)=>x.Degree = x.Degree.name);
+      dxData.Education.map((x:any)=>x.StartsOn = new Date(x.StartsOn).getFullYear());
+      dxData.Education.map((x:any)=>x.EndsOn = new Date(x.EndsOn).getFullYear());
+      dxData.Experience.map((x:any)=>x.StartDate = new Date(x.StartDate).getFullYear());
+      dxData.Experience.map((x:any)=>x.ToDate = new Date(x.ToDate).getFullYear());
+      dxData.CertificationLicense.map((x:any)=>x.CertifiedDate = moment(x.CertifiedDate).format('YYYY-MM-DD'));
     }
     if (this.serverFile.length > 0) {
       this.spinner.show()
-      this.rdUserService.UploadUserRadianProfileImage(this.croppedImage, this.serverFile, this.addRadianForm.ProfileName.value)
+      this.rdUserService.UploadUserRadianProfileImage(this.croppedImage, this.serverFile, dxData.ProfileName)
         .pipe(first())
         .subscribe(
           res => {
             this.spinner.hide()
+<<<<<<< HEAD
             const pp = res.data.ProfilePicture;
             const cc = res.data.CoverPicture;
             this.addRadianForm.ProfilePicture.setValue(pp);
             this.addRadianForm.CoverPicture.setValue(cc);
             console.log(new RdRadian(this.addRadianFormGroup.value))
             this.rdUserService.addUserProfile(new RdRadian(this.addRadianFormGroup.value))
+=======
+            // const pp = res.data.ProfilePicture;
+            // const cc = res.data.CoverPicture;
+            dxData.ProfilePicture = res.data.ProfilePicture;
+            dxData.CoverPicture = res.data.CoverPicture
+            // this.addRadianForm.ProfilePicture.setValue(pp);
+            // this.addRadianForm.CoverPicture.setValue(cc);
+            this.rdUserService.addUserProfile(dxData)
+>>>>>>> 2a458c768cc562cfa9d5d1557ebcc56f07188a2b
               .subscribe(res => {
       
                 if (res.status) {
@@ -225,9 +229,9 @@ export class RdRadianAddComponent implements OnInit {
           });
     } else {
       this.spinner.show()
-      this.addRadianForm.ProfilePicture.setValue('');
-      this.addRadianForm.CoverPicture.setValue('');
-      this.rdUserService.addUserProfile(new RdRadian(this.addRadianFormGroup.value))
+      dxData.ProfilePicture = '';
+      dxData.CoverPicture = ''
+      this.rdUserService.addUserProfile(dxData)
         .subscribe(res => {
           this.spinner.hide()
           if (res.status) {
@@ -250,16 +254,22 @@ export class RdRadianAddComponent implements OnInit {
       }
     });
   }
-  onReset() {
-    this.addRadianFormGroup = this._formBuilder.group({
-      ProfileName: ['', Validators.required],
-      ProfilePicture: [''],
-      CoverPicture: [''],
-      ProfileDescription: ['', Validators.required],
-      ProfileSkill: [''],
-      ProfileExpertise: ['', Validators.required],
-      LinkedPortfolio: ['', Validators.required]
+  checkChildArrayValidation(){
+    const dx = this.getEducationControls();
+    dx.forEach((el:any) => {
+      this.validateAllFormFields(el);
     });
+    const dxp = this.getCertificationLicensedControls();
+    dxp.forEach((el:any) => {
+      this.validateAllFormFields(el);
+    });
+    const dxexp = this.getExperienceControls();
+    dxexp.forEach((el:any) => {
+      this.validateAllFormFields(el);
+    });
+  }
+  onReset() {
+    this.createFormGroup();
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName('body')[0];
@@ -282,14 +292,15 @@ export class RdRadianAddComponent implements OnInit {
   }
 
   educationFormarray() : FormArray {
-    console.log(this.addRadianFormGroup);
     return this.addRadianFormGroup.get("Education") as FormArray  
   }  
   newEducation(): FormGroup {  
     return this._formBuilder.group({  
-      Education: ['',Validators.required],  
+      Degree: ['',Validators.required],  
+      Other: [''],
       StartsOn: ['',Validators.required],
-      EndsOn:['',Validators.required]  
+      EndsOn:['',Validators.required],
+      showOther:[false]
     })  
   }  
      
@@ -304,13 +315,13 @@ export class RdRadianAddComponent implements OnInit {
   }
 
   CertificationLicensedFormarray() : FormArray {  
-    return this.addRadianFormGroup.get("CertificationLicensed") as FormArray  
+    return this.addRadianFormGroup.get("CertificationLicense") as FormArray  
   }  
   newCertificationLicensed(): FormGroup {  
     return this._formBuilder.group({  
       CertificationName: ['',Validators.required],  
       CertifiedDate: ['',Validators.required],
-      CertificationLicensedNumber:['']  
+      CertificationLicenseNumber:['']  
     })  
   }  
      
@@ -318,7 +329,7 @@ export class RdRadianAddComponent implements OnInit {
     this.CertificationLicensedFormarray().push(this.newCertificationLicensed());  
   }
   getCertificationLicensedControls() {
-    return (this.addRadianFormGroup.get('CertificationLicensed') as FormArray).controls;
+    return (this.addRadianFormGroup.get('CertificationLicense') as FormArray).controls;
   }
   deleteCertificationLicensed(index:number){
     this.CertificationLicensedFormarray().removeAt(index);  
@@ -349,4 +360,19 @@ export class RdRadianAddComponent implements OnInit {
     };
     container.setViewMode('year');
   }
+  degreeSelect(event:any,index){
+    let dx:any=this.getEducationControls()[index];
+    console.log(dx.controls)
+    if(event.name.toLowerCase()==='other'){
+      this._disableOther = true;
+      dx.controls['Others'].addValidators(Validators.required);
+      dx.controls['showOther'].setValue(true);
+    } else {
+      this._disableOther = false;
+      dx.controls['Others'].removeValidators(Validators.required);
+      dx.controls['showOther'].setValue(false);
+      
+    }
+  }
 }
+
