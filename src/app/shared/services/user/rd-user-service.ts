@@ -150,8 +150,8 @@ export class RdUserService {
     rdProfile.ProfilePicture = rdProfile.ProfilePicture===null?'':rdProfile.ProfilePicture;
     rdProfile.CoverPicture = rdProfile.CoverPicture===null?'':rdProfile.CoverPicture;
     var data = this._encryptDecryptService.ecryptModel(rdProfile);
-    console.log(data);
-    return null;
+    // console.log(data);
+    // return null;
     return this.http.post<any>(environment.apiCommon+'radianApi/Profiles/createProfile.php', JSON.stringify(data));
   }
 
