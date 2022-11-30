@@ -9,7 +9,8 @@
         <div class="row mt-top"
           *ngIf="addRadianFormGroup.controls['ProfilePicture'].errors && (addRadianFormGroup.controls['ProfilePicture'].dirty || addRadianFormGroup.controls['ProfilePicture'].touched)">
           <div class="col-md-12">
-            <app-required-validation-message [fieldName]="'Image'" *ngIf="addRadianFormGroup.controls['ProfilePicture'].errors.required">
+            <app-required-validation-message [fieldName]="'Image'"
+              *ngIf="addRadianFormGroup.controls['ProfilePicture'].errors.required">
             </app-required-validation-message>
           </div>
         </div>
@@ -20,7 +21,7 @@
                 <input type="file" (change)="fileChangeEvent($event,contentProfile)" />
               </div>
             </div>
-  
+
           </div>
         </div>
         <div class="row mt-top model-profile" *ngIf="isUploaded">
@@ -28,8 +29,9 @@
             <h6>Crop Image</h6>
             <div class="row">
               <div class="col-md-12">
-                <image-cropper class="border-custom" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
-                  [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)">
+                <image-cropper class="border-custom" [imageChangedEvent]="imageChangedEvent"
+                  [maintainAspectRatio]="true" [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png"
+                  (imageCropped)="imageCropped($event)">
                 </image-cropper>
               </div>
             </div>
@@ -40,12 +42,12 @@
               <div class="col-md-12">
                 <img [src]="croppedImage" class="border-custom" />
               </div>
-  
+
             </div>
           </div>
         </div>
       </div>
-  
+
     </ng-template>
     <ng-template #contentCover let-modal>
       <div class="modal-header">
@@ -86,7 +88,7 @@
           <a (click)="openProfilePopup(contentProfile)">
             <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
           </a>
-  
+
           <h3 class="title">[Vinay Pardeshi]</h3>
           <p>[Visual]</p>
         </div>
@@ -117,12 +119,12 @@
             <div class="row mt-top">
               <div class="col-md-12">
                 <div class="portfolio-label">About Profile</div>
-                <div class="row"
-                  *ngIf="addRadianFormGroup.controls['ProfileDescription'].errors && (addRadianFormGroup.controls['ProfileDescription'].dirty 
+                <div class="row" *ngIf="addRadianFormGroup.controls['ProfileDescription'].errors && (addRadianFormGroup.controls['ProfileDescription'].dirty 
                   || addRadianFormGroup.controls['ProfileDescription'].touched)">
                   <div class="col-md-12">
                     <app-required-validation-message [fieldName]="'Description'"
-                      *ngIf="addRadianFormGroup.controls['ProfileDescription'].errors.required"></app-required-validation-message>
+                      *ngIf="addRadianFormGroup.controls['ProfileDescription'].errors.required">
+                    </app-required-validation-message>
                   </div>
                 </div>
                 <textarea class="form-control" [placeholder]="" formControlName="ProfileDescription">
@@ -162,7 +164,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control other-custom" placeholder="Others" formControlName="Other">
+                      <input type="text" class="signUp-form-control form-control other-custom" placeholder="Others"
+                        formControlName="Other">
                     </div>
                   </div>
                 </div>
@@ -179,8 +182,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate" formControlName="StartsOn"
-                        [maxDate]="maxDate" [bsConfig]="{
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                        formControlName="StartsOn" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'
@@ -195,15 +198,15 @@
                 <div class="row"
                   *ngIf="item.controls['EndsOn'].errors && (item.controls['EndsOn'].dirty || item.controls['EndsOn'].touched)">
                   <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'To'"
-                      *ngIf="item.controls['EndsOn'].errors.required"></app-required-validation-message>
+                    <app-required-validation-message [fieldName]="'To'" *ngIf="item.controls['EndsOn'].errors.required">
+                    </app-required-validation-message>
                   </div>
                 </div>
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate" formControlName="EndsOn"
-                        [maxDate]="maxDate" [bsConfig]="{
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                        formControlName="EndsOn" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'
@@ -244,7 +247,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" placeholder="Certification Name" formControlName="CertificationName">
+                      <input type="text" class="signUp-form-control form-control" placeholder="Certification Name"
+                        formControlName="CertificationName">
                     </div>
                   </div>
                 </div>
@@ -262,8 +266,8 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="form-control" #dp="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate"  formControlName="CertifiedDate"
-                        [bsConfig]="{
+                      <input type="text" class="form-control" #dp="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate"
+                        formControlName="CertifiedDate" [bsConfig]="{
                           isAnimated: true,
                           dateInputFormat: 'DD/MM/YYYY'
                         }" bsDatepicker>
@@ -277,13 +281,15 @@
                   *ngIf="item.controls['CertificationLicenseNumber'].errors && (item.controls['CertificationLicenseNumber'].dirty || item.controls['CertificationLicenseNumber'].touched)">
                   <div class="col-md-12">
                     <app-required-validation-message [fieldName]="'License Number'"
-                      *ngIf="item.controls['CertificationLicenseNumber'].errors.required"></app-required-validation-message>
+                      *ngIf="item.controls['CertificationLicenseNumber'].errors.required">
+                    </app-required-validation-message>
                   </div>
                 </div>
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" placeholder="License Number"  formControlName="CertificationLicenseNumber">
+                      <input type="text" class="signUp-form-control form-control" placeholder="License Number"
+                        formControlName="CertificationLicenseNumber">
                     </div>
                   </div>
                 </div>
@@ -321,7 +327,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" placeholder="Experience As" formControlName="ExperienceName">
+                      <input type="text" class="signUp-form-control form-control" placeholder="Experience As"
+                        formControlName="ExperienceName">
                     </div>
                   </div>
                 </div>
@@ -360,8 +367,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate" formControlName="ToDate"
-                        [maxDate]="maxDate" [bsConfig]="{
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                        formControlName="ToDate" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'
@@ -369,8 +376,9 @@
                     </div>
                   </div>
                 </div>
-              <div class="col-md-1" *ngIf="getExperienceControls().length>1">
-                <button class="btn btn-primary btn-round del-btn" (click)="deleteExperience(i)">Delete</button>
+                <div class="col-md-1" *ngIf="getExperienceControls().length>1">
+                  <button class="btn btn-primary btn-round del-btn" (click)="deleteExperience(i)">Delete</button>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -383,19 +391,19 @@
         </div>
       </div>
     </div>
-    </div>
     <div class="row">
       <div class="col-md-12">
         <div class="row card portfolio portfolio-custom">
           <div class="col-md-12">
             <h4>Linked Portfolios</h4>
             <div class="row"
-            *ngIf="addRadianFormGroup.controls['LinkedPortfolio'].errors && (addRadianFormGroup.controls['LinkedPortfolio'].dirty || addRadianFormGroup.controls['LinkedPortfolio'].touched)">
-            <div class="col-md-12">
-              <app-required-validation-message [fieldName]="'Linked Portfolios'"
-                *ngIf="addRadianFormGroup.controls['LinkedPortfolio'].errors.required"></app-required-validation-message>
+              *ngIf="addRadianFormGroup.controls['LinkedPortfolio'].errors && (addRadianFormGroup.controls['LinkedPortfolio'].dirty || addRadianFormGroup.controls['LinkedPortfolio'].touched)">
+              <div class="col-md-12">
+                <app-required-validation-message [fieldName]="'Linked Portfolios'"
+                  *ngIf="addRadianFormGroup.controls['LinkedPortfolio'].errors.required">
+                </app-required-validation-message>
+              </div>
             </div>
-          </div>
             <div class="row mt-top">
               <div class="col-md-12">
                 <div class="pretty p-switch p-fill" *ngFor="let item of userPortfolio;let i=index;">
@@ -415,12 +423,12 @@
         <div class="row card portfolio portfolio-custom">
           <div class="col-md-12">
             <h4>Skills</h4>
-            <div class="row mt-top"
-              *ngIf="addRadianFormGroup.controls['ProfileExpertise'].errors && (addRadianFormGroup.controls['ProfileExpertise'].dirty 
+            <div class="row mt-top" *ngIf="addRadianFormGroup.controls['ProfileExpertise'].errors && (addRadianFormGroup.controls['ProfileExpertise'].dirty 
               || addRadianFormGroup.controls['ProfileExpertise'].touched)">
               <div class="col-md-12">
                 <app-required-validation-message [fieldName]="'Experties'"
-                  *ngIf="addRadianFormGroup.controls['ProfileExpertise'].errors.required"></app-required-validation-message>
+                  *ngIf="addRadianFormGroup.controls['ProfileExpertise'].errors.required">
+                </app-required-validation-message>
               </div>
             </div>
             <div class="row mt-top">
@@ -446,8 +454,8 @@
       <div class="col-md-12">
         <div class="row card portfolio portfolio-custom">
           <div class="col-md-12">
-              <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Create</button>&nbsp;
-                <a [routerLink]="['/member/hunar_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>  
+            <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Create</button>&nbsp;
+            <a [routerLink]="['/member/hunar_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>
           </div>
         </div>
       </div>

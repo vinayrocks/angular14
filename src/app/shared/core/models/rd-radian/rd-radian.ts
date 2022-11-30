@@ -8,9 +8,9 @@ export class RdRadian {
   ProfileExpertise: String='';
   LinkedPortfolio: String='';
   UserId:Number=0;
-  Education: any=[];
-  CertificationLicense: any=[];
-  Experience: any=[];
+  Education: any='';
+  CertificationLicense: any='';
+  Experience: any='';
   Email:String='';
   FirstName:String='';
   isDefaultProfile:Number=0;
