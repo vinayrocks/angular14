@@ -9,6 +9,7 @@ export class RdRadian {
   LinkedPortfolio: String='';
   UserId:Number=0;
   EducationName: String='';
+  EducationNameOther: String='';
   EducationStartYear: string;
   EducationEndYear: string;
   CertificationName: String='';

@@ -206,6 +206,7 @@ export class RdRadianAddComponent implements OnInit {
             const cc = res.data.CoverPicture;
             this.addRadianForm.ProfilePicture.setValue(pp);
             this.addRadianForm.CoverPicture.setValue(cc);
+            console.log(new RdRadian(this.addRadianFormGroup.value))
             this.rdUserService.addUserProfile(new RdRadian(this.addRadianFormGroup.value))
               .subscribe(res => {
       
