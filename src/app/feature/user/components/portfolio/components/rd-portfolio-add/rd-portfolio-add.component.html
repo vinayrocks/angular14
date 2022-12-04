@@ -96,11 +96,6 @@
             <div class="col-md-2 custom-img-col-2" *ngFor='let url of urls;let i =index;'>
               <div class="custom-photo-container">
                 <span class="close"><a (click)="removeMedia(i)">&times;</a></span>
-                <!-- <img src="{{url.imageMovieURL}}" alt="" class="img-raised" *ngIf="url.type==='image'">
-                <img src="assets/img/radian/document.png" alt="" class="img-raised" *ngIf="url.type==='document'">
-                <div *ngIf="url.type==='video'">
-                  <div [innerHtml]="getVideo(url.imageMovieURL)" ></div>
-                </div> -->
                 <img src="{{url.Name}}" alt="" class="img-raised" title="" *ngIf="url.IsImage==='image'">
                 <a href="{{url.Name}}" *ngIf="url.IsImage==='pdf'" target="_blank">
                   <img src="assets/img/radian/document.png" alt="" class="img-raised">
@@ -110,7 +105,17 @@
                   <a></a>
                 </div>
               </div>
-              <div class="radio-custom"><input type="radio" name="allowRating" checked formControlName="allowRating"/><label>Allow Rating</label></div>
+              <div class="row" *ngIf="url.IsImage==='image'">
+                <div class="col-md-12">
+                  <div class="portfolio-label">Allow Rating</div>
+                  <div class="pretty p-switch p-fill">
+                      <input type="checkbox" (change)="changeUserType($event,i)" />
+                      <div class="state p-success">
+                          <label>Yes/No</label>
+                      </div>
+                  </div>
+              </div>
+              </div>
             </div>
           </div>
         </div>
