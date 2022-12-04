@@ -7,8 +7,8 @@
         <a>
           <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
         </a>
-        <h3 class="title">[Vinay Pardeshi]</h3>
-        <p>[Visual]</p>
+        <h3 class="title">{{currentUser.ProfileName}}</h3>
+        <!-- <p>[Visual]</p> -->
       </div>
     </div>
   </div>
@@ -59,34 +59,63 @@
           <div class="row mt-top">
             <div class="col-md-12">
               <div class="portfolio-label">Portfolio Media</div>
+              
               <div class="row" *ngFor="let item of addMoreImageArray;let i=index;">
-                <div class="col-md-3" *ngIf="imageIndex===i">
-                  <select id="select{{i}}" class="select-css" (change)="selectMediaType($event.target.value)">
-                    <option value="image" selected="true">Image/Document</option>
-                    <option value="video">Video</option>
-                  </select>
-                </div>
-                <div class="col-md-7" *ngIf="isImageType && imageIndex===i">
-                  <input id="file{{i}}" type="file" class="form-control form-control-lg"
-                    (change)="fileChangeEvent($event,i)" accept="application/pdf, image/jpeg, image/png" />
-                </div>
-                <div class="col-md-7" *ngIf="!isImageType && imageIndex===i">
-                  <div class="input-group">
-                    <input id="video{{i}}" type="text" class="signUp-form-control form-control"
-                      placeholder="YouTube Video Link" formControlName="linkURL">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6" *ngIf="imageIndex===i">
+                      <!-- <select id="select{{i}}" class="select-css" (change)="selectMediaType($event.target.value)">
+                        <option value="image" selected="true">Image/Document</option>
+                        <option value="video">Video</option>
+                      </select> -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="pretty p-switch p-fill">
+                            <input type="radio" name="isUser" checked [value]="true"
+                              (change)="isImageType=true;" />
+                            <div class="state p-success">
+                              <label>Image/Document</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="pretty p-switch p-fill">
+                            <input type="radio" name="isUser" [value]="false"
+                              (change)="isImageType=false;" />
+                            <div class="state p-success">
+                              <label>Video</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6" *ngIf="isImageType && imageIndex===i">
+                      <input id="file{{i}}" type="file" class="form-control form-control-lg"
+                        (change)="fileChangeEvent($event,i)" accept="application/pdf, image/jpeg, image/png" />
+                    </div>
+                    <div class="col-md-6" *ngIf="!isImageType && imageIndex===i">
+                      <div class="input-group">
+                        <input id="video{{i}}" type="text" class="signUp-form-control form-control"
+                          placeholder="YouTube Video Link" formControlName="linkURL">
+                      </div>
+                    </div>
+                    <div class="col-md-3" *ngIf="!isImageType && imageIndex===i">
+                      <input type="button" class="btn btn-primary btn-round custom-btn" value="Add"
+                        (click)="addMoreImage(i)" />
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-2" *ngIf="!isImageType && imageIndex===i">
-                  <input type="button" class="btn btn-primary btn-round custom-btn" value="Add"
-                    (click)="addMoreImage(i)" />
-                </div>
+                
               </div>
-            </div>
-          </div>
-          <div class="row mt-top" *ngIf="!(isUploaded)">
-            <div class="col-md-12">
-              <div style="border: 1px dashed #38b6ff; padding: 50px 70px; border-radius: 10px; text-align: center;">
-                <img src="./././././././assets/img/radian/cloud_upload.png" style="width: 15%" />
+              <div class="row" *ngIf="!(isUploaded)">
+                <div class="col-md-12">
+                  <div style="border: 1px dashed #38b6ff; padding: 50px 70px; border-radius: 10px; text-align: center;">
+                    <img src="./././././././assets/img/radian/cloud_upload.png" style="width: 15%" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -103,10 +132,10 @@
                   <a></a>
                 </div>
               </div>
-              <div class="row row-allow" *ngIf="url.IsImage==='image'">
+              <div class="row row-allow">
                 <div class="col-md-12">
                   <div class="pretty p-switch p-fill">
-                    <input type="checkbox" (change)="changeUserType($event,i)" />
+                    <input type="checkbox" (change)="changeUserType($event,i)" [checked]="url.RatingAllow" />
                     <div class="state p-success">
                       <label>Allow Rating</label>
                     </div>

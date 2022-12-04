@@ -22,19 +22,17 @@ export class AppComponent implements OnInit, AfterViewInit {
     private router: Router
   ) {
     this.router.events.subscribe((val) => {
-      if (val instanceof NavigationStart) {
-        this.currentUser = this.rdAuthenticateService.getLocalStorageData();
-        if (window.outerWidth > 991) {
-          window.document.children[0].scrollTop = 0;
-        } else {
-          window.document.activeElement.scrollTop = 0;
-        }
-        var _location = this.location.path();
-        if (_location.split("/")[2] !== "login") {
-          this._showHeader = true;
-        } else {
-          this._showHeader = false;
-        }
+      this.currentUser = this.rdAuthenticateService.getLocalStorageData();
+      if (window.outerWidth > 991) {
+        window.document.children[0].scrollTop = 0;
+      } else {
+        window.document.activeElement.scrollTop = 0;
+      }
+      var _location = this.location.path();
+      if (_location.split("/")[2] !== "login") {
+        this._showHeader = true;
+      } else {
+        this._showHeader = false;
       }
     });
   }

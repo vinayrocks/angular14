@@ -9,6 +9,7 @@ import { RdPortfolio } from 'src/app/shared/core/models/rd-portfolio/rd-portfoli
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { RdAuthenticateService } from 'src/app/shared/services/authentication/rd-authenticate.service';
 @Component({
   selector: 'app-rd-portfolio-add',
   templateUrl: './rd-portfolio-add.component.html',
@@ -42,12 +43,13 @@ export class RdPortfolioAddComponent implements OnInit {
       'insertHorizontalRule',]
     ]
   };
+  currentUser:any=[];
   constructor(private _formBuilder: FormBuilder, private rdUserService: RdUserService,
     private embedService: EmbedVideoService,private spinner:NgxSpinnerService,
-    private notificationService:NotificationService, private router: Router
+    private notificationService:NotificationService, private router: Router,private rdAuthenticateService:RdAuthenticateService
     ) {
-    //PortfolioMedia
-    // 
+      this.currentUser = this.rdAuthenticateService.getLocalStorageData();
+      console.log(this.currentUser)
   }
 
   ngOnInit() {
@@ -107,12 +109,7 @@ export class RdPortfolioAddComponent implements OnInit {
     return this.embedService.embed(url);
   }
   selectMediaType(event: any){
-    if(event!=='image'){
-      this.isImageType=false;
-
-    } else {
-      this.isImageType=true;
-    }
+    this.isImageType=event;
   }
   addMoreImage(index:number){
     const data: any = [];
