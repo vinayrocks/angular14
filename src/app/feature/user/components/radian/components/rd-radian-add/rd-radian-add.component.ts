@@ -15,6 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { DefaultNgxMatCalendarRangeStrategy } from '@angular-material-components/datetime-picker';
 import { stringify } from 'querystring';
+import { RdAuthenticateService } from 'src/app/shared/services/authentication/rd-authenticate.service';
 @Component({
   selector: 'app-rd-radian-add',
   templateUrl: './rd-radian-add.component.html',
@@ -75,12 +76,14 @@ export class RdRadianAddComponent implements OnInit {
   maxDate = new Date();
   minDate = new Date();
   _disableOther:boolean=false;
+  currentUser:any=[];
   constructor(private _formBuilder: FormBuilder, private rdUserService: RdUserService,
     private spinner:NgxSpinnerService,private modalService: NgbModal,
-    private notificationService: NotificationService, private router: Router) {
+    private notificationService: NotificationService, private router: Router,private rdAuthenticateService:RdAuthenticateService) {
     this.skills =(skillsInterest as any).default;
     this.createFormGroup();
     this.minDate.setFullYear(this.minDate.getFullYear() - 40);
+    this.currentUser = this.rdAuthenticateService.getLocalStorageData();
   }
   ngOnInit() {
     var rellaxHeader = new Rellax('.rellax-header');
