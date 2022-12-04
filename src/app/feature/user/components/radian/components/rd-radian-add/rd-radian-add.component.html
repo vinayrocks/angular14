@@ -3,7 +3,7 @@
     <ng-template #contentProfile let-modal>
       <div class="modal-header">
         <h4 class="modal-title">Profile Picture</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="close(modal)"></button>
       </div>
       <div class="modal-body">
         <div class="row mt-top"
@@ -52,7 +52,7 @@
     <ng-template #contentCover let-modal>
       <div class="modal-header">
         <h4 class="modal-title">Cover Picture</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeCover(modal)"></button>
       </div>
       <div class="modal-body">
         <div class="row mt-top"
@@ -164,7 +164,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-
+                      <input type="text" class="signUp-form-control form-control" placeholder="other"
+                      formControlName="Other">
                     </div>
                   </div>
                 </div>

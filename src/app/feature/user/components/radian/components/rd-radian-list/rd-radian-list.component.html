@@ -1,18 +1,4 @@
 <div class="container">
-  <!-- <div class="button-container">
-        <a href="#button" class="btn btn-primary btn-round btn-lg">My Profiles</a>
-    </div> -->
-  <!-- <div class="cover-img">
-    <img *ngIf="currentUser?.CoverPicture!==null" src="{{coverImagePath}}" class="custom-cover-picture">
-    <img *ngIf="currentUser?.CoverPicture===null" src="./assets/img/default-cover-picture.png" class="custom-cover-picture"/>
-  </div> -->
-  <!-- <div *ngIf="currentUser?.CoverPicture!==null" class="img"
-    style="background-image: url({{coverImagePath}}); height:350px; background-size:cover; position: relative; border-top-left-radius: 5px; border-top-right-radius: 5px;">
-    <div class="edit-btn">
-      <a [routerLink]="['/member/hunar_add']" class="btn btn-primary btn-round btn-margin reset-btn"><i
-          class="pi pi-camera"></i>Select Cover Image</a>
-    </div>
-  </div> -->
   <div class="img default-cover">
     <div class="edit-btn">
       <a [routerLink]="['/member/hunar_add']" class="btn btn-primary btn-round btn-margin reset-btn">
@@ -163,37 +149,65 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="row card portfolio">
+          <div class="row card portfolio" *ngIf="selectedUser.EducationDetails.length>0">
             <h4>Educations</h4>
-            <p-carousel [value]="selectedUser.EducationDetails" styleClass="custom-carousel" [numVisible]="1"
-              [numScroll]="1" [circular]="true" [autoplayInterval]="5000" [responsiveOptions]="responsiveOptions" 
-              *ngIf="selectedUser.EducationDetails.length>0">
-              <!-- <ng-template pTemplate="header">
-                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
-            </ng-template> -->
-              <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                  <div class="product-item-content">
-                    <div class="p-mb-3">
-                    </div>
-                    <div>
-                      <h4 class="p-mb-1">{{product.Degree}}</h4>
-                      <h6 class="p-mt-0 p-mb-3">{{product.StartsOn}}</h6>
-                      <h6 class="p-mt-0 p-mb-3">{{product.EndsOn}}</h6>
-                      <!-- <span
-                      [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
-                    <div class="car-buttons p-mt-5">
-                      <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
-                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
-                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
-                    </div> -->
+            <div class="row" *ngFor="let item of selectedUser.EducationDetails;let i = index">
+              <div class="col-md-3">
+                <div class="portfolio-label">Education Name</div>
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" [value]="item.EducationName" [disabled]="true" class="signUp-form-control form-control">
+                      <!-- {{item.EducationName}} -->
                     </div>
                   </div>
                 </div>
-              </ng-template>
-            </p-carousel>
+              </div>
+              <div class="col-md-2">
+                <div class="portfolio-label">From</div>
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
+                        [(ngModel)]="item.StartsOn" [bsConfig]="{
+                        isAnimated: true,
+                        minMode: 'year',
+                        dateInputFormat: 'YYYY',
+                        disabled:true
+                      }" bsDatepicker>
+                      <!-- {{item.StartsOn}} -->
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-2">
+                <div class="portfolio-label">To</div>
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
+                        [(ngModel)]="item.EndsOn" [bsConfig]="{
+                        isAnimated: true,
+                        minMode: 'year',
+                        dateInputFormat: 'YYYY',
+                        disabled:true
+                      }" bsDatepicker>
+                      <!-- {{item.EndsOn}} -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row card portfolio" *ngIf="selectedUser.EducationDetails.length===0">
+            <h4>Educations</h4>
+            <div class="col-md-12" >
+              <h4>No Records</h4>
+            </div>
           </div>
         </div>
+       
       </div>
     </div>
   </div>
@@ -223,39 +237,61 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="row card portfolio">
+          <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails.length>0">
             <h4>Certification Details</h4>
-            <p-carousel [value]="selectedUser.CertificationDetails" styleClass="custom-carousel" [numVisible]="1"
-              [numScroll]="1" [circular]="true" [autoplayInterval]="5000" [responsiveOptions]="responsiveOptions" 
-              *ngIf="selectedUser.CertificationDetails.length>0">
-              <!-- <ng-template pTemplate="header">
-                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
-            </ng-template> -->
-              <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                  <div class="product-item-content">
-                    <div class="p-mb-3">
-                    </div>
-                    <div>
-                      <h4 class="p-mb-1">{{product.CertificationName}}</h4>
-                      <h6 class="p-mt-0 p-mb-3">{{product.CertifiedDate}}</h6>
-                      <h6 class="p-mt-0 p-mb-3">{{product.CertificationLicenseNumber}}</h6>
-                      <!-- <span
-                      [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
-                    <div class="car-buttons p-mt-5">
-                      <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
-                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
-                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
-                    </div> -->
+            <div class="row" *ngFor="let item of selectedUser.CertificationDetails;let i = index">
+              <div class="col-md-3">
+                <div class="portfolio-label">Certification Name</div>
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" [value]="item.CertifiedName" [disabled]="true" class="signUp-form-control form-control">
+                      <!-- {{item.CertificateName}} -->
                     </div>
                   </div>
                 </div>
-              </ng-template>
-            </p-carousel>
+              </div>
+              <div class="col-md-2">
+                <div class="portfolio-label">Certificate Date</div>
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
+                        [(ngModel)]="item.CertifiedDate" [bsConfig]="{
+                        isAnimated: true,
+                        minMode: 'year',
+                        dateInputFormat: 'YYYY/MM/DD',
+                        disabled:true
+                      }" bsDatepicker>
+                      <!-- {{item.CertifiedDate}} -->
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-2">
+                <div class="portfolio-label">License Number</div>
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" [value]="item.CertificationLicenseNumber" [disabled]="true" class="signUp-form-control form-control">
+                      <!-- {{item.CertificationLicenseNumber}} -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails.length===0">
+            <h4>Certification Details</h4>
+            <div class="col-md-12" >
+              <h4>No Records</h4>
+            </div>
           </div>
         </div>
       </div>
     </div>
+   
   </div>
   <div class="row" [@enterAnimation] *ngIf="_istab===4">
     <div class="col-md-12">
@@ -283,39 +319,67 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="row card portfolio">
+          <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails.length>0">
             <h4>Experience Details</h4>
-            <p-carousel [value]="selectedUser.ExperienceDetails" styleClass="custom-carousel" [numVisible]="1"
-              [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions" 
-              *ngIf="selectedUser.ExperienceDetails.length>0">
-              <!-- <ng-template pTemplate="header">
-                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
-            </ng-template> -->
-              <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                  <div class="product-item-content">
-                    <div class="p-mb-3">
-                    </div>
-                    <div>
-                      <h4 class="p-mb-1">{{product.ExperienceName}}</h4>
-                      <h6 class="p-mt-0 p-mb-3">{{product.StartDate}}</h6>
-                      <h6 class="p-mt-0 p-mb-3">{{product.ToDate}}</h6>
-                      <!-- <span
-                      [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
-                    <div class="car-buttons p-mt-5">
-                      <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
-                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
-                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
-                    </div> -->
+            <div class="row" *ngFor="let item of selectedUser.ExperienceDetails;let i = index">
+              <div class="col-md-3">
+                <div class="portfolio-label">Experience Name</div>
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" [value]="item.ExperienceName" [disabled]="true" class="signUp-form-control form-control">
+                      <!-- {{item.ExperienceName}} -->
                     </div>
                   </div>
                 </div>
-              </ng-template>
-            </p-carousel>
+              </div>
+              <div class="col-md-2">
+                <div class="portfolio-label">Starts On</div>
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
+                        [(ngModel)]="item.StartDate" [bsConfig]="{
+                        isAnimated: true,
+                        minMode: 'year',
+                        dateInputFormat: 'YYYY/MM/DD',
+                        disabled:true
+                      }" bsDatepicker>
+                      <!-- {{item.StartDate}} -->
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-2">
+                <div class="portfolio-label">Ends On</div>
+                <div class="row mt-top">
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker"
+                      [(ngModel)]="item.ToDate" [bsConfig]="{
+                      isAnimated: true,
+                      minMode: 'year',
+                      dateInputFormat: 'YYYY',
+                      disabled:true
+                    }" bsDatepicker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails.length===0">
+            <h4>Experience Details</h4>
+            <div class="col-md-12" >
+              <h4>No Records</h4>
+            </div>
           </div>
         </div>
+       
       </div>
     </div>
+  
   </div>
   <div class="row" [@enterAnimation] *ngIf="_istab===5">
     <div class="col-md-12">
@@ -333,7 +397,7 @@
                     <h4 class="userName">Vinay Pardeshi</h4>
                   </div>
                   <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br/>
+                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br />
                   </div>
                   <div class="accept-reject">
                     <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Delete</button>
@@ -349,7 +413,7 @@
                     <h4 class="userName">Vinay Pardeshi</h4>
                   </div>
                   <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br/>
+                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br />
                   </div>
                   <div class="accept-reject">
                     <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Delete</button>
@@ -376,7 +440,7 @@
                     <h4 class="userName">Vinay Pardeshi</h4>
                   </div>
                   <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br/>
+                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
                   </div>
                   <div class="accept-reject">
                     <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
@@ -392,7 +456,7 @@
                     <h4 class="userName">Vinay Pardeshi</h4>
                   </div>
                   <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br/>
+                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
                   </div>
                   <div class="accept-reject">
                     <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
@@ -408,7 +472,7 @@
                     <h4 class="userName">Vinay Pardeshi</h4>
                   </div>
                   <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br/>
+                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
                   </div>
                   <div class="accept-reject">
                     <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
@@ -424,7 +488,7 @@
                     <h4 class="userName">Vinay Pardeshi</h4>
                   </div>
                   <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br/>
+                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
                   </div>
                   <div class="accept-reject">
                     <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
@@ -441,94 +505,11 @@
     <div class="col-md-12">
       <div class="row card portfolio">
         <div class="col-md-12 flt-left">
-          <button class="btn btn-primary btn-round btn-margin" (click)="openEdit(selectedUser.id)">Edit Profile</button>&nbsp;
+          <button class="btn btn-primary btn-round btn-margin" (click)="openEdit(selectedUser.id)">Edit
+            Profile</button>&nbsp;
           <button mat-button class="btn btn-primary btn-round btn-margin reset-btn">Delete Profile</button>
         </div>
       </div>
     </div>
   </div>
-  <!-- <div class="row">
-    <div class="col-md-12">
-      <div class="row card portfolio">
-        <div class="col-md-12 custom-col-12">
-          <div class="row">
-            <div class="col-md-12" style="margin-top: 13px;">
-              
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <mat-vertical-stepper #stepper>
-                <mat-step *ngFor="let item of userProfiles;let i = index" [completed]="false">
-                  <ng-template class="row" matStepLabel>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <div class="team-player img-custom">
-                          <br/>
-                          <img class="rounded img-fluid img-raised" *ngIf="item.ProfilePicture!==null"
-                            src="{{projectPath}}/{{projectFilePath}}/{{item.ProfileName}}/ProfileImages/{{item.ProfilePicture}}">
-                          <img class="rounded img-fluid img-raised" *ngIf="item?.ProfilePicture===null" src="./assets/img/default-avatar.png" alt="">
-                        </div>
-                      </div>
-                      <div class="col-md-9">
-                        <h4>{{item.ProfileName}}</h4>
-                        <p class='last-acc'>Last Accessed: {{item.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>
-                      </div>
-                    </div>
-                  </ng-template><br /><br />
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="portfolio-label">About Profile</div>
-                      <textarea class="txtarea-custom form-control"
-                        [(ngModel)]="item.ProfileDescription"  disabled="true">
-                      </textarea>
-                    </div>
-                  </div><br /><br />
-                  <div class="row">
-                    <div class="col-md-2">
-                      <div class="portfolio-label">Skills</div>
-                    </div>
-                    <div class="col-md-10">
-                      <select class="select-css" disabled="true">
-                        <option selected="true" *ngIf="item.ProfileSkill!==null">{{item.ProfileSkill.name}}</option>
-                        <option selected="true"></option>
-                      </select>
-                      <br />
-                      <div class="pretty p-switch p-fill" *ngFor="let elem of item.ProfileExpertise;let i=index;">
-                        <input type="radio" disabled="true" checked value="true" />
-                        <div class="state p-success  p-fill">
-                          <label>{{elem.name}}</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div><br /><hr/><br />
-                  <div class="row">
-                    <div class="col-md-2">
-                      <div class="portfolio-label">Linked Portfolios</div>
-                    </div>
-                    <div class="col-md-10" style="margin-top: 5px;">
-                      <div class="pretty p-switch p-fill" *ngFor="let elem of item.LinkedPortfolio;let i=index;">
-                        <input type="radio" disabled="true" checked value="true" />
-                        <div class="state p-success  p-fill">
-                          <label>{{elem.name}}</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div><br />
-                  <div class="row mt-top">
-                    <div class="col-md-12 flt-right">
-                      <button class="btn btn-primary btn-round btn-margin" (click)="openEdit(item.id)">Edit</button>&nbsp;
-                      <button mat-button class="btn btn-primary btn-round btn-margin reset-btn"
-                        (click)="DeleteProfile(item)" [disabled]='i===0'>Delete</button>
-                    </div>
-                  </div>  
-                </mat-step>
-              </mat-vertical-stepper>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </div>
-  </div> -->
-
 </div>

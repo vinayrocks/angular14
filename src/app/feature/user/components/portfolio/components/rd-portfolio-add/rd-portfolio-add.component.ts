@@ -12,7 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-rd-portfolio-add',
   templateUrl: './rd-portfolio-add.component.html',
-  styleUrls: ['./rd-portfolio-add.component.scss']
+  styleUrls: ['./rd-portfolio-add.component.scss'],
 })
 export class RdPortfolioAddComponent implements OnInit {
   addPortfolioFormGroup: FormGroup;
@@ -78,14 +78,14 @@ export class RdPortfolioAddComponent implements OnInit {
           var reader = new FileReader();
           reader.onload = (event: any) => {
             // data.imageMovieURL = event.target.result;
-            this.urls.push({Name:event.target.result,IsImage:'image'});
+            this.urls.push({Name:event.target.result,IsImage:'image',RatingAllow:false});
             // this.urls.push(data);
           }
           reader.readAsDataURL(event.target.files[i]);
         }else if(event.target.files[i].type==='application/pdf'){
           // data.type='document';
           // data.imageMovieURL='';
-          this.urls.push({Name:'',IsImage:'pdf'});
+          this.urls.push({Name:'',IsImage:'pdf',RatingAllow:false});
         } else {
           this.notificationService.warn('File format not accepted [Valid format: .jpg, .png, .pdf]')
         }
@@ -211,7 +211,13 @@ export class RdPortfolioAddComponent implements OnInit {
       }
     });
   }
-  
+  changeUserType(event: any,index:number) {
+    if (event.target.checked) {
+      this.urls[index].RatingAllow = true;
+    } else {
+      this.urls[index].RatingAllow = false;
+    }
+  }
   ngOnDestroy() {
     var body = document.getElementsByTagName('body')[0];
     body.classList.remove('profile-page');

@@ -225,34 +225,65 @@ export class RdRadianEditComponent implements OnInit {
         });
   }
   onSubmit() {
-    console.log(new RdRadian(this.editRadianFormGroup))
+    const dxData = this.editRadianFormGroup.value;
     // stop here if form is invalid
     if (this.editRadianFormGroup.invalid) {
-
       this.notificationService.error('Please fill in the required fields');
       this.validateAllFormFields(this.editRadianFormGroup);
       return;
+    }else {
+      dxData.ProfileSkill = dxData.ProfileSkill.radianSkillCategoryId;
+      dxData.Education.map((x:any)=>x.EducationName = x.EducationName.name);
+      // dxData.Education.map((x:any)=>x.StartsOn = new Date(x.StartsOn).getFullYear());
+      // dxData.Education.map((x:any)=>x.EndsOn = new Date(x.EndsOn).getFullYear());
+      // dxData.Experience.map((x:any)=>x.StartDate = new Date(x.StartDate).getFullYear());
+      // dxData.Experience.map((x:any)=>x.ToDate = new Date(x.ToDate).getFullYear());
+      // dxData.CertificationLicense.map((x:any)=>x.CertifiedDate = moment(x.CertifiedDate).format('YYYY-MM-DD'));
+
+      dxData.Education = JSON.stringify(dxData.Education);
+      dxData.Experience = JSON.stringify(dxData.Experience);
+      dxData.CertificationLicense = JSON.stringify(dxData.CertificationLicense);
     }
-    // if(this.serverFile.length!=0){
-    //   this.spinner.show()
-    //   this.rdUserService.UploadUserRadianProfileImage(this.croppedImage, this.serverFile, 
-    //     this.editRadianFormGroup.controls['ProfileName'].value)
-    //   .pipe(first())
-    //   .subscribe(
-    //     res => {
+    if(this.serverFile.length!=0){
+      this.spinner.show()
+      this.rdUserService.UploadUserRadianProfileImage(this.croppedImage, this.serverFile, 
+        this.editRadianFormGroup.controls['ProfileName'].value)
+      .pipe(first())
+      .subscribe(
+        res => {
           
-    //       this.serverFile = [];
-    //       this.editRadianFormGroup.controls['ProfilePicture'].setValue(res.data.ProfilePicture);
-    //       this.editRadianFormGroup.controls['CoverPicture'].setValue(res.data.CoverPicture);
-    //       this.submitDetail();
-    //     },
-    //     error => {
-    //       this.spinner.hide()
-    //       this.notificationService.error('Something went wrong.Please try again.');
-    //     });
-    // } else {
-    //   this.submitDetail();
-    // }
+          this.serverFile = [];
+          dxData.ProfilePicture = res.data.ProfilePicture;
+          dxData.CoverPicture = res.data.CoverPicture;
+          console.log(dxData);
+          this.rdUserService.addUserProfile(new RdRadian(dxData))
+          .subscribe(res => {
+            this.spinner.hide()
+            if (res.status) {
+              this.notificationService.success(res.message);
+              this.router.navigate(['/member/hunar_view']);
+            } else {
+              this.notificationService.error(res.message);
+            }
+          });
+        },
+        error => {
+          this.spinner.hide()
+          this.notificationService.error('Something went wrong.Please try again.');
+        });
+    } else {
+      console.log(dxData);
+      this.rdUserService.addUserProfile(new RdRadian(dxData))
+      .subscribe(res => {
+        this.spinner.hide()
+        if (res.status) {
+          this.notificationService.success(res.message);
+          this.router.navigate(['/member/hunar_view']);
+        } else {
+          this.notificationService.error(res.message);
+        }
+      });
+    }
   }
   validateAllFormFields(formGroup: FormGroup) {         //{1}
     Object.keys(formGroup.controls).forEach(field => {  //{2}
@@ -261,19 +292,6 @@ export class RdRadianEditComponent implements OnInit {
         control.markAsTouched({ onlySelf: true });
       } else if (control instanceof FormGroup) {        //{5}
         this.validateAllFormFields(control);            //{6}
-      }
-    });
-  }
-
-  submitDetail(){
-    this.rdUserService.addUserProfile(new RdRadian(this.editRadianFormGroup.value))
-    .subscribe(res => {
-      this.spinner.hide()
-      if (res.status) {
-        this.notificationService.success(res.message);
-        this.router.navigate(['/member/hunar_view']);
-      } else {
-        this.notificationService.error(res.message);
       }
     });
   }
@@ -321,7 +339,7 @@ export class RdRadianEditComponent implements OnInit {
       Other: [item!==null?item.Other:''],
       StartsOn: [item!==null?item.StartsOn:'',Validators.required],
       EndsOn:[item!==null?item.EndsOn:'',Validators.required],
-      showOther:[item!==null?(item.Other!==''?false:true):'']
+      showOther:[(item!==null && item!=='')?((item.Other!=='' && item.Other!==null)?true:false):false]
     })  
   }  
      

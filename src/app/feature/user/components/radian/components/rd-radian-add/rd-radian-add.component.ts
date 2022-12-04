@@ -126,6 +126,7 @@ export class RdRadianAddComponent implements OnInit {
     }
   }
   CoverFileChangeEvent(event: any): void {
+    this.serverFile=[];
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
@@ -182,7 +183,7 @@ export class RdRadianAddComponent implements OnInit {
       return;
     } else {
       dxData.ProfileSkill = dxData.ProfileSkill.radianSkillCategoryId;
-      // dxData.Education.map((x:any)=>x.EducationName = x.EducationName.name);
+      dxData.Education.map((x:any)=>x.EducationName = x.EducationName.name);
       // dxData.Education.map((x:any)=>x.StartsOn = new Date(x.StartsOn).getFullYear());
       // dxData.Education.map((x:any)=>x.EndsOn = new Date(x.EndsOn).getFullYear());
       // dxData.Experience.map((x:any)=>x.StartDate = new Date(x.StartDate).getFullYear());
@@ -368,6 +369,13 @@ export class RdRadianAddComponent implements OnInit {
       dx.controls['showOther'].setValue(false);
       
     }
+  }
+  close(modal:any){
+    modal.dismiss('Cross click');
+    this.croppedImage ='';
+  }
+  closeCover(modal:any){
+    modal.dismiss('Cross click')
   }
 }
 
