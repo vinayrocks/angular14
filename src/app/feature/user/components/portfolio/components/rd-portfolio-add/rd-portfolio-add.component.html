@@ -93,7 +93,7 @@
             </div>
           </div>
           <div class="row mt-top" *ngIf="isUploaded">
-            <div class="col-md-2" *ngFor='let url of urls;let i =index;'>
+            <div class="col-md-2 custom-img-col-2" *ngFor='let url of urls;let i =index;'>
               <div class="custom-photo-container">
                 <span class="close"><a (click)="removeMedia(i)">&times;</a></span>
                 <!-- <img src="{{url.imageMovieURL}}" alt="" class="img-raised" *ngIf="url.type==='image'">
@@ -110,14 +110,15 @@
                   <a></a>
                 </div>
               </div>
+              <div class="radio-custom"><input type="radio" name="allowRating" checked formControlName="allowRating"/><label>Allow Rating</label></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row card portfolio">
+    <div class="row card portfolio mb-search-buttons">
       <div class="col-md-12">
-        <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Create</button>&nbsp;
+        <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="onSubmit()">Create</button>&nbsp;
         <a [routerLink]="['/member/portfolio_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>
       </div>
     </div>

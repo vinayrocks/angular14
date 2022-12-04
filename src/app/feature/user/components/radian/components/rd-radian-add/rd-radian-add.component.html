@@ -96,7 +96,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <div class="row card portfolio portfolio-custom">
+        <div class="row card portfolio profile-custom">
           <div class="col-md-12">
             <h4>Profile Details</h4>
             <div class="portfolio-label">Profile Name</div>
@@ -141,7 +141,7 @@
           <div class="col-md-12">
             <h4>Education Details</h4>
             <div class="row" *ngFor="let item of getEducationControls();let i = index" [formGroupName]=" i">
-              <div class="col-md-3">
+              <div class="col-md-5">
                 <div class="portfolio-label">Education Name</div>
                 <div class="row"
                   *ngIf="item.controls['EducationName'].errors && (item.controls['EducationName'].dirty || item.controls['EducationName'].touched)">
@@ -169,19 +169,19 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-2">
-                <div class="portfolio-label">From</div>
+              <div class="col-md-3">
+                <div class="portfolio-label">Start Year</div>
                 <div class="row"
                   *ngIf="item.controls['StartsOn'].errors && (item.controls['StartsOn'].dirty || item.controls['StartsOn'].touched)">
                   <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'from'"
+                    <app-required-validation-message [fieldName]="'Start Year'"
                       *ngIf="item.controls['StartsOn'].errors.required"></app-required-validation-message>
                   </div>
                 </div>
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                      <input type="text" class="form-control date-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
                         formControlName="StartsOn" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -192,19 +192,19 @@
                 </div>
 
               </div>
-              <div class="col-md-2">
-                <div class="portfolio-label">To</div>
+              <div class="col-md-3">
+                <div class="portfolio-label">End Year</div>
                 <div class="row"
                   *ngIf="item.controls['EndsOn'].errors && (item.controls['EndsOn'].dirty || item.controls['EndsOn'].touched)">
                   <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'To'" *ngIf="item.controls['EndsOn'].errors.required">
+                    <app-required-validation-message [fieldName]="'End Year'" *ngIf="item.controls['EndsOn'].errors.required">
                     </app-required-validation-message>
                   </div>
                 </div>
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                      <input type="text" class="form-control date-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
                         formControlName="EndsOn" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -230,7 +230,7 @@
     </div>
     <div class="row" formArrayName="CertificationLicense">
       <div class="col-md-12">
-        <div class="row card portfolio portfolio-custom">
+        <div class="row card portfolio profile-custom">
           <div class="col-md-12">
             <h4>Certification & Licenses</h4>
             <div class="row" *ngFor="let item of getCertificationLicensedControls();let i = index" [formGroupName]=" i">
@@ -265,7 +265,7 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="form-control" #dp="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate"
+                      <input type="text" class="form-control date-control" #dp="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate"
                         formControlName="CertifiedDate" [bsConfig]="{
                           isAnimated: true,
                           dateInputFormat: 'DD/MM/YYYY'
@@ -310,41 +310,41 @@
     </div>
     <div class="row" formArrayName="Experience">
       <div class="col-md-12">
-        <div class="row card portfolio portfolio-custom">
+        <div class="row card portfolio profile-custom">
           <div class="col-md-12">
-            <h4>Experiences</h4>
+            <h4>Work Experience</h4>
             <div class="row" *ngFor="let item of getExperienceControls();let i = index" [formGroupName]=" i">
               <div class="col-md-5">
-                <div class="portfolio-label">Experience As</div>
+                <div class="portfolio-label">Experience</div>
                 <div class="row"
                   *ngIf="item.controls['ExperienceName'].errors && (item.controls['ExperienceName'].dirty || item.controls['ExperienceName'].touched)">
                   <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'Experience As'"
+                    <app-required-validation-message [fieldName]="'Experience'"
                       *ngIf="item.controls['ExperienceName'].errors.required"></app-required-validation-message>
                   </div>
                 </div>
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" placeholder="Experience As"
+                      <input type="text" class="signUp-form-control form-control" placeholder="Experience"
                         formControlName="ExperienceName">
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="portfolio-label">From</div>
+                <div class="portfolio-label">Start Year</div>
                 <div class="row"
                   *ngIf="item.controls['StartDate'].errors && (item.controls['StartDate'].dirty || item.controls['StartDate'].touched)">
                   <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'From date'"
+                    <app-required-validation-message [fieldName]="'Start Year'"
                       *ngIf="item.controls['StartDate'].errors.required"></app-required-validation-message>
                   </div>
                 </div>
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                      <input type="text" class="form-control date-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
                         [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -355,18 +355,18 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="portfolio-label">To</div>
+                <div class="portfolio-label">End Year</div>
                 <div class="row"
                   *ngIf="item.controls['ToDate'].errors && (item.controls['ToDate'].dirty || item.controls['ToDate'].touched)">
                   <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'To Date'"
+                    <app-required-validation-message [fieldName]="'End Year'"
                       *ngIf="item.controls['ToDate'].errors.required"></app-required-validation-message>
                   </div>
                 </div>
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+                      <input type="text" class="form-control date-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
                         formControlName="ToDate" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -375,9 +375,9 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-1" *ngIf="getExperienceControls().length>1">
-                  <button class="btn btn-primary btn-round del-btn" (click)="deleteExperience(i)">Delete</button>
-                </div>
+              </div>
+              <div class="col-md-1" *ngIf="getExperienceControls().length>1">
+                <button class="btn btn-primary btn-round del-btn" (click)="deleteExperience(i)">Delete</button>
               </div>
             </div>
             <div class="row">
@@ -392,7 +392,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <div class="row card portfolio portfolio-custom">
+        <div class="row card portfolio profile-custom">
           <div class="col-md-12">
             <h4>Linked Portfolios</h4>
             <div class="row"
@@ -451,9 +451,9 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <div class="row card portfolio portfolio-custom">
+        <div class="row card portfolio profile-custom">
           <div class="col-md-12">
-            <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Create</button>&nbsp;
+            <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="onSubmit()">Create</button>&nbsp;
             <a [routerLink]="['/member/hunar_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>
           </div>
         </div>
