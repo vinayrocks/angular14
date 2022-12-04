@@ -144,16 +144,16 @@
               <div class="col-md-3">
                 <div class="portfolio-label">Education Name</div>
                 <div class="row"
-                  *ngIf="item.controls['Degree'].errors && (item.controls['Degree'].dirty || item.controls['Degree'].touched)">
+                  *ngIf="item.controls['EducationName'].errors && (item.controls['EducationName'].dirty || item.controls['EducationName'].touched)">
                   <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'Degree'"
-                      *ngIf="item.controls['Degree'].errors.required"></app-required-validation-message>
+                    <app-required-validation-message [fieldName]="'Education Name'"
+                      *ngIf="item.controls['EducationName'].errors.required"></app-required-validation-message>
                   </div>
                 </div>
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <ngx-select-dropdown class="ngx-select" [instanceId]="'instance1'" formControlName="Degree"
+                      <ngx-select-dropdown class="ngx-select" [instanceId]="'instance1'" formControlName="EducationName"
                         [config]="eduNameConfig" [options]="degreeName" (change)="degreeSelect($event.value,i)">
                       </ngx-select-dropdown>
                     </div>

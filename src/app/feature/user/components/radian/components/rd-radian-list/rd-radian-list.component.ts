@@ -158,6 +158,7 @@ export class RdRadianListComponent implements OnInit {
           this.selectedUser = res.data[0];
           this.projectPath = res.projectPath;
           this.spinner.hide();
+          console.log(this.selectedUser);
         },
         (error) => {
           this.spinner.hide();
@@ -181,10 +182,18 @@ export class RdRadianListComponent implements OnInit {
       }
     });
   }
+  selectProfile(product){
+    this.selectedUser=product;
+    this.selectedUser.CertificationDetails = JSON.parse(this.selectedUser.CertificationDetails);
+    this.selectedUser.EducationDetails = JSON.parse(this.selectedUser.EducationDetails);
+    this.selectedUser.ExperienceDetails = JSON.parse(this.selectedUser.ExperienceDetails);
+    console.log(this.selectedUser);
+  }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("profile-page");
     var navbar = document.getElementsByTagName("nav")[0];
     navbar.classList.remove("navbar-transparent");
   }
+  
 }

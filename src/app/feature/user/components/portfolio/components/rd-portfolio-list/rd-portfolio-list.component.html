@@ -7,10 +7,74 @@
     </div>
     <div class="card social-prof">
         <div class="card-body">
-            <div class="wrapper">
+            <div class="wrapper" *ngIf="selectedPortfolio!==null">
                 <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
-                <h3 class="title">{{selectedPortfolio.PortfolioName}}</h3>
+                <h3 class="title">{{selectedPortfolio?.PortfolioName}}</h3>
                 <p>{{selectedPortfolio.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>
+            </div>
+            <div class="row">
+                <div cvlass="col-md-12">
+                    <ng-template #t let-fill="fill">
+                        <i class="bi-heart-fill">
+                            <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                        </i>
+                    </ng-template>
+                    <ng-template #popContent>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ng-template #t let-fill="fill">
+                                    <i class="bi-heart-fill">
+                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                    </i>
+                                </ng-template>
+                                <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ng-template #t let-fill="fill">
+                                    <i class="bi-heart-fill">
+                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                    </i>
+                                </ng-template>
+                                <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ng-template #t let-fill="fill">
+                                    <i class="bi-heart-fill">
+                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                    </i>
+                                </ng-template>
+                                <ngb-rating rate="3" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ng-template #t let-fill="fill">
+                                    <i class="bi-heart-fill">
+                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                    </i>
+                                </ng-template>
+                                <ngb-rating rate="2" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ng-template #t let-fill="fill">
+                                    <i class="bi-heart-fill">
+                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                    </i>
+                                </ng-template>
+                                <ngb-rating rate="1" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5" [ngbPopover]="popContent" popoverTitle="Loved By" 
+                    container="body"></ngb-rating>
+                  
+                </div>
             </div>
             <div class="row ">
                 <div class="wrapper">
@@ -62,7 +126,7 @@
             </div>
         </div>
     </div>
-    <div class="row" [@enterAnimation] *ngIf="userPortfolio.length>0">
+    <div class="row" [@enterAnimation] *ngIf="userPortfolio?.length>0">
         <div class="col-md-12">
             <div class="row card portfolio">
                 <h4>Other Portfolio</h4>

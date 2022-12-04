@@ -115,7 +115,7 @@
                     <div class="p-mb-3">
                     </div>
                     <div>
-                      <a (click)="selectedUser=product">
+                      <a (click)="selectProfile(product)">
                         <h4 class="p-mb-1">{{product.ProfileName}}</h4>
                       </a>
 
@@ -164,9 +164,10 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>Linked Portfolios</h4>
-            <p-carousel [value]="selectedUser.LinkedPortfolio" styleClass="custom-carousel" [numVisible]="1"
-              [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+            <h4>Educations</h4>
+            <p-carousel [value]="selectedUser.EducationDetails" styleClass="custom-carousel" [numVisible]="1"
+              [numScroll]="1" [circular]="true" [autoplayInterval]="5000" [responsiveOptions]="responsiveOptions" 
+              *ngIf="selectedUser.EducationDetails.length>0">
               <!-- <ng-template pTemplate="header">
                 <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
             </ng-template> -->
@@ -176,8 +177,9 @@
                     <div class="p-mb-3">
                     </div>
                     <div>
-                      <h4 class="p-mb-1">{{product.name}}</h4>
-                      <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                      <h4 class="p-mb-1">{{product.Degree}}</h4>
+                      <h6 class="p-mt-0 p-mb-3">{{product.StartsOn}}</h6>
+                      <h6 class="p-mt-0 p-mb-3">{{product.EndsOn}}</h6>
                       <!-- <span
                       [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
                     <div class="car-buttons p-mt-5">
@@ -185,41 +187,6 @@
                                 <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
                                 <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
                     </div> -->
-                    </div>
-                  </div>
-                </div>
-              </ng-template>
-            </p-carousel>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row card portfolio">
-            <h4>Other Profiles</h4>
-            <p-carousel [value]="userProfiles" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
-              [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-              <!-- <ng-template pTemplate="header">
-                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
-            </ng-template> -->
-              <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                  <div class="product-item-content">
-                    <div class="p-mb-3">
-                    </div>
-                    <div>
-                      <a (click)="selectedUser=product">
-                        <h4 class="p-mb-1">{{product.ProfileName}}</h4>
-                      </a>
-
-                      <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
-                      <span
-                        [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
-                      <div class="car-buttons p-mt-5">
-                        <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
-                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
-                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button> -->
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -257,9 +224,10 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>Linked Portfolios</h4>
-            <p-carousel [value]="selectedUser.LinkedPortfolio" styleClass="custom-carousel" [numVisible]="1"
-              [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+            <h4>Certification Details</h4>
+            <p-carousel [value]="selectedUser.CertificationDetails" styleClass="custom-carousel" [numVisible]="1"
+              [numScroll]="1" [circular]="true" [autoplayInterval]="5000" [responsiveOptions]="responsiveOptions" 
+              *ngIf="selectedUser.CertificationDetails.length>0">
               <!-- <ng-template pTemplate="header">
                 <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
             </ng-template> -->
@@ -269,8 +237,9 @@
                     <div class="p-mb-3">
                     </div>
                     <div>
-                      <h4 class="p-mb-1">{{product.name}}</h4>
-                      <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                      <h4 class="p-mb-1">{{product.CertificationName}}</h4>
+                      <h6 class="p-mt-0 p-mb-3">{{product.CertifiedDate}}</h6>
+                      <h6 class="p-mt-0 p-mb-3">{{product.CertificationLicenseNumber}}</h6>
                       <!-- <span
                       [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
                     <div class="car-buttons p-mt-5">
@@ -278,41 +247,6 @@
                                 <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
                                 <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
                     </div> -->
-                    </div>
-                  </div>
-                </div>
-              </ng-template>
-            </p-carousel>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row card portfolio">
-            <h4>Other Profiles</h4>
-            <p-carousel [value]="userProfiles" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
-              [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-              <!-- <ng-template pTemplate="header">
-                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
-            </ng-template> -->
-              <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                  <div class="product-item-content">
-                    <div class="p-mb-3">
-                    </div>
-                    <div>
-                      <a (click)="selectedUser=product">
-                        <h4 class="p-mb-1">{{product.ProfileName}}</h4>
-                      </a>
-
-                      <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
-                      <span
-                        [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
-                      <div class="car-buttons p-mt-5">
-                        <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
-                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
-                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button> -->
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -350,9 +284,10 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>Linked Portfolios</h4>
-            <p-carousel [value]="selectedUser.LinkedPortfolio" styleClass="custom-carousel" [numVisible]="1"
-              [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+            <h4>Experience Details</h4>
+            <p-carousel [value]="selectedUser.ExperienceDetails" styleClass="custom-carousel" [numVisible]="1"
+              [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions" 
+              *ngIf="selectedUser.ExperienceDetails.length>0">
               <!-- <ng-template pTemplate="header">
                 <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
             </ng-template> -->
@@ -362,8 +297,9 @@
                     <div class="p-mb-3">
                     </div>
                     <div>
-                      <h4 class="p-mb-1">{{product.name}}</h4>
-                      <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
+                      <h4 class="p-mb-1">{{product.ExperienceName}}</h4>
+                      <h6 class="p-mt-0 p-mb-3">{{product.StartDate}}</h6>
+                      <h6 class="p-mt-0 p-mb-3">{{product.ToDate}}</h6>
                       <!-- <span
                       [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
                     <div class="car-buttons p-mt-5">
@@ -371,41 +307,6 @@
                                 <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
                                 <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
                     </div> -->
-                    </div>
-                  </div>
-                </div>
-              </ng-template>
-            </p-carousel>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row card portfolio">
-            <h4>Other Profiles</h4>
-            <p-carousel [value]="userProfiles" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
-              [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-              <!-- <ng-template pTemplate="header">
-                <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
-            </ng-template> -->
-              <ng-template let-product pTemplate="item">
-                <div class="product-item">
-                  <div class="product-item-content">
-                    <div class="p-mb-3">
-                    </div>
-                    <div>
-                      <a (click)="selectedUser=product">
-                        <h4 class="p-mb-1">{{product.ProfileName}}</h4>
-                      </a>
-
-                      <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
-                      <span
-                        [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
-                      <div class="car-buttons p-mt-5">
-                        <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
-                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
-                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button> -->
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -540,7 +441,7 @@
     <div class="col-md-12">
       <div class="row card portfolio">
         <div class="col-md-12 flt-left">
-          <button class="btn btn-primary btn-round btn-margin">Edit Profile</button>&nbsp;
+          <button class="btn btn-primary btn-round btn-margin" (click)="openEdit(selectedUser.id)">Edit Profile</button>&nbsp;
           <button mat-button class="btn btn-primary btn-round btn-margin reset-btn">Delete Profile</button>
         </div>
       </div>

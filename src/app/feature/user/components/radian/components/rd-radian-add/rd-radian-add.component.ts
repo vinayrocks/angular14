@@ -182,12 +182,12 @@ export class RdRadianAddComponent implements OnInit {
       return;
     } else {
       dxData.ProfileSkill = dxData.ProfileSkill.radianSkillCategoryId;
-      dxData.Education.map((x:any)=>x.Degree = x.Degree.name);
-      dxData.Education.map((x:any)=>x.StartsOn = new Date(x.StartsOn).getFullYear());
-      dxData.Education.map((x:any)=>x.EndsOn = new Date(x.EndsOn).getFullYear());
-      dxData.Experience.map((x:any)=>x.StartDate = new Date(x.StartDate).getFullYear());
-      dxData.Experience.map((x:any)=>x.ToDate = new Date(x.ToDate).getFullYear());
-      dxData.CertificationLicense.map((x:any)=>x.CertifiedDate = moment(x.CertifiedDate).format('YYYY-MM-DD'));
+      // dxData.Education.map((x:any)=>x.EducationName = x.EducationName.name);
+      // dxData.Education.map((x:any)=>x.StartsOn = new Date(x.StartsOn).getFullYear());
+      // dxData.Education.map((x:any)=>x.EndsOn = new Date(x.EndsOn).getFullYear());
+      // dxData.Experience.map((x:any)=>x.StartDate = new Date(x.StartDate).getFullYear());
+      // dxData.Experience.map((x:any)=>x.ToDate = new Date(x.ToDate).getFullYear());
+      // dxData.CertificationLicense.map((x:any)=>x.CertifiedDate = moment(x.CertifiedDate).format('YYYY-MM-DD'));
 
       dxData.Education = JSON.stringify(dxData.Education);
       dxData.Experience = JSON.stringify(dxData.Experience);
@@ -291,7 +291,7 @@ export class RdRadianAddComponent implements OnInit {
   }  
   newEducation(): FormGroup {  
     return this._formBuilder.group({  
-      Degree: ['',Validators.required],  
+      EducationName: ['',Validators.required],  
       Other: [''],
       StartsOn: ['',Validators.required],
       EndsOn:['',Validators.required],
