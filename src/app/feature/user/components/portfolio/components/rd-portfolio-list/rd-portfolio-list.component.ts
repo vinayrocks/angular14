@@ -22,7 +22,26 @@ declare function modifyPdf(filePath,PDFDocument,StandardFonts,rgb): any;
 @Component({
   selector: 'app-rd-portfolio-list',
   templateUrl: './rd-portfolio-list.component.html',
-  styleUrls: ['./rd-portfolio-list.component.scss']
+  styleUrls: ['./rd-portfolio-list.component.scss'],
+  styles: [
+		`
+			i {
+				position: relative;
+				display: inline-block;
+				font-size: 1.5rem;
+				padding-right: 0.1rem;
+				color: #d3d3d3;
+			}
+
+			.filled {
+				color: red;
+				overflow: hidden;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		`,
+	]
 })
 export class RdPortfolioListComponent implements OnInit {
   userPortfolio: any;
@@ -102,12 +121,14 @@ export class RdPortfolioListComponent implements OnInit {
       .pipe(first())
       .subscribe(
         res => {
+          console.log(res)
           this.spinner.hide()
           res.data.forEach(element => {
-            element.PortfolioMedia= this.GetPortfolioImagePath(element);
+            element.PortfolioMedia= (element.PortfolioMedia!=='' && element.PortfolioMedia!==null)?this.GetPortfolioImagePath(element):'';
           });
           this.projectPath=res.projectPath;
           this.userPortfolio = res.data;
+          this.selectedPortfolio = res.data[0];
         },
         error => {
           this.spinner.hide()

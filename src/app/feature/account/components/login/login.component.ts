@@ -64,11 +64,11 @@ export class LoginComponent implements OnInit, OnDestroy  {
          const dx =this.authenticationService.getLocalStorageData();
           this.notificationService.success(res.message);
           if(dx.isPortfolio){
-           // this.router.navigate(['/member/hunar_view']);
+            // this.router.navigate(['/member/hunar_view']);
             window.location.href = '/member/hunar_view'
           } else {
             window.location.href = '/member/portfolio_add'
-            // this.router.navigate(['/member/portfolio_add']);
+            //this.router.navigate(['/member/portfolio_add']);
           }
          
         } else {
