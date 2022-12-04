@@ -59,8 +59,9 @@
                                 <img src="{{elem.Image}}" (click)='openImageDialog(selectedPortfolio.PortfolioMedia,i)'>
                                 <a></a>
                             </div>
-                            <div class="row">
-                                <div cvlass="col-md-9">
+
+                            <div class="row row-rating">
+                                <div class="col-md-6">
                                     <ng-template #t let-fill="fill">
                                         <i class="bi-heart-fill">
                                             <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
@@ -71,147 +72,74 @@
                                             <div class="col-md-12">
                                                 <ng-template #t let-fill="fill">
                                                     <i class="bi-heart-fill">
-                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled"
+                                                            [style.width.%]="fill"></i>
                                                     </i>
                                                 </ng-template>
-                                                <ngb-rating rate="5" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-                                                <pre style="float:right;padding: 8px 0px 0px 14px;">Rate: <b>5/5</b></pre>
+                                                <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5">
+                                                </ngb-rating>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <ng-template #t let-fill="fill">
                                                     <i class="bi-heart-fill">
-                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled"
+                                                            [style.width.%]="fill"></i>
                                                     </i>
                                                 </ng-template>
-                                                <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-                                                <pre style="float:right;padding: 8px 0px 0px 14px;">Rate: <b>4/5</b></pre>
+                                                <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5">
+                                                </ngb-rating>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <ng-template #t let-fill="fill">
                                                     <i class="bi-heart-fill">
-                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled"
+                                                            [style.width.%]="fill"></i>
                                                     </i>
                                                 </ng-template>
-                                                <ngb-rating rate="3" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-                                                <pre style="float:right;padding: 8px 0px 0px 14px;">Rate: <b>3/5</b></pre>
+                                                <ngb-rating rate="3" [starTemplate]="t" [readonly]="true" [max]="5">
+                                                </ngb-rating>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <ng-template #t let-fill="fill">
                                                     <i class="bi-heart-fill">
-                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled"
+                                                            [style.width.%]="fill"></i>
                                                     </i>
                                                 </ng-template>
-                                                <ngb-rating rate="2" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-                                                <pre style="float:right;padding: 8px 0px 0px 14px;">Rate: <b>2/5</b></pre>
+                                                <ngb-rating rate="2" [starTemplate]="t" [readonly]="true" [max]="5">
+                                                </ngb-rating>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <ng-template #t let-fill="fill">
                                                     <i class="bi-heart-fill">
-                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled"
+                                                            [style.width.%]="fill"></i>
                                                     </i>
                                                 </ng-template>
-                                                <ngb-rating rate="1" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-                                                <pre style="float:right;padding: 8px 0px 0px 14px;">Rate: <b>1/5</b></pre>
+                                                <ngb-rating rate="1" [starTemplate]="t" [readonly]="true" [max]="5">
+                                                </ngb-rating>
                                             </div>
                                         </div>
                                     </ng-template>
-                                    <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-                                    <pre style="float:right;padding: 8px 0px 0px 14px;" [ngbPopover]="popContent" popoverTitle="Loved By" 
-                                    container="body" popoverClass="rating-popup" [openDelay]="300"
-                                    [closeDelay]="500" title="open">Rate: <b>4/5</b></pre>
-                                  
+                                    <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5"
+                                        [ngbPopover]="popContent" popoverTitle="Loved By" container="body"
+                                        [openDelay]="300" [closeDelay]="500"></ngb-rating>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="rating-custom">4 out of 5</label>
                                 </div>
                             </div>
-                        </div>
-<<<<<<< HEAD
-                        <div class="row row-rating">
-                            <div class="col-md-6">
-                                <ng-template #t let-fill="fill">
-                                    <i class="bi-heart-fill">
-                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
-                                    </i>
-                                </ng-template>
-                                <ng-template #popContent>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <ng-template #t let-fill="fill">
-                                                <i class="bi-heart-fill">
-                                                    <i *ngIf="fill > 0" class="bi-heart-fill filled"
-                                                        [style.width.%]="fill"></i>
-                                                </i>
-                                            </ng-template>
-                                            <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5">
-                                            </ngb-rating>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <ng-template #t let-fill="fill">
-                                                <i class="bi-heart-fill">
-                                                    <i *ngIf="fill > 0" class="bi-heart-fill filled"
-                                                        [style.width.%]="fill"></i>
-                                                </i>
-                                            </ng-template>
-                                            <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5">
-                                            </ngb-rating>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <ng-template #t let-fill="fill">
-                                                <i class="bi-heart-fill">
-                                                    <i *ngIf="fill > 0" class="bi-heart-fill filled"
-                                                        [style.width.%]="fill"></i>
-                                                </i>
-                                            </ng-template>
-                                            <ngb-rating rate="3" [starTemplate]="t" [readonly]="true" [max]="5">
-                                            </ngb-rating>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <ng-template #t let-fill="fill">
-                                                <i class="bi-heart-fill">
-                                                    <i *ngIf="fill > 0" class="bi-heart-fill filled"
-                                                        [style.width.%]="fill"></i>
-                                                </i>
-                                            </ng-template>
-                                            <ngb-rating rate="2" [starTemplate]="t" [readonly]="true" [max]="5">
-                                            </ngb-rating>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <ng-template #t let-fill="fill">
-                                                <i class="bi-heart-fill">
-                                                    <i *ngIf="fill > 0" class="bi-heart-fill filled"
-                                                        [style.width.%]="fill"></i>
-                                                </i>
-                                            </ng-template>
-                                            <ngb-rating rate="1" [starTemplate]="t" [readonly]="true" [max]="5">
-                                            </ngb-rating>
-                                        </div>
-                                    </div>
-                                </ng-template>
-                                <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5"
-                                    [ngbPopover]="popContent" popoverTitle="Loved By" container="body"></ngb-rating>
 
-                            </div>
-                            <div class="col-md-6">
-                                <label class="rating-custom">4 out of 5</label>
-                            </div>
-                        </div>
 
-=======
-                        <!-- <div class="row">
+                            <!-- <div class="row">
                             <div class="col-md-12">
                               <ng-template #t let-fill="fill">
                                 <i class="bi-heart-fill">
@@ -222,55 +150,53 @@
                               <pre>Rate: <b>4/5</b></pre>
                             </div>
                         </div> -->
-                        
->>>>>>> f364dc877f54f870a2ffe46f92173cc5ae257df3
+                        </div>
+
                     </div>
-                   
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row" [@enterAnimation] *ngIf="userPortfolio?.length>0">
-        <div class="col-md-12">
-            <div class="row card portfolio">
-                <h4>Other Portfolios</h4>
-                <p-carousel [value]="userPortfolio" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
-                    [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-                    <!-- <ng-template pTemplate="header">
+        <div class="row" [@enterAnimation] *ngIf="userPortfolio?.length>0">
+            <div class="col-md-12">
+                <div class="row card portfolio">
+                    <h4>Other Portfolios</h4>
+                    <p-carousel [value]="userPortfolio" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
+                        [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+                        <!-- <ng-template pTemplate="header">
                   <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
               </ng-template> -->
-                    <ng-template let-product pTemplate="item">
-                        <div class="product-item">
-                            <div class="product-item-content">
-                                <div class="p-mb-3">
-                                </div>
-                                <div>
-                                    <a (click)="selectedPortfolio=product">
-                                        <h4 class="p-mb-1">{{product.PortfolioName}}</h4>
-                                    </a>
-                                    <span
-                                        [class]="'product-badge status-'+product.PortfolioName.toLowerCase()">{{product.PortfolioArtifacts}}</span>
-                                    <div class="car-buttons p-mt-5">
+                        <ng-template let-product pTemplate="item">
+                            <div class="product-item">
+                                <div class="product-item-content">
+                                    <div class="p-mb-3">
+                                    </div>
+                                    <div>
+                                        <a (click)="selectedPortfolio=product">
+                                            <h4 class="p-mb-1">{{product.PortfolioName}}</h4>
+                                        </a>
+                                        <span
+                                            [class]="'product-badge status-'+product.PortfolioName.toLowerCase()">{{product.PortfolioArtifacts}}</span>
+                                        <div class="car-buttons p-mt-5">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </ng-template>
-                </p-carousel>
+                        </ng-template>
+                    </p-carousel>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row card portfolio">
-                <div class="col-md-12 flt-left">
-                    <button class="btn btn-primary btn-round btn-margin submit-btn"
-                        (click)="openEdit(selectedPortfolio.id)">Edit
-                        Portfolio</button>&nbsp;
-                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn"
-                        (click)="DeletePortfolio(selectedPortfolio)">Delete Portfolio</button>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row card portfolio">
+                    <div class="col-md-12 flt-left">
+                        <button class="btn btn-primary btn-round btn-margin submit-btn"
+                            (click)="openEdit(selectedPortfolio.id)">Edit
+                            Portfolio</button>&nbsp;
+                        <button mat-button class="btn btn-primary btn-round btn-margin reset-btn"
+                            (click)="DeletePortfolio(selectedPortfolio)">Delete Portfolio</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

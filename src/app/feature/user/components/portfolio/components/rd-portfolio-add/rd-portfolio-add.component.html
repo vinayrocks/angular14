@@ -67,8 +67,8 @@
                   </select>
                 </div>
                 <div class="col-md-7" *ngIf="isImageType && imageIndex===i">
-                  <input id="file{{i}}" type="file" class="form-control form-control-lg" (change)="fileChangeEvent($event,i)"
-                    accept="application/pdf, image/jpeg, image/png" />
+                  <input id="file{{i}}" type="file" class="form-control form-control-lg"
+                    (change)="fileChangeEvent($event,i)" accept="application/pdf, image/jpeg, image/png" />
                 </div>
                 <div class="col-md-7" *ngIf="!isImageType && imageIndex===i">
                   <div class="input-group">
@@ -86,9 +86,7 @@
           <div class="row mt-top" *ngIf="!(isUploaded)">
             <div class="col-md-12">
               <div style="border: 1px dashed #38b6ff; padding: 50px 70px; border-radius: 10px; text-align: center;">
-                <img
-                  src="./././././././assets/img/radian/cloud_upload.png"
-                  style="width: 15%" />
+                <img src="./././././././assets/img/radian/cloud_upload.png" style="width: 15%" />
               </div>
             </div>
           </div>
@@ -105,16 +103,15 @@
                   <a></a>
                 </div>
               </div>
-              <div class="row" *ngIf="url.IsImage==='image'">
+              <div class="row row-allow" *ngIf="url.IsImage==='image'">
                 <div class="col-md-12">
-                  <div class="portfolio-label">Allow Rating</div>
                   <div class="pretty p-switch p-fill">
-                      <input type="checkbox" (change)="changeUserType($event,i)" />
-                      <div class="state p-success">
-                          <label>Yes/No</label>
-                      </div>
+                    <input type="checkbox" (change)="changeUserType($event,i)" />
+                    <div class="state p-success">
+                      <label>Allow Rating</label>
+                    </div>
                   </div>
-              </div>
+                </div>
               </div>
             </div>
           </div>
