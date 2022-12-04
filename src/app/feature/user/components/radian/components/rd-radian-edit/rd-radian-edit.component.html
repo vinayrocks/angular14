@@ -161,10 +161,12 @@
                 </div>
               </div>
               <div class="col-md-4" *ngIf="item.controls['showOther'].value">
+                <div class="portfolio-label">Other</div>
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-
+                      <input type="text" class="signUp-form-control form-control" placeholder="other"
+                      formControlName="Other">
                     </div>
                   </div>
                 </div>
@@ -453,7 +455,7 @@
       <div class="col-md-12">
         <div class="row card portfolio portfolio-custom">
           <div class="col-md-12">
-            <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Create</button>&nbsp;
+            <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Update</button>&nbsp;
             <a [routerLink]="['/member/hunar_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>
           </div>
         </div>
