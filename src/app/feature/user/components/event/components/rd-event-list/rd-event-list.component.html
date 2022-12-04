@@ -11,7 +11,8 @@
                 <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
                 <h3 class="title">{{selectedEvent.EventName}}</h3>
                 <!--<p>{{selectedEvent.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
-                <img src="../../../../../../../assets/img/radian/activeEvent.png" />
+                <img *ngIf="selectedEvent.EventStatus" src="../../../../../../../assets/img/radian/activeEvent.png" />
+                <img *ngIf="!selectedEvent.EventStatus" src="../../../../../../../assets/img/radian/inactiveEvent.png" />
             </div>
             <div class="row">
                 <div class="wrapper">
