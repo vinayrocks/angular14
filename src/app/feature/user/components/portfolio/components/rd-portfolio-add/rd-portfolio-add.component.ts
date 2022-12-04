@@ -60,7 +60,8 @@ export class RdPortfolioAddComponent implements OnInit {
       PortfolioName: ['', Validators.required],
       PortfolioArtifacts: ['', Validators.required],
       PortfolioMedia: [''],
-      linkURL:['']
+      linkURL:[''],
+      allowRating:['']
     });
   }
   get addPortfolioForm() { return this.addPortfolioFormGroup.controls; }
