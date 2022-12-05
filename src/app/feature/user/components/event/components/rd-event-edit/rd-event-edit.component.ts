@@ -91,7 +91,6 @@ export class RdEventEditComponent implements OnInit {
     private route: ActivatedRoute, private embedService: EmbedVideoService,
     private notificationService: NotificationService, private spinner: NgxSpinnerService,
     private rdAuthenticateService: RdAuthenticateService) {
-    // this.rdAuthenticateService.currentUser.subscribe(x => this.currentUser = x);
 
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
     this.projectFilePath = this.currentUser.firstName + '_' + this.currentUser.username.split('@')[0] + '/Event';
