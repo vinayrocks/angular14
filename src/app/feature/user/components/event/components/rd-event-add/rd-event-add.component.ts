@@ -309,8 +309,6 @@ export class RdEventAddComponent implements OnInit {
           }
         );
     } else {
-      // this.addEventForm.EventStartDateTime.setValue(moment(this.addEventForm.EventStartDateTime.value).format('YYYY-MM-DD HH:mm:ss'));
-      // this.addEventForm.EventEndDateTime.setValue(moment(this.addEventForm.EventEndDateTime.value).format('YYYY-MM-DD HH:mm:ss'));
       dt.EventMedia = "";
       this.rdUserService.addUserEvent(new RdEvent(dt)).subscribe((res) => {
         this.spinner.hide();
