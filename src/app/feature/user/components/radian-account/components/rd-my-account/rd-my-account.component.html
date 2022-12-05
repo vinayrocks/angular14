@@ -20,7 +20,7 @@
                         <div class="container-fluid">
                             <h4>Upgrade Membership Category</h4>
                             <div class="row">
-                                <div class="card-register-membership custom-set"  [ngClass]="membershipData.length>1 ? 'col-md-4' : 'col-md-12 db-center'"
+                                <div class="card-register-membership custom-set"  [ngClass]="membershipData?.length>1 ? 'col-md-4' : 'col-md-12 db-center'"
                                 *ngFor="let item of membershipData;let i=index;">
                                     <input #radioBtn id="radio{{i}}" type="radio" formControlName="memberShip" value="{{item.Id}}" 
                                     (change)="onSelectMembership($event,item)">

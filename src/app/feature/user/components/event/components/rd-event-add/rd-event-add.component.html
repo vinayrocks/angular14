@@ -64,18 +64,22 @@
                       *ngIf="addEventForm.EventCategory.errors.required"></app-required-validation-message>
 
                   </div>
-                </div>
-                <select class="select-css" placeholder="Skill/Art" formControlName="EventSkill"
-                  (change)="getSkillSubCategory($event.target.value)">
-                  <option value="" [selected]="true">Select</option>
-                  <option *ngFor="let item of skills" value="{{item.radianSkillCategoryId}}">
-                    {{item.radianSkillCategoryName}}
-                  </option>
-                </select> <br />
-                <div class="pretty p-switch p-fill" *ngFor="let item of skillsSubcategory;let i=index;">
-                  <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)" />
-                  <div class="state p-success">
-                    <label>{{item.subCategoryName}}</label>
+                  <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
+                  [config]="skillCategoryConfig" [options]="skills" (change)="getSkillSubCategory($event.value)">
+                 </ngx-select-dropdown>
+                  <!-- <select class="select-css" placeholder="Skill/Art" formControlName="EventSkill"
+                    (change)="getSkillSubCategory($event.target.value)">
+                    <option value="" [selected]="true">Select</option>
+                    <option *ngFor="let item of skills" value="{{item.radianSkillCategoryId}}">
+                      {{item.radianSkillCategoryName}}
+                    </option>
+                  </select>  -->
+                  <br />
+                  <div class="pretty p-switch p-fill" *ngFor="let item of skillsSubcategory;let i=index;">
+                    <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)" />
+                    <div class="state p-success">
+                      <label>{{item.subCategoryName}}</label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -89,17 +93,23 @@
                 <div class="input-group">
                   <input type="text" class="signUp-form-control form-control" formControlName="EventLink">
                 </div>
-              </div>
-              <div class="col-md-12" *ngIf="!addEventForm.IsEventOnline.value">
-                <div class="row">
-                  <div class="col-md-4">
-                    <label class="lbl-custom">Country*</label>
-                    <div class="row"
-                      *ngIf="addEventForm.country.errors && (addEventForm.country.dirty || addEventForm.country.touched)">
-                      <div class="col-md-12">
-                        <app-required-validation-message [fieldName]="'Country'"
-                          *ngIf="addEventForm.country.errors.required"></app-required-validation-message>
+                <div class="col-md-12" *ngIf="!addEventForm.IsEventOnline.value">
+                  <h4>Event Location</h4>
+                  <hr />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label class="lbl-custom">Country*</label>
+                      <div class="row"
+                        *ngIf="addEventForm.country.errors && (addEventForm.country.dirty || addEventForm.country.touched)">
+                        <div class="col-md-12">
+                          <app-required-validation-message [fieldName]="'Country'"
+                            *ngIf="addEventForm.country.errors.required"></app-required-validation-message>
+                        </div>
                       </div>
+                      <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
+                      [config]="countryConfig" [options]="countryState" (change)="getStates($event.value)">
+                     </ngx-select-dropdown>
+                      
                     </div>
                     <div class="input-group">
                       <select class="select-css" formControlName="country" name="country"
@@ -124,14 +134,18 @@
                       <input type="text" class="signUp-form-control form-control" formControlName="street">
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <label class="lbl-custom">City*</label>
-                    <div class="row"
-                      *ngIf="addEventForm.city.errors && (addEventForm.city.dirty || addEventForm.city.touched)">
-                      <div class="col-md-12">
-                        <app-required-validation-message [fieldName]="'City'"
-                          *ngIf="addEventForm.city.errors.required"></app-required-validation-message>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label class="lbl-custom">State*</label>
+                      <div class="row"
+                        *ngIf="addEventForm.state.errors && (addEventForm.state.dirty || addEventForm.state.touched)">
+                        <div class="col-md-12">
+                          <app-required-validation-message [fieldName]="'State'"
+                            *ngIf="addEventForm.state.errors.required"></app-required-validation-message>
+                        </div>
                       </div>
+                      <ngx-select-dropdown [instanceId]="'instance2'" formControlName="state"
+                      [config]="stateConfig" [options]="state"></ngx-select-dropdown>
                     </div>
                     <div class="input-group">
                       <input type="text" class="signUp-form-control form-control" formControlName="city">
