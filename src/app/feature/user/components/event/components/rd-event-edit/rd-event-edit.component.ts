@@ -62,6 +62,30 @@ export class RdEventEditComponent implements OnInit {
   countryCode: any;
   state: any;
   images:any=[];
+  countryConfig: any = {
+    displayKey: "country",
+    search: true,
+    placeholder: "Select",
+    searchPlaceholder: "Search",
+    searchOnKey: "country",
+    height: "150px",
+  };
+  stateConfig: any = {
+    displayKey: "",
+    search: true,
+    placeholder: "Select",
+    searchPlaceholder: "Search",
+    searchOnKey: "country",
+    height: "150px",
+  };
+  skillCategoryConfig: any = {
+    displayKey: "radianSkillCategoryName",
+    search: true,
+    placeholder: "Select",
+    searchPlaceholder: "Search",
+    searchOnKey: "country",
+    height: "150px",
+  };
   constructor(private _formBuilder: FormBuilder, private rdUserService: RdUserService,
     private router: Router, private _encryptDecryptService: RdEncryptDecryptService,
     private route: ActivatedRoute, private embedService: EmbedVideoService,
@@ -163,16 +187,12 @@ export class RdEventEditComponent implements OnInit {
   }
 
   getStates(event: any) {
-    this.state = this.countryState.filter(function (item) {
-      return item.country === event;
-    })[0].states;
+    this.state = event.states;
   }
   getSkillSubCategory(event: any) {
     this.tempSubCategory = [];
     if (this.editEventForm.EventSkill.value !== '') {
-      this.skillsSubcategory = this.skills.filter(function (item) {
-        return item.radianSkillCategoryName === event;
-      })[0].radianSkillSubCategories;
+      this.skillsSubcategory = event.radianSkillSubCategories;
       this.skillsSubcategory.forEach(element => {
         if (this.tempArr.indexOf(element.subCategoryName) !== -1) {
           this.tempSubCategory.push({ 'name': element.subCategoryName, 'isChecked': true });
@@ -300,16 +320,15 @@ export class RdEventEditComponent implements OnInit {
     this.editEventForm.EventCategory.setValue(this.tempArr.join(','));
   }
   onSubmit() {
+    const dt = this.editEventFormGroup.value;
     this.spinner.show()
-    // stop here if form is invalid
-    ;
     if (this.editEventFormGroup.invalid) {
       this.notificationService.error('Please fill in the required fields');
       this.validateAllFormFields(this.editEventFormGroup);
       return;
     }
     if (this.serverFile.length != 0) {
-      this.rdUserService.UploadUserEventImage(this.serverFile, this.editEventForm.EventName.value)
+      this.rdUserService.UploadUserEventImage(this.serverFile, dt.EventName)
         .pipe(first())
         .subscribe(
           res => {
@@ -319,8 +338,8 @@ export class RdEventEditComponent implements OnInit {
             dataReposne.forEach(element => {
               this.EventPictureModel.push(element);
             });
-            this.editEventForm.EventMedia.setValue(this.EventPictureModel.join(','));
-            this.submitDetail();
+            dt.EventMedia= this.EventPictureModel.join(',');
+            this.submitDetail(dt);
           },
           error => {
             this.spinner.hide()
@@ -329,14 +348,19 @@ export class RdEventEditComponent implements OnInit {
     } else {
       
       this.editEventForm.EventMedia.setValue(this.EventPictureModel);
-      this.submitDetail();
+      this.submitDetail(dt);
     }
 
   }
-  submitDetail() {
-    this.editEventForm.EventStartDateTime.setValue(moment(this.editEventForm.EventStartDateTime.value).format('YYYY-MM-DD HH:mm:ss'));
-    this.editEventForm.EventEndDateTime.setValue(moment(this.editEventForm.EventEndDateTime.value).format('YYYY-MM-DD HH:mm:ss'));
-    this.rdUserService.addUserEvent(new RdEvent(this.editEventFormGroup.value))
+  submitDetail(dt:any) {
+    dt.EventStartDateTime.setValue(
+      moment(dt.EventStartDateTime).format("YYYY-MM-DD HH:mm:ss")
+    );
+    dt.EventEndDateTime.setValue(
+      moment(dt.EventEndDateTime).format("YYYY-MM-DD HH:mm:ss")
+    );
+    dt.country = dt.country.country;
+    this.rdUserService.addUserEvent(new RdEvent(dt))
       .subscribe(res => {
         this.spinner.hide()
         if (res.status) {

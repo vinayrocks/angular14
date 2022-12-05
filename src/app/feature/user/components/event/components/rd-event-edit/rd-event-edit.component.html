@@ -61,13 +61,17 @@
                             *ngIf="editEventForm.EventCategory.errors.required"></app-required-validation-message>
                         </div>
                       </div>
-                      <select class="select-css" placeholder="Skill/Art" formControlName="EventSkill"
+                      <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
+                        [config]="skillCategoryConfig" [options]="skills" (change)="getSkillSubCategory($event.value)">
+                      </ngx-select-dropdown>
+                      <!-- <select class="select-css" placeholder="Skill/Art" formControlName="EventSkill"
                         (change)="getSkillSubCategory($event.target.value)">
                         <option value="" [selected]="true">Select</option>
                         <option *ngFor="let item of skills" value="{{item.radianSkillCategoryId}}">
                           {{item.radianSkillCategoryName}}
                         </option>
-                      </select> <br />
+                      </select>  -->
+                      <br />
                       <div class="pretty p-switch p-fill" *ngFor="let item of tempSubCategory;let i=index;">
                         <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)"
                           [checked]="item.isChecked" />
@@ -97,7 +101,10 @@
                                 *ngIf="editEventForm.country.errors.required"></app-required-validation-message>
                             </div>
                           </div>
-                          <div class="input-group">
+                          <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
+                            [config]="countryConfig" [options]="countryState" (change)="getStates($event.value)">
+                          </ngx-select-dropdown>
+                          <!-- <div class="input-group">
                             <select class="select-css" formControlName="country" name="country"
                               (change)="getStates($event.target.value)">
                               <option value="" [disabled]="true" [selected]="true">Select</option>
@@ -105,7 +112,7 @@
                                 {{item.country}}
                               </option>
                             </select>
-                          </div>
+                          </div> -->
                         </div>
                         <div class="col-md-4">
                           <label class="lbl-custom">Apt/Street*</label>
@@ -144,14 +151,16 @@
                                 *ngIf="editEventForm.state.errors.required"></app-required-validation-message>
                             </div>
                           </div>
-                          <div class="input-group">
+                          <ngx-select-dropdown [instanceId]="'instance2'" formControlName="state"
+                          [config]="stateConfig" [options]="state"></ngx-select-dropdown>
+                          <!-- <div class="input-group">
                             <select class="select-css" formControlName="state" name="state">
                               <option value="" [disabled]="true" [selected]="true">Select</option>
                               <option *ngFor="let item of state" value="{{item}}">
                                 {{item}}
                               </option>
                             </select>
-                          </div>
+                          </div> -->
                         </div>
                         <div class="col-md-4">
                           <label class="lbl-custom">Zip / Pin Code*</label>

@@ -17,7 +17,7 @@ declare var Razorpay: any;
 export class RdMyAccountComponent implements OnInit {
 
   upgradeMembershipCategoryFormGroup: FormGroup;
-  membershipData: any;
+  membershipData: any=[];
   // membershipAmount: Number;
   label: any='';
   loggedUser:any=[];
@@ -34,6 +34,7 @@ export class RdMyAccountComponent implements OnInit {
         x.name === 'Semi Annual' ||
         x.name === 'Annual'
     );
+    console.log(this.membershipData)
   }
 
   ngOnInit() {
