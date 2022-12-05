@@ -1,340 +1,286 @@
 <div class="container">
   <div class="img default-cover">
-    <!--<div class="edit-btn">
-        <a [routerLink]="['/member/event_add']" class="btn btn-primary btn-round btn-margin reset-btn">
-            <i class="pi pi-camera"></i>Select Cover Image</a>
-    </div>-->
   </div>
   <div class="card social-prof">
     <div class="card-body">
-        <div class="wrapper">
-            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
-            <!--<p>{{selectedEvent.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->   
-        </div>
+      <div class="wrapper">
+        <a>
+          <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+        </a>
+        <h3 class="title">{{currentUser.ProfileName}}</h3>
+        <p>[Visual]</p>
+      </div>
     </div>
   </div>
   <form class="form" name="addEventForm" [formGroup]="addEventFormGroup">
-    <div class="row">
+    <div class="row card portfolio mb-search">
       <div class="col-md-12">
-          <div class="row card portfolio">
-            <h4>Event Type</h4>
-            <div class="row mt-top">
-              <div class="col-md-6">
-                <div class="pretty p-switch p-fill">
-                  <input type="radio" name="IsEventOnline" checked [value]="true" formControlName="IsEventOnline"
-                    (change)="changeEventType($event)" />
-                  <div class="state p-success">
-                    <label>Online Event</label>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="pretty p-switch p-fill">
-                  <input type="radio" name="IsEventOnline" [value]="false" formControlName="IsEventOnline"
-                    (change)="changeEventType($event)" />
-                  <div class="state p-success">
-                    <label>Offline Event</label>
-                  </div>
-                </div>
+        <h4>Event Type</h4>
+        <div class="row mt-top">
+          <div class="col-md-6">
+            <div class="pretty p-switch p-fill">
+              <input type="radio" name="IsEventOnline" checked [value]="true" formControlName="IsEventOnline" (change)="changeEventType($event)"/>
+              <div class="state p-success">
+                <label>Online Event</label>
               </div>
             </div>
           </div>
-          <div class="row card portfolio">
-            <div class="row mt-top">
-              <h4>Event Details</h4>
-              <div class="col-md-6">
-                <div class="portfolio-label">Event Name</div>
-                <div class="row"
-                  *ngIf="addEventForm.EventName.errors && (addEventForm.EventName.dirty || addEventForm.EventName.touched)">
-                  <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'Event Name'"
-                      *ngIf="addEventForm.EventName.errors.required"></app-required-validation-message>
-                  </div>
-                </div>
-                <div class="input-group">
-                  <input type="text" class="signUp-form-control form-control" formControlName="EventName">
-                </div>
+          <div class="col-md-6">
+            <div class="pretty p-switch p-fill">
+              <input type="radio" name="IsEventOnline" [value]="false" formControlName="IsEventOnline" (change)="changeEventType($event)"/>
+              <div class="state p-success">
+                <label>Offline Event</label>
               </div>
-              <div class="col-md-6">
-                <div class="portfolio-label">Event Category</div>
-                <div class="row"
-                  *ngIf="addEventForm.EventCategory.errors && (addEventForm.EventCategory.dirty || addEventForm.EventCategory.touched)">
-                  <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'Event Category'"
-                      *ngIf="addEventForm.EventCategory.errors.required"></app-required-validation-message>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row card portfolio mb-search">
+      <div class="col-md-12">
+        <h4>Event Details</h4>
+        <div class="row mt-top">
+          <div class="col-md-6">
+            <div class="portfolio-label">Event Name</div>
+            <div class="row"
+              *ngIf="addEventForm.EventName.errors && (addEventForm.EventName.dirty || addEventForm.EventName.touched)">
+              <div class="col-md-12">
+                <app-required-validation-message [fieldName]="'Event Name'"
+                  *ngIf="addEventForm.EventName.errors.required"></app-required-validation-message>
+              </div>
+            </div>
+            <div class="input-group">
+              <input type="text" class="signUp-form-control form-control" formControlName="EventName">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="portfolio-label">Event Category</div>
+            <div class="row"
+              *ngIf="addEventForm.EventCategory.errors && (addEventForm.EventCategory.dirty || addEventForm.EventCategory.touched)">
+              <div class="col-md-12">
+                <app-required-validation-message [fieldName]="'Event Category'"
+                  *ngIf="addEventForm.EventCategory.errors.required"></app-required-validation-message>
 
+              </div>
+            </div>
+            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
+            [config]="skillCategoryConfig" [options]="skills" (change)="getSkillSubCategory($event.value)">
+           </ngx-select-dropdown>
+            <br />
+            <div class="pretty p-switch p-fill" *ngFor="let item of skillsSubcategory;let i=index;">
+              <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)" />
+              <div class="state p-success">
+                <label>{{item.subCategoryName}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row card portfolio mb-search">
+      <h4>Event Location</h4>
+      <div class="col-md-12">
+        <div class="row mt-top">
+          <div class="col-md-12" *ngIf="addEventForm.IsEventOnline.value">
+            <div class="portfolio-label">Event Invitation Link</div>
+            <div class="input-group">
+              <input type="text" class="signUp-form-control form-control" formControlName="EventLink">
+            </div>
+          </div>
+          <div class="col-md-12" *ngIf="!addEventForm.IsEventOnline.value">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="portfolio-label">Country*</div>
+                <div class="row"
+                  *ngIf="addEventForm.country.errors && (addEventForm.country.dirty || addEventForm.country.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Country'"
+                      *ngIf="addEventForm.country.errors.required"></app-required-validation-message>
                   </div>
-                  <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
-                  [config]="skillCategoryConfig" [options]="skills" (change)="getSkillSubCategory($event.value)">
-                 </ngx-select-dropdown>
-                  <br />
-                  <div class="pretty p-switch p-fill" *ngFor="let item of skillsSubcategory;let i=index;">
-                    <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)" />
-                    <div class="state p-success">
-                      <label>{{item.subCategoryName}}</label>
-                    </div>
+                </div>
+                <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
+                [config]="countryConfig" [options]="countryState" (change)="getStates($event.value)">
+               </ngx-select-dropdown>
+                
+              </div>
+              <div class="col-md-4">
+                <div class="portfolio-label">Apt/Street*</div>
+                <div class="row"
+                  *ngIf="addEventForm.street.errors && (addEventForm.street.dirty || addEventForm.street.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Apt/Street'"
+                      *ngIf="addEventForm.street.errors.required"></app-required-validation-message>
                   </div>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="signUp-form-control form-control" formControlName="street">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="portfolio-label">City*</div>
+                <div class="row"
+                  *ngIf="addEventForm.city.errors && (addEventForm.city.dirty || addEventForm.city.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'City'"
+                      *ngIf="addEventForm.city.errors.required"></app-required-validation-message>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input type="text" class="signUp-form-control form-control" formControlName="city">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="portfolio-label">State*</div>
+                <div class="row"
+                  *ngIf="addEventForm.state.errors && (addEventForm.state.dirty || addEventForm.state.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'State'"
+                      *ngIf="addEventForm.state.errors.required"></app-required-validation-message>
+                  </div>
+                </div>
+                <ngx-select-dropdown [instanceId]="'instance2'" formControlName="state"
+                [config]="stateConfig" [options]="state"></ngx-select-dropdown>
+              </div>
+              <div class="col-md-4">
+                <div class="portfolio-label">Zip / Pin Code*</div>
+                <div class="row"
+                  *ngIf="addEventForm.zip.errors && (addEventForm.zip.dirty || addEventForm.zip.touched)">
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Zip/Pin Code'"
+                      *ngIf="addEventForm.zip.errors.required"></app-required-validation-message>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <input type="select" class="signUp-form-control form-control" formControlName="zip"
+                    maxlength="7">
                 </div>
               </div>
             </div>
           </div>
-          <div class="row card portfolio">
-            <div class="row mt-top">
-              <h4>Event Location</h4>
-              <div class="col-md-12" *ngIf="addEventForm.IsEventOnline.value">
-                <div class="portfolio-label">Event Invitation Link</div>
-                <div class="input-group">
-                  <input type="text" class="signUp-form-control form-control" formControlName="EventLink">
-                </div>
-                <div class="col-md-12" *ngIf="!addEventForm.IsEventOnline.value">
-                  <h4>Event Location</h4>
-                  <hr />
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label class="lbl-custom">Country*</label>
-                      <div class="row"
-                        *ngIf="addEventForm.country.errors && (addEventForm.country.dirty || addEventForm.country.touched)">
-                        <div class="col-md-12">
-                          <app-required-validation-message [fieldName]="'Country'"
-                            *ngIf="addEventForm.country.errors.required"></app-required-validation-message>
-                        </div>
-                      </div>
-                      <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
-                      [config]="countryConfig" [options]="countryState" (change)="getStates($event.value)">
-                     </ngx-select-dropdown>
-                      
-                    </div>
-                    <div class="input-group">
-                      <select class="select-css" formControlName="country" name="country"
-                        (change)="getStates($event.target.value)">
-                        <option value="" [disabled]="true" [selected]="true">Select</option>
-                        <option *ngFor="let item of countryState" value="{{item.country}}">
-                          {{item.country}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <label class="lbl-custom">Apt/Street*</label>
-                    <div class="row"
-                      *ngIf="addEventForm.street.errors && (addEventForm.street.dirty || addEventForm.street.touched)">
-                      <div class="col-md-12">
-                        <app-required-validation-message [fieldName]="'Apt/Street'"
-                          *ngIf="addEventForm.street.errors.required"></app-required-validation-message>
-                      </div>
-                    </div>
-                    <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" formControlName="street">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label class="lbl-custom">State*</label>
-                      <div class="row"
-                        *ngIf="addEventForm.state.errors && (addEventForm.state.dirty || addEventForm.state.touched)">
-                        <div class="col-md-12">
-                          <app-required-validation-message [fieldName]="'State'"
-                            *ngIf="addEventForm.state.errors.required"></app-required-validation-message>
-                        </div>
-                      </div>
-                      <ngx-select-dropdown [instanceId]="'instance2'" formControlName="state"
-                      [config]="stateConfig" [options]="state"></ngx-select-dropdown>
-                    </div>
-                    <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" formControlName="city">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <label class="lbl-custom">State*</label>
-                    <div class="row"
-                      *ngIf="addEventForm.state.errors && (addEventForm.state.dirty || addEventForm.state.touched)">
-                      <div class="col-md-12">
-                        <app-required-validation-message [fieldName]="'State'"
-                          *ngIf="addEventForm.state.errors.required"></app-required-validation-message>
-                      </div>
-                    </div>
-                    <div class="input-group">
-                      <select class="select-css" formControlName="state" name="state">
-                        <option value="" [disabled]="true" [selected]="true">Select</option>
-                        <option *ngFor="let item of state" value="{{item}}">
-                          {{item}}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <label class="lbl-custom">Zip / Pin Code*</label>
-                    <div class="row"
-                      *ngIf="addEventForm.zip.errors && (addEventForm.zip.dirty || addEventForm.zip.touched)">
-                      <div class="col-md-12">
-                        <app-required-validation-message [fieldName]="'Zip/Pin Code'"
-                          *ngIf="addEventForm.zip.errors.required"></app-required-validation-message>
-                      </div>
-                    </div>
-                    <div class="input-group">
-                      <input type="select" class="signUp-form-control form-control" formControlName="zip"
-                        maxlength="7">
-                    </div>
-                  </div>
-                </div>
+        </div>
+      </div>
+    </div>
+    <div class="row card portfolio mb-search">
+      <div class="col-md-12">
+        <h4>Event Dates</h4>
+        <div class="row mt-top">
+          <div class="col-md-6">
+            <div class="portfolio-label">Event Start Date*</div>
+            <div class="row"
+              *ngIf="addEventForm.EventStartDateTime.errors && (addEventForm.EventStartDateTime.dirty || addEventForm.EventStartDateTime.touched)">
+              <div class="col-md-12">
+                <app-required-validation-message [fieldName]="'Event Start DateTime'"
+                  *ngIf="addEventForm.EventStartDateTime.errors.required"></app-required-validation-message>
               </div>
             </div>
+            <div class="input-group">
+              <input matInput [ngxMatDatetimePicker]="startPicker" formControlName="EventStartDateTime"
+                class="date-input-custom" />
+              <mat-datepicker-toggle matSuffix [for]="startPicker" class="date-icon-custom"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #startPicker> </ngx-mat-datetime-picker>
+            </div>
           </div>
-          <div class="row card portfolio">
-            <h4>Event Dates</h4>
-            <div class="row mt-top">
-              <div class="col-md-6">
-                <div class="portfolio-label">Event Start Date*</div>
-                <div class="row"
-                  *ngIf="addEventForm.EventStartDateTime.errors && (addEventForm.EventStartDateTime.dirty || addEventForm.EventStartDateTime.touched)">
-                  <div class="col-md-10">
-                    <app-required-validation-message [fieldName]="'Start Date'"
-                      *ngIf="addEventForm.EventStartDateTime.errors.required"></app-required-validation-message>
-                  </div>
-                </div>
-                <div class="input-group">
-                  <input matInput [ngxMatDatetimePicker]="startPicker" formControlName="EventStartDateTime"
-                    class="date-control" />
-                  <mat-datepicker-toggle matSuffix [for]="startPicker" class="icon-datetime"></mat-datepicker-toggle>
-                  <ngx-mat-datetime-picker #startPicker> </ngx-mat-datetime-picker>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="portfolio-label">Event End Date*</div>
-                <div class="row"
+          <div class="col-md-6">
+            <div class="portfolio-label">Event End Date*</div>
+            <div class="row"
                   *ngIf="addEventForm.EventEndDateTime.errors && (addEventForm.EventEndDateTime.dirty || addEventForm.EventEndDateTime.touched)">
-                  <div class="col-md-10">
-                    <app-required-validation-message [fieldName]="'End Date'"
+                  <div class="col-md-12">
+                    <app-required-validation-message [fieldName]="'Event End DateTime'"
                       *ngIf="addEventForm.EventEndDateTime.errors.required"></app-required-validation-message>
                   </div>
                 </div>
+            <div class="input-group">
+              <input matInput [ngxMatDatetimePicker]="endPicker" formControlName="EventEndDateTime"
+              class="date-input-custom" />
+              <mat-datepicker-toggle matSuffix [for]="endPicker" class="date-icon-custom"></mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #endPicker> </ngx-mat-datetime-picker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row card portfolio mb-search">
+      <div class="col-md-12">
+        <h4>Event Description</h4>
+        <div class="row mt-top">
+          <div class="col-md-12">
+            <div class="portfolio-label">Describe your Event</div>
+            <div class="row"
+              *ngIf="addEventForm.EventDescription.errors && (addEventForm.EventDescription.dirty || addEventForm.EventDescription.touched)">
+              <div class="col-md-12">
+                <app-required-validation-message [fieldName]="'Event Description'"
+                  *ngIf="addEventForm.EventDescription.errors.required"></app-required-validation-message>
+              </div>
+            </div>
+            <textarea class="form-control" [placeholder]="'About Event'" formControlName="EventDescription" rows="8">
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row card portfolio mb-search">
+      <div class="col-md-12">
+        <h4>Event Media</h4>
+        <div class="row mt-top">
+          <div class="col-md-12">
+            <div class="row"
+              *ngIf="addEventForm.EventMedia.errors && (addEventForm.EventMedia.dirty || addEventForm.EventMedia.touched)">
+              <div class="col-md-12">
+                <app-required-validation-message [fieldName]="'Image'"
+                  *ngIf="addEventForm.EventMedia.errors.required"></app-required-validation-message>
+              </div>
+            </div>
+            <div class="row" *ngFor="let item of addMoreImageArray;let i=index;">
+              <div class="col-md-4" *ngIf="imageIndex===i">
+                <select class="select-css" (change)="selectMediaType($event.target.value)">
+                  <option value="image" selected="true">Image/Document</option>
+                  <option value="video">Video</option>
+                </select>
+              </div>
+              <div class="col-md-6" *ngIf="isImageType && imageIndex===i">
+                <input id="file{{i}}" type="file" accept="application/pdf, image/jpeg, image/png"
+                  (change)="fileChangeEvent($event,i)" />
+              </div>
+              <div class="col-md-6" *ngIf="!isImageType && imageIndex===i">
                 <div class="input-group">
-                  <input matInput [ngxMatDatetimePicker]="endPicker" formControlName="EventEndDateTime"
-                  class="date-control" />
-                  <mat-datepicker-toggle matSuffix [for]="endPicker" class="icon-datetime"></mat-datepicker-toggle>
-                  <ngx-mat-datetime-picker #endPicker> </ngx-mat-datetime-picker>
+                  <input id="video{{i}}" type="text" class="signUp-form-control form-control"
+                    placeholder="YouTube Video Link" formControlName="linkURL">
                 </div>
+              </div>
+              <div class="col-md-2" *ngIf="!isImageType && imageIndex===i">
+                <input type="button" class="btn btn-primary btn-round custom-btn" value="Add"
+                  (click)="addMoreImage(i)" />
               </div>
             </div>
           </div>
-          <div class="row card portfolio">
-            <h4>Describe your Event</h4>
-            <div class="row mt-top">
-              <div class="col-md-12">
-                <div class="row"
-                  *ngIf="addEventForm.EventDescription.errors && (addEventForm.EventDescription.dirty || addEventForm.EventDescription.touched)">
-                  <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'Event Description'"
-                      *ngIf="addEventForm.EventDescription.errors.required"></app-required-validation-message>
-                  </div>
-                </div>
-                <textarea class="form-control" [placeholder]="'About Event'" formControlName="EventDescription"
-                  rows="8">
-                </textarea>
+        </div>
+        <div class="row mt-top" *ngIf="isUploaded">
+          <div class="col-md-2" *ngFor='let url of urls;let i=index'>
+            <div class="custom-photo-container">
+              <span class="close"><a (click)="removeMedia(i)">&times;</a></span>
+              <img src="{{url.Name}}" alt="" class="img-raised" title="" *ngIf="url.IsImage==='image'">
+              <a href="{{url.Name}}" *ngIf="url.IsImage==='pdf'" target="_blank">
+                <img src="assets/img/radian/document.png" alt="" class="img-raised">
+              </a>
+              <div *ngIf="url.IsImage==='video'" class="video">
+                <img src="{{url.Image}}" class="img-raised">
+                <a></a>
               </div>
             </div>
           </div>
-          <div class="row card portfolio">
-            <div class="row mt-top">
-              <div class="col-md-12">
-                <div class="portfolio-label">Event Media</div>
-
-                <div class="row"
-                  *ngIf="addEventForm.EventMedia.errors && (addEventForm.EventMedia.dirty || addEventForm.EventMedia.touched)">
-                  <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'Image'"
-                      *ngIf="addEventForm.EventMedia.errors.required"></app-required-validation-message>
-                  </div>
-                </div>
-
-                <div class="row" *ngFor="let item of addMoreImageArray;let i=index;">
-                  <div class="col-md-12">
-                    <div class="row">
-                      <div class="col-md-6" *ngIf="imageIndex===i">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="pretty p-switch p-fill">
-                              <input type="radio" name="isUser" checked [value]="true"
-                                (change)="isImageType=true;" />
-                              <div class="state p-success">
-                                <label>Image/Document</label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="pretty p-switch p-fill">
-                              <input type="radio" name="isUser" [value]="false"
-                                (change)="isImageType=false;" />
-                              <div class="state p-success">
-                                <label>Video</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-3"></div>
-                      <div class="col-md-6" *ngIf="isImageType && imageIndex===i">
-                        <input id="file{{i}}" type="file" accept="application/pdf, image/jpeg, image/png"
-                          (change)="fileChangeEvent($event,i)" />
-                      </div>
-                      <div class="col-md-6" *ngIf="!isImageType && imageIndex===i">
-                        <div class="input-group">
-                          <input id="video{{i}}" type="text" class="signUp-form-control form-control"
-                            placeholder="YouTube Video Link" formControlName="linkURL">
-                        </div>
-                      </div>
-                      <div class="col-md-3" *ngIf="!isImageType && imageIndex===i">
-                        <input type="button" class="btn btn-primary btn-round custom-btn" value="Add"
-                          (click)="addMoreImage(i)" />
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!--<div class="col-md-4" *ngIf="imageIndex===i">
-                    <select class="select-css" (change)="selectMediaType($event.target.value)">
-                      <option value="image" selected="true">Image/Document</option>
-                      <option value="video">Video</option>
-                    </select>
-                  </div>-->
-                  
-                </div>
-                <div class="row" *ngIf="!(isUploaded)">
-                  <div class="col-md-12">
-                    <div style="border: 1px dashed #38b6ff; padding: 50px 70px; border-radius: 10px; text-align: center;">
-                      <img src="./././././././assets/img/radian/cloud_upload.png" style="width: 15%" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-top" *ngIf="isUploaded">
-              <div class="col-md-2" *ngFor='let url of urls;let i=index'>
-                <div class="custom-photo-container">
-                  <span class="close"><a (click)="removeMedia(i)">&times;</a></span>
-                  <img src="{{url.Name}}" alt="" class="img-raised" title="" *ngIf="url.IsImage==='image'">
-                  <a href="{{url.Name}}" *ngIf="url.IsImage==='pdf'" target="_blank">
-                    <img src="assets/img/radian/document.png" alt="" class="img-raised">
-                  </a>
-                  <div *ngIf="url.IsImage==='video'" class="video">
-                    <img src="{{url.Image}}" class="img-raised">
-                    <a></a>
-                  </div>
-                </div>
-              </div>
-            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row card portfolio">
+      <div class="col-md-12">
+        <div class="row mt-top">
+          <div class="col-md-12 ">
+            <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="onSubmit()">Create</button>&nbsp;
+            <a [routerLink]="['/member/event_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>
           </div>
-          <div class="row card portfolio">
-            <div class="row mt-top">
-              <div class="col-md-12 flt-right">
-                <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Create</button>&nbsp;
-                <a [routerLink]="['/member/event_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>
-              </div>
-            </div>
-          </div>
+        </div>
       </div>
     </div>
   </form>

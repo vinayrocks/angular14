@@ -18,6 +18,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import * as countryState from "src/app/shared/core/json-data/countryState.json";
 import * as countryCode from "src/app/shared/core/json-data/countryCodes.json";
 import * as moment from "moment";
+import { RdAuthenticateService } from "src/app/shared/services/authentication/rd-authenticate.service";
 @Component({
   selector: "app-rd-event-add",
   templateUrl: "./rd-event-add.component.html",
@@ -82,18 +83,21 @@ export class RdEventAddComponent implements OnInit {
     searchOnKey: "country",
     height: "150px",
   };
+  currentUser:any=[];
   constructor(
     private _formBuilder: FormBuilder,
     private rdUserService: RdUserService,
     private embedService: EmbedVideoService,
     private spinner: NgxSpinnerService,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private rdAuthenticateService:RdAuthenticateService
   ) {
     //PortfolioMedia
     this.skills = (skillsInterest as any).default;
     this.countryState = (countryState as any).default;
     this.countryCode = (countryCode as any).default;
+    this.currentUser = this.rdAuthenticateService.getLocalStorageData();
     //
   }
   ngOnInit() {
