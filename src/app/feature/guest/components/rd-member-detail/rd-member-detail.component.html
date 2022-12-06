@@ -1,5 +1,39 @@
+<div class="container">
+    <div class="img default-cover">
+        <!--<div class="edit-btn">
+          <a [routerLink]="['/member/hunar_add']" class="btn btn-primary btn-round btn-margin reset-btn">
+            <i class="pi pi-camera"></i>Select Cover Image</a>
+        </div>-->
+      </div>
+      <div class="card social-prof">
+        <div class="card-body">
+          <div class="wrapper">
+            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+            <h3 class="title">{{currentUser.ProfileName}}</h3>
+            <p>{{currentUser?.ProfileSkill.name}}</p>
+          </div>
+          <div class="row ">
+            <div class="wrapper">
+              [CONNECTIONS PLACEHOLDER]
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <ul class=" nav nav-tabs justify-content-center s-nav">
+                <li><a [ngClass]="{'active':_istab===1}" (click)="_istab=1">About</a></li>
+                <li><a [ngClass]="{'active':_istab===2}" (click)="_istab=2">Education</a></li>
+                <li><a [ngClass]="{'active':_istab===3}" (click)="_istab=3">Certification & Licenses</a></li>
+                <li><a [ngClass]="{'active':_istab===4}" (click)="_istab=4">Experiences</a></li>
+                <li><a [ngClass]="{'active':_istab===5}" (click)="_istab=5">Connections</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
 <div class="wrapper">
-    <a [routerLink]="['/account/signup']">
+    <!--<a [routerLink]="['/account/signup']">
         <div class="page-header page-header-small" filter-color="orange">
             <div class="page-header-image rellax-header custom-cover" data-rellax-speed="0">
                 <img src="{{memberDetail.CoverPicture}}" alt="">
@@ -12,8 +46,8 @@
                 </div>
             </div>
         </div>
-    </a>
-    <div class="section section-team" style="background: url('./assets/img/home-section-01-bg.jpg')">
+    </a>-->
+    <div class="section section-team">
         <div class="container-fluid">
             <!-- <h2 class="title">How It Works</h2> -->
             <div class="team custom-paragraph">

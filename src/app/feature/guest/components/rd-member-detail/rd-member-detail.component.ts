@@ -35,6 +35,7 @@ export class RdMemberDetailComponent implements OnInit {
   currentUser:any;
   UserLiked:String='';
   memberProfiles:any=[];
+  _istab:number=1;
   constructor(private route: ActivatedRoute,private spinner:NgxSpinnerService,
     private rdUserService: RdUserService,private rdAuthenticateService: RdAuthenticateService,
     private _encryptDecryptService: RdEncryptDecryptService,public matDialog: MatDialog,

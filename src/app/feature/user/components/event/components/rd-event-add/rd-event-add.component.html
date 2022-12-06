@@ -233,31 +233,61 @@
               </div>
             </div>
             <div class="row" *ngFor="let item of addMoreImageArray;let i=index;">
-              <div class="col-md-4" *ngIf="imageIndex===i">
-                <select class="select-css" (change)="selectMediaType($event.target.value)">
+              <div class="col-md-6" *ngIf="imageIndex===i">
+                <!-- <select class="select-css" (change)="selectMediaType($event.target.value)">
                   <option value="image" selected="true">Image/Document</option>
                   <option value="video">Video</option>
-                </select>
-              </div>
-              <div class="col-md-6" *ngIf="isImageType && imageIndex===i">
-                <input id="file{{i}}" type="file" accept="application/pdf, image/jpeg, image/png"
-                  (change)="fileChangeEvent($event,i)" />
-              </div>
-              <div class="col-md-6" *ngIf="!isImageType && imageIndex===i">
-                <div class="input-group">
-                  <input id="video{{i}}" type="text" class="signUp-form-control form-control"
-                    placeholder="YouTube Video Link" formControlName="linkURL">
+                </select> -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="pretty p-switch p-fill">
+                      <input type="radio" name="isUser" checked [value]="true"
+                        (change)="isImageType=true;" />
+                      <div class="state p-success">
+                        <label>Image/Document</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="pretty p-switch p-fill">
+                      <input type="radio" name="isUser" [value]="false"
+                        (change)="isImageType=false;" />
+                      <div class="state p-success">
+                        <label>Video</label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-2" *ngIf="!isImageType && imageIndex===i">
-                <input type="button" class="btn btn-primary btn-round custom-btn" value="Add"
-                  (click)="addMoreImage(i)" />
+              <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6" *ngIf="isImageType && imageIndex===i">
+                  <input id="file{{i}}" type="file" accept="application/pdf, image/jpeg, image/png"
+                    (change)="fileChangeEvent($event,i)" class="form-control form-control-lg upload-custom" />
+                </div>
+                <div class="col-md-6" *ngIf="!isImageType && imageIndex===i">
+                  <div class="input-group">
+                    <input id="video{{i}}" type="text" class="signUp-form-control form-control"
+                      placeholder="YouTube Video Link" formControlName="linkURL">
+                  </div>
+                </div>
+                <div class="col-md-3" *ngIf="!isImageType && imageIndex===i">
+                  <input type="button" class="btn btn-primary btn-round custom-btn" value="Add"
+                    (click)="addMoreImage(i)" />
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="!(isUploaded)">
+              <div class="col-md-12">
+                <div style="border: 1px dashed #38b6ff; padding: 50px 70px; border-radius: 10px; text-align: center;">
+                  <img src="./././././././assets/img/radian/cloud_upload.png" style="width: 15%" />
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="row mt-top" *ngIf="isUploaded">
-          <div class="col-md-2" *ngFor='let url of urls;let i=index'>
+          <div class="col-md-2 custom-img-col-2" *ngFor='let url of urls;let i=index'>
             <div class="custom-photo-container">
               <span class="close"><a (click)="removeMedia(i)">&times;</a></span>
               <img src="{{url.Name}}" alt="" class="img-raised" title="" *ngIf="url.IsImage==='image'">
@@ -273,9 +303,9 @@
         </div>
       </div>
     </div>
-    <div class="row card portfolio">
+    <div class="row card portfolio mb-search-buttons">
       <div class="col-md-12">
-        <div class="row mt-top">
+        <div class="row">
           <div class="col-md-12 ">
             <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="onSubmit()">Create</button>&nbsp;
             <a [routerLink]="['/member/event_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>

@@ -10,9 +10,7 @@
   border-radius: 0.1875rem !important;
   padding: 13px 25px;
 }
-.form-group .form-control, .input-group .form-control{
-  padding: 12px 18px 12px 18px;
-}
+
 .lbl-custom{
   font-weight: 700;
 }
@@ -43,7 +41,10 @@ h4 {
 //   min-width: 150px;
 // }
 .custom-btn{
-margin-top: 0;
+  margin-top: 0;
+  font-size: 14px;
+  padding: 20px 18px;
+  width: 50%;
 }
 
 
@@ -538,4 +539,21 @@ h4 {
 
 .submit-btn{
   font-size: 14px;
+}
+.upload-custom{
+  margin-bottom: 10px!important;
+  border: 1px solid #2F3C4F!important;
+  background: #ffffff!important;
+  color: #181f29!important;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 18px 20px;
+}
+
+.custom-img-col-2{
+  margin-right: 35px;
+}
+
+.mb-search-buttons{
+  padding: 15px 20px;
 }

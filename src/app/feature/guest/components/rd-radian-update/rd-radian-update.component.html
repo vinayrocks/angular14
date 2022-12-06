@@ -5,7 +5,7 @@
     </div>
   </div>
 </a>
-<div class="section section-team" style="background:url('./assets/img/home-section-01-bg.jpg')">
+<div class="section section-team" style="background-color: #FFF;">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-4">
@@ -96,12 +96,12 @@
         </form>
       </div>
       <div class="col-md-7">
-        <div class="row card portfolio mb-search" *ngIf="radianUpdates?.length===0">
+        <div class="row card portfolio mb-search-card" *ngIf="radianUpdates?.length===0">
           <div clas="col-md-12" style="text-align:center;">
             <h4>No results found...</h4>
           </div>
         </div>
-        <div class="row card portfolio mb-search" *ngFor="let item of radianUpdates">
+        <div class="row card portfolio mb-search-card" *ngFor="let item of radianUpdates">
           <div class="row">
             <div class="col-md-12" *ngIf="radianUpdates?.length!==0">
               <div class="row">
