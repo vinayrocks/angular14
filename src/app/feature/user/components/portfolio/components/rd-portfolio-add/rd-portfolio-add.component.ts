@@ -49,8 +49,7 @@ export class RdPortfolioAddComponent implements OnInit {
     private notificationService:NotificationService, private router: Router,private rdAuthenticateService:RdAuthenticateService
     ) {
       this.currentUser = this.rdAuthenticateService.getLocalStorageData();
-      console.log(this.currentUser)
-  }
+    }
 
   ngOnInit() {
     var rellaxHeader = new Rellax('.rellax-header');

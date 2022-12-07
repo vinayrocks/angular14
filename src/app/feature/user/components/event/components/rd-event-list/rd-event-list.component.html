@@ -11,12 +11,12 @@
                 <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
                 <h3 class="title">{{selectedEvent.EventName}}</h3>
                 <!--<p>{{selectedEvent.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
-                <img *ngIf="selectedEvent.EventStatus" src="../../../../../../../assets/img/radian/activeEvent.png" />
-                <img *ngIf="!selectedEvent.EventStatus" src="../../../../../../../assets/img/radian/inactiveEvent.png" />
+                
             </div>
             <div class="row">
                 <div class="wrapper">
-
+                    <img *ngIf="selectedEvent.EventStatus" src="../../../../../../../assets/img/radian/activeEvent.png" class="active-inactive"/>
+                    <img *ngIf="!selectedEvent.EventStatus" src="../../../../../../../assets/img/radian/inactiveEvent.png" class="active-inactive"/>
                 </div>
             </div>
             <div class="row">
@@ -70,6 +70,18 @@
                             src="assets/img/radian/interested_Users.png" />&nbsp;&nbsp;&nbsp;Click here to view users
                         interested for this Event</button>&nbsp;
                 </div>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row card portfolio">
+                <h4>Interested Users</h4>
+                <button class="btn btn-primary btn-custom btn-round btn-margin"
+                        (click)="OpenUserList(selectedEvent.id)"><img class="interestedUsers"
+                            src="assets/img/radian/interested_Users.png" />&nbsp;&nbsp;&nbsp;Click here to view users
+                        interested for this Event</button>
             </div>
         </div>
     </div>

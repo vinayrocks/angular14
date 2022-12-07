@@ -7,6 +7,9 @@
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
+.form-group .form-control, .input-group .form-control {
+    padding: 20px 18px;
+  }
 .p-skill{
     margin-bottom: 25px;
 }
@@ -121,7 +124,7 @@ mat-accordion {
     position: relative;
     overflow: hidden;
     width: 100%;
-    box-shadow: 0px 5px 25px 0px rgb(0 0 0 / 20%);
+    box-shadow: 0px 0px 3px #0000004d !important;
     margin-bottom: 25px;
 }
 
@@ -164,11 +167,18 @@ mat-accordion {
 }
 
 .signUp-form-control{
-  margin-bottom: 10px !important;
-  border: 0px !important;
-  background: #333333 !important;
-  color: #FFFFFF !important;
-}
+    margin-bottom: 10px !important;
+    border: 1px solid #2F3C4F !important;
+    background: #ffffff !important;
+    color: #181F29 !important;
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: none !important;
+  }
+  .form-control:focus{
+    box-shadow: none !important;
+    border: 2px solid #38b6ff!important;
+  }
 
 .custom-share {
   margin-top:7px;
@@ -201,3 +211,6 @@ mat-accordion {
    margin-bottom: unset !important;
 }
 
+.mb-search-card {
+    padding: 30px 20px 10px;
+}
