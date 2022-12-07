@@ -45,6 +45,14 @@ export class RdRadianUpdateComponent implements OnInit {
   currentUser: any;
   UserLiked: String = ''
   routerData: any = [];
+  skillCategoryConfig: any = {
+    displayKey: "radianSkillCategoryName",
+    search: true,
+    placeholder: "Select",
+    searchPlaceholder: "Search",
+    searchOnKey: "country",
+    height: "150px",
+  };
   constructor(private _formBuilder: FormBuilder, private rdUserService: RdUserService,
     private notificationService: NotificationService, private router: Router,
     private embedService: EmbedVideoService, public matDialog: MatDialog,private spinner: NgxSpinnerService,
@@ -78,9 +86,7 @@ export class RdRadianUpdateComponent implements OnInit {
   }
   get searchRadianUpdatesForm() { return this.searchRadianUpdatesFormGroup.controls; }
   getSKillSubCategory(data: any) {
-    this.skillsSubcategory = this.skills.filter(function (item) {
-      return item.radianSkillCategoryId === data;
-    })[0].radianSkillSubCategories;
+    this.skillsSubcategory = data.radianSkillSubCategories;
   }
   onSelectExperties(event, item: any) {
     if (event.target.checked) {
@@ -104,8 +110,9 @@ export class RdRadianUpdateComponent implements OnInit {
       // ();
       return;
     }
-    
-    this.rdUserService.searchRadianUpdate(new RdRadianUpdates(this.searchRadianUpdatesFormGroup.value))
+    const dxData = this.searchRadianUpdatesFormGroup.value;
+    dxData.SearchBySkill =  dxData.SearchBySkill.radianSkillCategoryId===undefined?'':dxData.SearchBySkill.radianSkillCategoryId;
+    this.rdUserService.searchRadianUpdate(new RdRadianUpdates(dxData))
       .subscribe(res => {
         
         if (res.status) {

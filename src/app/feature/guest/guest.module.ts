@@ -26,6 +26,9 @@ import { RdMemberPortfolioComponent } from './components/rd-member-portfolio/rd-
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RdSubscriptionRefundPolicyComponent } from './components/rd-subscription-refund-policy/rd-subscription-refund-policy.component';
 import { RdConversationComponent } from './components/rd-conversation/rd-conversation.component';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { CarouselModule } from 'primeng/carousel';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 @NgModule({
   declarations: [RdRadianUpdateComponent, RdMemberSearchComponent, RdHomeComponent,
     RdGuestLayoutComponent, RdAboutUsComponent, RdContactUsComponent, RdHowItWorksComponent,
@@ -43,6 +46,9 @@ import { RdConversationComponent } from './components/rd-conversation/rd-convers
     MatFormFieldModule,
     AngularEditorModule,
     NgxSpinnerModule,
+    SelectDropDownModule,
+    CarouselModule,
+    BsDatepickerModule,
     SharedModule.forRoot()
   ]
 })

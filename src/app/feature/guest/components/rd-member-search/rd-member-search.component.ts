@@ -30,7 +30,31 @@ export class RdMemberSearchComponent implements OnInit {
   radianLikeData: any = [];
   routerData: any = [];
   currentUser: any;
-  UserLiked: String = ''
+  UserLiked: String = '';
+  skillCategoryConfig: any = {
+    displayKey: "radianSkillCategoryName",
+    search: true,
+    placeholder: "Select",
+    searchPlaceholder: "Search",
+    searchOnKey: "country",
+    height: "150px",
+  };
+  countryConfig: any = {
+    displayKey: "country",
+    search: true,
+    placeholder: "Select",
+    searchPlaceholder: "Search",
+    searchOnKey: "country",
+    height: "150px",
+  };
+  stateConfig: any = {
+    displayKey: "",
+    search: true,
+    placeholder: "Select",
+    searchPlaceholder: "Search",
+    searchOnKey: "country",
+    height: "150px",
+  };
   constructor(private _formBuilder: FormBuilder, private rdUserService: RdUserService,private spinner:NgxSpinnerService,
     private notificationService: NotificationService, private router: Router, private rdAuthenticateService: RdAuthenticateService,
     public matDialog: MatDialog, private _encryptDecryptService: RdEncryptDecryptService) {
@@ -66,11 +90,13 @@ export class RdMemberSearchComponent implements OnInit {
   }
   get searchMemberForm() { return this.searchMemberFormGroup.controls; }
   getStates(event: any) {
-    this.state = this.countryState.filter(function (item) {
-      return item.country == event;
-    })[0].states;
+    this.state = event.states;
   }
+  // getSKillSubCategory(data: any) {
+  //   this.skillsSubcategory = data.radianSkillSubCategories;
+  // }
   onSubmit(SearchCount: Number,showLoader:boolean=false) {
+ 
     if(showLoader){
       this.spinner.show()
     }
@@ -79,6 +105,13 @@ export class RdMemberSearchComponent implements OnInit {
       return;
     }
     this.searchMemberForm.SearchCount.setValue(SearchCount);
+    const dxData = this.searchMemberFormGroup.value
+    // console.log(this.searchMemberFormGroup.value)
+    dxData.SearchBySkill = dxData.SearchBySkill.radianSkillCategoryId===undefined?'':dxData.SearchBySkill.radianSkillCategoryId;
+    dxData.SearchByCountry = dxData.SearchByCountry.country===undefined?'':dxData.SearchByCountry.country;
+    
+
+    
     this.rdUserService.searchMember(new RdSearchMember(this.searchMemberFormGroup.value))
       .subscribe(res => {
         this.spinner.hide()

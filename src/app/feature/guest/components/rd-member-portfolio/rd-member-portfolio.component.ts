@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RdMemberPortfolioComponent implements OnInit {
   routerData:any=[];
-  portfolioDetail:any=[];
+  selectedPortfolio:any=[];
   radianLikeData:any=[];
   config: AngularEditorConfig = {
     editable: false,
@@ -33,7 +33,22 @@ export class RdMemberPortfolioComponent implements OnInit {
     showToolbar:false
   };
   currentUser:any;
-  UserLiked:String=''
+  UserLiked:String='';
+  responsiveOptions:any=[{
+    breakpoint: "1024px",
+    numVisible: 3,
+    numScroll: 3,
+  },
+  {
+    breakpoint: "768px",
+    numVisible: 2,
+    numScroll: 2,
+  },
+  {
+    breakpoint: "560px",
+    numVisible: 1,
+    numScroll: 1,
+  }];
   constructor(private embedService: EmbedVideoService, private route: ActivatedRoute,
     private rdUserService: RdUserService,private rdAuthenticateService: RdAuthenticateService,
     private _encryptDecryptService: RdEncryptDecryptService,private spinner:NgxSpinnerService,
@@ -44,6 +59,7 @@ export class RdMemberPortfolioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.routerData)
     this.GetPortfolioDetail();
   }
 
@@ -53,11 +69,12 @@ export class RdMemberPortfolioComponent implements OnInit {
     .pipe(first())
     .subscribe(
       res => {
+        console.log(res)
         this.spinner.hide()
-        res.data.forEach(element => {
-          element.userPortfolioAttachment=element.userPortfolioAttachment === ''?[]:this.GetPortfolioImagePath(element);
-        });
-        this.portfolioDetail= res.data[0];
+        // res.data.forEach(element => {
+        //   element.userPortfolioAttachment=element.userPortfolioAttachment === ''?[]:this.GetPortfolioImagePath(element);
+        // });
+        this.selectedPortfolio= res.data[0];
   
       },
       error => {

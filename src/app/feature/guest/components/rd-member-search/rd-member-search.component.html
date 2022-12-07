@@ -15,35 +15,44 @@
                             <label class="lbl-custom">Search By Category</label>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <select class="select-css" placeholder="Skill/Art" formControlName="SearchBySkill">
+                                    <!-- <select class="select-css" placeholder="Skill/Art" formControlName="SearchBySkill">
                                         <option value="" selected>Select</option>
                                         <option *ngFor="let item of skills" value="{{item.radianSkillCategoryId}}">
                                             {{item.radianSkillCategoryName}}
                                         </option>
-                                    </select>
+                                    </select> -->
+                                    <ngx-select-dropdown [instanceId]="'instance1'" formControlName="SearchBySkill"
+                                    [config]="skillCategoryConfig" [options]="skills">
+                                    </ngx-select-dropdown>
                                 </div>
                             </div>
                             <label class="lbl-custom">Search By Country</label>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <select name="country" class="select-css" placeholder="Country"
+                                    <!-- <select name="country" class="select-css" placeholder="Country"
                                         (change)="getStates($event.target.value)" formControlName="SearchByCountry">
                                         <option value="" selected>Select</option>
                                         <option *ngFor="let item of countryState" value="{{item.country}}">
                                             {{item.country}}
                                         </option>
-                                    </select>
+                                    </select> -->
+                                    <ngx-select-dropdown [instanceId]="'instance2'" formControlName="SearchByCountry"
+                                    [config]="countryConfig" [options]="countryState" (change)="getStates($event.value)">
+                                    </ngx-select-dropdown>
                                 </div>
                             </div>
                             <label class="lbl-custom">Search By State</label>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <select class="select-css" placeholder="State" formControlName="SearchByState">
+                                    <!-- <select class="select-css" placeholder="State" formControlName="SearchByState">
                                         <option value="" selected>Select</option>
                                         <option *ngFor="let item of state" value="{{item}}">
                                             {{item}}
                                         </option>
-                                    </select>
+                                    </select> -->
+                                    <ngx-select-dropdown [instanceId]="'instance2'" formControlName="SearchByState"
+                                    [config]="stateConfig" [options]="state">
+                                    </ngx-select-dropdown>
                                 </div>
                             </div>
                             <label class="lbl-custom">Search By Zip / Pin Code</label>

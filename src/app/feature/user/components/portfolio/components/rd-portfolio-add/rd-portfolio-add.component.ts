@@ -80,14 +80,14 @@ export class RdPortfolioAddComponent implements OnInit {
           var reader = new FileReader();
           reader.onload = (event: any) => {
             // data.imageMovieURL = event.target.result;
-            this.urls.push({Name:event.target.result,IsImage:'image',RatingAllow:false});
+            this.urls.push({Name:event.target.result,IsImage:'image',AllowRating:false});
             // this.urls.push(data);
           }
           reader.readAsDataURL(event.target.files[i]);
         }else if(event.target.files[i].type==='application/pdf'){
           // data.type='document';
           // data.imageMovieURL='';
-          this.urls.push({Name:'',IsImage:'pdf',RatingAllow:false});
+          this.urls.push({Name:'',IsImage:'pdf',AllowRating:false});
         } else {
           this.notificationService.warn('File format not accepted [Valid format: .jpg, .png, .pdf]')
         }
@@ -163,10 +163,12 @@ export class RdPortfolioAddComponent implements OnInit {
             if(res.status){
               var dataReposne=res.data.split(',');
               this.serverFile=[];
-              dataReposne.forEach(element => {
-                this.PortfolioMediaModel.push(element);
+              dataReposne.forEach((element:any,index:number) => {
+                const dxDat ={'FileName':element,'AllowRating':this.urls[index].AllowRating,'Rating':0 }
+                this.PortfolioMediaModel.push(JSON.stringify(dxDat));
               });
-              this.addPortfolioForm.PortfolioMedia.setValue(this.PortfolioMediaModel.join(','))
+              this.addPortfolioForm.PortfolioMedia.setValue(this.PortfolioMediaModel.join(','));
+              console.log(new RdPortfolio(this.addPortfolioFormGroup.value))
               this.rdUserService.addUserPortfolio(new RdPortfolio(this.addPortfolioFormGroup.value))
               .subscribe(res=>{
       
@@ -210,9 +212,11 @@ export class RdPortfolioAddComponent implements OnInit {
   }
   changeUserType(event: any,index:number) {
     if (event.target.checked) {
-      this.urls[index].RatingAllow = true;
+      // this.serverFile[index].AllowRating = true;
+      this.urls[index].AllowRating = true;
     } else {
-      this.urls[index].RatingAllow = false;
+      // this.serverFile[index].AllowRating = false;
+      this.urls[index].AllowRating = false;
     }
   }
   ngOnDestroy() {
