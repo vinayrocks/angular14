@@ -158,7 +158,6 @@ export class RdRadianListComponent implements OnInit {
           this.selectedUser = res.data[0];
           this.projectPath = res.projectPath;
           this.spinner.hide();
-          console.log(this.selectedUser);
         },
         (error) => {
           this.spinner.hide();

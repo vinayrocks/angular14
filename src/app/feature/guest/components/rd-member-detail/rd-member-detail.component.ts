@@ -36,6 +36,21 @@ export class RdMemberDetailComponent implements OnInit {
   UserLiked:String='';
   memberProfiles:any=[];
   _istab:number=1;
+  responsiveOptions: any = [ {
+    breakpoint: "1024px",
+    numVisible: 3,
+    numScroll: 3,
+  },
+  {
+    breakpoint: "768px",
+    numVisible: 2,
+    numScroll: 2,
+  },
+  {
+    breakpoint: "560px",
+    numVisible: 1,
+    numScroll: 1,
+  },];
   constructor(private route: ActivatedRoute,private spinner:NgxSpinnerService,
     private rdUserService: RdUserService,private rdAuthenticateService: RdAuthenticateService,
     private _encryptDecryptService: RdEncryptDecryptService,public matDialog: MatDialog,
@@ -61,24 +76,25 @@ export class RdMemberDetailComponent implements OnInit {
     .pipe(first())
     .subscribe(
       res => {
-        this.spinner.hide()
-        res.data.forEach(element => {
-          element.ContactDetails=element.ContactDetails === ''?[]:JSON.parse(element.ContactDetails);
-          element.ProfileAddress=element.ProfileAddress === ''?[]:JSON.parse(element.ProfileAddress);
-          element.ProfileExpertise=element.ProfileExpertise === ''?[]: JSON.parse(element.ProfileExpertise);
-          element.ProfilePortfolio=element.ProfilePortfolio === ''?[]:JSON.parse(element.ProfilePortfolio);
-          element.ProfileSkills=element.ProfileSkills === ''?[]:JSON.parse(element.ProfileSkills);
-          element.ProfilePicture=this.getProfilefilePath(element);
-          element.CoverPicture=this.getCoverfilePath(element);
-        });
-        this.memberDetail= res.data[0];
-        this.UserLiked=res.UserLiked;
-        res.Events.forEach(eventItem => {
-          eventItem.EventCategories = JSON.parse(eventItem.EventCategories).filter(x=>x.name);
-          eventItem.EventSkill = JSON.parse(eventItem.EventSkill);
-        })
+        console.log(res)
         this.memberEvents = res.Events;
         this.memberProfiles = res.Profiles;
+        this.memberDetail= res.data[0]
+        this.memberDetail.ContactDetails=this.memberDetail.ContactDetails === ''?[]:JSON.parse(this.memberDetail.ContactDetails);
+        this.memberDetail.ProfileAddress=this.memberDetail.ProfileAddress === ''?[]:JSON.parse(this.memberDetail.ProfileAddress);
+        this.memberDetail.ProfileExpertise=this.memberDetail.ProfileExpertise === ''?[]: JSON.parse(this.memberDetail.ProfileExpertise);
+        this.memberDetail.ProfilePortfolio=this.memberDetail.ProfilePortfolio === ''?[]:JSON.parse(this.memberDetail.ProfilePortfolio);
+        this.memberDetail.ProfileSkills=this.memberDetail.ProfileSkills === ''?[]:JSON.parse(this.memberDetail.ProfileSkills);
+        this.memberDetail.ProfilePicture=this.getProfilefilePath(this.memberDetail);
+        this.memberDetail.CoverPicture=this.getCoverfilePath(this.memberDetail);
+        this.UserLiked=res.data[0].LikeCount;
+        this.memberDetail= res.data[0];
+        this.memberDetail.CertificationDetails = this.memberDetail.CertificationDetails!==''?JSON.parse(this.memberDetail.CertificationDetails):[];
+        this.memberDetail.EducationDetails = this.memberDetail.EducationDetails!==''?JSON.parse(this.memberDetail.EducationDetails):[];
+        this.memberDetail.ExperienceDetails = this.memberDetail.ExperienceDetails!==''?JSON.parse(this.memberDetail.ExperienceDetails):[];
+        //this.memberDetail.OtherProfiles =[];
+        console.log(this.memberDetail)
+        this.spinner.hide()
   
       },
       error => {
@@ -88,7 +104,7 @@ export class RdMemberDetailComponent implements OnInit {
 
   getProfilefilePath(data:any){
     if(data.ProfilePicture !=null){
-      return environment.apiCommon+'radianApi/media/'+data.FirstName+'_'+data.Email.split('@')[0]+'/Profile/'+data.ProfileName+'/ProfileImages/'+data.ProfilePicture;
+      return environment.apiCommon+'radianApi/media/'+data.FirstName+'_'+data.Email.split('@')[0]+'/Profile/'+data.ProfileName.replace(' ','')+'/ProfileImages/'+data.ProfilePicture;
     } else {
       return 'assets/img/default-avatar.png';
     }
@@ -96,7 +112,7 @@ export class RdMemberDetailComponent implements OnInit {
   }
   getCoverfilePath(data:any){
     if(data.CoverPicture!=null){
-      return environment.apiCommon+'radianApi/media/'+data.FirstName+'_'+data.Email.split('@')[0]+'/Profile/'+data.ProfileName+'/CoverImages/'+data.CoverPicture;
+      return environment.apiCommon+'radianApi/media/'+data.FirstName+'_'+data.Email.split('@')[0]+'/Profile/'+data.ProfileName.replace(' ','')+'/CoverImages/'+data.CoverPicture;
     } else {
       return 'assets/img/default-cover-picture.jpg';
     }
@@ -133,5 +149,8 @@ export class RdMemberDetailComponent implements OnInit {
     this.router.navigate(['/member-detail', this._encryptDecryptService.set(itemData.ProfileId)]);
     this.routerData.ProfileId=itemData.ProfileId;
     this.GetProfileDetail();
+  }
+  redirectToPortfolio(element) {
+    this.router.navigate(['/portfolio-detail', this._encryptDecryptService.set(element.id)]);
   }
 }

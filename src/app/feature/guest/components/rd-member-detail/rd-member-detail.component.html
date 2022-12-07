@@ -1,232 +1,514 @@
 <div class="container">
     <div class="img default-cover">
-        <!--<div class="edit-btn">
-          <a [routerLink]="['/member/hunar_add']" class="btn btn-primary btn-round btn-margin reset-btn">
+        <!-- <div class="edit-btn">
+          <a class="btn btn-primary btn-round btn-margin reset-btn">
             <i class="pi pi-camera"></i>Select Cover Image</a>
-        </div>-->
+        </div> -->
       </div>
-      <div class="card social-prof">
+    <div class="card social-prof">
         <div class="card-body">
-          <div class="wrapper">
-            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
-            <h3 class="title">{{currentUser.ProfileName}}</h3>
-            <p>{{currentUser?.ProfileSkill.name}}</p>
-          </div>
-          <div class="row ">
             <div class="wrapper">
-              [CONNECTIONS PLACEHOLDER]
+                <img src="{{memberDetail.ProfilePicture}}" alt="" class="user-profile">
+                <h3 class="title">{{currentUser.ProfileName}}</h3>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <ul class=" nav nav-tabs justify-content-center s-nav">
-                <li><a [ngClass]="{'active':_istab===1}" (click)="_istab=1">About</a></li>
-                <li><a [ngClass]="{'active':_istab===2}" (click)="_istab=2">Education</a></li>
-                <li><a [ngClass]="{'active':_istab===3}" (click)="_istab=3">Certification & Licenses</a></li>
-                <li><a [ngClass]="{'active':_istab===4}" (click)="_istab=4">Experiences</a></li>
-                <li><a [ngClass]="{'active':_istab===5}" (click)="_istab=5">Connections</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-</div>
-
-<div class="wrapper">
-    <!--<a [routerLink]="['/account/signup']">
-        <div class="page-header page-header-small" filter-color="orange">
-            <div class="page-header-image rellax-header custom-cover" data-rellax-speed="0">
-                <img src="{{memberDetail.CoverPicture}}" alt="">
-            </div>
-            <div class="container">
-                <div class="content-center">
-                    <div class="photo-container custom-container">
-                        <img src="{{memberDetail.ProfilePicture}}" alt="">
-                    </div>
+            <div class="row ">
+                <div class="col-lg-12">
+                    <ul class=" nav nav-tabs justify-content-center s-nav">
+                        <li><a [ngClass]="{'active':_istab===1}" (click)="_istab=1">About</a></li>
+                        <li><a [ngClass]="{'active':_istab===2}" (click)="_istab=2">Education</a></li>
+                        <li><a [ngClass]="{'active':_istab===3}" (click)="_istab=3">Certification & Licenses</a></li>
+                        <li><a [ngClass]="{'active':_istab===4}" (click)="_istab=4">Experiences</a></li>
+                        <li><a [ngClass]="{'active':_istab===5}" (click)="_istab=5">Connections</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </a>-->
-    <div class="section section-team">
-        <div class="container-fluid">
-            <!-- <h2 class="title">How It Works</h2> -->
-            <div class="team custom-paragraph">
-                <h2 class="title" style="text-align: center">{{memberDetail.ProfileName}}</h2>
-                <div class="separator separator-primary"></div>
-                <div class="row" style="margin-right: 0px; margin-left: 0px;">
-                    <div class="col-md-6">
-                        {{memberDetail.ProfileAddress?.country}}
-                    </div>
-                    <div class="col-md-6 custom-align">
-                        <table>
-                            <tr>
-                                <td>
-                                    <div class="custom-like">{{memberDetail.LikeCount}}&nbsp;&nbsp;</div>
-                                </td>
-                                <td *ngIf="radianLikeData.UserId!==''">
-                                    <a class="a-btn a-click" (click)="likeRadianEvent(true,memberDetail)"
-                                        *ngIf="!UserLiked">
-                                        <img src="./assets/img/radian/like-icon.png">
-                                    </a>
-                                    <a class="a-btn a-click" (click)="likeRadianEvent(false,memberDetail)"
-                                        *ngIf="UserLiked">
-                                        <img src="./assets/img/radian/like-icon-filled.png">
-                                    </a>
-                                    <a class="a-btn a-click" (click)="getShareLink()"><i
-                                            class="fa fa-share custom-icon"></i></a>
-                                </td>
-                                <td *ngIf="radianLikeData.UserId===''">
-                                    <a class="a-btn" *ngIf="memberDetail.LikeCount==='0'">
-                                        <img src="./assets/img/radian/like-icon.png">
-                                    </a>
-                                    <a class="a-btn" *ngIf="memberDetail.LikeCount!=='0'">
-                                        <img src="./assets/img/radian/like-icon-filled.png">
-                                    </a>
-                                    <span><i class="fa fa-share custom-icon"></i></span>
-                                </td>
-                            </tr>
-                        </table>
-
+    </div>
+    <div class="row" [@enterAnimation] *ngIf="_istab===1">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>About Profile</h4>
+                        <p>{{memberDetail.ProfileDescription}}</p>
                     </div>
                 </div>
-                <div class="row" style="margin-right: 0px; margin-left: 0px;">
-                    <div class="col-md-12">
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Skills</h4>
                         <div class="row">
-                            <!-- <div class="col-md-2">
-                            <div class="portfolio-label">About Profile</div>
-                        </div> -->
-                            <div class="col-md-12 custom-editor">
-                                <textarea [attr.disabled]="true" [(ngModel)]="memberDetail.ProfileDescription"
-                                    >
-                                </textarea>
-                                <!-- <p class="text-primary">{{memberDetail.ProfileDescription}}</p> -->
+                            <div class="col-md-4 custom-col-skills" *ngFor="let item of memberDetail.ProfileExpertise">
+                                <i class="{{item.iconClass}}"></i>
+                                <br />
+                                <h5 class="h5-custom">{{item.name}}</h5>
                             </div>
-                        </div><br />
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="portfolio-label">Specialities / Interests</div>
-                            </div>
-                            <div class="col-md-9">
-                                <!-- <input type="text" class="form-control" [value]="memberDetail.ProfileSkills.name" disabled="true"><br/>
-                            <div class="pretty p-switch p-fill" *ngFor="let elem of memberDetail.ProfileExpertise;let i=index;">
-                                <input type="radio" disabled="true" checked value="true"/>
-                                <div class="state p-success  p-fill">
-                                    <label>{{elem.name}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Linked Portfolios</h4>
+                        <p-carousel [value]="memberDetail.ProfilePortfolio" styleClass="custom-carousel" [numVisible]="2"
+                            [numScroll]="2" [circular]="true" [autoplayInterval]="3000"
+                            [responsiveOptions]="responsiveOptions">
+                            <ng-template let-product pTemplate="item">
+                                <div class="product-item">
+                                    <div class="product-item-content">
+                                        <div class="p-mb-3">
+                                        </div>
+                                        <div>
+                                            <a (click)="redirectToPortfolio(product)"><h4 class="p-mb-1" >{{product.name}}</h4></a>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
-                            </div> -->
-                            <p class="p-skill">
-                              <label *ngFor="let child of memberDetail.ProfileExpertise;let i = index">
-                                <span *ngIf="i<memberDetail.ProfileExpertise.length-1">{{child.name}},</span>
-                                <span *ngIf="i===memberDetail.ProfileExpertise.length-1">{{child.name}}</span>
-                              </label>
-                            </p>
+                            </ng-template>
+                        </p-carousel>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Events</h4>
+                        <p-carousel [value]="memberEvents" styleClass="custom-carousel" [numVisible]="2"
+                            [numScroll]="2" [circular]="true" [autoplayInterval]="3000"
+                            [responsiveOptions]="responsiveOptions">
+                            <ng-template let-product pTemplate="item">
+                                <div class="product-item">
+                                    <div class="product-item-content">
+                                        <div class="p-mb-3">
+                                        </div>
+                                        <div>
+                                            <a>
+                                                <h4 class="p-mb-1">{{product.EventName}}</h4>
+                                            </a>
+                                            <span
+                                                [class]="'product-badge status-'+product.EventName.toLowerCase()">{{product.EventDescription}}</span>
+                                            <div class="car-buttons p-mt-5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-carousel>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Other Profiles</h4>
+                        <p-carousel [value]="memberProfiles" styleClass="custom-carousel" [numVisible]="2"
+                            [numScroll]="2" [circular]="true" [autoplayInterval]="3000"
+                            [responsiveOptions]="responsiveOptions">
+                            <ng-template let-product pTemplate="item">
+                                <div class="product-item">
+                                    <div class="product-item-content">
+                                        <div class="p-mb-3">
+                                        </div>
+                                        <div>
+                                            <a>
+                                                <h4 class="p-mb-1">{{product.ProfileName}}</h4>
+                                            </a>
+                                            <span
+                                                [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
+                                            <div class="car-buttons p-mt-5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-carousel>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row" [@enterAnimation] *ngIf="_istab===2">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>About Profile</h4>
+                        <p>{{memberDetail.ProfileDescription}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Skills</h4>
+                        <div class="row">
+                            <div class="col-md-4 custom-col-skills">
+                                <i class="fa fa-camera-retro"></i>
+                                <br />
+                                <h5 class="h5-custom">{{memberDetail?.ProfileSkills.name}}</h5>
                             </div>
-                        </div><br />
-                        <div class="row" *ngIf="memberDetail.isAddressShown==='true'">
-                            <div class="col-md-3">
-                                <div class="portfolio-label">Location</div>
-                            </div>
-                            <div class="col-md-9">
-                                <p class=" text-primary">{{memberDetail.ProfileAddress.street}},
-                                    {{memberDetail.ProfileAddress.city}}, {{memberDetail.ProfileAddress.state}} -
-                                    {{memberDetail.ProfileAddress.zip}}</p>
-                            </div>
-                        </div><br />
-                        <div class="row" *ngIf="memberDetail.isMailingAddressShown==='true'">
-                            <div class="col-md-3">
-                                <div class="portfolio-label">Full Name</div>
-                            </div>
-                            <div class="col-md-9">
-                                <p class=" text-primary">{{memberDetail.FirstName}} {{memberDetail.LastName}}</p>
-                            </div>
-                        </div><br />
-                        <div class="row" *ngIf="memberDetail.isMailingAddressShown==='true'">
-                            <div class="col-md-3">
-                                <div class="portfolio-label">Email Id</div>
-                            </div>
-                            <div class="col-md-9">
-                                <p class=" text-primary">{{memberDetail.Email}}</p>
-                            </div>
-                        </div><br />
-                        <div class="row" *ngIf="memberDetail.isMailingAddressShown==='true'">
-                            <div class="col-md-3">
-                                <div class="portfolio-label">Contact Details</div>
-                            </div>
-                            <div class="col-md-9">
-                                <p class=" text-primary">
-                                    {{memberDetail.ContactDetails.phoneCode}}-{{memberDetail.ContactDetails.phone}} /
-                                    +{{memberDetail.ContactDetails.cellCode}}-{{memberDetail.ContactDetails.cell}}</p>
-                            </div>
-                        </div><br />
-                        <div class="row" *ngIf="memberDetail.isMailingAddressShown==='true'">
-                            <div class="col-md-3">
-                                <div class="portfolio-label">Portfolio</div>
-                            </div>
-                            <div class="col-md-9">
-                                <p class="p-skill"><a
-                                        (click)="getPortfolioDetail()">{{memberDetail.ProfilePortfolio.name}}</a></p>
-                            </div>
-                        </div><br />
-                        <div class="row" style="margin-bottom: 20px">
-                            <div class="col-md-12 portfolio-label">Events</div>
                         </div>
-                        <div class="row" style="margin-bottom: 20px">
-                            <div class="col-md-12">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Event Name</th>
-                                            <th width=60%>Event Description</th>
-                                            <!-- <th>Event Catagories</th> -->
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let item of memberEvents">
-                                            <td width=20%><a class="evt-name" (click)="getItemDetail(item)">
-                                                    {{item.EventName}}</a></td>
-                                            <td width=100% class="evt-detail">
-                                                <textarea [attr.disabled]="true"
-                                                    [(ngModel)]="item.EventDescription" 
-                                                    disabled="true">
-                                                </textarea>
-                                            </td>
-                                            <!-- <td>
-                                                <tr *ngFor="let cat of item.EventCategories">
-                                                    <td>{{cat.name}}</td>
-                                                </tr>
-                                            </td> -->
-                                        </tr>
-                                    </tbody>
-                                </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio" *ngIf="memberDetail.EducationDetails.length>0">
+                        <h4>Educations</h4>
+                        <div class="row" *ngFor="let item of memberDetail.EducationDetails;let i = index">
+                            <div class="col-md-3">
+                                <div class="portfolio-label">Education Name</div>
+                                <div class="row mt-top">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" [value]="item.EducationName" [disabled]="true"
+                                                class="signUp-form-control form-control">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div><br/>
-                        <div class="row" style="margin-bottom: 20px">
-                            <div class="col-md-12 portfolio-label">Related Profiles</div>
-                        </div>
-                        <div class="row" style="margin-bottom: 20px">
-                            <div class="col-md-12">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Profile Name</th>
-                                            <th width=100%>Description</th>
-                                            <!-- <th>Event Catagories</th> -->
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let item of memberProfiles">
-                                            <td width=20%><a class="evt-name"
-                                                    (click)="getProfileItemDetail(item)">{{item.ProfileName}}</a></td>
-                                            <td width=100% class="evt-detail">
-                                                <textarea [attr.disabled]="true"
-                                                    [(ngModel)]="item.ProfileDescription" 
-                                                    disabled="true">
-                                                </textarea>
-                                            </td>
+                            <div class="col-md-2">
+                                <div class="portfolio-label">From</div>
+                                <div class="row mt-top">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" autocomplete="off"
+                                                #dp="bsDatepicker" [disabled]="true" [(ngModel)]="item.StartsOn"
+                                                [bsConfig]="{
+                          isAnimated: true,
+                          minMode: 'year',
+                          dateInputFormat: 'YYYY'
+                        }" bsDatepicker>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="portfolio-label">To</div>
+                                <div class="row mt-top">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" autocomplete="off"
+                                                #dp="bsDatepicker" [disabled]="true" [(ngModel)]="item.EndsOn"
+                                                [bsConfig]="{
+                          isAnimated: true,
+                          minMode: 'year',
+                          dateInputFormat: 'YYYY'
+                        }" bsDatepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row card portfolio" *ngIf="memberDetail.EducationDetails.length===0">
+                        <h4>Educations</h4>
+                        <div class="col-md-12">
+                            <h4>No Records</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" [@enterAnimation] *ngIf="_istab===3">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>About Profile</h4>
+                        <p>{{memberDetail.ProfileDescription}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Skills</h4>
+                        <div class="row">
+                            <div class="col-md-4 custom-col-skills">
+                                <i class="fa fa-camera-retro"></i>
+                                <br />
+                                <h5 class="h5-custom">{{memberDetail?.ProfileSkills.name}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio" *ngIf="memberDetail.CertificationDetails.length>0">
+                        <h4>Certification Details</h4>
+                        <div class="row" *ngFor="let item of memberDetail.CertificationDetails;let i = index">
+                            <div class="col-md-3">
+                                <div class="portfolio-label">Certification Name</div>
+                                <div class="row mt-top">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" [value]="item.CertificationName" [disabled]="true"
+                                                class="signUp-form-control form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="portfolio-label">Certificate Date</div>
+                                <div class="row mt-top">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" autocomplete="off"
+                                                #dp="bsDatepicker" [disabled]="true" [(ngModel)]="item.CertifiedDate"
+                                                [bsConfig]="{
+                          isAnimated: true,
+                          minMode: 'year',
+                          dateInputFormat: 'YYYY/MM/DD'
+                        }" bsDatepicker>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                                <div class="portfolio-label">License Number</div>
+                                <div class="row mt-top">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" [value]="item.CertificationLicenseNumber"
+                                                [disabled]="true" class="signUp-form-control form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row card portfolio" *ngIf="memberDetail.CertificationDetails.length===0">
+                        <h4>Certification Details</h4>
+                        <div class="col-md-12">
+                            <h4>No Records</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" [@enterAnimation] *ngIf="_istab===4">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>About Profile</h4>
+                        <p>{{memberDetail.ProfileDescription}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Skills</h4>
+                        <div class="row">
+                            <div class="col-md-4 custom-col-skills">
+                                <i class="fa fa-camera-retro"></i>
+                                <br />
+                                <h5 class="h5-custom">{{memberDetail?.ProfileSkills.name}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio" *ngIf="memberDetail.ExperienceDetails.length>0">
+                        <h4>Experience Details</h4>
+                        <div class="row" *ngFor="let item of memberDetail.ExperienceDetails;let i = index">
+                            <div class="col-md-3">
+                                <div class="portfolio-label">Experience Name</div>
+                                <div class="row mt-top">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" [value]="item.ExperienceName" [disabled]="true"
+                                                class="signUp-form-control form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="portfolio-label">Starts On</div>
+                                <div class="row mt-top">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" autocomplete="off"
+                                                #dp="bsDatepicker" [disabled]="true" [(ngModel)]="item.StartDate"
+                                                [bsConfig]="{
+                          isAnimated: true,
+                          minMode: 'year',
+                          dateInputFormat: 'YYYY/MM/DD'
+                        }" bsDatepicker>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                                <div class="portfolio-label">Ends On</div>
+                                <div class="row mt-top">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" autocomplete="off"
+                                                #dp="bsDatepicker" [disabled]="true" [(ngModel)]="item.ToDate"
+                                                [bsConfig]="{
+                        isAnimated: true,
+                        minMode: 'year',
+                        dateInputFormat: 'YYYY'
+                      }" bsDatepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row card portfolio" *ngIf="memberDetail.ExperienceDetails.length===0">
+                        <h4>Experience Details</h4>
+                        <div class="col-md-12">
+                            <h4>No Records</h4>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row" [@enterAnimation] *ngIf="_istab===5">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>New Connection Requests</h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="conn-req-card">
+                                    <div class="user-image">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
+                                    </div>
+                                    <div class="user-details">
+                                        <h4 class="userName">Vinay Pardeshi</h4>
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br />
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="conn-req-card">
+                                    <div class="user-image">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
+                                    </div>
+                                    <div class="user-details">
+                                        <h4 class="userName">Vinay Pardeshi</h4>
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br />
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Connections</h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="conn-req-card">
+                                    <div class="user-image">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
+                                    </div>
+                                    <div class="user-details">
+                                        <h4 class="userName">Vinay Pardeshi</h4>
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="conn-req-card">
+                                    <div class="user-image">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
+                                    </div>
+                                    <div class="user-details">
+                                        <h4 class="userName">Vinay Pardeshi</h4>
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="conn-req-card">
+                                    <div class="user-image">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
+                                    </div>
+                                    <div class="user-details">
+                                        <h4 class="userName">Vinay Pardeshi</h4>
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="conn-req-card">
+                                    <div class="user-image">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
+                                    </div>
+                                    <div class="user-details">
+                                        <h4 class="userName">Vinay Pardeshi</h4>
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
+                                    </div>
+                                    <div class="accept-reject">
+                                        <button mat-button
+                                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
