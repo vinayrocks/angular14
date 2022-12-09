@@ -16,7 +16,26 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-rd-member-portfolio',
   templateUrl: './rd-member-portfolio.component.html',
-  styleUrls: ['./rd-member-portfolio.component.scss']
+  styleUrls: ['./rd-member-portfolio.component.scss'],
+  styles: [
+		`
+			i {
+				position: relative;
+				display: inline-block;
+				font-size: 1.5rem;
+				padding-right: 0.1rem;
+				color: #d3d3d3;
+			}
+
+			.filled {
+				color: red;
+				overflow: hidden;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		`,
+	]
 })
 export class RdMemberPortfolioComponent implements OnInit {
   routerData:any=[];
@@ -49,6 +68,7 @@ export class RdMemberPortfolioComponent implements OnInit {
     numVisible: 1,
     numScroll: 1,
   }];
+  userPortfolioMedia:any=[];
   constructor(private embedService: EmbedVideoService, private route: ActivatedRoute,
     private rdUserService: RdUserService,private rdAuthenticateService: RdAuthenticateService,
     private _encryptDecryptService: RdEncryptDecryptService,private spinner:NgxSpinnerService,
@@ -69,13 +89,17 @@ export class RdMemberPortfolioComponent implements OnInit {
     .pipe(first())
     .subscribe(
       res => {
-        console.log(res)
+      
         this.spinner.hide()
         // res.data.forEach(element => {
         //   element.userPortfolioAttachment=element.userPortfolioAttachment === ''?[]:this.GetPortfolioImagePath(element);
         // });
         this.selectedPortfolio= res.data[0];
-  
+        res.UserPortfolioMedia.forEach(element => {
+          element.attachments= this.GetPortfolioImagePath(this.selectedPortfolio,element.userPortfolioAttachment)
+        });
+        this.userPortfolioMedia = res.UserPortfolioMedia;
+        console.log(this.userPortfolioMedia)
       },
       error => {
         this.spinner.hide()
@@ -117,43 +141,23 @@ export class RdMemberPortfolioComponent implements OnInit {
   //   return imageArry;
   // }
 
-  GetPortfolioImagePath(data: any) {
+  GetPortfolioImagePath(selectedItem:any,data: any) {
     const imageArry = [];
-    if (data.userPortfolioAttachment.split(',').length > 1) {
-      data.userPortfolioAttachment.split(',')
-        .forEach(element => {
-          if(element.indexOf('youtu.be')===-1 && element.indexOf('youtube')===-1 && element.indexOf('pdf')===-1
-          && element.indexOf('pdf')===-1){
-            imageArry.push({Name:environment.apiCommon+'radianApi/media/' + data.userFirstName + '_' + data.userEmail.split('@')[0]+ '/Portfolio/' + data.userPortfolioName + '/' +element,IsImage:'image'});
-          }else if(element.indexOf('youtu.be')===-1 && element.indexOf('youtube')===-1 && element.indexOf('pdf')!==-1){
-            imageArry.push({Name:environment.apiCommon+'radianApi/media/' + data.userFirstName + '_' + data.userEmail.split('@')[0] + '/Portfolio/' + data.userPortfolioName + '/'+element,IsImage:'pdf'});
-          } else {
-            this.embedService.embed_image(element, { image: 'mqdefault' })
-            .then(res => {
-              imageArry.push({Name:this.embedService.embed(element),IsImage:'video',
-              Image:res.link});
-            });
-          }
-        });
-    } else {
-      
-      if(data.userPortfolioAttachment.indexOf('youtu.be')===-1 && data.userPortfolioAttachment.indexOf('youtube')===-1
-        && data.userPortfolioAttachment.indexOf('pdf')===-1){
-          imageArry.push({Name:environment.apiCommon+'radianApi/media/' + data.userFirstName + '_' + data.userEmail + '/Portfolio/' + data.userPortfolioName +'/'+data,IsImage:'image'});
-        }else if(data.userPortfolioAttachment.indexOf('youtu.be')===-1 && data.userPortfolioAttachment.indexOf('youtube')===-1 
-        && data.userPortfolioAttachment.indexOf('pdf')!==-1){
-          imageArry.push({Name:environment.apiCommon+'radianApi/media/' + data.userFirstName + '_' + data.userEmail + '/Portfolio/' + data.userPortfolioName + '/' +data,IsImage:'pdf'});
+    if(data.indexOf('youtu.be')===-1 && data.indexOf('youtube')===-1
+        && data.indexOf('pdf')===-1){
+          imageArry.push({Name:environment.apiCommon+'radianApi/media/' + selectedItem.userFirstName + '_' + selectedItem.userEmail.split('@')[0] + '/Portfolio/' + selectedItem.userPortfolioName.replace(' ','') +'/'+data,IsImage:'image'});
+        }else if(data.indexOf('youtu.be')===-1 && data.indexOf('youtube')===-1 
+        && data.indexOf('pdf')!==-1){
+          imageArry.push({Name:environment.apiCommon+'radianApi/media/' + selectedItem.userFirstName + '_' + selectedItem.userEmail.split('@')[0] + '/Portfolio/' + selectedItem.userPortfolioName.replace(' ','')  + '/' +data,IsImage:'pdf'});
         } else {
-          this.embedService.embed_image(data.userPortfolioAttachment, { image: 'mqdefault' })
+          this.embedService.embed_image(data, { image: 'mqdefault' })
             .then(res => {
-              imageArry.push({Name:this.embedService.embed(data.userPortfolioAttachment),IsImage:'video',
+              imageArry.push({Name:this.embedService.embed(data),IsImage:'video',
               Image:res.link});
             });
           // imageArry.push(element.PortfolioMedia);
          
         }
-
-    }
     return imageArry;
   }
 

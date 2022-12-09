@@ -7,7 +7,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { EmbedVideoService } from 'ngx-embed-video';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RdEncryptDecryptService } from 'src/app/shared/services/encrypt-decrypt/rd-encrypt-decrypt.service';
-import { RdCommon } from 'src/app/shared/core/models/rd-common/rd-common';
+import { RdCommon, RdEventIntUser } from 'src/app/shared/core/models/rd-common/rd-common';
 import { RdAuthenticateService } from 'src/app/shared/services/authentication/rd-authenticate.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { RdDeleteConfirmationBoxComponent } from 'src/app/core/components/rd-delete-confirmation-box/rd-delete-confirmation-box.component';
@@ -61,6 +61,8 @@ export class RdEventListComponent implements OnInit {
     numScroll: 1,
   }];
   selectedEvent:any=[];
+  getEventUserParameter: any = [];
+  userList:any=[];
   constructor(private rdUserService: RdUserService, public matDialog: MatDialog,private activatedRoute:ActivatedRoute,
     private embedService: EmbedVideoService, private router: Router,
     private _encryptDecryptService: RdEncryptDecryptService,
@@ -95,10 +97,10 @@ export class RdEventListComponent implements OnInit {
             element.EventCategory = element.EventCategory === '' ? [] : JSON.parse(element.EventCategory);
             element.EventMedia = this.GetEventImagePath(element);
           });
+          this.GetUserList(res.data[0])
           this.projectPath = res.projectPath;
           this.userEvents = res.data;
           this.selectedEvent = res.data[0];
-          console.log(this.selectedEvent)
           // ();
         }
 
@@ -182,6 +184,25 @@ export class RdEventListComponent implements OnInit {
   }
   downloadPdf(filePath){
     modifyPdf(filePath,PDFDocument,StandardFonts,rgb)
+  }
+  GetUserList(data) {
+    console.log(data);
+    this.selectedEvent = data;
+    this.getEventUserParameter.EventId = data.id;
+    this.rdUserService.getEventInterestedUserList(new RdEventIntUser(this.getEventUserParameter))
+      .pipe(first())
+      .subscribe(
+        res => {
+          if (res.status) {
+            res.data.forEach(element => {
+              element.userContactDetail = JSON.parse(element.userContactDetail)
+            });
+            this.userList = res.data;
+        
+          }
+        },
+        error => {
+        });
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName('body')[0];
