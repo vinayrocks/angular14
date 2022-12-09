@@ -72,21 +72,21 @@ export class RdRadianDetailComponent implements OnInit {
       .pipe(first())
       .subscribe(
         res => {
-          
+          console.log(res)
           this.spinner.hide()
           res.data.forEach(element => {
             element.EventStatus = element.EventStatus === '1' ? true : false;
             element.ContactDetails = element.ContactDetails === '' ? [] : JSON.parse(element.ContactDetails);
             element.EventCategories = element.EventCategories === '' ? [] : JSON.parse(element.EventCategories);
             element.EventSkill = element.EventSkill === '' ? [] : JSON.parse(element.EventSkill);
-            element.EventImages = this.getProfilefilePath(element);
+            element.EventImages = element.EventImages===''?[]:this.getProfilefilePath(element);
             element.EventLocation = element.EventLocation === '' ? [] : JSON.parse(element.EventLocation);
           });
           
           this.radianDetail = res.data[0];
           this.UserLiked = res.UserLiked;
           this.UserInterested = res.UserInterested;
-
+          
         },
         error => {
           this.spinner.hide()
