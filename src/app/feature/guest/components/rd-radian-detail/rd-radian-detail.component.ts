@@ -72,7 +72,7 @@ export class RdRadianDetailComponent implements OnInit {
       .pipe(first())
       .subscribe(
         res => {
-          console.log(res)
+          // console.log(res)
           this.spinner.hide()
           res.data.forEach(element => {
             element.EventStatus = element.EventStatus === '1' ? true : false;

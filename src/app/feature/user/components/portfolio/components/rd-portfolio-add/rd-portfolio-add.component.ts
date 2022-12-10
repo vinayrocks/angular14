@@ -168,7 +168,7 @@ export class RdPortfolioAddComponent implements OnInit {
                 this.PortfolioMediaModel.push(JSON.stringify(dxDat));
               });
               this.addPortfolioForm.PortfolioMedia.setValue(this.PortfolioMediaModel.join(','));
-              console.log(new RdPortfolio(this.addPortfolioFormGroup.value))
+              // console.log(new RdPortfolio(this.addPortfolioFormGroup.value))
               this.rdUserService.addUserPortfolio(new RdPortfolio(this.addPortfolioFormGroup.value))
               .subscribe(res=>{
       

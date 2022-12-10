@@ -22,7 +22,7 @@ export class BlockCopyDirective {
   /* @HostListener('keydown', ['$event']) triggerEsc(e: KeyboardEvent) {
      alert(e);
      if(e.keyCode===27){
-       console.log("local esc");
+       // console.log("local esc");
        alert("esc")
      }
    }*/

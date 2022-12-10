@@ -186,7 +186,7 @@ export class RdEventListComponent implements OnInit {
     modifyPdf(filePath,PDFDocument,StandardFonts,rgb)
   }
   GetUserList(data) {
-    console.log(data);
+    // console.log(data);
     this.selectedEvent = data;
     this.getEventUserParameter.EventId = data.id;
     this.rdUserService.getEventInterestedUserList(new RdEventIntUser(this.getEventUserParameter))

@@ -153,11 +153,11 @@ export class RdEventAddComponent implements OnInit {
     this.addEventForm.zip.updateValueAndValidity();
   }
   getSkillSubCategory(event: any) {
-    console.log(event);
+    // console.log(event);
     this.skillsSubcategory = event.radianSkillSubCategories;
   }
   getStates(event: any) {
-    console.log(event);
+    // console.log(event);
     this.state = event.states;
   }
   fileChangeEvent(event: any, index: number): void {

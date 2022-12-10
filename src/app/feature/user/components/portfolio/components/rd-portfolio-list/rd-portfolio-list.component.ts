@@ -79,6 +79,8 @@ export class RdPortfolioListComponent implements OnInit {
     numScroll: 1,
   }];
   selectedPortfolio:any=null
+  userPortfolioMedia:any=[];
+  initialUserPortfolioMedia:any=[];
   constructor(private rdUserService: RdUserService, public matDialog: MatDialog,
     private embedService: EmbedVideoService,private router: Router,
     private _encryptDecryptService: RdEncryptDecryptService,private spinner:NgxSpinnerService,
@@ -105,14 +107,20 @@ export class RdPortfolioListComponent implements OnInit {
       .pipe(first())
       .subscribe(
         res => {
-          console.log(res)
           this.spinner.hide()
-          res.data.forEach(element => {
-            element.PortfolioMedia= (element.PortfolioMedia!=='' && element.PortfolioMedia!==null)?this.GetPortfolioImagePath(element):'';
-          });
+          // res.data.forEach(element => {
+          //   element.PortfolioMedia= (element.PortfolioMedia!=='' && element.PortfolioMedia!==null)?this.GetPortfolioImagePath(element):'';
+          // });
           this.projectPath=res.projectPath;
           this.userPortfolio = res.data;
           this.selectedPortfolio = res.data[0];
+          this.initialUserPortfolioMedia = res.UserPortfolioMedia;
+          res.UserPortfolioMedia = this.initialUserPortfolioMedia.filter(x=>x.userPortfolioId===this.selectedPortfolio .id);
+          res.UserPortfolioMedia.forEach(element => {
+            element.attachments= this.GetPortfolioImagePath(this.selectedPortfolio,element.userPortfolioAttachment)
+          });
+          this.userPortfolioMedia = res.UserPortfolioMedia;
+          // console.log(res)
         },
         error => {
           this.spinner.hide()
@@ -131,42 +139,23 @@ export class RdPortfolioListComponent implements OnInit {
   openEdit(data:Number){
     this.router.navigate(['/member/portfolio_edit',this._encryptDecryptService.set(data)]);
   }
-  GetPortfolioImagePath(element){
-    const imageArry=[];
-    if(element.PortfolioMedia!==''){
-      if(element.PortfolioMedia.split(',').length>1){
-        element.PortfolioMedia.split(',')
-        .forEach(data => {
-          
-          if(data.indexOf('youtu.be')===-1 && data.indexOf('youtube')===-1 && data.indexOf('pdf')===-1){
-            imageArry.push({Name:environment.apiCommon+'radianApi/media/'+this.projectFilePath+ element.PortfolioName.toString().replace(/\s/g, "")+'/'+data,IsImage:'image'});
-          }else if(data.indexOf('youtu.be')===-1 && data.indexOf('youtube')===-1 && data.indexOf('pdf')!==-1){
-            imageArry.push({Name:environment.apiCommon+'radianApi/media/'+this.projectFilePath+ element.PortfolioName.toString().replace(/\s/g, "")+'/'+data,IsImage:'pdf'});
-          } else {
-            this.embedService.embed_image(data, { image: 'mqdefault' })
-            .then(res => {
-              imageArry.push({Name:this.embedService.embed(data),IsImage:'video',Image:res.link});
-            });
-          }
-        });
-      } else {
-        
-        if(element.PortfolioMedia.indexOf('youtu.be')===-1 && element.PortfolioMedia.indexOf('youtube')===-1
-        && element.PortfolioMedia.indexOf('pdf')===-1){
-          imageArry.push({Name:environment.apiCommon+'radianApi/media/'+this.projectFilePath+ element.PortfolioName.toString().replace(/\s/g, "")+'/'+element.PortfolioMedia,IsImage:'image'});
-        }else if(element.PortfolioMedia.indexOf('youtu.be')===-1 && element.PortfolioMedia.indexOf('youtube')===-1 
-        && element.PortfolioMedia.indexOf('pdf')!==-1){
-          imageArry.push({Name:environment.apiCommon+'radianApi/media/'+this.projectFilePath+ element.PortfolioName.toString().replace(/\s/g, "")+'/'+element.PortfolioMedia,IsImage:'pdf'});
+  GetPortfolioImagePath(selectedItem:any,data: any) {
+    const imageArry = [];
+    if(data.indexOf('youtu.be')===-1 && data.indexOf('youtube')===-1
+        && data.indexOf('pdf')===-1){
+          imageArry.push({Name:environment.apiCommon+'radianApi/media/' + this.projectFilePath+ selectedItem.PortfolioName.toString().replace(/\s/g, "")+'/'+data,IsImage:'image'});
+        }else if(data.indexOf('youtu.be')===-1 && data.indexOf('youtube')===-1 
+        && data.indexOf('pdf')!==-1){
+          imageArry.push({Name:environment.apiCommon+'radianApi/media/' + this.projectFilePath+ selectedItem.PortfolioName.toString().replace(/\s/g, "")+'/'+data,IsImage:'pdf'});
         } else {
-          this.embedService.embed_image(element.PortfolioMedia, { image: 'mqdefault' })
+          this.embedService.embed_image(data, { image: 'mqdefault' })
             .then(res => {
-              imageArry.push({Name:this.embedService.embed(element.PortfolioMedia),IsImage:'video',
+              imageArry.push({Name:this.embedService.embed(data),IsImage:'video',
               Image:res.link});
             });
+          // imageArry.push(element.PortfolioMedia);
+         
         }
-       
-      }
-    }
     return imageArry;
   }
   DeletePortfolio(data){
@@ -184,7 +173,13 @@ export class RdPortfolioListComponent implements OnInit {
   downloadPdf(filePath){
     modifyPdf(filePath,PDFDocument,StandardFonts,rgb)
   }
-  
+  selectPortfolio(data:any){
+    const xData = this.initialUserPortfolioMedia.filter(x=>x.userPortfolioId===data.id);
+    xData.forEach(element => {
+        element.attachments= this.GetPortfolioImagePath(data,element.userPortfolioAttachment)
+    });
+    this.userPortfolioMedia = xData;
+  }
   ngOnDestroy() {
     var body = document.getElementsByTagName('body')[0];
     body.classList.remove('profile-page');

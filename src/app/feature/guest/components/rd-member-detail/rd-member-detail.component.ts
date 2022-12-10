@@ -76,7 +76,7 @@ export class RdMemberDetailComponent implements OnInit {
     .pipe(first())
     .subscribe(
       res => {
-        console.log(res)
+        // console.log(res)
         this.memberEvents = res.Events;
         this.memberProfiles = res.Profiles;
         this.memberDetail= res.data[0]
@@ -93,7 +93,7 @@ export class RdMemberDetailComponent implements OnInit {
         this.memberDetail.EducationDetails = this.memberDetail.EducationDetails!==''?JSON.parse(this.memberDetail.EducationDetails):[];
         this.memberDetail.ExperienceDetails = this.memberDetail.ExperienceDetails!==''?JSON.parse(this.memberDetail.ExperienceDetails):[];
         //this.memberDetail.OtherProfiles =[];
-        console.log(this.memberDetail)
+        // console.log(this.memberDetail)
         this.spinner.hide()
   
       },
