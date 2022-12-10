@@ -527,3 +527,16 @@ font-size: 14px;
 .submit-btn{
   font-size: 14px;
 }
+
+.signUp-form-control{
+  margin-bottom: 10px !important;
+  border: 1px solid #2F3C4F !important;
+  background: #ffffff !important;
+  color: #181F29 !important;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.form-group .form-control, .input-group .form-control {
+  padding: 20px 18px;
+}
