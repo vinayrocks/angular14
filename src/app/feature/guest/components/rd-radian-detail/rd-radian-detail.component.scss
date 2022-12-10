@@ -549,7 +549,34 @@ font-size: 14px;
   font-size: 14px;
 }
 .active-inactive{
-  width: 65px !important;
-  height: 65px !important;
+  width: 50px !important;
+  height: 50px !important;
 }
 
+.para-custom{
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+.icon-marker{
+  font-size: 18px;
+  margin-right: 10px;
+}
+.icon-interested{
+  font-size: 24px;
+  margin-right: 10px;;
+}
+.users-label{
+  font-size: 18px;
+  font-weight: 600;
+}
+.icon-like-share{
+  font-size:15px;
+  margin-right: 10px;
+  margin-bottom: 0px !important;
+}
+.like-share-button{
+  background-color: transparent;
+  border: 1px solid #2F3C4F !important;
+  padding: 10px 20px;
+  color: #2F3C4F;
+}
