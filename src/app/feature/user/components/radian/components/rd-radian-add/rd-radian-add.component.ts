@@ -107,9 +107,9 @@ export class RdRadianAddComponent implements OnInit {
       ProfileSkill: new FormControl(''),
       ProfileExpertise:new FormControl('', Validators.required),
       LinkedPortfolio:new FormControl('', Validators.required),
-      Education: this._formBuilder.array([]),
-      CertificationLicense: this._formBuilder.array([]),
-      Experience: this._formBuilder.array([])
+      Education: new FormControl(null),
+      CertificationLicense: new FormControl(null),
+      Experience: new FormControl(null)
     });
   }
 
@@ -179,7 +179,7 @@ export class RdRadianAddComponent implements OnInit {
     // stop here if form is invalid
     this.checkChildArrayValidation();
     if (this.addRadianFormGroup.invalid) {
-      console.log(this.addRadianFormGroup);
+      // console.log(this.addRadianFormGroup);
       this.notificationService.error('Please fill in the required fields');
       this.validateAllFormFields(this.addRadianFormGroup);
       
@@ -361,7 +361,7 @@ export class RdRadianAddComponent implements OnInit {
   }
   degreeSelect(event:any,index){
     let dx:any=this.getEducationControls()[index];
-    console.log(dx.controls)
+    // console.log(dx.controls)
     if(event.name.toLowerCase()==='other'){
       this._disableOther = true;
       dx.controls['Others'].addValidators(Validators.required);

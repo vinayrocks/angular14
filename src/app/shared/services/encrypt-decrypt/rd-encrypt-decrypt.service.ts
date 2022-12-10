@@ -30,7 +30,7 @@ export class RdEncryptDecryptService {
   }
 
   set(value){
-    // console.log(this.API_Key);
+    // // console.log(this.API_Key);
     var key = CryptoJS.enc.Utf8.parse(this.API_Key);
     var iv = CryptoJS.enc.Utf8.parse(this.API_Key);
     var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(value.toString()), key,

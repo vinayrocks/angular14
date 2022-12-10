@@ -79,7 +79,7 @@ export class RdMemberPortfolioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.routerData)
+    // console.log(this.routerData)
     this.GetPortfolioDetail();
   }
 
@@ -99,7 +99,7 @@ export class RdMemberPortfolioComponent implements OnInit {
           element.attachments= this.GetPortfolioImagePath(this.selectedPortfolio,element.userPortfolioAttachment)
         });
         this.userPortfolioMedia = res.UserPortfolioMedia;
-        console.log(this.userPortfolioMedia)
+        // console.log(this.userPortfolioMedia)
       },
       error => {
         this.spinner.hide()

@@ -34,7 +34,7 @@ export class RdMyAccountComponent implements OnInit {
         x.name === 'Semi Annual' ||
         x.name === 'Annual'
     );
-    console.log(this.membershipData)
+    // console.log(this.membershipData)
   }
 
   ngOnInit() {

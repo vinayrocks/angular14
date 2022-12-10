@@ -106,7 +106,7 @@ export class RdMemberSearchComponent implements OnInit {
     }
     this.searchMemberForm.SearchCount.setValue(SearchCount);
     const dxData = this.searchMemberFormGroup.value
-    // console.log(this.searchMemberFormGroup.value)
+    // // console.log(this.searchMemberFormGroup.value)
     dxData.SearchBySkill = dxData.SearchBySkill.radianSkillCategoryId===undefined?'':dxData.SearchBySkill.radianSkillCategoryId;
     dxData.SearchByCountry = dxData.SearchByCountry.country===undefined?'':dxData.SearchByCountry.country;
     

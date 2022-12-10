@@ -28,7 +28,7 @@ export class RdAuthenticateService {
       )
       .pipe(
         map((res) => {
-          console.log(res)
+          // console.log(res)
           if (res.status) {
             
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -160,7 +160,7 @@ export class RdAuthenticateService {
       : JSON.parse(localStorage.getItem('currentUser'));
   }
   setLocalStorageData(data) {
-    console.log(data);
+    // console.log(data);
     if (data !== null) {
      
       if (data.LinkedPortfolio === null){

@@ -14,7 +14,7 @@ export class HeaderImageSliderComponent implements OnInit,AfterViewInit {
   constructor(private scriptService:ScriptService,public location: Location,
     private router: Router) { 
     this.scriptService.load('gsap').then(data => {
-      // console.log('script loaded ', data);
+      // // console.log('script loaded ', data);
     }).catch(error => console.log(error));
 
     this._router =   this.router.events.pipe(
@@ -38,7 +38,7 @@ export class HeaderImageSliderComponent implements OnInit,AfterViewInit {
   }
   ngAfterViewInit():void{
     this.scriptService.load('cssrule','script').then(data => {
-      // console.log('script loaded ', data);
+      // // console.log('script loaded ', data);
     }).catch(error => console.log(error));
   }
 

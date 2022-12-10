@@ -186,7 +186,7 @@ export class RdRadianListComponent implements OnInit {
     this.selectedUser.CertificationDetails = JSON.parse(this.selectedUser.CertificationDetails);
     this.selectedUser.EducationDetails = JSON.parse(this.selectedUser.EducationDetails);
     this.selectedUser.ExperienceDetails = JSON.parse(this.selectedUser.ExperienceDetails);
-    console.log(this.selectedUser);
+    // console.log(this.selectedUser);
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];

@@ -77,7 +77,7 @@ export class RdRadianEditComponent implements OnInit {
     { id: 14, name: 'PhD', status: 'enabled' },
     { id: 15, name: 'Others', status: 'enabled' },
   ];
-
+  tempDegreeName:any=[];
   maxDate = new Date();
   minDate = new Date();
   _disableOther:boolean=false;
@@ -87,7 +87,7 @@ export class RdRadianEditComponent implements OnInit {
     private spinner:NgxSpinnerService,private modalService: NgbModal,
     private rdAuthenticateService: RdAuthenticateService) {
     this.skills =(skillsInterest as any).default;
-    
+    this.tempDegreeName = Object.assign([],this.degreeName);
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
     this.projectFilePath = this.currentUser.firstName + '_' + this.currentUser.username.split('@')[0] + '/Profile';
     this.routerData.Id = this.route.snapshot.paramMap.get('id');
@@ -146,15 +146,15 @@ export class RdRadianEditComponent implements OnInit {
     });
     this.userProfile.EducationDetails.forEach(element => {
       this.addEducation(element);
+      this.degreeName= this.degreeName.filter(x=>x.name.toLowerCase()!== element.EducationName.toLowerCase());
     });
     this.userProfile.ExperienceDetails.forEach(element => {
       this.addExperience(element);
     });
-    console.log(this.editRadianFormGroup.controls)
   }
 
   getUserProfile(data) {
-    this.spinner.show()
+    // this.spinner.show()
     
     this.rdUserService.getUserProfile(new RdCommon(data))
       .pipe(first())
@@ -170,6 +170,7 @@ export class RdRadianEditComponent implements OnInit {
             element.ExperienceDetails = element.ExperienceDetails === ''?[]:JSON.parse(element.ExperienceDetails);
           });
           this.userProfile = res.data[0];
+          this.userProfile.isDefaultProfile = parseInt(this.userProfile.isDefaultProfile)===1?true:false;
           this.projectPath = res.projectPath;
           this.setFormGroup();
           this.getUserPorfolio();
@@ -255,7 +256,7 @@ export class RdRadianEditComponent implements OnInit {
           this.serverFile = [];
           dxData.ProfilePicture = res.data.ProfilePicture;
           dxData.CoverPicture = res.data.CoverPicture;
-          console.log(dxData);
+          // console.log(dxData);
           this.rdUserService.addUserProfile(new RdRadian(dxData))
           .subscribe(res => {
             this.spinner.hide()
@@ -272,7 +273,8 @@ export class RdRadianEditComponent implements OnInit {
           this.notificationService.error('Something went wrong.Please try again.');
         });
     } else {
-      console.log(dxData);
+      // // console.log(dxData);
+      this.spinner.show()
       this.rdUserService.addUserProfile(new RdRadian(dxData))
       .subscribe(res => {
         this.spinner.hide()
@@ -350,7 +352,13 @@ export class RdRadianEditComponent implements OnInit {
     return (this.editRadianFormGroup.get('Education') as FormArray).controls;
   }
   deleteEducation(index:number){
-    this.educationFormarray().removeAt(index);  
+    let dxData:any = this.getEducationControls()[index];
+    this.degreeName.push(this.tempDegreeName.filter(x=>x.name.toLowerCase() === dxData.controls['EducationName'].value.name.toLowerCase())[0]);
+    this.degreeName.sort(function(a, b) { 
+      return - ( b.id - a.id);
+    });
+    this.educationFormarray().removeAt(index);
+ 
   }
 
   CertificationLicensedFormarray() : FormArray {  
@@ -401,17 +409,17 @@ export class RdRadianEditComponent implements OnInit {
   }
   degreeSelect(event:any,index){
     let dx:any=this.getEducationControls()[index];
-    console.log(dx.controls)
     if(event.name.toLowerCase()==='other'){
       this._disableOther = true;
-      dx.controls['Others'].addValidators(Validators.required);
+      dx.controls['Other'].addValidators(Validators.required);
       dx.controls['showOther'].setValue(true);
     } else {
       this._disableOther = false;
-      dx.controls['Others'].removeValidators(Validators.required);
+      dx.controls['Other'].removeValidators(Validators.required);
       dx.controls['showOther'].setValue(false);
       
     }
+    this.degreeName= this.degreeName.filter(x=>x.name.toLowerCase()!== event.name.toLowerCase());
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName('body')[0];
