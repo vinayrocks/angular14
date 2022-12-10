@@ -10,10 +10,12 @@
             <div class="wrapper">
                 <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
                 <h3 class="title">{{radianDetail.EventName}}</h3>
-                <h4>Start Date: {{radianDetail.EventStartDateTime|date:'MM/dd/yyyy hh:mm:ss'}}</h4>
                 <!-- <h4>End Date: {{radianDetail.EventStartDateTime|date:'MM/dd/yyyy hh:mm:ss'}}</h4> -->
                 <!--<p>{{selectedEvent.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
-                
+                <p class="para-custom">
+                    <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"><i class="fa fa-thumbs-up icon-like-share"></i>Like</button>&nbsp;&nbsp;
+                    <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"><i class="fa fa-share-alt icon-like-share"></i>Share</button>
+                </p>
             </div>
             <div class="row">
                 <div class="wrapper">
@@ -24,14 +26,58 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-9">
             <div class="row card portfolio">
-                <h4>About Event</h4>
-                <p>{{radianDetail.EventDescription}}</p>
-                <h4>Venue Address</h4>
-                <p>{{radianDetail.EventLocation.street}}, {{radianDetail.EventLocation.city}}, {{radianDetail.EventLocation.state}}, {{radianDetail.EventLocation.zip}},
-                     {{radianDetail.EventLocation.country}}
-                </p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>About Event</h4>
+                        <p>{{radianDetail.EventDescription}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Location</h4>
+                        <p><i class="fa fa-map-marker icon-marker"></i>{{radianDetail.EventLocation.street}}, {{radianDetail.EventLocation.city}}, {{radianDetail.EventLocation.state}}, {{radianDetail.EventLocation.zip}},
+                            {{radianDetail.EventLocation.country}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Start Date</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>End Date</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{radianDetail.EventStartDateTime|date:'EEEE, MMMM d, y'}} at {{radianDetail.EventStartDateTime|date:'hh:mm'}}
+                    </div>
+                    <div class="col-md-6">
+                        {{radianDetail.EventEndDateTime|date:'EEEE, MMMM d, y'}} at {{radianDetail.EventEndDateTime|date:'hh:mm'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row card portfolio">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Click on Intersted to stay updated about this Event</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4></h4>
+                        <button mat-button class="btn btn-primary btn-round btn-margin reset-btn">Interested</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4></h4>
+                        <i class="fa fa-hand-o-right icon-interested"></i><label class="users-label">500 Users</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

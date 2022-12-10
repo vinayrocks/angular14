@@ -145,10 +145,10 @@
                     <div class="row card portfolio">
                         <h4>Skills</h4>
                         <div class="row">
-                            <div class="col-md-4 custom-col-skills">
-                                <i class="fa fa-camera-retro"></i>
+                            <div class="col-md-4 custom-col-skills" *ngFor="let item of memberDetail.ProfileExpertise">
+                                <i class="{{item.iconClass}}"></i>
                                 <br />
-                                <h5 class="h5-custom">{{memberDetail?.ProfileSkills.name}}</h5>
+                                <h5 class="h5-custom">{{item.name}}</h5>
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                     <div class="row card portfolio" *ngIf="memberDetail.EducationDetails.length>0">
                         <h4>Educations</h4>
                         <div class="row" *ngFor="let item of memberDetail.EducationDetails;let i = index">
-                            <div class="col-md-3">
+                            <div class="col-md-5">
                                 <div class="portfolio-label">Education Name</div>
                                 <div class="row mt-top">
                                     <div class="col-md-12">
@@ -170,12 +170,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="portfolio-label">From</div>
+                            <div class="col-md-3">
+                                <div class="portfolio-label">Start Year</div>
                                 <div class="row mt-top">
                                     <div class="col-md-12">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" autocomplete="off"
+                                            <input type="text" class="form-control signUp-form-control" autocomplete="off"
                                                 #dp="bsDatepicker" [disabled]="true" [(ngModel)]="item.StartsOn"
                                                 [bsConfig]="{
                           isAnimated: true,
@@ -187,12 +187,12 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-2">
-                                <div class="portfolio-label">To</div>
+                            <div class="col-md-3">
+                                <div class="portfolio-label">End Year</div>
                                 <div class="row mt-top">
                                     <div class="col-md-12">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" autocomplete="off"
+                                            <input type="text" class="form-control signUp-form-control" autocomplete="off"
                                                 #dp="bsDatepicker" [disabled]="true" [(ngModel)]="item.EndsOn"
                                                 [bsConfig]="{
                           isAnimated: true,
@@ -231,10 +231,10 @@
                     <div class="row card portfolio">
                         <h4>Skills</h4>
                         <div class="row">
-                            <div class="col-md-4 custom-col-skills">
-                                <i class="fa fa-camera-retro"></i>
+                            <div class="col-md-4 custom-col-skills" *ngFor="let item of memberDetail.ProfileExpertise">
+                                <i class="{{item.iconClass}}"></i>
                                 <br />
-                                <h5 class="h5-custom">{{memberDetail?.ProfileSkills.name}}</h5>
+                                <h5 class="h5-custom">{{item.name}}</h5>
                             </div>
                         </div>
                     </div>
@@ -261,7 +261,7 @@
                                 <div class="row mt-top">
                                     <div class="col-md-12">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" autocomplete="off"
+                                            <input type="text" class="form-control signUp-form-control" autocomplete="off"
                                                 #dp="bsDatepicker" [disabled]="true" [(ngModel)]="item.CertifiedDate"
                                                 [bsConfig]="{
                           isAnimated: true,
@@ -312,10 +312,10 @@
                     <div class="row card portfolio">
                         <h4>Skills</h4>
                         <div class="row">
-                            <div class="col-md-4 custom-col-skills">
-                                <i class="fa fa-camera-retro"></i>
+                            <div class="col-md-4 custom-col-skills" *ngFor="let item of memberDetail.ProfileExpertise">
+                                <i class="{{item.iconClass}}"></i>
                                 <br />
-                                <h5 class="h5-custom">{{memberDetail?.ProfileSkills.name}}</h5>
+                                <h5 class="h5-custom">{{item.name}}</h5>
                             </div>
                         </div>
                     </div>
@@ -338,11 +338,11 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <div class="portfolio-label">Starts On</div>
+                                <div class="portfolio-label">Start Year</div>
                                 <div class="row mt-top">
                                     <div class="col-md-12">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" autocomplete="off"
+                                            <input type="text" class="signUp-form-control form-control" autocomplete="off"
                                                 #dp="bsDatepicker" [disabled]="true" [(ngModel)]="item.StartDate"
                                                 [bsConfig]="{
                           isAnimated: true,
@@ -355,11 +355,11 @@
 
                             </div>
                             <div class="col-md-2">
-                                <div class="portfolio-label">Ends On</div>
+                                <div class="portfolio-label">End Year</div>
                                 <div class="row mt-top">
                                     <div class="col-md-12">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" autocomplete="off"
+                                            <input type="text" class="signUp-form-control form-control" autocomplete="off"
                                                 #dp="bsDatepicker" [disabled]="true" [(ngModel)]="item.ToDate"
                                                 [bsConfig]="{
                         isAnimated: true,
