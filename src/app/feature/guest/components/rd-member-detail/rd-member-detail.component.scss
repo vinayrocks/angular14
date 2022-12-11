@@ -481,11 +481,11 @@ font-size: 14px;
 }
 
 .conn-req-card{
-  border:1px solid #000;
   height: 450px;
   width: 100%;
   border-radius: 10px;
   padding: 10px 35px;
+  box-shadow: 0 0 3px #0000004d!important;
 }
 
 .user-image{
@@ -539,4 +539,22 @@ font-size: 14px;
 
 .form-group .form-control, .input-group .form-control {
   padding: 20px 18px;
+}
+
+.icon-like-share{
+  font-size:15px;
+  margin-right: 10px;
+  margin-bottom: 0px !important;
+}
+.like-share-button{
+  padding: 10px 20px;
+}
+
+.para-custom{
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.connected-custom{
+  background-color: #7ed957;
 }
