@@ -13,7 +13,7 @@ export class RdRadian {
   Experience: any='';
   Email:String='';
   FirstName:String='';
-  isDefaultProfile:Number=0;
+  isDefaultProfile:boolean=false;
   public rdRadian: RdRadian[];
   constructor(input: any){
     Object.assign(this, input);

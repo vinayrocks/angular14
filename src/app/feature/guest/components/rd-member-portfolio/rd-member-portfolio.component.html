@@ -35,83 +35,37 @@
                                 <img src="{{elem.attachments[0].Image}}">
                                 <a></a>
                             </div>
-
-                            <div class="row row-rating">
-                                <div class="col-md-6">
-                                    <ng-template #t let-fill="fill">
-                                        <i class="bi-heart-fill">
-                                            <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
-                                        </i>
-                                    </ng-template>
-                                    <ng-template #popContent>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <ng-template #t let-fill="fill">
-                                                    <i class="bi-heart-fill">
-                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled"
-                                                            [style.width.%]="fill"></i>
-                                                    </i>
-                                                </ng-template>
-                                                <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5">
-                                                </ngb-rating>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <ng-template #t let-fill="fill">
-                                                    <i class="bi-heart-fill">
-                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled"
-                                                            [style.width.%]="fill"></i>
-                                                    </i>
-                                                </ng-template>
-                                                <ngb-rating rate="4" [starTemplate]="t" [readonly]="true" [max]="5">
-                                                </ngb-rating>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <ng-template #t let-fill="fill">
-                                                    <i class="bi-heart-fill">
-                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled"
-                                                            [style.width.%]="fill"></i>
-                                                    </i>
-                                                </ng-template>
-                                                <ngb-rating rate="3" [starTemplate]="t" [readonly]="true" [max]="5">
-                                                </ngb-rating>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <ng-template #t let-fill="fill">
-                                                    <i class="bi-heart-fill">
-                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled"
-                                                            [style.width.%]="fill"></i>
-                                                    </i>
-                                                </ng-template>
-                                                <ngb-rating rate="2" [starTemplate]="t" [readonly]="true" [max]="5">
-                                                </ngb-rating>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <ng-template #t let-fill="fill">
-                                                    <i class="bi-heart-fill">
-                                                        <i *ngIf="fill > 0" class="bi-heart-fill filled"
-                                                            [style.width.%]="fill"></i>
-                                                    </i>
-                                                </ng-template>
-                                                <ngb-rating rate="1" [starTemplate]="t" [readonly]="true" [max]="5">
-                                                </ngb-rating>
-                                            </div>
-                                        </div>
-                                    </ng-template>
-                                    <ngb-rating rate="4" [starTemplate]="t" [readonly]="false" [max]="5"
-                                        [ngbPopover]="popContent" popoverTitle="Loved By" container="body"
-                                        [openDelay]="300" [closeDelay]="500"></ngb-rating>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="rating-custom">4 out of 5</label>
-                                </div>
+                        </div>
+                        <div class="row row-rating">
+                            <div class="col-md-6">
+                                <ng-template #t let-fill="fill">
+                                    <i class="bi-heart-fill">
+                                        <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
+                                    </i>
+                                </ng-template>
+                               
+                                <ngb-rating rate="{{elem.userPortfolioRating}}" [starTemplate]="t" [readonly]="false" [max]="5"
+                                     (click)="submitRating(elem)"
+                                    [(ngModel)]="elem.userPortfolioRating"></ngb-rating>
+                            </div>
+                            <div class="col-md-6">
+                                <ng-template #popContent>
+                                    <ngx-charts-bar-horizontal
+                                    [view]="[200,100]"
+                                    [results]="single"
+                                    [gradient]="true"
+                                    [xAxis]="false"
+                                    [yAxis]="true"
+                                    [legend]="false"
+                                    [showXAxisLabel]="false"
+                                    [showYAxisLabel]="false"
+                                    [xAxisLabel]="false"
+                                    [yAxisLabel]="true"
+                                    [showDataLabel]="true"
+                                    >
+                                    </ngx-charts-bar-horizontal>
+                                </ng-template>
+                                <label class="rating-custom" [ngbPopover]="popContent" container="body"  [openDelay]="100" [closeDelay]="100">{{elem.userPortfolioRating}} out of 5</label>
                             </div>
                         </div>
                     </div>
