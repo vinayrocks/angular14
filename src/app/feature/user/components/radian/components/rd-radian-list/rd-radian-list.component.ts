@@ -154,9 +154,23 @@ export class RdRadianListComponent implements OnInit {
               element.LinkedPortfolio === ""
                 ? []
                 : JSON.parse(element.LinkedPortfolio);
-            element.CertificationDetails = JSON.parse(element.CertificationDetails);
-            element.EducationDetails = JSON.parse(element.EducationDetails);
-            element.ExperienceDetails = JSON.parse(element.ExperienceDetails);
+
+                element.CertificationDetails =
+                element.CertificationDetails === ""
+                  ? []
+                  : JSON.parse(element.CertificationDetails);
+              element.EducationDetails =
+                element.EducationDetails === ""
+                  ? []
+                  : JSON.parse(element.EducationDetails);
+              element.ExperienceDetails =
+                element.ExperienceDetails === ""
+                  ? []
+                  : JSON.parse(element.ExperienceDetails);
+
+            // element.CertificationDetails = JSON.parse(element.CertificationDetails);
+            // element.EducationDetails = JSON.parse(element.EducationDetails);
+            // element.ExperienceDetails = JSON.parse(element.ExperienceDetails);
           });
          
           this.userProfiles = res.data;
