@@ -96,6 +96,7 @@ export class RdEventListComponent implements OnInit {
             element.EventSkill = element.EventSkill === '' ? [] : JSON.parse(element.EventSkill);
             element.EventCategory = element.EventCategory === '' ? [] : JSON.parse(element.EventCategory);
             element.EventMedia = this.GetEventImagePath(element);
+            element.EventLocation = element.EventLocation === '' ? [] : JSON.parse(element.EventLocation);
           });
           this.GetUserList(res.data[0])
           this.projectPath = res.projectPath;
