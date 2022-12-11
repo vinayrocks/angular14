@@ -183,7 +183,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control date-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+
+                      <input type="text" class="form-control" autocomplete="off" #StartsOn="bsDatepicker"
                         formControlName="StartsOn" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -206,7 +207,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control date-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+
+                      <input type="text" class="form-control" autocomplete="off" #EndsOn="bsDatepicker" [minDate]="getDate(item.controls['StartsOn'].value)"
                         formControlName="EndsOn" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -267,7 +269,8 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="form-control date-control" #dp="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate"
+
+                      <input type="text" class="form-control" #CertifiedDate="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate"
                         formControlName="CertifiedDate" [bsConfig]="{
                           isAnimated: true,
                           dateInputFormat: 'DD/MM/YYYY'
@@ -346,7 +349,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control date-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+
+                      <input type="text" class="form-control" autocomplete="off" #StartDate="bsDatepicker" [minDate]="minDate"
                         [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -368,7 +372,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="form-control date-control" autocomplete="off" #dp="bsDatepicker" [minDate]="minDate"
+
+                      <input type="text" class="form-control" autocomplete="off" #ToDate="bsDatepicker" [minDate]="minDate"
                         formControlName="ToDate" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',

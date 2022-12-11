@@ -92,9 +92,9 @@ export class RdRadianAddComponent implements OnInit {
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.add('navbar-transparent');
     this.getUserPorfolio();
-    this.addEducation();
-    this.addCertificationLicensed();
-    this.addExperience();
+    // this.addEducation();
+    // this.addCertificationLicensed();
+    // this.addExperience();
 
   }
 
@@ -107,9 +107,9 @@ export class RdRadianAddComponent implements OnInit {
       ProfileSkill: new FormControl(''),
       ProfileExpertise:new FormControl('', Validators.required),
       LinkedPortfolio:new FormControl('', Validators.required),
-      Education: new FormControl(null),
-      CertificationLicense: new FormControl(null),
-      Experience: new FormControl(null)
+      Education: new FormControl(''),
+      CertificationLicense: new FormControl(''),
+      Experience: new FormControl('')
     });
   }
 
@@ -177,7 +177,7 @@ export class RdRadianAddComponent implements OnInit {
   onSubmit() {
     const dxData = this.addRadianFormGroup.value;
     // stop here if form is invalid
-    this.checkChildArrayValidation();
+    // this.checkChildArrayValidation();
     if (this.addRadianFormGroup.invalid) {
       // console.log(this.addRadianFormGroup);
       this.notificationService.error('Please fill in the required fields');
@@ -186,16 +186,6 @@ export class RdRadianAddComponent implements OnInit {
       return;
     } else {
       dxData.ProfileSkill = dxData.ProfileSkill.radianSkillCategoryId;
-      dxData.Education.map((x:any)=>x.EducationName = x.EducationName.name);
-      // dxData.Education.map((x:any)=>x.StartsOn = new Date(x.StartsOn).getFullYear());
-      // dxData.Education.map((x:any)=>x.EndsOn = new Date(x.EndsOn).getFullYear());
-      // dxData.Experience.map((x:any)=>x.StartDate = new Date(x.StartDate).getFullYear());
-      // dxData.Experience.map((x:any)=>x.ToDate = new Date(x.ToDate).getFullYear());
-      // dxData.CertificationLicense.map((x:any)=>x.CertifiedDate = moment(x.CertifiedDate).format('YYYY-MM-DD'));
-
-      dxData.Education = JSON.stringify(dxData.Education);
-      dxData.Experience = JSON.stringify(dxData.Experience);
-      dxData.CertificationLicense = JSON.stringify(dxData.CertificationLicense);
     }
     if (this.serverFile.length > 0) {
       this.spinner.show()
@@ -204,12 +194,8 @@ export class RdRadianAddComponent implements OnInit {
         .subscribe(
           res => {
             this.spinner.hide()
-            // const pp = res.data.ProfilePicture;
-            // const cc = res.data.CoverPicture;
             dxData.ProfilePicture = res.data.ProfilePicture;
             dxData.CoverPicture = res.data.CoverPicture
-            // this.addRadianForm.ProfilePicture.setValue(pp);
-            // this.addRadianForm.CoverPicture.setValue(cc);
             this.rdUserService.addUserProfile(new RdRadian(dxData))
               .subscribe(res => {
       
@@ -227,9 +213,10 @@ export class RdRadianAddComponent implements OnInit {
             this.notificationService.error('Something went wrong.Please try again.');
           });
     } else {
-      this.spinner.show()
+      // this.spinner.show()
       dxData.ProfilePicture = '';
-      dxData.CoverPicture = ''
+      dxData.CoverPicture = '';
+      console.log(dxData)
       this.rdUserService.addUserProfile(new RdRadian(dxData))
         .subscribe(res => {
           this.spinner.hide()
@@ -253,20 +240,20 @@ export class RdRadianAddComponent implements OnInit {
       }
     });
   }
-  checkChildArrayValidation(){
-    const dx = this.getEducationControls();
-    dx.forEach((el:any) => {
-      this.validateAllFormFields(el);
-    });
-    const dxp = this.getCertificationLicensedControls();
-    dxp.forEach((el:any) => {
-      this.validateAllFormFields(el);
-    });
-    const dxexp = this.getExperienceControls();
-    dxexp.forEach((el:any) => {
-      this.validateAllFormFields(el);
-    });
-  }
+  // checkChildArrayValidation(){
+  //   const dx = this.getEducationControls();
+  //   dx.forEach((el:any) => {
+  //     this.validateAllFormFields(el);
+  //   });
+  //   const dxp = this.getCertificationLicensedControls();
+  //   dxp.forEach((el:any) => {
+  //     this.validateAllFormFields(el);
+  //   });
+  //   const dxexp = this.getExperienceControls();
+  //   dxexp.forEach((el:any) => {
+  //     this.validateAllFormFields(el);
+  //   });
+  // }
   onReset() {
     this.createFormGroup();
   }
@@ -290,69 +277,69 @@ export class RdRadianAddComponent implements OnInit {
     this.modalService.open(content, { centered: true,size: 'lg' })
   }
 
-  educationFormarray() : FormArray {
-    return this.addRadianFormGroup.get("Education") as FormArray  
-  }  
-  newEducation(): FormGroup {  
-    return this._formBuilder.group({  
-      EducationName: ['',Validators.required],  
-      Other: [''],
-      StartsOn: ['',Validators.required],
-      EndsOn:['',Validators.required],
-      showOther:[false]
-    })  
-  }  
+  // educationFormarray() : FormArray {
+  //   return this.addRadianFormGroup.get("Education") as FormArray  
+  // }  
+  // newEducation(): FormGroup {  
+  //   return this._formBuilder.group({  
+  //     EducationName: ['',Validators.required],  
+  //     Other: [''],
+  //     StartsOn: ['',Validators.required],
+  //     EndsOn:['',Validators.required],
+  //     showOther:[false]
+  //   })  
+  // }  
      
-  addEducation() {  
-    this.educationFormarray().push(this.newEducation());  
-  }
-  getEducationControls() {
-    return (this.addRadianFormGroup.get('Education') as FormArray).controls;
-  }
-  deleteEducation(index:number){
-    this.educationFormarray().removeAt(index);  
-  }
+  // addEducation() {  
+  //   this.educationFormarray().push(this.newEducation());  
+  // }
+  // getEducationControls() {
+  //   return (this.addRadianFormGroup.get('Education') as FormArray).controls;
+  // }
+  // deleteEducation(index:number){
+  //   this.educationFormarray().removeAt(index);  
+  // }
 
-  CertificationLicensedFormarray() : FormArray {  
-    return this.addRadianFormGroup.get("CertificationLicense") as FormArray  
-  }  
-  newCertificationLicensed(): FormGroup {  
-    return this._formBuilder.group({  
-      CertificationName: ['',Validators.required],  
-      CertifiedDate: ['',Validators.required],
-      CertificationLicenseNumber:['']  
-    })  
-  }  
+  // CertificationLicensedFormarray() : FormArray {  
+  //   return this.addRadianFormGroup.get("CertificationLicense") as FormArray  
+  // }  
+  // newCertificationLicensed(): FormGroup {  
+  //   return this._formBuilder.group({  
+  //     CertificationName: ['',Validators.required],  
+  //     CertifiedDate: ['',Validators.required],
+  //     CertificationLicenseNumber:['']  
+  //   })  
+  // }  
      
-  addCertificationLicensed() {  
-    this.CertificationLicensedFormarray().push(this.newCertificationLicensed());  
-  }
-  getCertificationLicensedControls() {
-    return (this.addRadianFormGroup.get('CertificationLicense') as FormArray).controls;
-  }
-  deleteCertificationLicensed(index:number){
-    this.CertificationLicensedFormarray().removeAt(index);  
-  }
-  ExperienceFormarray() : FormArray {  
-    return this.addRadianFormGroup.get("Experience") as FormArray  
-  }  
-  newExperience(): FormGroup {  
-    return this._formBuilder.group({  
-      ExperienceName: ['',Validators.required],  
-      StartDate: ['',Validators.required],
-      ToDate:['',Validators.required]  
-    })  
-  }  
+  // addCertificationLicensed() {  
+  //   this.CertificationLicensedFormarray().push(this.newCertificationLicensed());  
+  // }
+  // getCertificationLicensedControls() {
+  //   return (this.addRadianFormGroup.get('CertificationLicense') as FormArray).controls;
+  // }
+  // deleteCertificationLicensed(index:number){
+  //   this.CertificationLicensedFormarray().removeAt(index);  
+  // }
+  // ExperienceFormarray() : FormArray {  
+  //   return this.addRadianFormGroup.get("Experience") as FormArray  
+  // }  
+  // newExperience(): FormGroup {  
+  //   return this._formBuilder.group({  
+  //     ExperienceName: ['',Validators.required],  
+  //     StartDate: ['',Validators.required],
+  //     ToDate:['',Validators.required]  
+  //   })  
+  // }  
      
-  addExperience() {  
-    this.ExperienceFormarray().push(this.newExperience());  
-  }
-  getExperienceControls() {
-    return (this.addRadianFormGroup.get('Experience') as FormArray).controls;
-  }
-  deleteExperience(index:number){
-    this.ExperienceFormarray().removeAt(index);  
-  }
+  // addExperience() {  
+  //   this.ExperienceFormarray().push(this.newExperience());  
+  // }
+  // getExperienceControls() {
+  //   return (this.addRadianFormGroup.get('Experience') as FormArray).controls;
+  // }
+  // deleteExperience(index:number){
+  //   this.ExperienceFormarray().removeAt(index);  
+  // }
   onOpenCalendar(container) {
     container.monthSelectHandler = (event: any): void => {
       container._store.dispatch(container._actions.select(event.date));
@@ -360,18 +347,18 @@ export class RdRadianAddComponent implements OnInit {
     container.setViewMode('year');
   }
   degreeSelect(event:any,index){
-    let dx:any=this.getEducationControls()[index];
+    // let dx:any=this.getEducationControls()[index];
     // console.log(dx.controls)
-    if(event.name.toLowerCase()==='other'){
-      this._disableOther = true;
-      dx.controls['Others'].addValidators(Validators.required);
-      dx.controls['showOther'].setValue(true);
-    } else {
-      this._disableOther = false;
-      dx.controls['Others'].removeValidators(Validators.required);
-      dx.controls['showOther'].setValue(false);
+    // if(event.name.toLowerCase()==='other'){
+    //   this._disableOther = true;
+    //   dx.controls['Others'].addValidators(Validators.required);
+    //   dx.controls['showOther'].setValue(true);
+    // } else {
+    //   this._disableOther = false;
+    //   dx.controls['Others'].removeValidators(Validators.required);
+    //   dx.controls['showOther'].setValue(false);
       
-    }
+    // }
   }
   close(modal:any){
     modal.dismiss('Cross click');

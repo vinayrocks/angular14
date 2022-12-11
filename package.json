@@ -31,6 +31,7 @@
     "@kolkov/angular-editor": "^3.0.0-beta.0",
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.11.6",
+    "@swimlane/ngx-charts": "^20.1.2",
     "bootstrap": "^5.2.2",
     "crypto-js": "^4.1.1",
     "font-awesome": "^4.7.0",
@@ -64,7 +65,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.1",
-    "@angular/cli": "~14.2.1",
+    "@angular/cli": "^15.0.1",
     "@angular/compiler-cli": "^14.0.0",
     "@angular/localize": "^14.2.1",
     "@capacitor/cli": "^4.3.0",

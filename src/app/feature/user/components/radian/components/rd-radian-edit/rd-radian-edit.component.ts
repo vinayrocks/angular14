@@ -14,6 +14,7 @@ import { RdAuthenticateService } from 'src/app/shared/services/authentication/rd
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 @Component({
   selector: 'app-rd-radian-edit',
   templateUrl: './rd-radian-edit.component.html',
@@ -94,7 +95,6 @@ export class RdRadianEditComponent implements OnInit {
     if (this.routerData.Id !== '') {
       this.routerData.Id = this._encryptDecryptService.get(this.routerData.Id);
       this.routerData.UserId = this.currentUser.id;
-      this.getUserProfile(this.routerData);
       this.editRadianFormGroup = this._formBuilder.group({
         Id: [this.routerData.Id, Validators.required],
         ProfileName: [''],
@@ -108,6 +108,7 @@ export class RdRadianEditComponent implements OnInit {
         CertificationLicense: this._formBuilder.array([]),
         Experience: this._formBuilder.array([])
       });
+      this.getUserProfile(this.routerData);
     } else {
       this.router.navigate(['/member/radian_view']);
     }
@@ -118,8 +119,12 @@ export class RdRadianEditComponent implements OnInit {
     var navbar = document.getElementsByTagName('nav')[0];
     navbar.classList.add('navbar-transparent');
   }
+  getDate(value:any){
+    return new Date(value);
+  }
   setFormGroup() {
-    this.editRadianFormGroup.controls['ProfileSkill'].setValue(this.userProfile.ProfileSkill.name);
+   
+    this.editRadianFormGroup.controls['ProfileSkill'].setValue(this.userProfile.ProfileSkill.name===undefined?'':this.userProfile.ProfileSkill.name);
     this.editRadianFormGroup.controls['ProfileName'].setValue(this.userProfile.ProfileName);
     this.editRadianFormGroup.controls['ProfilePicture'].setValue(this.userProfile.ProfilePicture);
     this.editRadianFormGroup.controls['CoverPicture'].setValue(this.userProfile.CoverPicture);
@@ -140,17 +145,20 @@ export class RdRadianEditComponent implements OnInit {
         this.tempSubCategory.push({ 'Id': element.id, 'name': element.subCategoryName, 'isChecked': false });
       }
     });
-
-    this.userProfile.CertificationDetails.forEach(element => {
-      this.addCertificationLicensed(element);
-    });
-    this.userProfile.EducationDetails.forEach(element => {
-      this.addEducation(element);
-      this.degreeName= this.degreeName.filter(x=>x.name.toLowerCase()!== element.EducationName.toLowerCase());
-    });
-    this.userProfile.ExperienceDetails.forEach(element => {
-      this.addExperience(element);
-    });
+    if(this.userProfile.isDefaultProfile){
+      this.userProfile.CertificationDetails.forEach(element => {
+        this.addCertificationLicensed(element);
+      });
+      this.userProfile.EducationDetails.forEach(element => {
+        this.addEducation(element);
+        console.log(element)
+        this.degreeName= this.degreeName.filter(x=>x.name.toLowerCase()!== element.EducationName.toLowerCase());
+      });
+      this.userProfile.ExperienceDetails.forEach(element => {
+        this.addExperience(element);
+      });
+    }
+    console.log(this.editRadianFormGroup.controls)
   }
 
   getUserProfile(data) {
@@ -160,17 +168,21 @@ export class RdRadianEditComponent implements OnInit {
       .pipe(first())
       .subscribe(
         res => {
-          res.data.forEach(element => {
-            element.ProfileExpertise = element.ProfileExpertise === ''?[]:JSON.parse(element.ProfileExpertise);
-            element.ProfileSkill = element.ProfileSkill === ''?[]:JSON.parse(element.ProfileSkill);
-            element.LinkedPortfolio = element.LinkedPortfolio === ''?[]:JSON.parse(element.LinkedPortfolio);
-
-            element.CertificationDetails = element.CertificationDetails === ''?[]:JSON.parse(element.CertificationDetails);
-            element.EducationDetails = element.EducationDetails === ''?[]:JSON.parse(element.EducationDetails);
-            element.ExperienceDetails = element.ExperienceDetails === ''?[]:JSON.parse(element.ExperienceDetails);
-          });
+          res.data[0].isDefaultProfile = parseInt(res.data[0].isDefaultProfile)===1?true:false;
+          if(res.data[0].isDefaultProfile){
+              res.data.forEach(element => {
+                element.ProfileExpertise = element.ProfileExpertise === ''?'':JSON.parse(element.ProfileExpertise);
+                element.ProfileSkill = element.ProfileSkill === ''?'':JSON.parse(element.ProfileSkill);
+                element.LinkedPortfolio = element.LinkedPortfolio === ''?'':JSON.parse(element.LinkedPortfolio);
+    
+                element.CertificationDetails = element.CertificationDetails === ''?'':JSON.parse(element.CertificationDetails);
+                element.EducationDetails = element.EducationDetails === ''?'':JSON.parse(element.EducationDetails);
+                element.ExperienceDetails = element.ExperienceDetails === ''?'':JSON.parse(element.ExperienceDetails);
+              });
+          }
+         
           this.userProfile = res.data[0];
-          this.userProfile.isDefaultProfile = parseInt(this.userProfile.isDefaultProfile)===1?true:false;
+          console.log(this.userProfile)
           this.projectPath = res.projectPath;
           this.setFormGroup();
           this.getUserPorfolio();
@@ -181,9 +193,7 @@ export class RdRadianEditComponent implements OnInit {
   }
 
   getSkillSubCategory(event: any) {
-    this.skillsSubcategory = this.skills.filter(function (item) {
-      return item.radianSkillCategoryId === event.radianSkillCategoryId;
-    })[0].radianSkillSubCategories;
+    this.skillsSubcategory = event.radianSkillSubCategories;
   }
   onSelectPortfolio(event, item: any){
     if (event.target.checked) {
@@ -205,8 +215,8 @@ export class RdRadianEditComponent implements OnInit {
       .pipe(first())
       .subscribe(
         res => {
-          
-          this.spinner.hide()
+          // console.log(res.data)
+          this.spinner.hide(res)
           this.userPortfolio = res.data;
           var dbData = [];
           dbData = this.userProfile.LinkedPortfolio;
@@ -226,24 +236,37 @@ export class RdRadianEditComponent implements OnInit {
         });
   }
   onSubmit() {
+    // console.log(this.editRadianFormGroup)
+    const edData= this.editRadianFormGroup.get("Education") as FormArray ;
+    edData.controls.map((x:any)=>x.controls['StartsOn'].setValue(moment(x.controls['StartsOn'].value).format("YYYY-MM-DD HH:mm:ss")));
+    edData.controls.map((x:any)=>x.controls['EndsOn'].setValue(moment(x.controls['EndsOn'].value).format("YYYY-MM-DD HH:mm:ss")));
+
+    const certData= this.editRadianFormGroup.get("CertificationLicense") as FormArray ;
+    certData.controls.map((x:any)=>x.controls['CertifiedDate'].setValue(moment(x.controls['CertifiedDate'].value).format("YYYY-MM-DD HH:mm:ss")));
+
+    const expData= this.editRadianFormGroup.get("Experience") as FormArray ;
+    expData.controls.map((x:any)=>x.controls['StartDate'].setValue(moment(x.controls['StartDate'].value).format("YYYY-MM-DD HH:mm:ss")));
+    expData.controls.map((x:any)=>x.controls['ToDate'].setValue(moment(x.controls['ToDate'].value).format("YYYY-MM-DD HH:mm:ss")));
+
     const dxData = this.editRadianFormGroup.value;
+    console.log(this.editRadianFormGroup)
     // stop here if form is invalid
     if (this.editRadianFormGroup.invalid) {
       this.notificationService.error('Please fill in the required fields');
       this.validateAllFormFields(this.editRadianFormGroup);
       return;
     }else {
-      dxData.ProfileSkill = dxData.ProfileSkill.radianSkillCategoryId;
-      dxData.Education.map((x:any)=>x.EducationName = x.EducationName.name);
-      // dxData.Education.map((x:any)=>x.StartsOn = new Date(x.StartsOn).getFullYear());
-      // dxData.Education.map((x:any)=>x.EndsOn = new Date(x.EndsOn).getFullYear());
-      // dxData.Experience.map((x:any)=>x.StartDate = new Date(x.StartDate).getFullYear());
-      // dxData.Experience.map((x:any)=>x.ToDate = new Date(x.ToDate).getFullYear());
-      // dxData.CertificationLicense.map((x:any)=>x.CertifiedDate = moment(x.CertifiedDate).format('YYYY-MM-DD'));
-
-      dxData.Education = JSON.stringify(dxData.Education);
-      dxData.Experience = JSON.stringify(dxData.Experience);
-      dxData.CertificationLicense = JSON.stringify(dxData.CertificationLicense);
+      dxData.ProfileSkill = dxData.ProfileSkill.radianSkillCategoryId===undefined
+      ?this.skills.filter(function (item) {
+        return item.radianSkillCategoryName === dxData.ProfileSkill;
+      })[0].radianSkillCategoryId:dxData.ProfileSkill.radianSkillCategoryId;
+      if(this.userProfile.isDefaultProfile){
+        dxData.Education.map((x:any)=>x.EducationName = x.EducationName.name===undefined?x.EducationName:x.EducationName.name);
+        dxData.Education = JSON.stringify(dxData.Education);
+        dxData.Experience = JSON.stringify(dxData.Experience);
+        dxData.CertificationLicense = JSON.stringify(dxData.CertificationLicense);
+      }
+      
     }
     if(this.serverFile.length!=0){
       this.spinner.show()
@@ -256,7 +279,6 @@ export class RdRadianEditComponent implements OnInit {
           this.serverFile = [];
           dxData.ProfilePicture = res.data.ProfilePicture;
           dxData.CoverPicture = res.data.CoverPicture;
-          // console.log(dxData);
           this.rdUserService.addUserProfile(new RdRadian(dxData))
           .subscribe(res => {
             this.spinner.hide()
@@ -273,8 +295,9 @@ export class RdRadianEditComponent implements OnInit {
           this.notificationService.error('Something went wrong.Please try again.');
         });
     } else {
-      // // console.log(dxData);
       this.spinner.show()
+      dxData.isDefaultProfile = this.userProfile.isDefaultProfile;
+      console.log(new RdRadian(dxData))
       this.rdUserService.addUserProfile(new RdRadian(dxData))
       .subscribe(res => {
         this.spinner.hide()
@@ -336,6 +359,7 @@ export class RdRadianEditComponent implements OnInit {
     return this.editRadianFormGroup.get("Education") as FormArray  
   }  
   newEducation(item): FormGroup {  
+    console.log(item)
     return this._formBuilder.group({  
       EducationName: [item!==null?item.EducationName:'',Validators.required],  
       Other: [item!==null?item.Other:''],
@@ -420,6 +444,7 @@ export class RdRadianEditComponent implements OnInit {
       
     }
     this.degreeName= this.degreeName.filter(x=>x.name.toLowerCase()!== event.name.toLowerCase());
+    console.log(this.editRadianFormGroup)
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName('body')[0];

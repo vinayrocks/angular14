@@ -140,6 +140,7 @@ export class RdRadianListComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res) => {
+          console.log(res.data)
           res.data.forEach((element) => {
             element.ProfileExpertise =
               element.ProfileExpertise === ""
@@ -153,7 +154,11 @@ export class RdRadianListComponent implements OnInit {
               element.LinkedPortfolio === ""
                 ? []
                 : JSON.parse(element.LinkedPortfolio);
+            element.CertificationDetails = JSON.parse(element.CertificationDetails);
+            element.EducationDetails = JSON.parse(element.EducationDetails);
+            element.ExperienceDetails = JSON.parse(element.ExperienceDetails);
           });
+         
           this.userProfiles = res.data;
           this.selectedUser = res.data[0];
           this.projectPath = res.projectPath;

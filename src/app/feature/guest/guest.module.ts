@@ -29,6 +29,7 @@ import { RdConversationComponent } from './components/rd-conversation/rd-convers
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { CarouselModule } from 'primeng/carousel';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [RdRadianUpdateComponent, RdMemberSearchComponent, RdHomeComponent,
     RdGuestLayoutComponent, RdAboutUsComponent, RdContactUsComponent, RdHowItWorksComponent,
@@ -49,6 +50,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     SelectDropDownModule,
     CarouselModule,
     BsDatepickerModule,
+    NgxChartsModule,
     SharedModule.forRoot()
   ]
 })

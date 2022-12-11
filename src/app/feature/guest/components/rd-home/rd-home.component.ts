@@ -8,6 +8,7 @@ import { RdUserService } from 'src/app/shared/services/user/rd-user-service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { EmbedVideoService } from 'ngx-embed-video';
+import { RdAuthenticateService } from 'src/app/shared/services/authentication/rd-authenticate.service';
 @Component({
   selector: 'app-rd-home',
   templateUrl: './rd-home.component.html',
@@ -44,10 +45,11 @@ export class RdHomeComponent implements OnInit {
   data : number;
   radianUpdates:any;
   loading:Boolean=false;
+  currentUser:any=[];
   constructor(private notificationService: NotificationService,private rdUserService: RdUserService,
-    private _formBuilder: FormBuilder,private embedService: EmbedVideoService,) {
+    private _formBuilder: FormBuilder,private embedService: EmbedVideoService,private rdAuthenticateService:RdAuthenticateService) {
     this.data=0;
-    
+    this.currentUser = this.rdAuthenticateService.getLocalStorageData();
      //emit 0 after 1 second then complete, since no second argument is supplied
       const source = timer(5000,5000);
       //output: 0
@@ -173,6 +175,12 @@ export class RdHomeComponent implements OnInit {
     
     return results;
 }
+// openSign(){
+//   console.log(this.currentUser)
+//   if (this.currentUser === null) {
+//     window.location.href = '/account/signup';
+//   }
+// }
   ngOnDestroy(){
     var body = document.getElementsByTagName('body')[0];
     body.classList.remove('landing-page');

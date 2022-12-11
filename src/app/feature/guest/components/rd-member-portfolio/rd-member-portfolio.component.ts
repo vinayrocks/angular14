@@ -69,6 +69,28 @@ export class RdMemberPortfolioComponent implements OnInit {
     numScroll: 1,
   }];
   userPortfolioMedia:any=[];
+  single = [
+    {
+      "name": "5 Star",
+      "value": 49
+    },
+    {
+      "name": "4 Star",
+      "value": 10
+    },
+    {
+      "name": "3 Star",
+      "value": 30
+    } ,
+    {
+      "name": "2 Star",
+      "value": 11
+    },
+    {
+      "name": "1 Star",
+      "value": 0
+    } 
+  ];
   constructor(private embedService: EmbedVideoService, private route: ActivatedRoute,
     private rdUserService: RdUserService,private rdAuthenticateService: RdAuthenticateService,
     private _encryptDecryptService: RdEncryptDecryptService,private spinner:NgxSpinnerService,
@@ -84,13 +106,13 @@ export class RdMemberPortfolioComponent implements OnInit {
   }
 
   GetPortfolioDetail(){
-    this.spinner.show()
+    // this.spinner.show()
     this.rdUserService.getPortfolioDetail(new RdGetPortfolio(this.routerData))
     .pipe(first())
     .subscribe(
       res => {
       
-        this.spinner.hide()
+        // this.spinner.hide()
         // res.data.forEach(element => {
         //   element.userPortfolioAttachment=element.userPortfolioAttachment === ''?[]:this.GetPortfolioImagePath(element);
         // });
@@ -98,6 +120,7 @@ export class RdMemberPortfolioComponent implements OnInit {
         res.UserPortfolioMedia.forEach(element => {
           element.attachments= this.GetPortfolioImagePath(this.selectedPortfolio,element.userPortfolioAttachment)
         });
+        console.log(res.UserPortfolioMedia)
         this.userPortfolioMedia = res.UserPortfolioMedia;
         // console.log(this.userPortfolioMedia)
       },
@@ -118,28 +141,6 @@ export class RdMemberPortfolioComponent implements OnInit {
       dialogConfig.data = { imageArray: data, imageActive: index }
     this.matDialog.open(PopupImageSliderComponent, dialogConfig);
   }
-  // GetPortfolioImagePath(element){
-  //   const imageArry=[];
-  //   if(element.userPortfolioAttachment.split(',').length>1){
-  //     element.userPortfolioAttachment.split(',')
-  //     .forEach(data => {
-  //       if(data.indexOf('youtu.be')===-1 && data.indexOf('youtube')===-1){
-  //         imageArry.push(environment.apiCommon+'radianApi/media/'+element.userFirstName+'_'+element.userEmail.split('@')[0]+'/Portfolio/'+ element.userPortfolioName.toString()+'/'+data);
-  //       } else {
-  //         imageArry.push(data);
-  //       }
-        
-  //     });
-  //   } else {
-  //     if(element.userPortfolioAttachment.indexOf('youtu.be')===-1 && element.userPortfolioAttachment.indexOf('youtube')===-1){
-  //       imageArry.push(environment.apiCommon+'radianApi/media/'+element.userFirstName+'_'+element.userEmail+'/Portfolio/'+ element.userPortfolioName.toString()+'/'+element);
-  //     } else {
-  //       imageArry.push(element.userPortfolioAttachment);
-  //     }
-     
-  //   }
-  //   return imageArry;
-  // }
 
   GetPortfolioImagePath(selectedItem:any,data: any) {
     const imageArry = [];
@@ -159,6 +160,14 @@ export class RdMemberPortfolioComponent implements OnInit {
          
         }
     return imageArry;
+  }
+
+  submitRating(event:any){
+    event.userPortfolioRating = event.userPortfolioRating.toString();
+    this.rdUserService.submitRating(event)
+      .subscribe(res => {
+        this.GetPortfolioDetail();
+      })
   }
 
 }
