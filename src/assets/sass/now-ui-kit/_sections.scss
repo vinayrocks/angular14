@@ -87,11 +87,11 @@
     }
 
     &:before{
-        background: url('../../../assets/img/home-section-01-bg.jpg');
+        background-color: #F2F3F5;
     }
 
     &[filter-color="black"]{
-        @include linear-gradient(rgba($black-color,.20), rgba(224, 23, 3, 0.6));
+        @include linear-gradient(rgba($black-color,.20), rgba(141, 88, 83, 0.6));
     }
     &[filter-color="black"]{
         @include linear-gradient(rgba($black-color,.20), rgb(121, 121, 121));
