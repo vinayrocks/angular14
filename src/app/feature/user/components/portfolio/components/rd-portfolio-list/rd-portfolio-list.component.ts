@@ -78,6 +78,28 @@ export class RdPortfolioListComponent implements OnInit {
     numVisible: 1,
     numScroll: 1,
   }];
+  single = [
+    {
+      "name": "5 Star",
+      "value": 49
+    },
+    {
+      "name": "4 Star",
+      "value": 10
+    },
+    {
+      "name": "3 Star",
+      "value": 30
+    } ,
+    {
+      "name": "2 Star",
+      "value": 11
+    },
+    {
+      "name": "1 Star",
+      "value": 0
+    } 
+  ];
   selectedPortfolio:any=null
   userPortfolioMedia:any=[];
   initialUserPortfolioMedia:any=[];
@@ -126,14 +148,14 @@ export class RdPortfolioListComponent implements OnInit {
           this.spinner.hide()
         });
   }
-  openImageDialog(data, index) {
+  openImageDialog(index) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.maxWidth = '756px';
     dialogConfig.maxHeight = '550px';
     dialogConfig.panelClass = 'image-popup',
-      dialogConfig.data = { imageArray: data, imageActive: index }
+      dialogConfig.data = { imageArray: this.userPortfolioMedia.map(x=>x.attachments).flat(1), imageActive: index }
     this.matDialog.open(PopupImageSliderComponent, dialogConfig);
   }
   openEdit(data:Number){

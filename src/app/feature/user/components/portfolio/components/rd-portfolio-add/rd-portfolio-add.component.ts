@@ -171,10 +171,13 @@ export class RdPortfolioAddComponent implements OnInit {
               // console.log(new RdPortfolio(this.addPortfolioFormGroup.value))
               this.rdUserService.addUserPortfolio(new RdPortfolio(this.addPortfolioFormGroup.value))
               .subscribe(res=>{
-      
+                console.log(res)
                 if(res.status){
                   this.notificationService.success(res.message);
-                  this.router.navigate(['/member/portfolio_view']);
+                  this.rdAuthenticateService.logout();
+                  this.currentUser.isLoggedIn=false;
+                  this.currentUser.isPortfolio = false;
+                  window.location.href = '/account/login'
                 } else {
                   this.notificationService.error(res.message);
                 }
