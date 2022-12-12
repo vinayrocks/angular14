@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -6,6 +6,7 @@ import { EmbedVideoService } from 'ngx-embed-video';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs/operators';
 import { PopupImageSliderComponent } from 'src/app/shared/components/popup-image-slider/popup-image-slider.component';
+import { ReviewRatingComponent } from 'src/app/shared/components/review-rating/review-rating.component';
 import { RdGetPortfolio } from 'src/app/shared/core/models/rd-common/rd-common';
 import { RdAuthenticateService } from 'src/app/shared/services/authentication/rd-authenticate.service';
 import { NotificationService } from 'src/app/shared/services/common/rd-notification/notification.service';
@@ -118,11 +119,13 @@ export class RdMemberPortfolioComponent implements OnInit {
         // });
         this.selectedPortfolio= res.data[0];
         res.UserPortfolioMedia.forEach(element => {
-          element.attachments= this.GetPortfolioImagePath(this.selectedPortfolio,element.userPortfolioAttachment)
+          element.attachments= this.GetPortfolioImagePath(this.selectedPortfolio,element.userPortfolioAttachment);
+          element.userPortfolioRating = parseFloat(element.userPortfolioRating.toString()).toFixed(1).replace(/\.0+$/,'');
+          element.userPortfolioRatingAverage = parseFloat(element.userPortfolioRatingAverage.toString()).toFixed(1).replace(/\.0+$/,'');
+          element.userPortfolioIsRatingAllowed = parseInt(element.userPortfolioIsRatingAllowed)===1?true:false;
+          
         });
-        console.log(res.UserPortfolioMedia)
         this.userPortfolioMedia = res.UserPortfolioMedia;
-        // console.log(this.userPortfolioMedia)
       },
       error => {
         this.spinner.hide()
@@ -131,14 +134,14 @@ export class RdMemberPortfolioComponent implements OnInit {
   getVideo(url){
     return this.embedService.embed(url);
   }
-  openImageDialog(data, index) {
+  openImageDialog(index) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.maxWidth = '756px';
     dialogConfig.maxHeight = '550px';
     dialogConfig.panelClass = 'image-popup',
-      dialogConfig.data = { imageArray: data, imageActive: index }
+      dialogConfig.data = { imageArray: this.userPortfolioMedia.map(x=>x.attachments).flat(1), imageActive: index }
     this.matDialog.open(PopupImageSliderComponent, dialogConfig);
   }
 
@@ -161,13 +164,15 @@ export class RdMemberPortfolioComponent implements OnInit {
         }
     return imageArry;
   }
-
-  submitRating(event:any){
-    event.userPortfolioRating = event.userPortfolioRating.toString();
-    this.rdUserService.submitRating(event)
-      .subscribe(res => {
-        this.GetPortfolioDetail();
-      })
+  openRating(data){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.maxWidth = '756px';
+    dialogConfig.maxHeight = '550px';
+    dialogConfig.panelClass = 'rating-popup',
+    dialogConfig.data = data
+    this.matDialog.open(ReviewRatingComponent, dialogConfig);
   }
 
 }

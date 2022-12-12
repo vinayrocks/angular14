@@ -15,12 +15,14 @@ import { ScriptService } from './services/custom-script/script.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BlockCopyDirective } from './components/directives/block-copy.directive';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ReviewRatingComponent } from './components/review-rating/review-rating.component';
 @NgModule({
   declarations: [RequiredFieldComponent, RequiredValidationMessageComponent, FormatValidationMessageComponent,
      NotmatchedValidationMessageComponent,
      PopupImageSliderComponent,
      HeaderImageSliderComponent,
-     BlockCopyDirective],
+     BlockCopyDirective,
+     ReviewRatingComponent],
   imports: [
     CommonModule,
     NgbModule,

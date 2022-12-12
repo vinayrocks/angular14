@@ -14,6 +14,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { EmbedVideoService } from 'ngx-embed-video';
 import { CarouselModule } from 'primeng/carousel';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [RdPortfolioListComponent, RdPortfolioAddComponent, RdPortfolioEditComponent],
   imports: [
@@ -28,7 +29,8 @@ import { CarouselModule } from 'primeng/carousel';
     SharedModule.forRoot(),
     AngularEditorModule,
     ImageCropperModule,
-    CarouselModule
+    CarouselModule,
+    NgxChartsModule
   ],
   providers: [EmbedVideoService]
 })

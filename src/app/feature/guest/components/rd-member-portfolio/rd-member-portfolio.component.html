@@ -25,8 +25,10 @@
                 <div class="row">
                     <div class="col-md-2 custom-img-col-2"
                         *ngFor="let elem of userPortfolioMedia;let i=index;">
+                        <!-- <h6>{{elem.attachments[0].Name}}}</h6> -->
                         <div class="custom-photo-container">
-                            <img src="{{elem.attachments[0].Name}}" alt="" class="img-raised" title="" *ngIf="elem.attachments[0].IsImage==='image'">
+                            <img src="{{elem.attachments[0].Name}}" alt="" class="img-raised" title="" *ngIf="elem.attachments[0].IsImage==='image'" 
+                            (click)="openImageDialog(i)">
                             <a *ngIf="elem.attachments[0].IsImage==='pdf'">
                                 <img src="assets/img/radian/document.png" alt="" class="img-raised">
                             </a>
@@ -36,7 +38,7 @@
                                 <a></a>
                             </div>
                         </div>
-                        <div class="row row-rating">
+                        <div class="row row-rating" *ngIf="elem.userPortfolioIsRatingAllowed">
                             <div class="col-md-6">
                                 <ng-template #t let-fill="fill">
                                     <i class="bi-heart-fill">
@@ -44,9 +46,8 @@
                                     </i>
                                 </ng-template>
                                
-                                <ngb-rating rate="{{elem.userPortfolioRating}}" [starTemplate]="t" [readonly]="false" [max]="5"
-                                     (click)="submitRating(elem)"
-                                    [(ngModel)]="elem.userPortfolioRating"></ngb-rating>
+                                <ngb-rating rate="{{elem.userPortfolioRatingAverage}}" [starTemplate]="t" [readonly]="false" [max]="5"
+                                     [readonly]="true" [(ngModel)]="elem.userPortfolioRating"></ngb-rating>
                             </div>
                             <div class="col-md-6">
                                 <ng-template #popContent>
@@ -65,7 +66,12 @@
                                     >
                                     </ngx-charts-bar-horizontal>
                                 </ng-template>
-                                <label class="rating-custom" [ngbPopover]="popContent" container="body"  [openDelay]="100" [closeDelay]="100">{{elem.userPortfolioRating}} out of 5</label>
+                                <label class="rating-custom" [ngbPopover]="popContent" container="body"  [openDelay]="100" [closeDelay]="100">{{elem.userPortfolioRatingAverage}} out of 5</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label><a (click)="openRating(elem)">Write your review</a></label>
                             </div>
                         </div>
                     </div>

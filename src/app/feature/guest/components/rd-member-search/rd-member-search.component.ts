@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as Rellax from 'rellax';
 import * as  countryState from 'src/app/shared/core/json-data/countryState.json';
 import * as  skillsInterest from 'src/app/shared/core/json-data/skillsInterest.json';
@@ -96,7 +96,6 @@ export class RdMemberSearchComponent implements OnInit {
   //   this.skillsSubcategory = data.radianSkillSubCategories;
   // }
   onSubmit(SearchCount: Number,showLoader:boolean=false) {
- 
     if(showLoader){
       this.spinner.show()
     }
