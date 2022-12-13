@@ -1,117 +1,120 @@
-<div class="container">
-    <div class="img default-cover">
-        <!--<div class="edit-btn">
+<div class="section" style="background-color: #F2F3F5;">
+    <div class="container">
+        <div class="img default-cover">
+            <!--<div class="edit-btn">
             <a [routerLink]="['/member/event_add']" class="btn btn-primary btn-round btn-margin reset-btn">
                 <i class="pi pi-camera"></i>Select Cover Image</a>
         </div>-->
-    </div>
-    <div class="card social-prof">
-        <div class="card-body">
-            <div class="wrapper">
-                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
-                <h3 class="title">{{radianDetail.EventName}}</h3>
-                <!-- <h4>End Date: {{radianDetail.EventStartDateTime|date:'MM/dd/yyyy hh:mm:ss'}}</h4> -->
-                <!--<p>{{selectedEvent.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
-                <p class="para-custom">
-                    <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"><i
-                            class="fa fa-thumbs-up icon-like-share"></i>Like</button>&nbsp;&nbsp;
-                    <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"><i
-                            class="fa fa-share-alt icon-like-share"></i>Share</button>
-                </p>
-            </div>
-            <div class="row">
+        </div>
+        <div class="card social-prof">
+            <div class="card-body">
                 <div class="wrapper">
-                    <img *ngIf="radianDetail.EventStatus" src="../../../../../../../assets/img/radian/activeEvent.png"
-                        class="active-inactive" />
-                    <img *ngIf="!radianDetail.EventStatus"
-                        src="../../../../../../../assets/img/radian/inactiveEvent.png" class="active-inactive" />
+                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+                    <h3 class="title">{{radianDetail.EventName}}</h3>
+                    <!-- <h4>End Date: {{radianDetail.EventStartDateTime|date:'MM/dd/yyyy hh:mm:ss'}}</h4> -->
+                    <!--<p>{{selectedEvent.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
+                    <p class="para-custom">
+                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"><i
+                                class="fa fa-thumbs-up icon-like-share"></i>Like</button>&nbsp;&nbsp;
+                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"><i
+                                class="fa fa-share-alt icon-like-share"></i>Share</button>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="wrapper">
+                        <img *ngIf="radianDetail.EventStatus"
+                            src="../../../../../../../assets/img/radian/activeEvent.png" class="active-inactive" />
+                        <img *ngIf="!radianDetail.EventStatus"
+                            src="../../../../../../../assets/img/radian/inactiveEvent.png" class="active-inactive" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-9">
-            <div class="row card portfolio">
-                <!-- <div class="row">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row card portfolio">
+                    <!-- <div class="row">
                     <div class="col-md-12">
                         <h4>About Event</h4>
                         <p>{{radianDetail.EventDescription}}</p>
                     </div>
                 </div> -->
-                <h4>About Event</h4>
-                <p>{{radianDetail.EventDescription}}</p>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>Location</h4>
-                        <p><i class="fa fa-map-marker icon-marker"></i>{{radianDetail.EventLocation.street}},
-                            {{radianDetail.EventLocation.city}}, {{radianDetail.EventLocation.state}},
-                            {{radianDetail.EventLocation.zip}},
-                            {{radianDetail.EventLocation.country}}</p>
+                    <h4>About Event</h4>
+                    <p>{{radianDetail.EventDescription}}</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Location</h4>
+                            <p><i class="fa fa-map-marker icon-marker"></i>{{radianDetail.EventLocation.street}},
+                                {{radianDetail.EventLocation.city}}, {{radianDetail.EventLocation.state}},
+                                {{radianDetail.EventLocation.zip}},
+                                {{radianDetail.EventLocation.country}}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>Start Date</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Start Date</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>End Date</h4>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <h4>End Date</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        {{radianDetail.EventStartDateTime|date:'EEEE, MMMM d, y'}} at
-                        {{radianDetail.EventStartDateTime|date:'hh:mm'}}
-                    </div>
-                    <div class="col-md-6">
-                        {{radianDetail.EventEndDateTime|date:'EEEE, MMMM d, y'}} at
-                        {{radianDetail.EventEndDateTime|date:'hh:mm'}}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{radianDetail.EventStartDateTime|date:'EEEE, MMMM d, y'}} at
+                            {{radianDetail.EventStartDateTime|date:'hh:mm'}}
+                        </div>
+                        <div class="col-md-6">
+                            {{radianDetail.EventEndDateTime|date:'EEEE, MMMM d, y'}} at
+                            {{radianDetail.EventEndDateTime|date:'hh:mm'}}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="row card portfolio">
-                <!-- <div class="row">
+            <div class="col-md-3">
+                <div class="row card portfolio">
+                    <!-- <div class="row">
                     <div class="col-md-12">
                         <h4>Click on Intersted to stay updated about this Event</h4>
                     </div>
                 </div> -->
-                <h4>Click on Intersted to stay updated about this Event</h4>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4></h4>
-                        <button mat-button class="btn btn-primary btn-round btn-margin reset-btn">Interested</button>
+                    <h4>Click on Intersted to stay updated about this Event</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4></h4>
+                            <button mat-button
+                                class="btn btn-primary btn-round btn-margin reset-btn">Interested</button>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4></h4>
-                        <i class="fa fa-hand-o-right icon-interested"></i><label class="users-label">500 Users</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row card portfolio">
-                <h4>Event Categories</h4>
-                <div class="row">
-                    <div class="col-md-4 custom-col-skills" *ngFor="let item of radianDetail.EventCategories">
-                        <i class="{{item.iconClass}}"></i>
-                        <br />
-                        <h5 class="h5-custom">{{item.name}}</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4></h4>
+                            <i class="fa fa-hand-o-right icon-interested"></i><label class="users-label">500
+                                Users</label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row card portfolio">
+                    <h4>Event Categories</h4>
+                    <div class="row">
+                        <div class="col-md-4 custom-col-skills" *ngFor="let item of radianDetail.EventCategories">
+                            <i class="{{item.iconClass}}"></i>
+                            <br />
+                            <h5 class="h5-custom">{{item.name}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row card portfolio">
-                <h4>Interested Users</h4>
-                <!-- <div class="row mt-top" style="padding: 0px 20px 0px 20px;" appBlockCopy>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row card portfolio">
+                    <h4>Interested Users</h4>
+                    <!-- <div class="row mt-top" style="padding: 0px 20px 0px 20px;" appBlockCopy>
                     <div class="col-md-12">
                         <div class="row" style="margin-bottom: 20px">
                             <table class="table table-striped table-hover">
@@ -137,25 +140,26 @@
                         </div>
                     </div>
                 </div> -->
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row card portfolio">
-                <h4>Event Media</h4>
-                <div class="row">
-                    <div class="col-md-2" *ngFor="let elem of radianDetail.EventMedia;let i=index;">
-                        <div class="custom-photo-container">
-                            <img src="{{elem.Name}}" alt="" class="img-raised" title=""
-                                (click)='openImageDialog(radianDetail.EventMedia,i)' *ngIf="elem.IsImage==='image'">
-                            <a *ngIf="elem.IsImage==='pdf'">
-                                <img src="assets/img/radian/document.png" alt="" class="img-raised">
-                            </a>
-                            <div *ngIf="elem.IsImage==='video'" class="video">
-                                <img src="{{elem.Image}}" (click)='openImageDialog(radianDetail.EventMedia,i)'>
-                                <a></a>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row card portfolio">
+                    <h4>Event Media</h4>
+                    <div class="row">
+                        <div class="col-md-2" *ngFor="let elem of radianDetail.EventMedia;let i=index;">
+                            <div class="custom-photo-container">
+                                <img src="{{elem.Name}}" alt="" class="img-raised" title=""
+                                    (click)='openImageDialog(radianDetail.EventMedia,i)' *ngIf="elem.IsImage==='image'">
+                                <a *ngIf="elem.IsImage==='pdf'">
+                                    <img src="assets/img/radian/document.png" alt="" class="img-raised">
+                                </a>
+                                <div *ngIf="elem.IsImage==='video'" class="video">
+                                    <img src="{{elem.Image}}" (click)='openImageDialog(radianDetail.EventMedia,i)'>
+                                    <a></a>
+                                </div>
                             </div>
                         </div>
                     </div>

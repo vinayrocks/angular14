@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-md-6">
+        <h4>Overall Rating</h4>
         <ng-template #t let-fill="fill">
             <i class="bi-heart-fill">
                 <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
@@ -9,9 +10,14 @@
         (click)="submitRating()"></ngb-rating>
     </div>
 </div>
+<div class="row mt-top">
+    <h4>Write your review</h4>
+    <div class="col-md-12">
+        <textarea class="form-control" disabled="true" placeholder="What did you like or dislike?"></textarea>
+    </div>
+</div>
 <div class="row">
-    <h6>Write your review</h6>
-    <div class="col-md-6">
-        <textarea disabled="true"></textarea>
+    <div class="col-md-12">
+        <button class="btn btn-primary btn-round btn-margin submit-btn" disabled>Submit</button>
     </div>
 </div>
