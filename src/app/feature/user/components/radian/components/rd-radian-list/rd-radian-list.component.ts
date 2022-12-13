@@ -106,7 +106,13 @@ export class RdRadianListComponent implements OnInit {
       this.coverImagePath = this.GetCoverPicture();
     }
   }
-
+  gotoTop() {
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
   GetProfilePath() {
     return (
       "http://itechprovisions.com/radianApi/media/" +
@@ -205,7 +211,7 @@ export class RdRadianListComponent implements OnInit {
     this.selectedUser.CertificationDetails = JSON.parse(this.selectedUser.CertificationDetails);
     this.selectedUser.EducationDetails = JSON.parse(this.selectedUser.EducationDetails);
     this.selectedUser.ExperienceDetails = JSON.parse(this.selectedUser.ExperienceDetails);
-    // console.log(this.selectedUser);
+    this.gotoTop();
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];

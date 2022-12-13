@@ -17,7 +17,6 @@ export class PopupImageSliderComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public inputData: any,config: NgbCarouselConfig,
   private embedService: EmbedVideoService) {
     this.imageArray = this.inputData.imageArray
-    console.log(this.imageArray)
     this.slideIndex=this.inputData.imageActive.toString();
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
@@ -25,8 +24,7 @@ export class PopupImageSliderComponent implements OnInit {
 
   ngOnInit(): void {
     const indexSelected = 'slide'+this.slideIndex;
-    setTimeout(() => { this.imagecarousel.select(indexSelected) });
-    ;
+    setTimeout(() => { this.imagecarousel.select(indexSelected)});
   }
   getVideo(url){
       return this.embedService.embed(url);

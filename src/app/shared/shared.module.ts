@@ -16,6 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BlockCopyDirective } from './components/directives/block-copy.directive';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ReviewRatingComponent } from './components/review-rating/review-rating.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [RequiredFieldComponent, RequiredValidationMessageComponent, FormatValidationMessageComponent,
      NotmatchedValidationMessageComponent,
@@ -25,6 +26,8 @@ import { ReviewRatingComponent } from './components/review-rating/review-rating.
      ReviewRatingComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     MatSnackBarModule
   ],

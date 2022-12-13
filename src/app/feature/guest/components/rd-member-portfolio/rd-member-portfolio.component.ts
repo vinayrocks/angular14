@@ -126,6 +126,7 @@ export class RdMemberPortfolioComponent implements OnInit {
           
         });
         this.userPortfolioMedia = res.UserPortfolioMedia;
+        console.log(this.userPortfolioMedia)
       },
       error => {
         this.spinner.hide()
@@ -141,7 +142,7 @@ export class RdMemberPortfolioComponent implements OnInit {
     dialogConfig.maxWidth = '756px';
     dialogConfig.maxHeight = '550px';
     dialogConfig.panelClass = 'image-popup',
-      dialogConfig.data = { imageArray: this.userPortfolioMedia.map(x=>x.attachments).flat(1), imageActive: index }
+    dialogConfig.data = { imageArray: this.userPortfolioMedia.map(x=>x.attachments).flat(1), imageActive: index }
     this.matDialog.open(PopupImageSliderComponent, dialogConfig);
   }
 
@@ -168,11 +169,16 @@ export class RdMemberPortfolioComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.maxWidth = '756px';
-    dialogConfig.maxHeight = '550px';
+    dialogConfig.maxWidth = '800px';
+    dialogConfig.maxHeight = '800px';
     dialogConfig.panelClass = 'rating-popup',
     dialogConfig.data = data
-    this.matDialog.open(ReviewRatingComponent, dialogConfig);
+    const dxRef = this.matDialog.open(ReviewRatingComponent, dialogConfig);
+    dxRef.afterClosed().subscribe(result => {
+      dxRef.close();
+      this.GetPortfolioDetail()
+    });
   }
+ 
 
 }

@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RdAuthenticateService } from '../../services/authentication/rd-authenticate.service';
+import { RdUserService } from '../../services/user/rd-user-service';
 
 @Component({
   selector: 'review-rating',
@@ -29,17 +30,21 @@ import { RdAuthenticateService } from '../../services/authentication/rd-authenti
 export class ReviewRatingComponent {
   data:any=[];
   currentUser:any=[];
-  constructor(@Inject(MAT_DIALOG_DATA) public inputData: any,private rdAuthenticateService: RdAuthenticateService){
+  constructor(public dialogRef: MatDialogRef<ReviewRatingComponent>,
+    @Inject(MAT_DIALOG_DATA) public inputData: any,private rdAuthenticateService: RdAuthenticateService,private rdUserService: RdUserService){
     this.data = this.inputData;
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
   }
-  submitRating(event:any){
-    // event.userPortfolioRating = event.userPortfolioRating.toString();
-    // event.userLoginId = this.currentUser.id;
-    // console.log(Object.assign([],event))
-    // this.rdUserService.submitRating(event)
-    //   .subscribe(res => {
-    //     this.GetPortfolioDetail();
-    //   })
+  submitRating(){
+    const dxData:any = {};
+    dxData.userPortfolioAttachmentId = this.data.userPortfolioAttachmentId;
+    dxData.userPortfolioId =this.data.userPortfolioId;
+    dxData.userPortfolioRating = this.data.userPortfolioRating;
+    dxData.UserId = this.currentUser.id;
+    console.log(dxData)
+    this.rdUserService.submitRating(dxData)
+      .subscribe(res => {
+        this.dialogRef.close();
+    })
   }
 }
