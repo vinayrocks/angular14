@@ -123,6 +123,13 @@ export class RdPortfolioListComponent implements OnInit {
     this.getUserPorfolio();
     
   }
+  gotoTop() {
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
   getUserPorfolio() {
     this.spinner.hide()
     this.rdUserService.getUserPorfolios(new RdCommon(this.routerData))
@@ -201,6 +208,7 @@ export class RdPortfolioListComponent implements OnInit {
         element.attachments= this.GetPortfolioImagePath(data,element.userPortfolioAttachment)
     });
     this.userPortfolioMedia = xData;
+    this.gotoTop();
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName('body')[0];

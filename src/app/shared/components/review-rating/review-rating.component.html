@@ -6,7 +6,8 @@
                 <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
             </i>
         </ng-template>
-        <ngb-rating rate="4" [starTemplate]="t" [readonly]="false" [max]="5"></ngb-rating>
+        <ngb-rating rate="{{data.userPortfolioRating}}" [(ngModel)]="data.userPortfolioRating" [starTemplate]="t" [readonly]="false" [max]="5" 
+        (click)="submitRating()"></ngb-rating>
     </div>
 </div>
 <div class="row mt-top">
