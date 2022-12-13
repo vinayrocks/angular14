@@ -63,7 +63,7 @@
                                         5</label>
                                 </div>
                             </div>
-                            <div class="row review-center">
+                            <div class="row review-center" *ngIf="elem.userPortfolioIsRatingAllowed">
                                 <div class="col-md-12">
                                     <label><a (click)="openRating(elem)" class="href_review">Write your
                                             review</a></label>

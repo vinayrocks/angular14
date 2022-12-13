@@ -77,6 +77,7 @@ export class DeleteProfile {
 }
 export class RdGetPortfolio {
   PortfolioId: String = '';
+  UserId:number=0;
   public rdGetPortfolio: RdGetPortfolio[];
   constructor(input: any) {
     Object.assign(this, input);

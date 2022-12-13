@@ -50,6 +50,7 @@ export class RdPortfolioEditComponent implements OnInit {
       'insertHorizontalRule',]
     ]
   };
+  userPortfolioMedia:any=[];
   constructor(private _formBuilder: FormBuilder, private rdUserService: RdUserService,
     private router: Router, private _encryptDecryptService: RdEncryptDecryptService,
     private route: ActivatedRoute, private embedService: EmbedVideoService,
@@ -88,7 +89,7 @@ export class RdPortfolioEditComponent implements OnInit {
   get editPortfolioForm() { return this.editPortfolioFormGroup.controls; }
   setFormGroup() {
     this.editPortfolioForm.PortfolioName.setValue(this.userPortfolio.PortfolioName);
-    this.editPortfolioForm.PortfolioMedia.setValue(this.userPortfolio.PortfolioMedia);
+    // this.editPortfolioForm.PortfolioMedia.setValue(this.userPortfolio.PortfolioMedia);
     this.editPortfolioForm.PortfolioArtifacts.setValue(this.userPortfolio.PortfolioArtifacts);
   }
   getUserPorfolio(data) {
@@ -97,12 +98,27 @@ export class RdPortfolioEditComponent implements OnInit {
       .pipe(first())
       .subscribe(
         res => {
+      
           this.spinner.hide()
-          res.data.forEach(element => {
-            this.PortfolioMediaModel = element.PortfolioMedia.split(',');
-            element.PortfolioMedia = this.GetPortfolioImagePath(element);
+          // res.data.forEach(element => {
+          //   this.PortfolioMediaModel = element.PortfolioMedia.split(',');
+          //   element.PortfolioMedia = this.GetPortfolioImagePath(element);
+          // });
+          res.UserPortfolioMedia.forEach(el => {
+            el.userPortfolioIsRatingAllowed =parseInt(el.userPortfolioIsRatingAllowed)===1?true:false;
+            if(el.userPortfolioAttachment.indexOf('youtu.be')===-1 && el.userPortfolioAttachment.indexOf('youtube')===-1 && el.userPortfolioAttachment.indexOf('pdf')===-1){
+              el.IsImage = 'image';
+            } else if(el.userPortfolioAttachment.indexOf('youtu.be')===-1 && el.userPortfolioAttachment.indexOf('youtube')===-1 && el.userPortfolioAttachment.indexOf('pdf')!==-1){
+              el.IsImage = 'pdf';
+            } else {
+              const img = this.embedService.embed_image(data, { image: 'mqdefault' })
+              .then(res => {
+                el.IsImage = 'video';
+              });
+             
+            }
           });
-          
+          this.userPortfolioMedia = res.UserPortfolioMedia;
           this.userPortfolio = res.data[0];
           this.portfolioName = res.data[0].PortfolioName;
           this.portfolioName = this.portfolioName.replace(/\s/g, "");
@@ -121,10 +137,8 @@ export class RdPortfolioEditComponent implements OnInit {
       const img = this.embedService.embed_image(this.editPortfolioForm.linkURL.value, { image: 'mqdefault' })
       .then(res => {
         this.urls.push({Name:this.embedService.embed(data.imageMovieURL),IsImage:'video',
-        Image:res.link});
+        Image:res.link,AllowRating:0});
       });
-      // this.urls.push({Name:this.embedService.embed(this.editPortfolioForm.linkURL.value),IsImage:'video',
-      // Image:res.link});
       this.imageIndex = index + 1;
       this.addMoreImageArray.push(index + 1);
       this.isImageType = true;
@@ -169,7 +183,7 @@ export class RdPortfolioEditComponent implements OnInit {
           var reader = new FileReader();
           reader.onload = (event: any) => {
             // data.imageMovieURL = event.target.result;
-            this.urls.push({Name:event.target.result,IsImage:'image'});
+            this.urls.push({Name:event.target.result,IsImage:'image','AllowRating':false,'Rating':0 });
             // this.urls.push(data);
           }
           reader.readAsDataURL(event.target.files[i]);
@@ -202,7 +216,6 @@ export class RdPortfolioEditComponent implements OnInit {
       return;
     }
     if (this.serverFile.length != 0) {
-      
       this.rdUserService.UploadUserPortfolioFile(this.serverFile, this.editPortfolioForm.PortfolioName.value)
         .pipe(first())
         .subscribe(
@@ -210,8 +223,9 @@ export class RdPortfolioEditComponent implements OnInit {
             
             var dataReposne = res.data.split(',');
             this.serverFile = [];
-            dataReposne.forEach(element => {
-              this.PortfolioMediaModel.push(element);
+            dataReposne.forEach((element:any,index:number) => {
+              const dxDat ={'FileName':element,'AllowRating':this.urls[index].AllowRating,'Rating':0 }
+              this.PortfolioMediaModel.push(JSON.stringify(dxDat));
             });
             this.editPortfolioForm.PortfolioMedia.setValue(this.PortfolioMediaModel.join(','));
             this.submitDetail();
@@ -236,7 +250,9 @@ export class RdPortfolioEditComponent implements OnInit {
     });
   }
   submitDetail(){
-    
+    const data = this.editPortfolioFormGroup.value;
+    data.UserPortfolioMedia = this.userPortfolioMedia
+    console.log(data)
     this.rdUserService.addUserPortfolio(new RdPortfolio(this.editPortfolioFormGroup.value))
       .subscribe(res => {
         this.spinner.hide()
@@ -248,57 +264,14 @@ export class RdPortfolioEditComponent implements OnInit {
         }
       });
   }
-  assemblePortfolioMedias(uploadedImages) {
-    uploadedImages.forEach(element => {
-      this.PortfolioMediaModel.push(element);
-    });
-    this.userPortfolio.PortfolioMedia.foreach(ele => {
-      this.PortfolioMediaModel.push(ele);
-    })
-    return this.PortfolioMediaModel;
-  }
-  GetPortfolioImagePath(element){
-    const imageArry=[];
-    if(element.PortfolioMedia!==''){
-      if(element.PortfolioMedia.split(',').length>1){
-        element.PortfolioMedia.split(',')
-        .forEach(data => {
-          if(data.indexOf('youtu.be')===-1 && data.indexOf('youtube')===-1 && data.indexOf('pdf')===-1){
-            imageArry.push({Name:data,IsImage:'image'});
-          }else if(data.indexOf('youtu.be')===-1 && data.indexOf('youtube')===-1 && data.indexOf('pdf')!==-1){
-            imageArry.push({Name:data,IsImage:'pdf'});
-          } else {
-            
-            const img = this.embedService.embed_image(data, { image: 'mqdefault' })
-            .then(res => {
-              
-              imageArry.push({Name:this.embedService.embed(data),IsImage:'video',Image:res.link});
-            });
-           
-          }
-          
-        });
-      } else {
-        if(element.PortfolioMedia.indexOf('youtu.be')===-1 && element.PortfolioMedia.indexOf('youtube')===-1
-        && element.PortfolioMedia.indexOf('pdf')===-1){
-          imageArry.push({Name:element.PortfolioMedia,IsImage:'image'});
-        }else if(element.PortfolioMedia.indexOf('youtu.be')===-1 && element.PortfolioMedia.indexOf('youtube')===-1 
-        && element.PortfolioMedia.indexOf('pdf')!==-1){
-          imageArry.push({Name:element.PortfolioMedia,IsImage:'pdf'});
-        } else {
-          const img = this.embedService.embed_image(element.PortfolioMedia, { image: 'mqdefault' })
-            .then(res => {
-              
-              imageArry.push({Name:this.embedService.embed(element.PortfolioMedia),IsImage:'video',
-              Image:res.link});
-            });
-          // imageArry.push(element.PortfolioMedia);
-         
-        }
-       
-      }
+  changeUserType(event: any,index:number) {
+    if (event.target.checked) {
+      // this.serverFile[index].AllowRating = true;
+      this.urls[index].AllowRating = true;
+    } else {
+      // this.serverFile[index].AllowRating = false;
+      this.urls[index].AllowRating = false;
     }
-    return imageArry;
   }
   ngOnDestroy() {
   }
