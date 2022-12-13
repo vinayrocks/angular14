@@ -50,16 +50,26 @@
                   <div class="row mt-top">
                     <div class="col-md-12">
                       <div class="row mt-top">
-                        <div class="col-md-2" *ngFor='let elem of userPortfolio.PortfolioMedia' disabled="true">
+                        <div class="col-md-2" *ngFor='let elem of userPortfolioMedia;let i =index' disabled="true">
                           <div class="custom-photo-container">
-                            <img src="{{projectPath}}/{{projectFilePath}}/{{portfolioName}}/{{elem.Name}}" alt=""
+                            <img src="{{projectPath}}/{{projectFilePath}}/{{portfolioName}}/{{elem.userPortfolioAttachment}}" alt=""
                               class="img-raised" title="" *ngIf="elem.IsImage==='image'">
-                            <a href="{{elem.Name}}" *ngIf="elem.IsImage==='pdf'" target="_blank">
+                            <a href="{{elem.userPortfolioAttachment}}" *ngIf="elem.IsImage==='pdf'" target="_blank">
                               <img src="assets/img/radian/document.png" alt="" class="img-raised">
                             </a>
                             <div *ngIf="elem.IsImage==='video'" class="video">
-                              <img src="{{elem.Image}}">
+                              <img src="{{elem.userPortfolioAttachment}}">
                               <a></a>
+                            </div>
+                            <div class="row row-allow">
+                              <div class="col-md-12">
+                                <div class="pretty p-switch p-fill">
+                                  <input type="checkbox" [checked]="elem.userPortfolioIsRatingAllowed" />
+                                  <div class="state p-success">
+                                    <label>Allow Rating</label>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -107,7 +117,16 @@
                               <img src="{{url.Image}}" class="img-raised">
                               <a></a>
                             </div>
-
+                          </div>
+                          <div class="row row-allow">
+                            <div class="col-md-12">
+                              <div class="pretty p-switch p-fill">
+                                <input type="checkbox" (change)="changeUserType($event,i)" [checked]="url.AllowRating" />
+                                <div class="state p-success">
+                                  <label>Allow Rating</label>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>

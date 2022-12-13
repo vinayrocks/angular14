@@ -208,9 +208,9 @@ export class RdRadianListComponent implements OnInit {
   }
   selectProfile(product){
     this.selectedUser=product;
-    this.selectedUser.CertificationDetails = JSON.parse(this.selectedUser.CertificationDetails);
-    this.selectedUser.EducationDetails = JSON.parse(this.selectedUser.EducationDetails);
-    this.selectedUser.ExperienceDetails = JSON.parse(this.selectedUser.ExperienceDetails);
+    // this.selectedUser.CertificationDetails = JSON.parse(this.selectedUser.CertificationDetails);
+    // this.selectedUser.EducationDetails = JSON.parse(this.selectedUser.EducationDetails);
+    // this.selectedUser.ExperienceDetails = JSON.parse(this.selectedUser.ExperienceDetails);
     this.gotoTop();
   }
   ngOnDestroy() {

@@ -6,8 +6,7 @@
                 <i *ngIf="fill > 0" class="bi-heart-fill filled" [style.width.%]="fill"></i>
             </i>
         </ng-template>
-        <ngb-rating rate="{{data.userPortfolioRating}}" [(ngModel)]="data.userPortfolioRating" [starTemplate]="t" [readonly]="false" [max]="5" 
-        (click)="submitRating()"></ngb-rating>
+        <ngb-rating rate="{{data.userPortfolioRating}}" [(ngModel)]="data.userPortfolioRating" [starTemplate]="t" [readonly]="false" [max]="5"></ngb-rating>
     </div>
 </div>
 <div class="row mt-top">
@@ -18,6 +17,6 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <button class="btn btn-primary btn-round btn-margin submit-btn" disabled>Submit</button>
+        <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="submitRating()">Submit</button>
     </div>
 </div>

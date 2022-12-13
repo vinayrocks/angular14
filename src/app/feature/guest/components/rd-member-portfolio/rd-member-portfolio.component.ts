@@ -92,23 +92,26 @@ export class RdMemberPortfolioComponent implements OnInit {
       "value": 0
     } 
   ];
+  userMedia:any=[];
   constructor(private embedService: EmbedVideoService, private route: ActivatedRoute,
     private rdUserService: RdUserService,private rdAuthenticateService: RdAuthenticateService,
     private _encryptDecryptService: RdEncryptDecryptService,private spinner:NgxSpinnerService,
     private notificationService : NotificationService,public matDialog: MatDialog) { 
-    this.routerData.PortfolioId=this.route.snapshot.paramMap.get('id');
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
+    this.routerData.PortfolioId=this.route.snapshot.paramMap.get('id');
     this.routerData=this._encryptDecryptService.decryptModel(this.routerData);
   }
 
   ngOnInit(): void {
-    // console.log(this.routerData)
     this.GetPortfolioDetail();
   }
 
   GetPortfolioDetail(){
-    // this.spinner.show()
-    this.rdUserService.getPortfolioDetail(new RdGetPortfolio(this.routerData))
+    const dmData:any={};
+    dmData.PortfolioId = this.routerData.PortfolioId;
+    dmData.UserId = this.currentUser.id;
+    console.log(dmData)
+    this.rdUserService.getPortfolioDetail(new RdGetPortfolio(dmData))
     .pipe(first())
     .subscribe(
       res => {
@@ -126,7 +129,8 @@ export class RdMemberPortfolioComponent implements OnInit {
           
         });
         this.userPortfolioMedia = res.UserPortfolioMedia;
-        console.log(this.userPortfolioMedia)
+        this.userMedia = res.UserPortfolioMediaRating;
+        console.log(res)
       },
       error => {
         this.spinner.hide()
@@ -165,14 +169,40 @@ export class RdMemberPortfolioComponent implements OnInit {
         }
     return imageArry;
   }
-  openRating(data){
+  openRating(event){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.maxWidth = '800px';
     dialogConfig.maxHeight = '800px';
-    dialogConfig.panelClass = 'rating-popup',
-    dialogConfig.data = data
+    dialogConfig.panelClass = 'rating-popup';
+    if(this.userMedia.length!==0){
+      if(this.userMedia.filter((x:any)=>x.userPortfolioAttachmentId===event.userPortfolioAttachmentId).length>0){
+        dialogConfig.data = this.userMedia.filter((x:any)=>x.userPortfolioAttachmentId===event.userPortfolioAttachmentId)[0]
+      } else {
+        const dxm:any={};
+        dxm.userPortfolioAttachment=event.userPortfolioAttachment;
+        dxm.userPortfolioIsRatingAllowed=event.userPortfolioIsRatingAllowed;
+        dxm.userPortfolioAttachmentRatingId=event.userPortfolioAttachmentRatingId;
+        dxm.userPortfolioAttachmentId=event.userPortfolioAttachmentId;
+        dxm.userPortfolioId=event.userPortfolioId;
+        dxm.userLoginId=this.currentUser.id;
+        dxm.userPortfolioRating= 0
+        dialogConfig.data = event
+      }
+     
+    } else {
+      const dxm:any={};
+      dxm.userPortfolioAttachment=event.userPortfolioAttachment;
+      dxm.userPortfolioIsRatingAllowed=event.userPortfolioIsRatingAllowed;
+      dxm.userPortfolioAttachmentRatingId=event.userPortfolioAttachmentRatingId;
+      dxm.userPortfolioAttachmentId=event.userPortfolioAttachmentId;
+      dxm.userPortfolioId=event.userPortfolioId;
+      dxm.userLoginId=this.currentUser.id;
+      dxm.userPortfolioRating= 0
+      dialogConfig.data = event
+    }
+   
     const dxRef = this.matDialog.open(ReviewRatingComponent, dialogConfig);
     dxRef.afterClosed().subscribe(result => {
       dxRef.close();

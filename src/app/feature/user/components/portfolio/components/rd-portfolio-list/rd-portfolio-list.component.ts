@@ -140,16 +140,16 @@ export class RdPortfolioListComponent implements OnInit {
           // res.data.forEach(element => {
           //   element.PortfolioMedia= (element.PortfolioMedia!=='' && element.PortfolioMedia!==null)?this.GetPortfolioImagePath(element):'';
           // });
+          console.log(res)
           this.projectPath=res.projectPath;
           this.userPortfolio = res.data;
           this.selectedPortfolio = res.data[0];
           this.initialUserPortfolioMedia = res.UserPortfolioMedia;
-          res.UserPortfolioMedia = this.initialUserPortfolioMedia.filter(x=>x.userPortfolioId===this.selectedPortfolio .id);
+          res.UserPortfolioMedia = this.initialUserPortfolioMedia.filter(x=>x.userPortfolioId===this.selectedPortfolio.id);
           res.UserPortfolioMedia.forEach(element => {
             element.attachments= this.GetPortfolioImagePath(this.selectedPortfolio,element.userPortfolioAttachment)
           });
           this.userPortfolioMedia = res.UserPortfolioMedia;
-          // console.log(res)
         },
         error => {
           this.spinner.hide()
@@ -207,6 +207,8 @@ export class RdPortfolioListComponent implements OnInit {
     xData.forEach(element => {
         element.attachments= this.GetPortfolioImagePath(data,element.userPortfolioAttachment)
     });
+    this.selectedPortfolio = data;
+    xData.map((a:any)=>a.userPortfolioRatingAverage = parseFloat(a.userPortfolioRatingAverage.toString()).toFixed(1).replace(/\.0+$/,''));
     this.userPortfolioMedia = xData;
     this.gotoTop();
   }

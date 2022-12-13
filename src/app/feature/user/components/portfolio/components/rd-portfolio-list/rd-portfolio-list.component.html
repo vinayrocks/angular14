@@ -82,13 +82,13 @@
                                         >
                                         </ngx-charts-bar-horizontal>
                                     </ng-template>
-                                    <ngb-rating rate="4" [starTemplate]="t" [readonly]="false" [max]="5"
+                                    <ngb-rating rate="{{elem.userPortfolioRatingAverage}}" [starTemplate]="t" [readonly]="false" [max]="5"
                                         [readonly]="true"
                                         [ngbPopover]="popContent" popoverTitle="Loved By" container="body"
                                         [openDelay]="300" [closeDelay]="500"></ngb-rating>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="rating-custom">4 out of 5</label>
+                                    <label class="rating-custom">{{elem.userPortfolioRatingAverage}} out of 5</label>
                                 </div>
                             </div>
                         </div>
