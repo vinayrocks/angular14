@@ -157,7 +157,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" [value]="item.EducationName" [disabled]="true" class="signUp-form-control form-control">
+                      <input type="text" [value]="item.EducationName" [disabled]="true"
+                        class="signUp-form-control form-control">
                       <!-- {{item.EducationName}} -->
                     </div>
                   </div>
@@ -168,8 +169,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #dp="bsDatepicker" [disabled]="true"
-                        [(ngModel)]="item.StartsOn" [bsConfig]="{
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #dp="bsDatepicker"
+                        [disabled]="true" [(ngModel)]="item.StartsOn" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'
@@ -185,8 +186,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #dp="bsDatepicker" [disabled]="true"
-                        [(ngModel)]="item.EndsOn" [bsConfig]="{
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #dp="bsDatepicker"
+                        [disabled]="true" [(ngModel)]="item.EndsOn" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'
@@ -200,12 +201,12 @@
           </div>
           <div class="row card portfolio" *ngIf="selectedUser.EducationDetails.length===0">
             <h4>Educations</h4>
-            <div class="col-md-12" >
+            <div class="col-md-12">
               <h4>No Records</h4>
             </div>
           </div>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -243,7 +244,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" [value]="item.CertificationName" [disabled]="true" class="signUp-form-control form-control">
+                      <input type="text" [value]="item.CertificationName" [disabled]="true"
+                        class="signUp-form-control form-control">
                       <!-- {{item.CertificateName}} -->
                     </div>
                   </div>
@@ -254,8 +256,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #dp="bsDatepicker" [disabled]="true"
-                        [(ngModel)]="item.CertifiedDate" [bsConfig]="{
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #dp="bsDatepicker"
+                        [disabled]="true" [(ngModel)]="item.CertifiedDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY/MM/DD'
@@ -271,7 +273,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" [value]="item.CertificationLicenseNumber" [disabled]="true" class="signUp-form-control form-control">
+                      <input type="text" [value]="item.CertificationLicenseNumber" [disabled]="true"
+                        class="signUp-form-control form-control">
                       <!-- {{item.CertificationLicenseNumber}} -->
                     </div>
                   </div>
@@ -281,14 +284,14 @@
           </div>
           <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails.length===0">
             <h4>Certification Details</h4>
-            <div class="col-md-12" >
+            <div class="col-md-12">
               <h4>No Records</h4>
             </div>
           </div>
         </div>
       </div>
     </div>
-   
+
   </div>
   <div class="row" [@enterAnimation] *ngIf="_istab===4">
     <div class="col-md-12">
@@ -324,7 +327,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" [value]="item.ExperienceName" [disabled]="true" class="signUp-form-control form-control">
+                      <input type="text" [value]="item.ExperienceName" [disabled]="true"
+                        class="signUp-form-control form-control">
                       <!-- {{item.ExperienceName}} -->
                     </div>
                   </div>
@@ -335,8 +339,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #dp="bsDatepicker" [disabled]="true"
-                        [(ngModel)]="item.StartDate" [bsConfig]="{
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #dp="bsDatepicker"
+                        [disabled]="true" [(ngModel)]="item.StartDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY/MM/DD'
@@ -352,8 +356,8 @@
                 <div class="row mt-top">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #dp="bsDatepicker" [disabled]="true"
-                      [(ngModel)]="item.ToDate" [bsConfig]="{
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #dp="bsDatepicker"
+                        [disabled]="true" [(ngModel)]="item.ToDate" [bsConfig]="{
                       isAnimated: true,
                       minMode: 'year',
                       dateInputFormat: 'YYYY'
@@ -366,15 +370,15 @@
           </div>
           <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails.length===0">
             <h4>Experience Details</h4>
-            <div class="col-md-12" >
+            <div class="col-md-12">
               <h4>No Records</h4>
             </div>
           </div>
         </div>
-       
+
       </div>
     </div>
-  
+
   </div>
   <div class="row" [@enterAnimation] *ngIf="_istab===5">
     <div class="col-md-12">
@@ -383,35 +387,25 @@
           <div class="row card portfolio">
             <h4>New Connection Requests</h4>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-3" *ngFor="let item of ConnectionRequest">
                 <div class="conn-req-card">
                   <div class="user-image">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
+                    <img src="{{item.ImagePath}}" />
                   </div>
                   <div class="user-details">
-                    <h4 class="userName">Vinay Pardeshi</h4>
+                    <h4 class="userName">{{item.SenderName}}</h4>
                   </div>
-                  <div class="accept-reject">
+                  <div class="accept-reject" *ngIf="item.Status===0">
                     <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br />
                   </div>
-                  <div class="accept-reject">
+                  <div class="accept-reject" *ngIf="item.Status===2">
+                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Rejected</button><br />
+                  </div>
+                  <div class="accept-reject" *ngIf="item.Status===2">
                     <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Delete</button>
                   </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="conn-req-card">
-                  <div class="user-image">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
-                  </div>
-                  <div class="user-details">
-                    <h4 class="userName">Vinay Pardeshi</h4>
-                  </div>
-                  <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br />
-                  </div>
-                  <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Delete</button>
+                  <div class="accept-reject" *ngIf="item.Status===0">
+                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Reject</button>
                   </div>
                 </div>
               </div>
@@ -426,66 +420,18 @@
           <div class="row card portfolio">
             <h4>Connections</h4>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-3" *ngFor="let item of UserConnection">
                 <div class="conn-req-card">
                   <div class="user-image">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
+                    <img src="{{item.ImagePath}}" />
                   </div>
                   <div class="user-details">
-                    <h4 class="userName">Vinay Pardeshi</h4>
+                    <h4 class="userName">{{item.SenderName}}</h4>
                   </div>
-                  <div class="accept-reject">
+                  <div class="accept-reject" *ngIf="item.Status===1">
                     <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
                   </div>
-                  <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="conn-req-card">
-                  <div class="user-image">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
-                  </div>
-                  <div class="user-details">
-                    <h4 class="userName">Vinay Pardeshi</h4>
-                  </div>
-                  <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
-                  </div>
-                  <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="conn-req-card">
-                  <div class="user-image">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
-                  </div>
-                  <div class="user-details">
-                    <h4 class="userName">Vinay Pardeshi</h4>
-                  </div>
-                  <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
-                  </div>
-                  <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="conn-req-card">
-                  <div class="user-image">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
-                  </div>
-                  <div class="user-details">
-                    <h4 class="userName">Vinay Pardeshi</h4>
-                  </div>
-                  <div class="accept-reject">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
-                  </div>
-                  <div class="accept-reject">
+                  <div class="accept-reject" *ngIf="item.Status===1">
                     <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
                   </div>
                 </div>
@@ -500,7 +446,8 @@
     <div class="col-md-12">
       <div class="row card portfolio">
         <div class="col-md-12 flt-left">
-          <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="openEdit(selectedUser.id)">Edit Profile</button>&nbsp;
+          <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="openEdit(selectedUser.id)">Edit
+            Profile</button>&nbsp;
 
           <button mat-button class="btn btn-primary btn-round btn-margin reset-btn">Delete Profile</button>
         </div>

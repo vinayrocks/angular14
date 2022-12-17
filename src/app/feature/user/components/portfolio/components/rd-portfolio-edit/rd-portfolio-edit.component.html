@@ -34,7 +34,7 @@
                       </textarea>
                     </div>
                   </div>
-                  <br/>
+                  <br />
                   <div class="row mt-top"
                     *ngIf="editPortfolioForm.PortfolioMedia.errors && (editPortfolioForm.PortfolioMedia.dirty || editPortfolioForm.PortfolioMedia.touched)">
                     <div class="col-md-12">
@@ -52,8 +52,9 @@
                       <div class="row mt-top">
                         <div class="col-md-2" *ngFor='let elem of userPortfolioMedia;let i =index' disabled="true">
                           <div class="custom-photo-container">
-                            <img src="{{projectPath}}/{{projectFilePath}}/{{portfolioName}}/{{elem.userPortfolioAttachment}}" alt=""
-                              class="img-raised" title="" *ngIf="elem.IsImage==='image'">
+                            <img
+                              src="{{projectPath}}/{{projectFilePath}}/{{portfolioName}}/{{elem.userPortfolioAttachment}}"
+                              alt="" class="img-raised" title="" *ngIf="elem.IsImage==='image'">
                             <a href="{{elem.userPortfolioAttachment}}" *ngIf="elem.IsImage==='pdf'" target="_blank">
                               <img src="assets/img/radian/document.png" alt="" class="img-raised">
                             </a>
@@ -64,7 +65,8 @@
                             <div class="row row-allow">
                               <div class="col-md-12">
                                 <div class="pretty p-switch p-fill">
-                                  <input type="checkbox" [checked]="elem.userPortfolioIsRatingAllowed" />
+                                  <input type="checkbox" [checked]="elem.userPortfolioIsRatingAllowed"
+                                    (change)="allowRating($event,i)" />
                                   <div class="state p-success">
                                     <label>Allow Rating</label>
                                   </div>
@@ -121,7 +123,8 @@
                           <div class="row row-allow">
                             <div class="col-md-12">
                               <div class="pretty p-switch p-fill">
-                                <input type="checkbox" (change)="changeUserType($event,i)" [checked]="url.AllowRating" />
+                                <input type="checkbox" (change)="changeUserType($event,i)"
+                                  [checked]="url.AllowRating" />
                                 <div class="state p-success">
                                   <label>Allow Rating</label>
                                 </div>

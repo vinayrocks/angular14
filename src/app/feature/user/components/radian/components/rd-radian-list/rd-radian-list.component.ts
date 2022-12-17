@@ -56,7 +56,59 @@ export class RdRadianListComponent implements OnInit {
     ],
   };
   responsiveOptions: any = [];
-  _istab:number=1;
+  _istab: number = 1;
+  ConnectionRequest: any = [
+    {
+      RequestId: 1,
+      SenderId: 1,
+      SenderName: "Visual",
+      ReceiverId: 1,
+      Status: 0,
+      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
+    },
+    {
+      requestId: 2,
+      SenderId: 2,
+      SenderName: "Vinay",
+      ReceiverId: 1,
+      Status: 2,
+      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
+    },
+    {
+      requestId: 3,
+      SenderId: 3,
+      SenderName: "Abhishek",
+      ReceiverId: 1,
+      Status: 0,
+      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
+    },
+  ];
+  UserConnection: any = [
+    {
+      RequestId: 4,
+      SenderId: 4,
+      SenderName: "kimso well",
+      ReceiverId: 1,
+      Status: 1,
+      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
+    },
+    {
+      requestId: 5,
+      SenderId: 5,
+      SenderName: "kimmy",
+      ReceiverId: 1,
+      Status: 1,
+      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
+    },
+    {
+      requestId: 6,
+      SenderId: 6,
+      SenderName: "Mark",
+      ReceiverId: 1,
+      Status: 1,
+      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
+    },
+  ];
   constructor(
     private rdUserService: RdUserService,
     private router: Router,
@@ -107,10 +159,10 @@ export class RdRadianListComponent implements OnInit {
     }
   }
   gotoTop() {
-    window.scroll({ 
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth' 
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
     });
   }
   GetProfilePath() {
@@ -146,7 +198,7 @@ export class RdRadianListComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res) => {
-          console.log(res.data)
+          console.log(res.data);
           res.data.forEach((element) => {
             element.ProfileExpertise =
               element.ProfileExpertise === ""
@@ -161,24 +213,24 @@ export class RdRadianListComponent implements OnInit {
                 ? []
                 : JSON.parse(element.LinkedPortfolio);
 
-                element.CertificationDetails =
-                element.CertificationDetails === ""
-                  ? []
-                  : JSON.parse(element.CertificationDetails);
-              element.EducationDetails =
-                element.EducationDetails === ""
-                  ? []
-                  : JSON.parse(element.EducationDetails);
-              element.ExperienceDetails =
-                element.ExperienceDetails === ""
-                  ? []
-                  : JSON.parse(element.ExperienceDetails);
+            element.CertificationDetails =
+              element.CertificationDetails === ""
+                ? []
+                : JSON.parse(element.CertificationDetails);
+            element.EducationDetails =
+              element.EducationDetails === ""
+                ? []
+                : JSON.parse(element.EducationDetails);
+            element.ExperienceDetails =
+              element.ExperienceDetails === ""
+                ? []
+                : JSON.parse(element.ExperienceDetails);
 
             // element.CertificationDetails = JSON.parse(element.CertificationDetails);
             // element.EducationDetails = JSON.parse(element.EducationDetails);
             // element.ExperienceDetails = JSON.parse(element.ExperienceDetails);
           });
-         
+
           this.userProfiles = res.data;
           this.selectedUser = res.data[0];
           this.projectPath = res.projectPath;
@@ -206,8 +258,8 @@ export class RdRadianListComponent implements OnInit {
       }
     });
   }
-  selectProfile(product){
-    this.selectedUser=product;
+  selectProfile(product) {
+    this.selectedUser = product;
     // this.selectedUser.CertificationDetails = JSON.parse(this.selectedUser.CertificationDetails);
     // this.selectedUser.EducationDetails = JSON.parse(this.selectedUser.EducationDetails);
     // this.selectedUser.ExperienceDetails = JSON.parse(this.selectedUser.ExperienceDetails);
@@ -219,5 +271,4 @@ export class RdRadianListComponent implements OnInit {
     var navbar = document.getElementsByTagName("nav")[0];
     navbar.classList.remove("navbar-transparent");
   }
-  
 }
