@@ -395,17 +395,20 @@
                   <div class="user-details">
                     <h4 class="userName">{{item.SenderName}}</h4>
                   </div>
-                  <div class="accept-reject" *ngIf="item.Status===0">
-                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br />
+                  <div class="accept-reject" *ngIf="item.ConnectionStatus===0">
+                    <button mat-button class="btn btn-primary btn-round btn-margin btn-custom"
+                      (click)="AcceptRequest(item)">Accept</button><br />
                   </div>
-                  <div class="accept-reject" *ngIf="item.Status===2">
+                  <div class="accept-reject" *ngIf="item.ConnectionStatus===2">
                     <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Rejected</button><br />
                   </div>
-                  <div class="accept-reject" *ngIf="item.Status===2">
-                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Delete</button>
+                  <div class="accept-reject" *ngIf="item.ConnectionStatus===2">
+                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom"
+                      (click)="DeleteRequest(item)">Delete</button>
                   </div>
-                  <div class="accept-reject" *ngIf="item.Status===0">
-                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Reject</button>
+                  <div class="accept-reject" *ngIf="item.ConnectionStatus===0">
+                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom"
+                      (click)="RejectRequest(item)">Rejected</button>
                   </div>
                 </div>
               </div>
@@ -432,7 +435,8 @@
                     <button mat-button class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
                   </div>
                   <div class="accept-reject" *ngIf="item.Status===1">
-                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
+                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn-custom"
+                      (click)="DeleteRequest(item)">Remove</button>
                   </div>
                 </div>
               </div>
