@@ -413,4 +413,46 @@ export class RdUserService {
       JSON.stringify(data)
     );
   }
+  sendConnectionRequest(rdCommon) {
+    console.log(this._encryptDecryptService.ecryptModel(rdCommon));
+    return null;
+    // return this.http
+    //   .post<any>(
+    //     environment.apiCommon + "radianApi/UserLikes/userLikes.php",
+    //     JSON.stringify(this._encryptDecryptService.ecryptModel(rdCommon))
+    //   )
+    //   .pipe(
+    //     map((res) => {
+    //       return res;
+    //     })
+    //   );
+  }
+  connectionRequest(rdCommon) {
+    console.log(rdCommon);
+    return null;
+    // return this.http
+    //   .post<any>(
+    //     environment.apiCommon + "radianApi/UserLikes/userLikes.php",
+    //     JSON.stringify(this._encryptDecryptService.ecryptModel(rdCommon))
+    //   )
+    //   .pipe(
+    //     map((res) => {
+    //       return res;
+    //     })
+    //   );
+  }
+  deleteRequest(rdCommon) {
+    console.log(rdCommon);
+    return null;
+    // return this.http
+    //     .post<any>(
+    //       environment.apiCommon + "radianApi/Events/deleteUserEvent.php",
+    //       JSON.stringify(this._encryptDecryptService.ecryptModel(rdCommon))
+    //     )
+    //     .pipe(
+    //       map((res) => {
+    //         return res;
+    //       })
+    //     );
+  }
 }

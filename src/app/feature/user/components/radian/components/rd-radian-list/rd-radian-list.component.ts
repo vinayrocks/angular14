@@ -6,7 +6,10 @@ import { first } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { RdEncryptDecryptService } from "src/app/shared/services/encrypt-decrypt/rd-encrypt-decrypt.service";
 import { NotificationService } from "src/app/shared/services/common/rd-notification/notification.service";
-import { RdCommon } from "src/app/shared/core/models/rd-common/rd-common";
+import {
+  ConnectProfile,
+  RdCommon,
+} from "src/app/shared/core/models/rd-common/rd-common";
 import { RdAuthenticateService } from "src/app/shared/services/authentication/rd-authenticate.service";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { MatDialog } from "@angular/material/dialog";
@@ -59,63 +62,65 @@ export class RdRadianListComponent implements OnInit {
   _istab: number = 1;
   ConnectionRequest: any = [
     {
-      RequestId: 1,
-      SenderId: 1,
+      ConnectionId: 1,
+      ConnectionSenderId: 1,
       SenderName: "Visual",
-      ReceiverId: 1,
-      Status: 0,
+      ConnectionReceiverId: 1,
+      ConnectionStatus: 0,
       ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
     },
     {
-      requestId: 2,
-      SenderId: 2,
+      ConnectionId: 2,
+      ConnectionSenderId: 2,
       SenderName: "Vinay",
-      ReceiverId: 1,
-      Status: 2,
+      ConnectionReceiverId: 1,
+      ConnectionStatus: 2,
       ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
     },
     {
-      requestId: 3,
-      SenderId: 3,
+      ConnectionId: 3,
+      ConnectionSenderId: 3,
       SenderName: "Abhishek",
-      ReceiverId: 1,
-      Status: 0,
+      ConnectionReceiverId: 1,
+      ConnectionStatus: 0,
       ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
     },
   ];
   UserConnection: any = [
     {
-      RequestId: 4,
-      SenderId: 4,
+      ConnectionId: 4,
+      ConnectionSenderId: 4,
       SenderName: "kimso well",
-      ReceiverId: 1,
-      Status: 1,
+      ConnectionReceiverId: 1,
+      ConnectionStatus: 1,
       ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
     },
     {
-      requestId: 5,
-      SenderId: 5,
+      ConnectionId: 5,
+      ConnectionSenderId: 5,
       SenderName: "kimmy",
-      ReceiverId: 1,
-      Status: 1,
+      ConnectionReceiverId: 1,
+      ConnectionStatus: 1,
       ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
     },
     {
-      requestId: 6,
-      SenderId: 6,
+      ConnectionId: 6,
+      ConnectionSenderId: 6,
       SenderName: "Mark",
-      ReceiverId: 1,
-      Status: 1,
+      ConnectionReceiverId: 1,
+      ConnectionStatus: 1,
       ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
     },
   ];
+  sendConnectionModel: any = [];
   constructor(
     private rdUserService: RdUserService,
     private router: Router,
     private _encryptDecryptService: RdEncryptDecryptService,
     private spinner: NgxSpinnerService,
     public matDialog: MatDialog,
-    private rdAuthenticateService: RdAuthenticateService
+    private rdAuthenticateService: RdAuthenticateService,
+    private notificationService: NotificationService
   ) {
     this.skills = (skillsInterest as any).default;
 
@@ -264,6 +269,45 @@ export class RdRadianListComponent implements OnInit {
     // this.selectedUser.EducationDetails = JSON.parse(this.selectedUser.EducationDetails);
     // this.selectedUser.ExperienceDetails = JSON.parse(this.selectedUser.ExperienceDetails);
     this.gotoTop();
+  }
+  AcceptRequest(item: any) {
+    item.ConnectionStatus = 1;
+    this.rdUserService
+      .connectionRequest(new ConnectProfile(item))
+      .pipe(first())
+      .subscribe(
+        (res) => {
+          this.notificationService.success(res.message);
+          // this.GetProfileDetail();
+        },
+        (error) => {}
+      );
+  }
+  RejectRequest(item: any) {
+    item.ConnectionStatus = 2;
+    this.rdUserService
+      .connectionRequest(new ConnectProfile(item))
+      .pipe(first())
+      .subscribe(
+        (res) => {
+          this.notificationService.success(res.message);
+          // this.GetProfileDetail();
+        },
+        (error) => {}
+      );
+  }
+  DeleteRequest(item: any) {
+    item.ConnectionStatus = 2;
+    this.rdUserService
+      .deleteRequest(new ConnectProfile(item))
+      .pipe(first())
+      .subscribe(
+        (res) => {
+          this.notificationService.success(res.message);
+          // this.GetProfileDetail();
+        },
+        (error) => {}
+      );
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];

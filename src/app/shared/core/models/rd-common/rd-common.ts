@@ -20,8 +20,8 @@ export class RdUserSetting {
   }
 }
 export class RdGetProfile {
-  ProfileId: String = '';
-  UserId: String = '';
+  ProfileId: String = "";
+  UserId: String = "";
   public getRdRadian: RdGetProfile[];
   constructor(input: any) {
     Object.assign(this, input);
@@ -29,8 +29,8 @@ export class RdGetProfile {
   }
 }
 export class RdGetEvent {
-  EventId: String = '';
-  UserId: String = '';
+  EventId: String = "";
+  UserId: String = "";
   public getRdRadian: RdGetEvent[];
   constructor(input: any) {
     Object.assign(this, input);
@@ -38,10 +38,10 @@ export class RdGetEvent {
   }
 }
 export class RdLikeEventProfile {
-  RadianType: String = '';
-  RadianTypeStatus: Boolean =false;
-  RadianTypeId : String = '';
-  UserId:String='';
+  RadianType: String = "";
+  RadianTypeStatus: Boolean = false;
+  RadianTypeId: String = "";
+  UserId: String = "";
   public getRdRadian: RdGetEvent[];
   constructor(input: any) {
     Object.assign(this, input);
@@ -49,8 +49,8 @@ export class RdLikeEventProfile {
   }
 }
 export class DeleteEvent {
-  EventId: String = '';
-  UserId: Boolean =false;
+  EventId: String = "";
+  UserId: Boolean = false;
   public getDeleteEvent: DeleteEvent[];
   constructor(input: any) {
     Object.assign(this, input);
@@ -58,8 +58,8 @@ export class DeleteEvent {
   }
 }
 export class DeletePortfolio {
-  PortfolioId: String = '';
-  UserId: Boolean =false;
+  PortfolioId: String = "";
+  UserId: Boolean = false;
   public getDeletePortfolio: DeletePortfolio[];
   constructor(input: any) {
     Object.assign(this, input);
@@ -67,8 +67,8 @@ export class DeletePortfolio {
   }
 }
 export class DeleteProfile {
-  ProfileId: String = '';
-  UserId: Boolean =false;
+  ProfileId: String = "";
+  UserId: Boolean = false;
   public getDeleteProfile: DeleteProfile[];
   constructor(input: any) {
     Object.assign(this, input);
@@ -76,8 +76,8 @@ export class DeleteProfile {
   }
 }
 export class RdGetPortfolio {
-  PortfolioId: String = '';
-  UserId:number=0;
+  PortfolioId: String = "";
+  UserId: number = 0;
   public rdGetPortfolio: RdGetPortfolio[];
   constructor(input: any) {
     Object.assign(this, input);
@@ -85,7 +85,7 @@ export class RdGetPortfolio {
   }
 }
 export class RdEventIntUser {
-  EventId: String = '';
+  EventId: String = "";
   public rdEventIntUser: RdEventIntUser[];
   constructor(input: any) {
     Object.assign(this, input);
@@ -93,10 +93,21 @@ export class RdEventIntUser {
   }
 }
 export class RdUserAccount {
-  memberShip: String = '';
-  membershipAmount: String = '';
-  membershipDuration: String = '';
+  memberShip: String = "";
+  membershipAmount: String = "";
+  membershipDuration: String = "";
   public RdUserAccount: RdUserAccount[];
+  constructor(input: any) {
+    Object.assign(this, input);
+    return this;
+  }
+}
+export class ConnectProfile {
+  ConnectionId: number = 0;
+  ConnectionStatus: number = 0;
+  ConnectionReceiverId: number = 0;
+  ConnectionSenderId: number = 0;
+  public getRdRadian: ConnectProfile[];
   constructor(input: any) {
     Object.assign(this, input);
     return this;
