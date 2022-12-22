@@ -324,7 +324,7 @@ export class RdPortfolioEditComponent implements OnInit {
     var dimData = new RdPortfolio(data);
     this.rdUserService.addUserPortfolio(dimData).subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.spinner.hide();
         if (res.status) {
           this.notificationService.success(res.message);
@@ -334,7 +334,7 @@ export class RdPortfolioEditComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }

@@ -113,6 +113,9 @@ export class RdRadianListComponent implements OnInit {
     },
   ];
   sendConnectionModel: any = [];
+  ConnectionsReceiver: any = [];
+  ConnectionsSender: any = [];
+  Connections: any = [];
   constructor(
     private rdUserService: RdUserService,
     private router: Router,
@@ -203,7 +206,7 @@ export class RdRadianListComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res) => {
-          console.log(res.data);
+          // console.log(res);
           res.data.forEach((element) => {
             element.ProfileExpertise =
               element.ProfileExpertise === ""
@@ -230,12 +233,59 @@ export class RdRadianListComponent implements OnInit {
               element.ExperienceDetails === ""
                 ? []
                 : JSON.parse(element.ExperienceDetails);
-
-            // element.CertificationDetails = JSON.parse(element.CertificationDetails);
-            // element.EducationDetails = JSON.parse(element.EducationDetails);
-            // element.ExperienceDetails = JSON.parse(element.ExperienceDetails);
           });
 
+          if (res.ConnectionsReceiver !== null) {
+            res.ConnectionsReceiver.map(
+              (x: any) => (x.ConnectionStatus = parseInt(x.ConnectionStatus))
+            );
+            res.ConnectionsReceiver.map(
+              (x: any) =>
+                (x.ConnectionReceiverId = parseInt(x.ConnectionReceiverId))
+            );
+            res.ConnectionsReceiver.map(
+              (x: any) =>
+                (x.ConnectionSenderId = parseInt(x.ConnectionSenderId))
+            );
+            res.ConnectionsReceiver.map(
+              (x: any) => (x.ConnectionId = parseInt(x.ConnectionId))
+            );
+          }
+          if (res.ConnectionsSender !== null) {
+            res.ConnectionsSender.map(
+              (x: any) => (x.ConnectionStatus = parseInt(x.ConnectionStatus))
+            );
+            res.ConnectionsSender.map(
+              (x: any) =>
+                (x.ConnectionReceiverId = parseInt(x.ConnectionReceiverId))
+            );
+            res.ConnectionsSender.map(
+              (x: any) =>
+                (x.ConnectionSenderId = parseInt(x.ConnectionSenderId))
+            );
+            res.ConnectionsSender.map(
+              (x: any) => (x.ConnectionId = parseInt(x.ConnectionId))
+            );
+          }
+          if (res.Connections !== null) {
+            res.Connections.map(
+              (x: any) => (x.ConnectionStatus = parseInt(x.ConnectionStatus))
+            );
+            res.Connections.map(
+              (x: any) =>
+                (x.ConnectionReceiverId = parseInt(x.ConnectionReceiverId))
+            );
+            res.Connections.map(
+              (x: any) =>
+                (x.ConnectionSenderId = parseInt(x.ConnectionSenderId))
+            );
+            res.Connections.map(
+              (x: any) => (x.ConnectionId = parseInt(x.ConnectionId))
+            );
+          }
+          this.ConnectionsReceiver = res.ConnectionsReceiver;
+          this.ConnectionsSender = res.ConnectionsSender;
+          this.Connections = res.Connections;
           this.userProfiles = res.data;
           this.selectedUser = res.data[0];
           this.projectPath = res.projectPath;
@@ -271,40 +321,54 @@ export class RdRadianListComponent implements OnInit {
     this.gotoTop();
   }
   AcceptRequest(item: any) {
-    item.ConnectionStatus = 1;
+    const dxData = new ConnectProfile(ConnectProfile);
+    dxData.ConnectionId = item.ConnectionId;
+    dxData.ConnectionReceiverId = item.ConnectionReceiverId;
+    dxData.ConnectionSenderId = item.ConnectionSenderId;
+    dxData.ConnectionStatus = 1;
+
+    // console.log(dxData);
     this.rdUserService
-      .connectionRequest(new ConnectProfile(item))
+      .sendConnectionRequest(dxData)
       .pipe(first())
       .subscribe(
         (res) => {
           this.notificationService.success(res.message);
-          // this.GetProfileDetail();
+          this.getUserProfiles();
         },
         (error) => {}
       );
   }
   RejectRequest(item: any) {
-    item.ConnectionStatus = 2;
+    const dxData = new ConnectProfile(ConnectProfile);
+    dxData.ConnectionId = item.ConnectionId;
+    dxData.ConnectionReceiverId = item.ConnectionReceiverId;
+    dxData.ConnectionSenderId = item.ConnectionSenderId;
+    dxData.ConnectionStatus = 2;
     this.rdUserService
-      .connectionRequest(new ConnectProfile(item))
+      .sendConnectionRequest(dxData)
       .pipe(first())
       .subscribe(
         (res) => {
           this.notificationService.success(res.message);
-          // this.GetProfileDetail();
+          this.getUserProfiles();
         },
         (error) => {}
       );
   }
   DeleteRequest(item: any) {
-    item.ConnectionStatus = 2;
+    const dxData = new ConnectProfile(ConnectProfile);
+    dxData.ConnectionId = item.ConnectionId;
+    dxData.ConnectionReceiverId = item.ConnectionReceiverId;
+    dxData.ConnectionSenderId = item.ConnectionSenderId;
+    dxData.ConnectionStatus = 2;
     this.rdUserService
-      .deleteRequest(new ConnectProfile(item))
+      .sendConnectionRequest(dxData)
       .pipe(first())
       .subscribe(
         (res) => {
           this.notificationService.success(res.message);
-          // this.GetProfileDetail();
+          this.getUserProfiles();
         },
         (error) => {}
       );
