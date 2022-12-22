@@ -89,7 +89,7 @@ export class RdMemberDetailComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res) => {
-          // console.log(res)
+          // console.log(res);
           this.memberEvents = res.Events;
           this.memberProfiles = res.Profiles;
           this.memberDetail = res.data[0];
@@ -134,7 +134,7 @@ export class RdMemberDetailComponent implements OnInit {
               ? JSON.parse(this.memberDetail.ExperienceDetails)
               : [];
           //this.memberDetail.OtherProfiles =[];
-          console.log(this.memberDetail);
+          // console.log(this.memberDetail);
           this.spinner.hide();
         },
         (error) => {
@@ -228,10 +228,11 @@ export class RdMemberDetailComponent implements OnInit {
   }
   sendConnectionRequest() {
     this.sendConnectionModel.ConnectionStatus = 0;
-    this.radianLikeData.ConnectionReceiverId = parseInt(
+    this.sendConnectionModel.ConnectionReceiverId = parseInt(
       this.memberDetail.UserLoginId
     );
     this.sendConnectionModel.ConnectionSenderId = this.currentUser.id;
+    console.log(this.sendConnectionModel);
     this.rdUserService
       .sendConnectionRequest(new ConnectProfile(this.sendConnectionModel))
       .pipe(first())

@@ -255,7 +255,7 @@ export class RdUserService {
   }
 
   addUserPortfolio(rdPortfolio: any) {
-    console.log(rdPortfolio);
+    // console.log(rdPortfolio);
     this.currentUserSubject = this.rdAuthenticateService.getLocalStorageData();
     rdPortfolio.UserId = this.currentUserSubject.id;
     rdPortfolio.Email = this.currentUserSubject.username;
@@ -414,45 +414,17 @@ export class RdUserService {
     );
   }
   sendConnectionRequest(rdCommon) {
-    console.log(this._encryptDecryptService.ecryptModel(rdCommon));
-    return null;
-    // return this.http
-    //   .post<any>(
-    //     environment.apiCommon + "radianApi/UserLikes/userLikes.php",
-    //     JSON.stringify(this._encryptDecryptService.ecryptModel(rdCommon))
-    //   )
-    //   .pipe(
-    //     map((res) => {
-    //       return res;
-    //     })
-    //   );
-  }
-  connectionRequest(rdCommon) {
-    console.log(rdCommon);
-    return null;
-    // return this.http
-    //   .post<any>(
-    //     environment.apiCommon + "radianApi/UserLikes/userLikes.php",
-    //     JSON.stringify(this._encryptDecryptService.ecryptModel(rdCommon))
-    //   )
-    //   .pipe(
-    //     map((res) => {
-    //       return res;
-    //     })
-    //   );
-  }
-  deleteRequest(rdCommon) {
-    console.log(rdCommon);
-    return null;
-    // return this.http
-    //     .post<any>(
-    //       environment.apiCommon + "radianApi/Events/deleteUserEvent.php",
-    //       JSON.stringify(this._encryptDecryptService.ecryptModel(rdCommon))
-    //     )
-    //     .pipe(
-    //       map((res) => {
-    //         return res;
-    //       })
-    //     );
+    // console.log(this._encryptDecryptService.ecryptModel(rdCommon));
+    // return null;
+    return this.http
+      .post<any>(
+        environment.apiCommon + "radianApi/Profiles/userConnections.php",
+        JSON.stringify(this._encryptDecryptService.ecryptModel(rdCommon))
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
   }
 }
