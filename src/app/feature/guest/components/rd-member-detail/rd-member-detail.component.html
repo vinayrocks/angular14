@@ -11,10 +11,26 @@
                 <div class="wrapper">
                     <img src="{{memberDetail.ProfilePicture}}" alt="" class="user-profile">
                     <!-- <h3 class="title">{{currentUser.ProfileName}}</h3> -->
-                    <p class="para-custom">
+                    <p class="para-custom"
+                        *ngIf="routerData.UserId!==0 && memberDetail.isCurrentLoggedInUserConnected!==0">
                         <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"
-                            (click)="sendConnectionRequest()"><i
+                            (click)="sendConnectionRequest()"
+                            *ngIf="memberDetail.isCurrentLoggedInUserConnected===null"><i
                                 class="fas fa-user-tie icon-like-share"></i>Connect</button>&nbsp;&nbsp;
+                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"
+                            *ngIf="memberDetail.isCurrentLoggedInUserConnected===1"><i
+                                class="fas fa-user-tie icon-like-share"></i>Connected</button>&nbsp;&nbsp;
+                    </p>
+                    <p *ngIf="routerData.UserId!==0 && memberDetail.isCurrentLoggedInUserConnected===0">
+                        <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===null"
+                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Request
+                            Sent</button>
+                        <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===0"
+                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Accept
+                        </button>
+                        <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===0"
+                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Reject
+                        </button>
                     </p>
                     <!-- <p class="para-custom">
                         <button mat-button
@@ -31,7 +47,8 @@
                             <li><a [ngClass]="{'active':_istab===3}" (click)="_istab=3">Certification & Licenses</a>
                             </li>
                             <li><a [ngClass]="{'active':_istab===4}" (click)="_istab=4">Experiences</a></li>
-                            <li><a [ngClass]="{'active':_istab===5}" (click)="_istab=5">Connections</a></li>
+                            <li><a [ngClass]="{'active':_istab===5}" (click)="_istab=5"
+                                    *ngIf="routerData.UserId!==0">Connections</a></li>
                         </ul>
                     </div>
                 </div>
@@ -403,132 +420,41 @@
             </div>
 
         </div>
-        <div class="row" [@enterAnimation] *ngIf="_istab===5">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row card portfolio">
-                            <h4>New Connection Requests</h4>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="conn-req-card">
-                                        <div class="user-image">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
-                                        </div>
-                                        <div class="user-details">
-                                            <h4 class="userName">Vinay Pardeshi</h4>
-                                        </div>
-                                        <div class="accept-reject">
-                                            <button mat-button
-                                                class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br />
-                                        </div>
-                                        <div class="accept-reject">
-                                            <button mat-button
-                                                class="btn btn-primary btn-round btn-margin reset-btn-custom">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="conn-req-card">
-                                        <div class="user-image">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
-                                        </div>
-                                        <div class="user-details">
-                                            <h4 class="userName">Vinay Pardeshi</h4>
-                                        </div>
-                                        <div class="accept-reject">
-                                            <button mat-button
-                                                class="btn btn-primary btn-round btn-margin btn-custom">Accept</button><br />
-                                        </div>
-                                        <div class="accept-reject">
-                                            <button mat-button
-                                                class="btn btn-primary btn-round btn-margin reset-btn-custom">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row" [@enterAnimation] *ngIf="_istab===5 && routerData.UserId!==0">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row card portfolio">
                             <h4>Connections</h4>
-                            <div class="row">
-                                <div class="col-md-3">
+                            <div class="row" *ngIf="Connections!==null">
+                                <div class="col-md-3" *ngFor="let item of Connections">
                                     <div class="conn-req-card">
                                         <div class="user-image">
                                             <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
                                         </div>
                                         <div class="user-details">
-                                            <h4 class="userName">Vinay Pardeshi</h4>
+                                            <h4 class="userName">{{item.ProfileName}}</h4>
                                         </div>
-                                        <div class="accept-reject">
+                                        <!-- <div class="accept-reject" *ngIf="item.isCurrentLoggedInUserConnected===1">
                                             <button mat-button
                                                 class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
                                         </div>
-                                        <div class="accept-reject">
+                                        <div class="accept-reject" *ngIf="item.isCurrentLoggedInUserConnected===null">
                                             <button mat-button
-                                                class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
+                                                class="btn btn-primary btn-round btn-margin reset-btn-custom"
+                                                (click)="SendRequest(item)">Connect</button>
                                         </div>
+                                        <div class="accept-reject" *ngIf="item.isCurrentLoggedInUserConnected===0">
+
+                                            <button mat-button
+                                                class="btn btn-primary btn-round btn-margin reset-btn-custom">Request
+                                                Sent</button>
+                                        </div> -->
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="conn-req-card">
-                                        <div class="user-image">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
-                                        </div>
-                                        <div class="user-details">
-                                            <h4 class="userName">Vinay Pardeshi</h4>
-                                        </div>
-                                        <div class="accept-reject">
-                                            <button mat-button
-                                                class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
-                                        </div>
-                                        <div class="accept-reject">
-                                            <button mat-button
-                                                class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="conn-req-card">
-                                        <div class="user-image">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
-                                        </div>
-                                        <div class="user-details">
-                                            <h4 class="userName">Vinay Pardeshi</h4>
-                                        </div>
-                                        <div class="accept-reject">
-                                            <button mat-button
-                                                class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
-                                        </div>
-                                        <div class="accept-reject">
-                                            <button mat-button
-                                                class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="conn-req-card">
-                                        <div class="user-image">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
-                                        </div>
-                                        <div class="user-details">
-                                            <h4 class="userName">Vinay Pardeshi</h4>
-                                        </div>
-                                        <div class="accept-reject">
-                                            <button mat-button
-                                                class="btn btn-primary btn-round btn-margin btn-custom">Connected</button><br />
-                                        </div>
-                                        <div class="accept-reject">
-                                            <button mat-button
-                                                class="btn btn-primary btn-round btn-margin reset-btn-custom">Remove</button>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="row" *ngIf="Connections===null">
+                                <h6>No Connections</h6>
                             </div>
                         </div>
                     </div>
