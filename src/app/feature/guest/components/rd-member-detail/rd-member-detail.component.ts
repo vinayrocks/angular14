@@ -58,6 +58,7 @@ export class RdMemberDetailComponent implements OnInit {
       numScroll: 1,
     },
   ];
+  Connections: any = null;
   constructor(
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
@@ -78,6 +79,7 @@ export class RdMemberDetailComponent implements OnInit {
       this.radianLikeData.UserId = this.currentUser.id;
       this.routerData.UserId = this.currentUser.id;
     }
+    console.log(this.routerData.UserId);
   }
   ngOnInit(): void {
     this.GetProfileDetail();
@@ -89,10 +91,24 @@ export class RdMemberDetailComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res) => {
-          // console.log(res);
+          console.log(res);
           this.memberEvents = res.Events;
           this.memberProfiles = res.Profiles;
           this.memberDetail = res.data[0];
+          if (this.memberDetail.isCurrentLoggedInUserConnected !== null) {
+            this.memberDetail.isCurrentLoggedInUserConnected = parseInt(
+              this.memberDetail.isCurrentLoggedInUserConnected
+            );
+          }
+          if (this.memberDetail.isCurrentLoggedInReceiver !== null) {
+            this.memberDetail.isCurrentLoggedInReceiver = parseInt(
+              this.memberDetail.isCurrentLoggedInReceiver
+            );
+          }
+          this.memberDetail.UserLoginId = parseInt(
+            this.memberDetail.UserLoginId
+          );
+
           this.memberDetail.ContactDetails =
             this.memberDetail.ContactDetails === ""
               ? []
@@ -133,8 +149,24 @@ export class RdMemberDetailComponent implements OnInit {
             this.memberDetail.ExperienceDetails !== ""
               ? JSON.parse(this.memberDetail.ExperienceDetails)
               : [];
-          //this.memberDetail.OtherProfiles =[];
-          // console.log(this.memberDetail);
+          if (res.Connections !== null) {
+            res.Connections.map(
+              (x: any) => (x.ConnectionStatus = parseInt(x.ConnectionStatus))
+            );
+            res.Connections.map(
+              (x: any) =>
+                (x.ConnectionReceiverId = parseInt(x.ConnectionReceiverId))
+            );
+            res.Connections.map(
+              (x: any) =>
+                (x.ConnectionSenderId = parseInt(x.ConnectionSenderId))
+            );
+            res.Connections.map(
+              (x: any) => (x.ConnectionId = parseInt(x.ConnectionId))
+            );
+            this.Connections = res.Connections;
+          }
+
           this.spinner.hide();
         },
         (error) => {
@@ -235,6 +267,22 @@ export class RdMemberDetailComponent implements OnInit {
     console.log(this.sendConnectionModel);
     this.rdUserService
       .sendConnectionRequest(new ConnectProfile(this.sendConnectionModel))
+      .pipe(first())
+      .subscribe(
+        (res) => {
+          this.notificationService.success(res.message);
+          this.GetProfileDetail();
+        },
+        (error) => {}
+      );
+  }
+  SendRequest(item: any) {
+    const dxData = new ConnectProfile(ConnectProfile);
+    dxData.ConnectionReceiverId = parseInt(item.UserLoginId);
+    dxData.ConnectionSenderId = this.currentUser.id;
+    dxData.ConnectionStatus = 0;
+    this.rdUserService
+      .sendConnectionRequest(dxData)
       .pipe(first())
       .subscribe(
         (res) => {

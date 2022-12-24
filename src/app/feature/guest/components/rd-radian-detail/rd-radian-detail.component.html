@@ -79,16 +79,25 @@
                 </div> -->
                     <h4>Click on Intersted to stay updated about this Event</h4>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-1">
                             <h4></h4>
-                            <button mat-button
+                            <!-- <a class="a-btn a-click" (click)="likeRadianEvent(true,radianDetail)" *ngIf="!UserLiked">
+                                <img src="./assets/img/radian/like-icon.png">
+                            </a>
+                            <a class="a-btn a-click" (click)="likeRadianEvent(false,radianDetail)" *ngIf="UserLiked">
+                                <img src="./assets/img/radian/like-icon-filled.png">
+                            </a> {{radianDetail.LikeCount}} -->
+                            <button mat-button (click)="likeRadianEvent(true,radianDetail)" *ngIf="!UserLiked"
+                                class="btn btn-primary btn-round btn-margin reset-btn">Interest</button>
+                            <button mat-button (click)="likeRadianEvent(false,radianDetail)" *ngIf="UserLiked"
                                 class="btn btn-primary btn-round btn-margin reset-btn">Interested</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <h4></h4>
-                            <i class="fa fa-hand-o-right icon-interested"></i><label class="users-label">500
+                            <i class="fa fa-hand-o-right icon-interested"></i><label
+                                class="users-label">{{radianDetail.LikeCount}}
                                 Users</label>
                         </div>
                     </div>
