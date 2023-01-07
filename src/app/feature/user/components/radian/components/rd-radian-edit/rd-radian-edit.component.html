@@ -184,7 +184,7 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="form-control" autocomplete="off" #StartsOn="bsDatepicker"
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #StartsOn="bsDatepicker"
                         formControlName="StartsOn" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -208,7 +208,7 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="form-control" autocomplete="off" #EndsOn="bsDatepicker" [minDate]="getDate(item.controls['StartsOn'].value)"
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #EndsOn="bsDatepicker" [minDate]="getDate(item.controls['StartsOn'].value)"
                         formControlName="EndsOn" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -270,7 +270,7 @@
                     <div class="input-group">
 
 
-                      <input type="text" class="form-control" #CertifiedDate="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate"
+                      <input type="text" class="signUp-form-control form-control" #CertifiedDate="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate"
                         formControlName="CertifiedDate" [bsConfig]="{
                           isAnimated: true,
                           dateInputFormat: 'DD/MM/YYYY'
@@ -350,7 +350,7 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="form-control" autocomplete="off" #StartDate="bsDatepicker" [minDate]="minDate"
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #StartDate="bsDatepicker" [minDate]="minDate"
                         [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -373,7 +373,7 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="form-control" autocomplete="off" #ToDate="bsDatepicker" [minDate]="minDate"
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #ToDate="bsDatepicker" [minDate]="minDate"
                         formControlName="ToDate" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -460,7 +460,7 @@
       <div class="col-md-12">
         <div class="row card portfolio profile-custom">
           <div class="col-md-12">
-            <button class="btn btn-primary btn-round btn-margin" (click)="onSubmit()">Update</button>&nbsp;
+            <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="onSubmit()">Update</button>&nbsp;
             <a [routerLink]="['/member/hunar_view']" class="btn btn-primary btn-round reset-btn">Cancel</a>
           </div>
         </div>
