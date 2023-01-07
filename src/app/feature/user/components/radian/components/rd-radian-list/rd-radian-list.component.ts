@@ -180,7 +180,7 @@ export class RdRadianListComponent implements OnInit {
       "_" +
       this.currentUser.username.split("@")[0] +
       "/Profile/" +
-      this.currentUser.ProfileName +
+      this.currentUser.ProfileName.replace(" ", "") +
       "/ProfileImages/" +
       this.currentUser.ProfilePicture
     );
@@ -192,7 +192,7 @@ export class RdRadianListComponent implements OnInit {
       "_" +
       this.currentUser.username.split("@")[0] +
       "/Profile/" +
-      this.currentUser.ProfileName +
+      this.currentUser.ProfileName.replace(" ", "") +
       "/CoverImages/" +
       this.currentUser.CoverPicture
     );
@@ -288,6 +288,8 @@ export class RdRadianListComponent implements OnInit {
           this.Connections = res.Connections;
           this.userProfiles = res.data;
           this.selectedUser = res.data[0];
+          // console.log(res);
+          // console.log(this.selectedUser);
           this.projectPath = res.projectPath;
           this.spinner.hide();
         },
