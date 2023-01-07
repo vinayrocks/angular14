@@ -41,8 +41,8 @@ export class RdRadianEditComponent implements OnInit {
   userProfile: any = "";
   tempSubCategory: any = [];
   serverFile: any = [];
-  projectFilePath: String = "";
-  projectPath: String = "";
+  profileImagePath: String = "";
+  coverImagePath: String = "";
   currentUser: any;
   config: AngularEditorConfig = {
     editable: true,
@@ -101,11 +101,11 @@ export class RdRadianEditComponent implements OnInit {
     this.skills = (skillsInterest as any).default;
     this.tempDegreeName = Object.assign([], this.degreeName);
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
-    this.projectFilePath =
-      this.currentUser.firstName +
-      "_" +
-      this.currentUser.username.split("@")[0] +
-      "/Profile";
+    // this.projectFilePath =
+    //   this.currentUser.firstName +
+    //   "_" +
+    //   this.currentUser.username.split("@")[0] +
+    //   "/Profile";
     this.routerData.Id = this.route.snapshot.paramMap.get("id");
     if (this.routerData.Id !== "") {
       this.routerData.Id = this._encryptDecryptService.get(this.routerData.Id);
@@ -133,6 +133,30 @@ export class RdRadianEditComponent implements OnInit {
     body.classList.add("profile-page");
     var navbar = document.getElementsByTagName("nav")[0];
     navbar.classList.add("navbar-transparent");
+  }
+  GetProfilePath() {
+    return (
+      "http://itechprovisions.com/radianApi/media/" +
+      this.currentUser.firstName +
+      "_" +
+      this.currentUser.username.split("@")[0] +
+      "/Profile/" +
+      this.currentUser.ProfileName.replace(" ", "") +
+      "/ProfileImages/" +
+      this.userProfile.ProfilePicture
+    );
+  }
+  GetCoverPicture() {
+    return (
+      "http://itechprovisions.com/radianApi/media/" +
+      this.currentUser.firstName +
+      "_" +
+      this.currentUser.username.split("@")[0] +
+      "/Profile/" +
+      this.currentUser.ProfileName.replace(" ", "") +
+      "/CoverImages/" +
+      this.userProfile.CoverPicture
+    );
   }
   getDate(value: any) {
     return new Date(value);
@@ -240,8 +264,16 @@ export class RdRadianEditComponent implements OnInit {
           }
 
           this.userProfile = res.data[0];
-          // console.log(this.userProfile)
-          this.projectPath = res.projectPath;
+          if (this.currentUser !== null) {
+            this.profileImagePath =
+              this.userProfile.ProfilePicture !== null
+                ? this.GetProfilePath()
+                : "";
+            this.coverImagePath =
+              this.userProfile.CoverPicture !== null
+                ? this.GetCoverPicture()
+                : "";
+          }
           this.setFormGroup();
           this.getUserPorfolio();
         },

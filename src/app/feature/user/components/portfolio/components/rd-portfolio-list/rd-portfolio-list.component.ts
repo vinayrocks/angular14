@@ -49,6 +49,7 @@ export class RdPortfolioListComponent implements OnInit {
   currentUser: any;
   projectFilePath: String = "";
   projectPath: String = "";
+  selectedPortfolioImage: string = "";
   config: AngularEditorConfig = {
     editable: false,
     spellcheck: false,
@@ -156,13 +157,21 @@ export class RdPortfolioListComponent implements OnInit {
           res.UserPortfolioMedia = this.initialUserPortfolioMedia.filter(
             (x) => x.userPortfolioId === this.selectedPortfolio.id
           );
-          res.UserPortfolioMedia.forEach((element) => {
-            element.attachments = this.GetPortfolioImagePath(
-              this.selectedPortfolio,
-              element.userPortfolioAttachment
-            );
-          });
-          this.userPortfolioMedia = res.UserPortfolioMedia;
+          if (res.UserPortfolioMedia.length !== 0) {
+            res.UserPortfolioMedia.forEach((element) => {
+              element.attachments = this.GetPortfolioImagePath(
+                this.selectedPortfolio,
+                element.userPortfolioAttachment
+              );
+            });
+            this.userPortfolioMedia = res.UserPortfolioMedia;
+            if (this.userPortfolioMedia[0].attachments[0].IsImage === "image") {
+              this.selectedPortfolioImage =
+                this.userPortfolioMedia[0].attachments[0].Name;
+            } else {
+              this.selectedPortfolioImage = "";
+            }
+          }
         },
         (error) => {
           this.spinner.hide();
@@ -253,22 +262,36 @@ export class RdPortfolioListComponent implements OnInit {
     const xData = this.initialUserPortfolioMedia.filter(
       (x) => x.userPortfolioId === data.id
     );
-    xData.forEach((element) => {
-      element.attachments = this.GetPortfolioImagePath(
-        data,
-        element.userPortfolioAttachment
+    if (xData.length > 0) {
+      xData.forEach((element) => {
+        element.attachments = this.GetPortfolioImagePath(
+          data,
+          element.userPortfolioAttachment
+        );
+      });
+      xData.map(
+        (a: any) =>
+          (a.userPortfolioRatingAverage = parseFloat(
+            a.userPortfolioRatingAverage.toString()
+          )
+            .toFixed(1)
+            .replace(/\.0+$/, ""))
       );
-    });
+    }
+
     this.selectedPortfolio = data;
-    xData.map(
-      (a: any) =>
-        (a.userPortfolioRatingAverage = parseFloat(
-          a.userPortfolioRatingAverage.toString()
-        )
-          .toFixed(1)
-          .replace(/\.0+$/, ""))
-    );
     this.userPortfolioMedia = xData;
+    this.selectedPortfolioImage = "";
+    if (this.userPortfolioMedia.length !== 0) {
+      if (this.userPortfolioMedia[0].attachments[0].IsImage === "image") {
+        this.selectedPortfolioImage =
+          this.userPortfolioMedia[0].attachments[0].Name;
+      } else {
+        this.selectedPortfolioImage = "";
+      }
+    }
+
+    //console.log(this.selectedPortfolioImage);
     this.gotoTop();
   }
   ngOnDestroy() {

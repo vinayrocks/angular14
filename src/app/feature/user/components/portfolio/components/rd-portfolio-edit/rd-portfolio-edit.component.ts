@@ -54,6 +54,8 @@ export class RdPortfolioEditComponent implements OnInit {
     ],
   };
   userPortfolioMedia: any = [];
+  profileImagePath: String = "";
+  coverImagePath: String = "";
   constructor(
     private _formBuilder: FormBuilder,
     private rdUserService: RdUserService,
@@ -85,6 +87,7 @@ export class RdPortfolioEditComponent implements OnInit {
     } else {
       this.router.navigate(["/member/portfolio_view"]);
     }
+    // console.log(this.currentUser);
   }
   ngOnInit() {
     var rellaxHeader = new Rellax(".rellax-header");
@@ -99,9 +102,37 @@ export class RdPortfolioEditComponent implements OnInit {
       PortfolioMedia: [""],
       linkURL: [""],
     });
+    if (this.currentUser !== null) {
+      this.profileImagePath = this.GetProfilePath();
+      this.coverImagePath = this.GetCoverPicture();
+    }
   }
   get editPortfolioForm() {
     return this.editPortfolioFormGroup.controls;
+  }
+  GetProfilePath() {
+    return (
+      "http://itechprovisions.com/radianApi/media/" +
+      this.currentUser.firstName +
+      "_" +
+      this.currentUser.username.split("@")[0] +
+      "/Profile/" +
+      this.currentUser.ProfileName.replace(" ", "") +
+      "/ProfileImages/" +
+      this.currentUser.ProfilePicture
+    );
+  }
+  GetCoverPicture() {
+    return (
+      "http://itechprovisions.com/radianApi/media/" +
+      this.currentUser.firstName +
+      "_" +
+      this.currentUser.username.split("@")[0] +
+      "/Profile/" +
+      this.currentUser.ProfileName.replace(" ", "") +
+      "/CoverImages/" +
+      this.currentUser.CoverPicture
+    );
   }
   setFormGroup() {
     this.editPortfolioForm.PortfolioName.setValue(
@@ -283,7 +314,6 @@ export class RdPortfolioEditComponent implements OnInit {
               };
               this.PortfolioMediaModel.push(dxDat);
             });
-
             this.editPortfolioForm.PortfolioMedia.setValue(
               this.PortfolioMediaModel
             );

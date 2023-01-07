@@ -8,7 +8,9 @@
     <div class="card social-prof">
         <div class="card-body">
             <div class="wrapper" *ngIf="selectedPortfolio!==null">
-                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+                <img *ngIf="selectedPortfolioImage===''" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""
+                    class="user-profile">
+                <img *ngIf="selectedPortfolioImage!==''" src="{{selectedPortfolioImage}}" alt="" class="user-profile">
                 <h3 class="title">{{selectedPortfolio?.PortfolioName}}</h3>
                 <!--<p>{{selectedPortfolio.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
 
@@ -45,17 +47,16 @@
             <div class="row card portfolio">
                 <h4>Portfolio Media</h4>
                 <div class="row">
-                    <div class="col-md-2 custom-img-col-2"
-                        *ngFor="let elem of userPortfolioMedia;let i=index;">
+                    <div class="col-md-2 custom-img-col-2" *ngFor="let elem of userPortfolioMedia;let i=index;">
                         <div class="custom-photo-container">
-                            <img src="{{elem.attachments[0].Name}}" alt="" class="img-raised" title="" *ngIf="elem.attachments[0].IsImage==='image'" 
-                            (click)="openImageDialog(i)">
-                            <a *ngIf="elem.attachments[0].IsImage==='pdf'">
+                            <img src="{{elem?.attachments[0].Name}}" alt="" class="img-raised" title=""
+                                *ngIf="elem?.attachments[0].IsImage==='image'" (click)="openImageDialog(i)">
+                            <a *ngIf="elem?.attachments[0].IsImage==='pdf'">
                                 <img src="assets/img/radian/document.png" alt="" class="img-raised">
                             </a>
 
-                            <div *ngIf="elem.attachments[0].IsImage==='video'" class="video">
-                                <img src="{{elem.attachments[0].Image}}">
+                            <div *ngIf="elem?.attachments[0].IsImage==='video'" class="video">
+                                <img src="{{elem?.attachments[0].Image}}">
                                 <a></a>
                             </div>
 
@@ -67,25 +68,16 @@
                                         </i>
                                     </ng-template>
                                     <ng-template #popContent>
-                                        <ngx-charts-bar-horizontal
-                                        [view]="[200,100]"
-                                        [results]="single"
-                                        [gradient]="true"
-                                        [xAxis]="false"
-                                        [yAxis]="true"
-                                        [legend]="false"
-                                        [showXAxisLabel]="false"
-                                        [showYAxisLabel]="false"
-                                        [xAxisLabel]="false"
-                                        [yAxisLabel]="true"
-                                        [showDataLabel]="true"
-                                        >
+                                        <ngx-charts-bar-horizontal [view]="[200,100]" [results]="single"
+                                            [gradient]="true" [xAxis]="false" [yAxis]="true" [legend]="false"
+                                            [showXAxisLabel]="false" [showYAxisLabel]="false" [xAxisLabel]="false"
+                                            [yAxisLabel]="true" [showDataLabel]="true">
                                         </ngx-charts-bar-horizontal>
                                     </ng-template>
-                                    <ngb-rating rate="{{elem.userPortfolioRatingAverage}}" [starTemplate]="t" [readonly]="false" [max]="5"
-                                        [readonly]="true"
-                                        [ngbPopover]="popContent" popoverTitle="Loved By" container="body"
-                                        [openDelay]="300" [closeDelay]="500"></ngb-rating>
+                                    <ngb-rating rate="{{elem.userPortfolioRatingAverage}}" [starTemplate]="t"
+                                        [readonly]="false" [max]="5" [readonly]="true" [ngbPopover]="popContent"
+                                        popoverTitle="Loved By" container="body" [openDelay]="300"
+                                        [closeDelay]="500"></ngb-rating>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="rating-custom">{{elem.userPortfolioRatingAverage}} out of 5</label>

@@ -86,7 +86,9 @@
       <div class="card-body">
         <div class="wrapper">
           <a (click)="openProfilePopup(contentProfile)">
-            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+            <img *ngIf="profileImagePath===''" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""
+              class="user-profile">
+            <img *ngIf="profileImagePath!==''" src="{{profileImagePath}}" alt="" class="user-profile">
           </a>
 
           <h3 class="title">{{userProfile.ProfileName}}</h3>
@@ -166,7 +168,7 @@
                   <div class="col-md-12">
                     <div class="input-group">
                       <input type="text" class="signUp-form-control form-control" placeholder="other"
-                      formControlName="Other">
+                        formControlName="Other">
                     </div>
                   </div>
                 </div>
@@ -184,8 +186,8 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #StartsOn="bsDatepicker"
-                        formControlName="StartsOn" [maxDate]="maxDate" [bsConfig]="{
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off"
+                        #StartsOn="bsDatepicker" formControlName="StartsOn" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'
@@ -200,7 +202,8 @@
                 <div class="row"
                   *ngIf="item.controls['EndsOn'].errors && (item.controls['EndsOn'].dirty || item.controls['EndsOn'].touched)">
                   <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'End Year'" *ngIf="item.controls['EndsOn'].errors.required">
+                    <app-required-validation-message [fieldName]="'End Year'"
+                      *ngIf="item.controls['EndsOn'].errors.required">
                     </app-required-validation-message>
                   </div>
                 </div>
@@ -208,7 +211,8 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #EndsOn="bsDatepicker" [minDate]="getDate(item.controls['StartsOn'].value)"
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off"
+                        #EndsOn="bsDatepicker" [minDate]="getDate(item.controls['StartsOn'].value)"
                         formControlName="EndsOn" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
@@ -270,8 +274,8 @@
                     <div class="input-group">
 
 
-                      <input type="text" class="signUp-form-control form-control" #CertifiedDate="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate"
-                        formControlName="CertifiedDate" [bsConfig]="{
+                      <input type="text" class="signUp-form-control form-control" #CertifiedDate="bsDatepicker"
+                        [minDate]="minDate" [maxDate]="maxDate" formControlName="CertifiedDate" [bsConfig]="{
                           isAnimated: true,
                           dateInputFormat: 'DD/MM/YYYY'
                         }" bsDatepicker>
@@ -350,8 +354,8 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #StartDate="bsDatepicker" [minDate]="minDate"
-                        [maxDate]="maxDate" [bsConfig]="{
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off"
+                        #StartDate="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'
@@ -373,8 +377,9 @@
                   <div class="col-md-12">
                     <div class="input-group">
 
-                      <input type="text" class="signUp-form-control form-control" autocomplete="off" #ToDate="bsDatepicker" [minDate]="minDate"
-                        formControlName="ToDate" [maxDate]="maxDate" [bsConfig]="{
+                      <input type="text" class="signUp-form-control form-control" autocomplete="off"
+                        #ToDate="bsDatepicker" [minDate]="minDate" formControlName="ToDate" [maxDate]="maxDate"
+                        [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'
@@ -413,7 +418,8 @@
             <div class="row mt-top">
               <div class="col-md-12">
                 <div class="pretty p-switch p-fill" *ngFor="let item of tempArrPortfolio;let i=index;">
-                  <input type="checkbox" name="switch{{i}}" (change)="onSelectPortfolio($event,item)" [checked]="item.isChecked"/><br />
+                  <input type="checkbox" name="switch{{i}}" (change)="onSelectPortfolio($event,item)"
+                    [checked]="item.isChecked" /><br />
                   <div class="state p-success">
                     <label>{{item.name}}</label>
                   </div>
@@ -445,7 +451,8 @@
               </div>
               <div class="col-md-9 custom-checkbox">
                 <div class="pretty p-switch p-fill" *ngFor="let item of tempSubCategory;let i=index;">
-                  <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)" [checked]="item.isChecked"/><br />
+                  <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)"
+                    [checked]="item.isChecked" /><br />
                   <div class="state p-success">
                     <label>{{item.name}}</label>
                   </div>

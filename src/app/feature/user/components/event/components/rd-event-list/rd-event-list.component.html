@@ -8,15 +8,19 @@
     <div class="card social-prof">
         <div class="card-body">
             <div class="wrapper">
-                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
-                <h3 class="title">{{selectedEvent.EventName}}</h3>
-                <!--<p>{{selectedEvent.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
-                
+                <img *ngIf="eventImagePath===''" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""
+                    class="user-profile">
+                <img *ngIf="eventImagePath!==''" src="{{eventImagePath}}" alt="" class="user-profile">
+                <h3 class="title">{{selectedEvent?.EventName}}</h3>
+                <!--<p>{{selectedEvent?.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
+
             </div>
             <div class="row">
                 <div class="wrapper">
-                    <img *ngIf="selectedEvent.EventStatus" src="../../../../../../../assets/img/radian/activeEvent.png" class="active-inactive"/>
-                    <img *ngIf="!selectedEvent.EventStatus" src="../../../../../../../assets/img/radian/inactiveEvent.png" class="active-inactive"/>
+                    <img *ngIf="selectedEvent?.EventStatus" src="../../../../../../../assets/img/radian/activeEvent.png"
+                        class="active-inactive" />
+                    <img *ngIf="!selectedEvent?.EventStatus"
+                        src="../../../../../../../assets/img/radian/inactiveEvent.png" class="active-inactive" />
                 </div>
             </div>
             <div class="row">
@@ -36,14 +40,14 @@
                     </div>
                 </div> -->
                 <h4>About Event</h4>
-                <p>{{selectedEvent.EventDescription}}</p>
+                <p>{{selectedEvent?.EventDescription}}</p>
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Location</h4>
-                        <p><i class="fa fa-map-marker icon-marker"></i>{{selectedEvent.EventLocation.street}},
-                            {{selectedEvent.EventLocation.city}}, {{selectedEvent.EventLocation.state}},
-                            {{selectedEvent.EventLocation.zip}},
-                            {{selectedEvent.EventLocation.country}}</p>
+                        <p><i class="fa fa-map-marker icon-marker"></i>{{selectedEvent?.EventLocation?.street}},
+                            {{selectedEvent?.EventLocation?.city}}, {{selectedEvent?.EventLocation?.state}},
+                            {{selectedEvent?.EventLocation?.zip}},
+                            {{selectedEvent?.EventLocation?.country}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -56,12 +60,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        {{selectedEvent.EventStartDateTime|date:'EEEE, MMMM d, y'}} at
-                        {{selectedEvent.EventStartDateTime|date:'hh:mm'}}
+                        {{selectedEvent?.EventStartDateTime|date:'EEEE, MMMM d, y'}} at
+                        {{selectedEvent?.EventStartDateTime|date:'hh:mm'}}
                     </div>
                     <div class="col-md-6">
-                        {{selectedEvent.EventEndDateTime|date:'EEEE, MMMM d, y'}} at
-                        {{selectedEvent.EventEndDateTime|date:'hh:mm'}}
+                        {{selectedEvent?.EventEndDateTime|date:'EEEE, MMMM d, y'}} at
+                        {{selectedEvent?.EventEndDateTime|date:'hh:mm'}}
                     </div>
                 </div>
             </div>
@@ -94,7 +98,7 @@
             <div class="row card portfolio">
                 <h4>Event Categories</h4>
                 <div class="row">
-                    <div class="col-md-4 custom-col-skills" *ngFor="let item of selectedEvent.EventCategory">
+                    <div class="col-md-4 custom-col-skills" *ngFor="let item of selectedEvent?.EventCategory">
                         <i class="{{item.iconClass}}"></i>
                         <br />
                         <h5 class="h5-custom">{{item.name}}</h5>
@@ -103,7 +107,7 @@
                 <!--<div class="col-md-4">
                     <div class="portfolio-label">Event Status</div>
                     <div class="pretty p-switch p-fill">
-                        <input type="radio" disabled="true" [checked]="selectedEvent.EventStatus" />
+                        <input type="radio" disabled="true" [checked]="selectedEvent?.EventStatus" />
                         <div class="state p-success">
                             <label>Active/Inactive</label>
                         </div>
@@ -111,7 +115,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="portfolio-label">Event Categories</div>
-                    <div class="pretty p-switch p-fill" *ngFor="let elem of selectedEvent.EventCategory;let i=index;">
+                    <div class="pretty p-switch p-fill" *ngFor="let elem of selectedEvent?.EventCategory;let i=index;">
                         <input type="radio" disabled="true" checked [value]="true" />
                         <div class="state p-success p-fill">
                             <label>{{elem.name}}</label>
@@ -121,7 +125,7 @@
                 <div class="col-md-4">
                     <div class="portfolio-label"></div>
                     <button class="btn btn-primary btn-custom btn-round btn-margin"
-                        (click)="OpenUserList(selectedEvent.id)"><img class="interestedUsers"
+                        (click)="OpenUserList(selectedEvent?.id)"><img class="interestedUsers"
                             src="assets/img/radian/interested_Users.png" />&nbsp;&nbsp;&nbsp;Click here to view users
                         interested for this Event</button>&nbsp;
                 </div>-->
@@ -135,45 +139,48 @@
                 <h4>Interested Users</h4>
                 <div class="row mt-top" style="padding: 0px 20px 0px 20px;" appBlockCopy>
                     <div class="col-md-12">
-                      <div class="row" style="margin-bottom: 20px">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th width=30%>Name</th>
-                                    <th width=30%>Email</th>
-                                    <th width=40%>Contact Number</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngIf="userList.length===0"><td colspan="3">No Records</td></tr>
-                                <tr *ngFor="let item of userList">
-                                    <td width=30%><a class="evt-name">{{item.FirstName}} {{item.LastName}}</a></td>
-                                    <td width=30% class="evt-detail">{{item.Email}}</td>
-                                    <td width=40%>{{item.userContactDetail.phoneCode}} {{item.userContactDetail.phone}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <div class="row" style="margin-bottom: 20px">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width=30%>Name</th>
+                                        <th width=30%>Email</th>
+                                        <th width=40%>Contact Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="userList?.length===0">
+                                        <td colspan="3">No Records</td>
+                                    </tr>
+                                    <tr *ngFor="let item of userList">
+                                        <td width=30%><a class="evt-name">{{item.FirstName}} {{item.LastName}}</a></td>
+                                        <td width=30% class="evt-detail">{{item.Email}}</td>
+                                        <td width=40%>{{item.userContactDetail.phoneCode}}
+                                            {{item.userContactDetail.phone}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row" *ngIf="selectedEvent.EventMedia.length>0">
+    <div class="row" *ngIf="selectedEvent?.EventMedia?.length>0">
         <div class="col-md-12">
             <div class="row card portfolio">
                 <h4>Event Media</h4>
                 <div class="row">
-                    <div class="col-md-2" *ngFor="let elem of selectedEvent.EventMedia;let i=index;">
+                    <div class="col-md-2 custom-img-col-2" *ngFor="let elem of selectedEvent?.EventMedia;let i=index;">
                         <div class="custom-photo-container">
-                            <img src="{{elem.Name}}" alt="" class="img-raised" title=""
-                                (click)='openImageDialog(selectedEvent.EventMedia,i)' *ngIf="elem.IsImage==='image'">
-                            <a *ngIf="elem.IsImage==='pdf'" (click)="downloadPdf(elem.Name)">
+                            <img src="{{elem?.Name}}" alt="" class="img-raised" title=""
+                                (click)='openImageDialog(selectedEvent?.EventMedia,i)' *ngIf="elem?.IsImage==='image'">
+                            <a *ngIf="elem?.IsImage==='pdf'" (click)="downloadPdf(elem?.Name)">
                                 <img src="assets/img/radian/document.png" alt="" class="img-raised">
                             </a>
-                            <div *ngIf="elem.IsImage==='video'" class="video">
-                                <img src="{{elem.Image}}" (click)='openImageDialog(selectedEvent.EventMedia,i)'>
+                            <div *ngIf="elem?.IsImage==='video'" class="video">
+                                <img src="{{elem?.Image}}" (click)='openImageDialog(selectedEvent?.EventMedia,i)'>
                                 <a></a>
                             </div>
                         </div>
@@ -216,7 +223,8 @@
         <div class="col-md-12">
             <div class="row card portfolio">
                 <div class="col-md-12 flt-left">
-                    <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="openEdit(selectedEvent.id)">Edit
+                    <button class="btn btn-primary btn-round btn-margin submit-btn"
+                        (click)="openEdit(selectedEvent?.id)">Edit
                         Event</button>&nbsp;
                     <button mat-button class="btn btn-primary btn-round btn-margin reset-btn"
                         (click)="DeleteEvent(selectedEvent)">Delete Event</button>

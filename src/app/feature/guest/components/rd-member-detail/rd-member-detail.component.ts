@@ -79,7 +79,7 @@ export class RdMemberDetailComponent implements OnInit {
       this.radianLikeData.UserId = this.currentUser.id;
       this.routerData.UserId = this.currentUser.id;
     }
-    console.log(this.routerData.UserId);
+    // console.log(this.routerData.UserId);
   }
   ngOnInit(): void {
     this.GetProfileDetail();
@@ -91,7 +91,7 @@ export class RdMemberDetailComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res) => {
-          console.log(res);
+          // console.log(res);
           this.memberEvents = res.Events;
           this.memberProfiles = res.Profiles;
           this.memberDetail = res.data[0];
@@ -264,7 +264,7 @@ export class RdMemberDetailComponent implements OnInit {
       this.memberDetail.UserLoginId
     );
     this.sendConnectionModel.ConnectionSenderId = this.currentUser.id;
-    console.log(this.sendConnectionModel);
+    // console.log(this.sendConnectionModel);
     this.rdUserService
       .sendConnectionRequest(new ConnectProfile(this.sendConnectionModel))
       .pipe(first())
