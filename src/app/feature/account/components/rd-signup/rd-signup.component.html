@@ -354,9 +354,9 @@
                             </select> -->
                         </div>
                         <div class="col-md-7"
-                            *ngIf="registerForm.profileSkill.errors && (registerForm.profileSkill.dirty || registerForm.profileSkill.touched)">
+                            *ngIf="registerForm.profileSkillName.errors && (registerForm.profileSkillName.dirty || registerForm.profileSkillName.touched)">
                             <app-required-validation-message [fieldName]="'Skill Category'"
-                                *ngIf="registerForm.profileSkill.errors.required"></app-required-validation-message>
+                                *ngIf="registerForm.profileSkillName.errors.required"></app-required-validation-message>
                         </div>
                     </div><br />
                     <div class="row" *ngIf="registerForm.profileSkillSubCategory.errors && (registerForm.profileSkillSubCategory.dirty
@@ -553,7 +553,7 @@
                     <hr />
                     <div class="row">
                         <div class="col-md-12">
-                            <a target="_blank" [routerLink]="['/term-of-use']">Click here to read Hunar Terms &
+                            <a target="_blank" [routerLink]="['/term-of-use']">Click here to read Miraculum Terms &
                                 Condition.</a><br /><br />
                             <div class="row"
                                 *ngIf="registerForm.termCondition.errors && (registerForm.termCondition.dirty || registerForm.termCondition.touched)">
@@ -565,17 +565,18 @@
                             </div>
                             <label class="form-check-label">
                                 <input type="checkbox" formControlName="termCondition">
-                                I have read and agree to Hunar Terms & Conditions.
+                                I have read and agree to Miraculum Terms & Conditions.
                                 <span class="form-check-sign"></span>
                             </label>
                         </div>
                     </div><br />
                     <div class="row">
                         <div class="col-md-12">
-                            <button mat-button class="btn btn-danger btn-round btn-margin reset-btn"
-                                (click)="reset()">Reset</button>
-                            <button class="btn btn-danger btn-round btn-float-right"
+                            <button class="btn btn-danger btn-round"
                                 (click)="onSubmit()">Register</button>
+                            <button mat-button class="btn btn-danger btn-round btn-margin  btn-float-right reset-btn"
+                                (click)="reset()">Reset</button>
+                            
                         </div>
                     </div>
                 </form>

@@ -139,7 +139,7 @@ export class RdSignupComponent implements OnInit {
       email: ["", [Validators.required, Validators.email, emailValidation]],
       password: ["", [Validators.required, passwordValidation]],
       confirmPassword: ["", Validators.required],
-      profileSkill: ["", Validators.required],
+      profileSkillName: ["", Validators.required],
       profileSkillSubCategory: ["", Validators.required],
       paymentMethod: [""],
       cardName: [""],

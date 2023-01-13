@@ -15,7 +15,7 @@
     margin-bottom: 10px;
   }
   .custom-label{
-    margin-bottom: 35px;
+    margin-bottom: 35px; 
   }
 }
 // form.registerForm{
@@ -65,12 +65,14 @@ input[type="radio"]:checked + label h4{
 .title.text-center{
   padding:17px;
 }
-.signUp-form-control{
-    margin-bottom: 10px !important;
-    border: 0px !important;
-    background: #333333 !important;
-    color: #FFFFFF !important;
-  }
+.signUp-form-control {
+  margin-bottom: 10px !important;
+  border: 1px solid #2f3c4f !important;
+  background: #ffffff !important;
+  color: #181f29 !important;
+  font-size: 14px;
+  border-radius: 5px !important;
+}
 .form-check-label.card-label h4{
     margin-top: unset;
 }
@@ -87,7 +89,7 @@ h4 {
 }
 .reset-btn{
     background-color: #181F29;
-    margin-right:10px;
+    margin-left:10px;
 }
 
 h5, h6{
@@ -97,12 +99,7 @@ h5, h6{
 .form-control:focus{
   box-shadow: 2px 2px 15px 0px #231F20 !important;
 }
-.signUp-form-control{
-    margin-bottom: 10px !important;
-    border: 1px solid #2F3C4F !important;
-    background: #ffffff !important;
-    color: #181F29 !important;
-  }
+
   .form-control:focus{
     border: 2px solid #4AA0FF !important;
     box-shadow: 0px 0px 2px 0px #4AA0FF !important;
@@ -133,5 +130,9 @@ h5, h6{
   position: relative;
   overflow: hidden;
   width: 100%;
-  box-shadow: none !important;
+  box-shadow:0 0 3px #0000004d !important;
+}
+.form-group .form-control,
+.input-group .form-control {
+  padding: 20px 18px;
 }

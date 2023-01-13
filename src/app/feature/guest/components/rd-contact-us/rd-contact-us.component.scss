@@ -48,3 +48,49 @@
     background-position: unset !important;
   }
 }
+
+.about-start,
+.about-end {
+  background-color: #ffde59;
+  background-size: contain; 
+  border-radius: 10px;
+}
+
+@media (min-width: 992px) {
+  .about-start {
+    position: relative;
+    margin-right: -90px;
+    z-index: 1;
+    border-radius: 10px;
+  }
+
+  .about-end {
+    position: relative;
+    margin-left: -90px;
+    z-index: 1;
+  }
+}
+.position-absolute {
+  border-radius: 10px;
+}
+
+h2.title {
+  font-family: "Open Sans" !important;
+  font-weight: 600;
+}
+.p-contact{
+  font-size: 16px;
+  font-weight: 600;
+}
+.signUp-form-control {
+  margin-bottom: 10px !important;
+  border: 1px solid #2f3c4f !important;
+  background: #ffffff !important;
+  color: #181f29 !important;
+  font-size: 14px;
+  border-radius: 5px !important;
+}
+.form-group .form-control,
+.input-group .form-control {
+  padding: 20px 18px;
+}
