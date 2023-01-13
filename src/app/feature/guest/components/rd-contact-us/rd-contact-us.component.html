@@ -2,21 +2,30 @@
   <div class="page-header-image rellax-header" data-rellax-speed="0"
     style="background-image: url('assets/img/radian/contactUs.jpg');"></div>
 </div>
-<div class="section section-team" >
-  <div class="container-fluid">
-      <div class="row" style="margin-right: 0px; margin-left: 0px;">
-        <div class="col-md-1"></div>
-          <div class="col-md-7">
-              <h2 class="title" style="text-align: center">We'd love to hear from you</h2>
-              <div class="separator separator-primary" style="margin-bottom: 50px;"></div>
-              <p style="text-align: center;">
-                Wheather you have a questions about feautres, suggestion on new
-                feature or anything else, our team is waiting for your feedback.
-              </p>
-              <div class="card contact-form">
+<div class="section section-about-us" style="background: #FFF">
+  <div class="container-fluid py-5">
+    <div class="container py-5">
+      <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+        <h2 class="title">We'd love to hear from you</h2>
+        <div class="separator separator-primary"></div>
+      </div>
+      <div class="row gx-0 mb-3 mb-lg-0">
+        <div class="col-lg-6 my-lg-5 py-lg-5">
+          <div class="about-start p-5">
+            <h1 class="display-5 mb-4" data-aos="fade-up">Get In Touch!</h1>
+            <p class="p-contact"><i class="	fas fa-map-marker-alt" style="font-size:16px"></i>&nbsp;&nbsp; 143 Narmada Colony, Katol Road, Nagpur - 440013, Maharashtra, India</p>
+            <p class="p-contact"><i class="fa fa-address-book" style="font-size:16px"></i>&nbsp;&nbsp;+91 8082776668</p>
+            <p class="p-contact"><i class="fa fa-envelope" style="font-size:16px"></i>&nbsp;&nbsp;info@bemiraculum.com</p>
+          </div>
+        </div>
+        <div class="col-lg-6" style="min-height: 400px; box-shadow:0 0 3px #0000004d!important; padding: 50px">
+            <div class="row">
+              <div class="col-md-3">
+              </div>
+              <div class="col-md-9">
                 <form class="login-form" [formGroup]="contactUsFormGroup" (ngSubmit)="onSubmit()">
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       <div class="row" *ngIf="
                           contactUsForm.FirstName.errors &&
                           (contactUsForm.FirstName.dirty || contactUsForm.FirstName.touched)
@@ -27,10 +36,12 @@
                         </div>
                       </div>
                       <div class="input-group">
-                        <input type="text" class="form-control contant-form-control" placeholder="First Name" formControlName="FirstName" /><br /><br />
+                        <input type="text" class="form-control signUp-form-control" placeholder="First Name" formControlName="FirstName" /><br /><br />
                       </div>
                     </div>
-                    <div class="col-md-6">
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
                       <div class="row" *ngIf="
                           contactUsForm.LastName.errors &&
                           (contactUsForm.LastName.dirty || contactUsForm.LastName.touched)
@@ -41,12 +52,12 @@
                         </div>
                       </div>
                       <div class="input-group">
-                        <input type="text" class="form-control contant-form-control" placeholder="Last Name" formControlName="LastName" /><br /><br />
+                        <input type="text" class="form-control signUp-form-control" placeholder="Last Name" formControlName="LastName" /><br /><br />
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                       <div class="row" *ngIf="
                           contactUsForm.Email.errors &&
                           (contactUsForm.Email.dirty || contactUsForm.Email.touched)
@@ -57,10 +68,12 @@
                         </div>
                       </div>
                       <div class="input-group">
-                        <input type="text" class="form-control contant-form-control" placeholder="Email" formControlName="Email"/>
+                        <input type="text" class="form-control signUp-form-control" placeholder="Email" formControlName="Email"/>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
                       <div class="row" *ngIf="
                           contactUsForm.ContactNumber.errors &&
                           (contactUsForm.ContactNumber.dirty || contactUsForm.ContactNumber.touched)
@@ -71,7 +84,7 @@
                         </div>
                       </div>
                       <div class="input-group">
-                        <input type="text" class="form-control contant-form-control" placeholder="Contact Number" formControlName="ContactNumber"/>
+                        <input type="text" class="form-control signUp-form-control" placeholder="Contact Number" formControlName="ContactNumber"/>
                       </div>
                     </div>
                   </div>
@@ -88,14 +101,14 @@
                         </div>
                       </div>
                       <div class="input-group">
-                        <textarea class="form-control contant-form-control" placeholder="Love to hear your words...." formControlName="Message"></textarea>
+                        <textarea class="form-control signUp-form-control" placeholder="Love to hear your words...." formControlName="Message"></textarea>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
-                      <button mat-button matStepperPrevious style="background: #1E1E1E!important;" class="btn btn-default btn-round btn-float-right" (click)="setLoadForm()">Reset</button>
-                       <button class="btn btn-danger btn-round btn-float-right submit-btn"  [disabled]="contactUsForm.errors">Submit</button>
+                      <button class="btn btn-danger btn-round submit-btn"  [disabled]="contactUsForm.errors">Submit</button>
+                      <button mat-button matStepperPrevious style="background: #1E1E1E!important;" class="btn btn-default btn-round" (click)="setLoadForm()">Reset</button>
                       <!-- <button type="submit" class="btn btn-danger btn-round btn-flt-rt" [disabled]="contactUsForm.errors">
                         Submit
                       </button>
@@ -106,22 +119,10 @@
                   </div>
                 </form>
               </div>
-          </div>
-          <div class="col-md-4">
-            <h2 class="title" style="text-align: center">Contact Us @</h2>
-              <div class="separator separator-primary" style="margin-bottom: 80px;"></div>
-              <div class="contact-addr">
-                <span class="custom-span">KLASIK TECHNOLOGY SOLUTIONS PRIVATE LIMITED</span><br/><br/>
-                143 Narmada Colony,<br/>
-                Katol Road,<br/>
-                Nagpur - 440013<br/>
-                Maharashtra<br/>
-                India<br/><br/>
-                <i class="fa fa-address-book" style="font-size:18px"></i>&nbsp;&nbsp;<span style="font-size: 16px; font-weight: 800;">+91 8082776668</span><br/>
-                <i class="fa fa-envelope" style="font-size:18px"></i>&nbsp;&nbsp;<span style="font-size: 16px; font-weight: 800;">info@gohunar.com</span><br/>
-              </div>        
-          </div>
+            </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
-
+ 

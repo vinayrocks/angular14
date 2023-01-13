@@ -13,8 +13,13 @@
   .h5-custom{
     font-weight: 800;
   }
-  .title{
-    font-weight: 700;
+
+  h2.title {
+    font-family: "Open Sans" !important;
+    font-weight: 600;
     text-align: center;
     font-size: 50px;
   }
+  .card{
+    box-shadow:0 0 3px #0000004d !important;
+  } 
