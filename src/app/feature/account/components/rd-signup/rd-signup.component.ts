@@ -117,14 +117,8 @@ export class RdSignupComponent implements OnInit {
   initRegisterForm() {
     this.registerFormGroup = this._formBuilder.group({
       isUser: [true, Validators.required],
-      organizationName: [
-        "",
-        this.requiredIfValidator(() => !this.registerForm.isUser.value),
-      ],
-      uniqueNumber: [
-        "",
-        this.requiredIfValidator(() => !this.registerForm.isUser.value),
-      ],
+      organizationName: [""],
+      uniqueNumber: [""],
       firstName: ["", Validators.required],
       middleName: [""],
       lastName: ["", Validators.required],
@@ -157,15 +151,15 @@ export class RdSignupComponent implements OnInit {
       cell: ["", [Validators.required, numberValidation]],
       altMmobileCountryCode: [""],
       altMobileNumber: [""],
-      PortfolioName: new FormControl(
-        "",
-        Validators.compose([Validators.required])
-      ),
-      PortfolioArtifacts: new FormControl(
-        "",
-        Validators.compose([Validators.required])
-      ),
-      PortfolioMedia: new FormControl(""),
+      // PortfolioName: new FormControl(
+      //   "",
+      //   Validators.compose([Validators.required])
+      // ),
+      // PortfolioArtifacts: new FormControl(
+      //   "",
+      //   Validators.compose([Validators.required])
+      // ),
+      // PortfolioMedia: new FormControl(""),
       linkURL: new FormControl(""),
     });
   }
@@ -263,6 +257,7 @@ export class RdSignupComponent implements OnInit {
   onSubmit() {
     this.spinner.show();
     // Stop here if form is invalid
+    // console.log(this.registerFormGroup.controls);
     if (this.registerFormGroup.invalid) {
       this.notificationService.error("Please fill in the required fields");
       this.validateAllFormFields(this.registerFormGroup);
@@ -288,7 +283,7 @@ export class RdSignupComponent implements OnInit {
                 this.registerForm.PortfolioMedia.setValue(
                   this.PortfolioMediaModel.join(",")
                 );
-                this.createUser();
+                // this.createUser();
               } else {
                 this.notificationService.error(res.message);
               }
@@ -299,7 +294,7 @@ export class RdSignupComponent implements OnInit {
           );
       } else {
         this.registerForm.PortfolioMedia.setValue("");
-        this.createUser();
+        // this.createUser();
       }
     }
   }
@@ -353,7 +348,7 @@ export class RdSignupComponent implements OnInit {
 
             rzp1.on("payment.failed", function (response) {
               // Todo - store this information in the server
-        
+
               this.error = response.error.reason;
               this.spinner.hide();
             });
@@ -425,8 +420,12 @@ export class RdSignupComponent implements OnInit {
       this.registerForm.uniqueNumber.setValue("");
     }
     if (this.registerForm.isUser.value === true) {
+      this.registerForm.organizationName.removeValidators(Validators.required);
+      this.registerForm.uniqueNumber.removeValidators(Validators.required);
       this.membership = (memberShipCategory as any).default;
     } else {
+      this.registerForm.organizationName.addValidators(Validators.required);
+      this.registerForm.uniqueNumber.addValidators(Validators.required);
       this.membership = (memberShipCategory as any).default.filter(
         (x: any) =>
           x.name === "Premium Monthly" ||
