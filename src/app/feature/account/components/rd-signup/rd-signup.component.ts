@@ -264,38 +264,36 @@ export class RdSignupComponent implements OnInit {
       this.spinner.hide();
       return;
     } else {
-      if (this.serverFile.length > 0) {
-        this.userService
-          .UploadUserPortfolioFile(
-            this.serverFile,
-            this.registerFormGroup.value
-          )
-          .pipe(first())
-          .subscribe(
-            (res) => {
-              this.spinner.hide();
-              if (res.status) {
-                var dataReposne = res.data.split(",");
-                this.serverFile = [];
-                dataReposne.forEach((element) => {
-                  this.PortfolioMediaModel.push(element);
-                });
-                this.registerForm.PortfolioMedia.setValue(
-                  this.PortfolioMediaModel.join(",")
-                );
-                this.createUser();
-              } else {
-                this.notificationService.error(res.message);
-              }
-            },
-            (error) => {
-              this.spinner.hide();
-            }
-          );
-      } else {
-        this.registerForm.PortfolioMedia.setValue("");
-        this.createUser();
-      }
+      //if (this.serverFile.length > 0) {
+        //this.userService
+          //.UploadUserPortfolioFile(
+            //this.serverFile,
+            //this.registerFormGroup.value
+          //)
+          //.pipe(first())
+          //.subscribe(
+            //(res) => {
+              //this.spinner.hide();
+              //if (res.status) {
+                //var dataReposne = res.data.split(",");
+                //this.serverFile = [];
+                //dataReposne.forEach((element) => {
+                  //this.PortfolioMediaModel.push(element);
+                //});
+                //this.registerForm.PortfolioMedia.setValue(this.PortfolioMediaModel.join(","));
+                //this.createUser();
+              //} else {
+                //this.notificationService.error(res.message);
+              //}
+            //},
+            //(error) => {
+              //this.spinner.hide();
+            //}
+          //);
+      //} else {
+        //this.registerForm.PortfolioMedia.setValue("");
+      //}
+      this.createUser();
     }
   }
   createUser() {
