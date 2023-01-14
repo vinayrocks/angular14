@@ -283,7 +283,7 @@ export class RdSignupComponent implements OnInit {
                 this.registerForm.PortfolioMedia.setValue(
                   this.PortfolioMediaModel.join(",")
                 );
-                // this.createUser();
+                this.createUser();
               } else {
                 this.notificationService.error(res.message);
               }
@@ -294,7 +294,7 @@ export class RdSignupComponent implements OnInit {
           );
       } else {
         this.registerForm.PortfolioMedia.setValue("");
-        // this.createUser();
+        this.createUser();
       }
     }
   }
