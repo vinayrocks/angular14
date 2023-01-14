@@ -223,7 +223,7 @@
                                     </option>
                                 </select> -->
                                 <ngx-select-dropdown class="mb-num" [instanceId]="'instance3'"
-                                    formControlName="mobileCountryCode" [config]="mobileConfig" [options]="countryCode">
+                                    (change)="mobileCode($event.value)" [config]="mobileConfig" [options]="countryCode">
                                 </ngx-select-dropdown>
                                 <input type="text" maxlength="10" class="col-md-9
                                  signUp-form-control form-control" formControlName="cell">
@@ -342,9 +342,8 @@
                         multiple profiles. ]</p><br />
                     <div class="row">
                         <div class="col-md-5">
-                            <ngx-select-dropdown [instanceId]="'instance5'" formControlName="profileSkillName"
-                                [config]="radianSkillConfig" [options]="skills"
-                                (change)="getSkillSubCategory($event.value)"></ngx-select-dropdown>
+                            <ngx-select-dropdown [instanceId]="'instance5'" [config]="radianSkillConfig"
+                                [options]="skills" (change)="getSkillSubCategory($event.value)"></ngx-select-dropdown>
                             <!-- <select class="select-css" matNativeControl placeholder="Specialities / Interests"
                                 formControlName="profileSkill" (change)="getSkillSubCategory($event.target.value)">
                                 <option value="" [selected]="true" [disabled]="true">Specialities / Interests*</option>
@@ -572,11 +571,10 @@
                     </div><br />
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-danger btn-round"
-                                (click)="onSubmit()">Register</button>
+                            <button class="btn btn-danger btn-round" (click)="onSubmit()">Register</button>
                             <button mat-button class="btn btn-danger btn-round btn-margin  btn-float-right reset-btn"
                                 (click)="reset()">Reset</button>
-                            
+
                         </div>
                     </div>
                 </form>

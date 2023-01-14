@@ -168,6 +168,7 @@ export class RdSignupComponent implements OnInit {
     return this.registerFormGroup.controls;
   }
   getStates(event: any) {
+    this.registerForm.country.setValue(event.country);
     this.state = event.states;
     this.registerForm.state.setValue("");
   }
@@ -176,7 +177,12 @@ export class RdSignupComponent implements OnInit {
     this.registerForm.billState.setValue("");
   }
   getSkillSubCategory(event: any) {
+    this.registerForm.profileSkillName.setValue(event.radianSkillCategoryId);
     this.skillsSubcategory = event.radianSkillSubCategories;
+  }
+  mobileCode(event: any) {
+    // console.log(event);
+    this.registerForm.mobileCountryCode.setValue(event.dial_code);
   }
   onSelectExperties(event, item: any) {
     if (event.target.checked) {
@@ -265,38 +271,39 @@ export class RdSignupComponent implements OnInit {
       return;
     } else {
       //if (this.serverFile.length > 0) {
-        //this.userService
-          //.UploadUserPortfolioFile(
-            //this.serverFile,
-            //this.registerFormGroup.value
-          //)
-          //.pipe(first())
-          //.subscribe(
-            //(res) => {
-              //this.spinner.hide();
-              //if (res.status) {
-                //var dataReposne = res.data.split(",");
-                //this.serverFile = [];
-                //dataReposne.forEach((element) => {
-                  //this.PortfolioMediaModel.push(element);
-                //});
-                //this.registerForm.PortfolioMedia.setValue(this.PortfolioMediaModel.join(","));
-                //this.createUser();
-              //} else {
-                //this.notificationService.error(res.message);
-              //}
-            //},
-            //(error) => {
-              //this.spinner.hide();
-            //}
-          //);
+      //this.userService
+      //.UploadUserPortfolioFile(
+      //this.serverFile,
+      //this.registerFormGroup.value
+      //)
+      //.pipe(first())
+      //.subscribe(
+      //(res) => {
+      //this.spinner.hide();
+      //if (res.status) {
+      //var dataReposne = res.data.split(",");
+      //this.serverFile = [];
+      //dataReposne.forEach((element) => {
+      //this.PortfolioMediaModel.push(element);
+      //});
+      //this.registerForm.PortfolioMedia.setValue(this.PortfolioMediaModel.join(","));
+      //this.createUser();
       //} else {
-        //this.registerForm.PortfolioMedia.setValue("");
+      //this.notificationService.error(res.message);
+      //}
+      //},
+      //(error) => {
+      //this.spinner.hide();
+      //}
+      //);
+      //} else {
+      //this.registerForm.PortfolioMedia.setValue("");
       //}
       this.createUser();
     }
   }
   createUser() {
+    // console.log(this.registerFormGroup.value);
     this.rdAuthenticateService
       .register(new RdRegister(this.registerFormGroup.value))
       .pipe(first())
@@ -314,6 +321,7 @@ export class RdSignupComponent implements OnInit {
             //   this.spinner.hide()
             //   this.notificationService.error('Something went wrong.Please try again.');
             // })
+            // console.log(res);
             const options: any = {
               order_id: res.razorPayOrderId, // order_id created by you in backend
               theme: {
@@ -346,7 +354,7 @@ export class RdSignupComponent implements OnInit {
 
             rzp1.on("payment.failed", function (response) {
               // Todo - store this information in the server
-
+              // console.log("payment.failed" + response);
               this.error = response.error.reason;
               this.spinner.hide();
             });
@@ -354,6 +362,7 @@ export class RdSignupComponent implements OnInit {
         },
         (error) => {
           this.spinner.hide();
+          // console.log("payment.error" + JSON.stringify(error));
           this.notificationService.error(
             "Something went wrong.Please try again."
           );
@@ -366,6 +375,7 @@ export class RdSignupComponent implements OnInit {
     event.detail.MembershipId = "";
     this.rdAuthenticateService.verifyPayment(event.detail).subscribe(
       (data) => {
+        // console.log(data);
         this.notificationService.success(data.message);
         setTimeout(() => {
           this.spinner.hide();
@@ -373,12 +383,14 @@ export class RdSignupComponent implements OnInit {
         }, 1000);
       },
       (err) => {
+        // console.log(err);
         this.spinner.hide();
       }
     );
   }
   @HostListener("window:modal.ondismiss", ["$event"])
   onPaymentModelClose(event): void {
+    // console.log(event);
     this.spinner.hide();
     this.router.navigate(["/home"]);
   }

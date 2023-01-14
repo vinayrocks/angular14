@@ -126,13 +126,14 @@ export class RdEventListComponent implements OnInit {
             this.projectPath = res.projectPath;
             this.userEvents = res.data;
             this.selectedEvent = res.data[0];
-            // console.log(this.selectedEvent);
+            //console.log(this.selectedEvent);
             this.GetUserList(res.data[0]);
             this.eventImagePath =
               this.selectedEvent.EventMedia.length > 0
                 ? this.selectedEvent.EventMedia[0].Name
                 : "";
             // ();
+            // console.log(res.data);
           }
         },
         (error) => {

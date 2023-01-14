@@ -219,7 +219,6 @@ export class RdRadianUpdateComponent implements OnInit {
   //   // return 'http://itechprovisions.com/radianApi/media/'+data.FirstName+'_'+data.Email.split('@')[0]+'/Profile/'+data.ProfileName+'/ProfileImages/'+data.ProfilePicture;
   // }
   GetRadianDetail(element) {
-    const key = this._encryptDecryptService.set(element.EventId);
     this.router.navigate([
       "/detail",
       this._encryptDecryptService.set(element.EventId),

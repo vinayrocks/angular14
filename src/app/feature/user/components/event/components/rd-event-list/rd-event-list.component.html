@@ -87,7 +87,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h4></h4>
-                        <i class="fa fa-hand-o-right icon-interested"></i><label class="users-label">500 Users</label>
+                        <i class="fa fa-hand-o-right icon-interested"></i><label
+                            class="users-label">{{userList?.length}}</label>
                     </div>
                 </div>
             </div>
@@ -155,8 +156,8 @@
                                     <tr *ngFor="let item of userList">
                                         <td width=30%><a class="evt-name">{{item.FirstName}} {{item.LastName}}</a></td>
                                         <td width=30% class="evt-detail">{{item.Email}}</td>
-                                        <td width=40%>{{item.userContactDetail.phoneCode}}
-                                            {{item.userContactDetail.phone}}</td>
+                                        <td width=40%>{{item.userContactDetail.cellCode}}
+                                            {{item.userContactDetail.cell}}</td>
                                     </tr>
                                 </tbody>
                             </table>

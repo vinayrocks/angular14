@@ -14,10 +14,11 @@
                     <!-- <h4>End Date: {{radianDetail.EventStartDateTime|date:'MM/dd/yyyy hh:mm:ss'}}</h4> -->
                     <!--<p>{{selectedEvent.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
                     <p class="para-custom">
-                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"><i
+                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"
+                            (click)="likeRadianEvent(!UserLiked,radianDetail)"><i
                                 class="fa fa-thumbs-up icon-like-share"></i>Like</button>&nbsp;&nbsp;
-                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"><i
-                                class="fa fa-share-alt icon-like-share"></i>Share</button>
+                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"
+                            (click)="getShareLink()"><i class="fa fa-share-alt icon-like-share"></i>Share</button>
                     </p>
                 </div>
                 <div class="row">
@@ -44,10 +45,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h4>Location</h4>
-                            <p><i class="fa fa-map-marker icon-marker"></i>{{radianDetail.EventLocation.street}},
-                                {{radianDetail.EventLocation.city}}, {{radianDetail.EventLocation.state}},
-                                {{radianDetail.EventLocation.zip}},
-                                {{radianDetail.EventLocation.country}}</p>
+                            <p><i class="fa fa-map-marker icon-marker"></i>{{radianDetail?.EventLocation?.street}},
+                                {{radianDetail?.EventLocation?.city}}, {{radianDetail?.EventLocation?.state}},
+                                {{radianDetail?.EventLocation?.zip}},
+                                {{radianDetail?.EventLocation?.country}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -87,10 +88,13 @@
                             <a class="a-btn a-click" (click)="likeRadianEvent(false,radianDetail)" *ngIf="UserLiked">
                                 <img src="./assets/img/radian/like-icon-filled.png">
                             </a> {{radianDetail.LikeCount}} -->
-                            <button mat-button (click)="likeRadianEvent(true,radianDetail)" *ngIf="!UserLiked"
-                                class="btn btn-primary btn-round btn-margin reset-btn">Interest</button>
-                            <button mat-button (click)="likeRadianEvent(false,radianDetail)" *ngIf="UserLiked"
-                                class="btn btn-primary btn-round btn-margin reset-btn">Interested</button>
+                            <button mat-button (click)="addEventParticipation()" *ngIf="!UserInterested"
+                                class="btn btn-primary btn-round btn-margin reset-btn">Are You
+                                Interested?</button>
+                            <!-- <button mat-button (click)="likeRadianEvent(false,radianDetail)" *ngIf="UserLiked"
+                                class="btn btn-primary btn-round btn-margin reset-btn">You are Interested</button> -->
+                            <button mat-button *ngIf="UserInterested"
+                                class="btn btn-primary btn-round btn-margin reset-btn">You are Interested</button>
                         </div>
                     </div>
                     <div class="row">
@@ -123,32 +127,33 @@
             <div class="col-md-12">
                 <div class="row card portfolio">
                     <h4>Interested Users</h4>
-                    <!-- <div class="row mt-top" style="padding: 0px 20px 0px 20px;" appBlockCopy>
-                    <div class="col-md-12">
-                        <div class="row" style="margin-bottom: 20px">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th width=30%>Name</th>
-                                        <th width=30%>Email</th>
-                                        <th width=40%>Contact Number</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngIf="userList.length===0">
-                                        <td colspan="3">No Records</td>
-                                    </tr>
-                                    <tr *ngFor="let item of userList">
-                                        <td width=30%><a class="evt-name">{{item.FirstName}} {{item.LastName}}</a></td>
-                                        <td width=30% class="evt-detail">{{item.Email}}</td>
-                                        <td width=40%>{{item.userContactDetail.phoneCode}}
-                                            {{item.userContactDetail.phone}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="row mt-top" style="padding: 0px 20px 0px 20px;" appBlockCopy>
+                        <div class="col-md-12">
+                            <div class="row" style="margin-bottom: 20px">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width=30%>Name</th>
+                                            <th width=30%>Email</th>
+                                            <th width=40%>Contact Number</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="userList.length===0">
+                                            <td colspan="3">No Records</td>
+                                        </tr>
+                                        <tr *ngFor="let item of userList">
+                                            <td width=30%><a class="evt-name">{{item.FirstName}} {{item.LastName}}</a>
+                                            </td>
+                                            <td width=30% class="evt-detail">{{item.Email}}</td>
+                                            <td width=40%>{{item.userContactDetail.cellCode}}
+                                                {{item.userContactDetail.cell}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div> -->
                 </div>
             </div>
         </div>

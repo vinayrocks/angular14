@@ -1,14 +1,14 @@
-import { HostListener, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { RdLogin } from '../../core/models/login/rd-login';
-import { RdRegister } from '../../core/models/register/rd-register';
-import { RdEncryptDecryptService } from '../encrypt-decrypt/rd-encrypt-decrypt.service';
-import { environment } from 'src/environments/environment';
-import { WindowRefService } from '../razor-pay/window-ref.service';
+import { HostListener, Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
+import { RdLogin } from "../../core/models/login/rd-login";
+import { RdRegister } from "../../core/models/register/rd-register";
+import { RdEncryptDecryptService } from "../encrypt-decrypt/rd-encrypt-decrypt.service";
+import { environment } from "src/environments/environment";
+import { WindowRefService } from "../razor-pay/window-ref.service";
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class RdAuthenticateService {
   public currentUserSubject: any;
@@ -23,14 +23,13 @@ export class RdAuthenticateService {
     var data = this._encryptDecryptService.ecryptModel(RdLogin);
     return this.http
       .post<any>(
-        environment.apiCommon + 'radianApi/Users/loginDetails.php',
+        environment.apiCommon + "radianApi/Users/loginDetails.php",
         data
       )
       .pipe(
         map((res) => {
           // console.log(res)
           if (res.status) {
-            
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             this.setLocalStorageData(res.data);
           }
@@ -39,11 +38,11 @@ export class RdAuthenticateService {
       );
   }
   register(RdRegister: RdRegister) {
-    
     var data = this._encryptDecryptService.ecryptModel(RdRegister);
+    // console.log(data);
     return this.http
       .post<any>(
-        environment.apiCommon + 'radianApi/Users/registrationDetailsTemp.php',
+        environment.apiCommon + "radianApi/Users/registrationDetailsTemp.php",
         JSON.stringify(data)
       )
       .pipe(
@@ -55,11 +54,11 @@ export class RdAuthenticateService {
   }
   forgotPassword(rdForgotPassword: any) {
     var data = this._encryptDecryptService.ecryptModel(rdForgotPassword);
-    
+
     return this.http
       .post<any>(
-        environment.apiCommon + 'radianApi/Users/forgotPassword.php',
-        
+        environment.apiCommon + "radianApi/Users/forgotPassword.php",
+
         JSON.stringify(data)
       )
       .pipe(
@@ -73,7 +72,7 @@ export class RdAuthenticateService {
     var data = this._encryptDecryptService.ecryptModel(rdResetPassword);
     return this.http
       .post<any>(
-        environment.apiCommon + 'radianApi/Users/resetPassword.php',
+        environment.apiCommon + "radianApi/Users/resetPassword.php",
         JSON.stringify(data)
       )
       .pipe(
@@ -87,7 +86,7 @@ export class RdAuthenticateService {
     var data = this._encryptDecryptService.ecryptModel(rdForgotPassword);
     return this.http
       .post<any>(
-        environment.apiCommon + 'radianApi/Users/checkUserExists.php',
+        environment.apiCommon + "radianApi/Users/checkUserExists.php",
         JSON.stringify(data)
       )
       .pipe(
@@ -97,7 +96,7 @@ export class RdAuthenticateService {
       );
   }
   // razorPayment(data:any):any{
-  //   
+  //
   //   const options: any = {
   //     amount: 125500, // amount should be in paise format to display Rs 1255 without decimal point
   //     currency: 'INR',
@@ -116,29 +115,27 @@ export class RdAuthenticateService {
   //       color: '#0c238a'
   //     },
   //     handler: function (response){
-  //       var event = new CustomEvent("payment.success", 
+  //       var event = new CustomEvent("payment.success",
   //           {
   //               detail: response,
   //               bubbles: true,
   //               cancelable: true
   //           }
-  //       );    
+  //       );
   //       window.dispatchEvent(event);
   //     }
   //   };
   //   const rzp = new this.winRef.nativeWindow.Razorpay(options);
   //   rzp.open();
   // }
-  verifyPayment(response: any):any {
-    
+  verifyPayment(response: any): any {
     var data = this._encryptDecryptService.ecryptModel(response);
-    
+
     return this.http
-      .post<any>(environment.apiCommon + 'radianApi/verify.php', data)
+      .post<any>(environment.apiCommon + "radianApi/verify.php", data)
       .pipe(
         map(
           (res) => {
-            
             return res;
           },
           (error) => {
@@ -150,27 +147,27 @@ export class RdAuthenticateService {
 
   logout() {
     // remove user from local storage and set current user to null
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem("currentUser");
     localStorage.clear();
     this.currentUserSubject = [];
   }
   getLocalStorageData() {
-    return localStorage.getItem('currentUser') === null
+    return localStorage.getItem("currentUser") === null
       ? null
-      : JSON.parse(localStorage.getItem('currentUser'));
+      : JSON.parse(localStorage.getItem("currentUser"));
   }
   setLocalStorageData(data) {
     // console.log(data);
     if (data !== null) {
-     
-      if (data.LinkedPortfolio === null){
+      if (data.LinkedPortfolio === null) {
         data.isPortfolio = false;
-      }else{
-        data.isPortfolio = JSON.parse(data.LinkedPortfolio).length>0?true:false;
+      } else {
+        data.isPortfolio =
+          JSON.parse(data.LinkedPortfolio).length > 0 ? true : false;
       }
 
       data.isLoggedIn = true;
-      localStorage.setItem('currentUser', JSON.stringify(data));
+      localStorage.setItem("currentUser", JSON.stringify(data));
     }
   }
 }
