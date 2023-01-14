@@ -16,7 +16,7 @@
   {
     "Id":2,
     "name": "Premium Monthly",
-    "amount": "1000",
+    "amount": "1",
     "currency": "INR",
     "planType": "",
     "properties": [
