@@ -22,6 +22,8 @@ export class RdMyAccountComponent implements OnInit {
   label: any='';
   loggedUser:any=[];
   selectedMemberShip:any='';
+  currentUser: any = [];
+  
   constructor(private _formBuilder: FormBuilder,private rdAuthenticateService: RdAuthenticateService,
     private spinner: NgxSpinnerService,private notificationService: NotificationService,private rdUserService:RdUserService,
     private router: Router) { 
@@ -29,12 +31,13 @@ export class RdMyAccountComponent implements OnInit {
     
     this.membershipData = (memberShipCategory as any).default.filter(
       (x: any) =>
-        x.name === 'Monthly' ||
-        x.name === 'Quarterly' ||
-        x.name === 'Semi Annual' ||
-        x.name === 'Annual'
+        x.name === "Premium Monthly" ||
+        x.name === "Premium Annual" ||
+        x.name === "Corporate Monthly" ||
+        x.name === "Corporate Annual"
     );
     // console.log(this.membershipData)
+    this.currentUser = this.rdAuthenticateService.getLocalStorageData();
   }
 
   ngOnInit() {
