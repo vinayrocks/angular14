@@ -11,6 +11,7 @@ import { RdUserService } from "src/app/shared/services/user/rd-user-service";
 import { first } from "rxjs/operators";
 import { RdEncryptDecryptService } from "src/app/shared/services/encrypt-decrypt/rd-encrypt-decrypt.service";
 import {
+  RdEventIntUser,
   RdGetEvent,
   RdLikeEventProfile,
 } from "src/app/shared/core/models/rd-common/rd-common";
@@ -43,6 +44,8 @@ export class RdRadianDetailComponent implements OnInit {
   };
   currentUser: any;
   UserLiked: String = "";
+  getEventUserParameter: any = [];
+  userList: any = [];
   constructor(
     private embedService: EmbedVideoService,
     private route: ActivatedRoute,
@@ -112,10 +115,33 @@ export class RdRadianDetailComponent implements OnInit {
           this.radianDetail = res.data[0];
           this.UserLiked = res.UserLiked;
           this.UserInterested = res.UserInterested;
+          this.GetUserList(res.data[0]);
         },
         (error) => {
           this.spinner.hide();
         }
+      );
+  }
+  GetUserList(data) {
+    // console.log(data);
+    // this.selectedEvent = data;
+    this.getEventUserParameter.EventId = data.EventId;
+    this.rdUserService
+      .getEventInterestedUserList(
+        new RdEventIntUser(this.getEventUserParameter)
+      )
+      .pipe(first())
+      .subscribe(
+        (res) => {
+          if (res.status) {
+            res.data.forEach((element) => {
+              element.userContactDetail = JSON.parse(element.userContactDetail);
+            });
+            this.userList = res.data;
+            // console.log(this.userList);
+          }
+        },
+        (error) => {}
       );
   }
   getProfilefilePath(data: any) {
@@ -266,7 +292,9 @@ export class RdRadianDetailComponent implements OnInit {
     const data = this.notificationService.showLinkUrl();
     this.matDialog.open(RdUrlLinkBoxComponent, {
       width: "500px",
-      data: { link: data },
+      data: {
+        link: environment.apiUrl + this.route["_routerState"].snapshot.url,
+      },
     });
   }
   welcomeMessage() {
