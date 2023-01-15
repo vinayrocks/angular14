@@ -8,7 +8,7 @@
           <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
         </a>
         <h3 class="title">{{currentUser.ProfileName}}</h3>
-        <p>[Visual]</p>
+        <p>{{currentUser.ProfileSkillName.name}}</p>
       </div>
     </div>
   </div>
@@ -19,7 +19,8 @@
         <div class="row mt-top">
           <div class="col-md-6">
             <div class="pretty p-switch p-fill">
-              <input type="radio" name="IsEventOnline" checked [value]="true" formControlName="IsEventOnline" (change)="changeEventType($event)"/>
+              <input type="radio" name="IsEventOnline" checked [value]="true" formControlName="IsEventOnline"
+                (change)="changeEventType($event)" />
               <div class="state p-success">
                 <label>Online Event</label>
               </div>
@@ -27,7 +28,8 @@
           </div>
           <div class="col-md-6">
             <div class="pretty p-switch p-fill">
-              <input type="radio" name="IsEventOnline" [value]="false" formControlName="IsEventOnline" (change)="changeEventType($event)"/>
+              <input type="radio" name="IsEventOnline" [value]="false" formControlName="IsEventOnline"
+                (change)="changeEventType($event)" />
               <div class="state p-success">
                 <label>Offline Event</label>
               </div>
@@ -63,9 +65,9 @@
 
               </div>
             </div>
-            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
-            [config]="skillCategoryConfig" [options]="skills" (change)="getSkillSubCategory($event.value)">
-           </ngx-select-dropdown>
+            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country" [config]="skillCategoryConfig"
+              [options]="skills" (change)="getSkillSubCategory($event.value)">
+            </ngx-select-dropdown>
             <br />
             <div class="pretty p-switch p-fill" *ngFor="let item of skillsSubcategory;let i=index;">
               <input type="checkbox" name="switch{{i}}" (change)="onSelectExperties($event,item)" />
@@ -98,10 +100,10 @@
                       *ngIf="addEventForm.country.errors.required"></app-required-validation-message>
                   </div>
                 </div>
-                <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country"
-                [config]="countryConfig" [options]="countryState" (change)="getStates($event.value)">
-               </ngx-select-dropdown>
-                
+                <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country" [config]="countryConfig"
+                  [options]="countryState" (change)="getStates($event.value)">
+                </ngx-select-dropdown>
+
               </div>
               <div class="col-md-4">
                 <div class="portfolio-label">Apt/Street*</div>
@@ -140,8 +142,8 @@
                       *ngIf="addEventForm.state.errors.required"></app-required-validation-message>
                   </div>
                 </div>
-                <ngx-select-dropdown [instanceId]="'instance2'" formControlName="state"
-                [config]="stateConfig" [options]="state"></ngx-select-dropdown>
+                <ngx-select-dropdown [instanceId]="'instance2'" formControlName="state" [config]="stateConfig"
+                  [options]="state"></ngx-select-dropdown>
               </div>
               <div class="col-md-4">
                 <div class="portfolio-label">Zip / Pin Code*</div>
@@ -153,8 +155,7 @@
                   </div>
                 </div>
                 <div class="input-group">
-                  <input type="select" class="signUp-form-control form-control" formControlName="zip"
-                    maxlength="7">
+                  <input type="select" class="signUp-form-control form-control" formControlName="zip" maxlength="7">
                 </div>
               </div>
             </div>
@@ -185,15 +186,15 @@
           <div class="col-md-6">
             <div class="portfolio-label">Event End Date*</div>
             <div class="row"
-                  *ngIf="addEventForm.EventEndDateTime.errors && (addEventForm.EventEndDateTime.dirty || addEventForm.EventEndDateTime.touched)">
-                  <div class="col-md-12">
-                    <app-required-validation-message [fieldName]="'Event End DateTime'"
-                      *ngIf="addEventForm.EventEndDateTime.errors.required"></app-required-validation-message>
-                  </div>
-                </div>
+              *ngIf="addEventForm.EventEndDateTime.errors && (addEventForm.EventEndDateTime.dirty || addEventForm.EventEndDateTime.touched)">
+              <div class="col-md-12">
+                <app-required-validation-message [fieldName]="'Event End DateTime'"
+                  *ngIf="addEventForm.EventEndDateTime.errors.required"></app-required-validation-message>
+              </div>
+            </div>
             <div class="input-group">
               <input matInput [ngxMatDatetimePicker]="endPicker" formControlName="EventEndDateTime"
-              class="date-input-custom" />
+                class="date-input-custom" />
               <mat-datepicker-toggle matSuffix [for]="endPicker" class="date-icon-custom"></mat-datepicker-toggle>
               <ngx-mat-datetime-picker #endPicker> </ngx-mat-datetime-picker>
             </div>
@@ -241,8 +242,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="pretty p-switch p-fill">
-                      <input type="radio" name="isUser" checked [value]="true"
-                        (change)="isImageType=true;" />
+                      <input type="radio" name="isUser" checked [value]="true" (change)="isImageType=true;" />
                       <div class="state p-success">
                         <label>Image/Document</label>
                       </div>
@@ -250,8 +250,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="pretty p-switch p-fill">
-                      <input type="radio" name="isUser" [value]="false"
-                        (change)="isImageType=false;" />
+                      <input type="radio" name="isUser" [value]="false" (change)="isImageType=false;" />
                       <div class="state p-success">
                         <label>Video</label>
                       </div>

@@ -83,7 +83,7 @@ export class RdEventAddComponent implements OnInit {
     searchOnKey: "country",
     height: "150px",
   };
-  currentUser:any=[];
+  currentUser: any = [];
   constructor(
     private _formBuilder: FormBuilder,
     private rdUserService: RdUserService,
@@ -91,13 +91,16 @@ export class RdEventAddComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private notificationService: NotificationService,
     private router: Router,
-    private rdAuthenticateService:RdAuthenticateService
+    private rdAuthenticateService: RdAuthenticateService
   ) {
     //PortfolioMedia
     this.skills = (skillsInterest as any).default;
     this.countryState = (countryState as any).default;
     this.countryCode = (countryCode as any).default;
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
+    this.currentUser.ProfileSkillName = JSON.parse(
+      this.currentUser.ProfileSkillName
+    );
     //
   }
   ngOnInit() {

@@ -58,6 +58,9 @@ export class RdPortfolioAddComponent implements OnInit {
     private rdAuthenticateService: RdAuthenticateService
   ) {
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
+    this.currentUser.ProfileSkillName = JSON.parse(
+      this.currentUser.ProfileSkillName
+    );
   }
 
   ngOnInit() {

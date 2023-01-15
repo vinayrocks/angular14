@@ -77,6 +77,9 @@ export class RdPortfolioEditComponent implements OnInit {
         this.currentUser.username.split("@")[0] +
         "/Portfolio";
       this.routerData.UserId = this.currentUser.id;
+      this.currentUser.ProfileSkillName = JSON.parse(
+        this.currentUser.ProfileSkillName
+      );
     }
 
     if (this.routerData !== "") {
