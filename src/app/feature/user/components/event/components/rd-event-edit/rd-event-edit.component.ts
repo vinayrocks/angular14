@@ -101,6 +101,9 @@ export class RdEventEditComponent implements OnInit {
     private rdAuthenticateService: RdAuthenticateService
   ) {
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
+    this.currentUser.ProfileSkillName = JSON.parse(
+      this.currentUser.ProfileSkillName
+    );
     this.projectFilePath =
       this.currentUser.firstName +
       "_" +
