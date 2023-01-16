@@ -61,6 +61,7 @@ export class RdPortfolioAddComponent implements OnInit {
     this.currentUser.ProfileSkillName = JSON.parse(
       this.currentUser.ProfileSkillName
     );
+    console.log(this.currentUser);
   }
 
   ngOnInit() {
