@@ -426,12 +426,10 @@ export class RdSignupComponent implements OnInit {
   changeUserType(event: any) {
     this.membership = [];
     if (event.target.checked) {
-      this.registerForm.organizationName.setValue("");
-      this.registerForm.uniqueNumber.setValue("");
-    }
-    if (this.registerForm.isUser.value === true) {
       this.registerForm.organizationName.removeValidators(Validators.required);
       this.registerForm.uniqueNumber.removeValidators(Validators.required);
+      this.registerForm.organizationName.setValue("");
+      this.registerForm.uniqueNumber.setValue("");
       this.membership = (memberShipCategory as any).default;
     } else {
       this.registerForm.organizationName.addValidators(Validators.required);
@@ -446,5 +444,22 @@ export class RdSignupComponent implements OnInit {
       this.membership = [...this.membership];
       this.registerForm.memberShip.setValue(this.membership[0].Id);
     }
+    // if (this.registerForm.isUser.value === true) {
+    //   this.registerForm.organizationName.removeValidators(Validators.required);
+    //   this.registerForm.uniqueNumber.removeValidators(Validators.required);
+    //   this.membership = (memberShipCategory as any).default;
+    // } else {
+    //   this.registerForm.organizationName.addValidators(Validators.required);
+    //   this.registerForm.uniqueNumber.addValidators(Validators.required);
+    //   this.membership = (memberShipCategory as any).default.filter(
+    //     (x: any) =>
+    //       x.name === "Premium Monthly" ||
+    //       x.name === "Premium Annual" ||
+    //       x.name === "Corporate Monthly" ||
+    //       x.name === "Corporate Annual"
+    //   );
+    //   this.membership = [...this.membership];
+    //   this.registerForm.memberShip.setValue(this.membership[0].Id);
+    // }
   }
 }

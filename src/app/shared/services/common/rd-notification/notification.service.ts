@@ -13,25 +13,25 @@ export class NotificationService {
     this.loading = new BehaviorSubject<boolean>(true);
   }
   success(message) {
-    this._snackBar.open(message, "close", {
+    this._snackBar.open(message, "Close", {
       duration: 10000,
       panelClass: "success",
     });
   }
   error(message) {
-    this._snackBar.open(message, "close", {
+    this._snackBar.open(message, "Close", {
       duration: 10000,
       panelClass: "error",
     });
   }
   warn(message) {
-    this._snackBar.open(message, "close", {
+    this._snackBar.open(message, "Close", {
       duration: 10000,
       panelClass: "warn",
     });
   }
   info(message) {
-    this._snackBar.open(message, "close", {
+    this._snackBar.open(message, "Close", {
       duration: 10000,
       panelClass: "info",
     });
