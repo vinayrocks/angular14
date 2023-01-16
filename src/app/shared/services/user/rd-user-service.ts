@@ -255,7 +255,6 @@ export class RdUserService {
   }
 
   addUserPortfolio(rdPortfolio: any) {
-    // console.log(rdPortfolio);
     this.currentUserSubject = this.rdAuthenticateService.getLocalStorageData();
     rdPortfolio.UserId = this.currentUserSubject.id;
     rdPortfolio.Email = this.currentUserSubject.username;

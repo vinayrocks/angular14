@@ -29,7 +29,7 @@ declare function modifyPdf(filePath, PDFDocument, StandardFonts, rgb): any;
   styleUrls: ["./rd-event-list.component.scss"],
 })
 export class RdEventListComponent implements OnInit {
-  userEvents: any;
+  userEvents: any = [];
   routerData: any = [];
   projectFilePath: String = "";
   projectPath: String = "";
@@ -107,6 +107,7 @@ export class RdEventListComponent implements OnInit {
       .subscribe(
         (res) => {
           this.spinner.hide();
+
           if (res !== "") {
             res.data.forEach((element) => {
               element.EventStatus = element.EventStatus === "1" ? true : false;
@@ -122,11 +123,9 @@ export class RdEventListComponent implements OnInit {
                   ? []
                   : JSON.parse(element.EventLocation);
             });
-
             this.projectPath = res.projectPath;
             this.userEvents = res.data;
             this.selectedEvent = res.data[0];
-            //console.log(this.selectedEvent);
             this.GetUserList(res.data[0]);
             this.eventImagePath =
               this.selectedEvent.EventMedia.length > 0

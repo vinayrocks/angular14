@@ -56,6 +56,8 @@ export class RdPortfolioEditComponent implements OnInit {
   userPortfolioMedia: any = [];
   profileImagePath: String = "";
   coverImagePath: String = "";
+  defaultImagePath: string =
+    "../../../../../../assets/img/radian/userAvatar.png";
   constructor(
     private _formBuilder: FormBuilder,
     private rdUserService: RdUserService,
@@ -103,6 +105,7 @@ export class RdPortfolioEditComponent implements OnInit {
       PortfolioName: ["", Validators.required],
       PortfolioArtifacts: ["", Validators.required],
       PortfolioMedia: [""],
+      UserPortfolioMedia: [""],
       linkURL: [""],
     });
     if (this.currentUser !== null) {
@@ -114,16 +117,20 @@ export class RdPortfolioEditComponent implements OnInit {
     return this.editPortfolioFormGroup.controls;
   }
   GetProfilePath() {
-    return (
-      "http://itechprovisions.com/radianApi/media/" +
-      this.currentUser.firstName +
-      "_" +
-      this.currentUser.username.split("@")[0] +
-      "/Profile/" +
-      this.currentUser.ProfileName.replace(" ", "") +
-      "/ProfileImages/" +
-      this.currentUser.ProfilePicture
-    );
+    if (this.currentUser.ProfilePicture === null) {
+      return this.defaultImagePath;
+    } else {
+      return (
+        "http://itechprovisions.com/radianApi/media/" +
+        this.currentUser.firstName +
+        "_" +
+        this.currentUser.username.split("@")[0] +
+        "/Profile/" +
+        this.currentUser.ProfileName.replace(" ", "") +
+        "/ProfileImages/" +
+        this.currentUser.ProfilePicture
+      );
+    }
   }
   GetCoverPicture() {
     return (
@@ -154,10 +161,6 @@ export class RdPortfolioEditComponent implements OnInit {
       .subscribe(
         (res) => {
           this.spinner.hide();
-          // res.data.forEach(element => {
-          //   this.PortfolioMediaModel = element.PortfolioMedia.split(',');
-          //   element.PortfolioMedia = this.GetPortfolioImagePath(element);
-          // });
           res.UserPortfolioMedia.forEach((el) => {
             el.userPortfolioIsRatingAllowed =
               parseInt(el.userPortfolioIsRatingAllowed) === 1 ? true : false;
@@ -290,7 +293,6 @@ export class RdPortfolioEditComponent implements OnInit {
     this.serverFile.splice(index, 1);
   }
   onSubmit() {
-    this.spinner.show();
     // stop here if form is invalid
     if (this.editPortfolioFormGroup.invalid) {
       this.notificationService.error("Please fill in the required fields");
@@ -298,6 +300,7 @@ export class RdPortfolioEditComponent implements OnInit {
       return;
     }
     if (this.serverFile.length != 0) {
+      this.spinner.show();
       this.rdUserService
         .UploadUserPortfolioFile(
           this.serverFile,
@@ -315,23 +318,23 @@ export class RdPortfolioEditComponent implements OnInit {
                 AllowRating: this.urls[index].AllowRating,
                 Rating: 0,
               };
-              this.PortfolioMediaModel.push(dxDat);
+              this.PortfolioMediaModel.push(JSON.stringify(dxDat));
             });
             this.editPortfolioForm.PortfolioMedia.setValue(
-              this.PortfolioMediaModel
+              this.PortfolioMediaModel.join(",")
             );
             this.submitDetail();
           },
           (error) => {
+            this.spinner.hide();
             this.notificationService.error(
               "Something went wrong.Please try again."
             );
           }
         );
     } else {
-      this.editPortfolioForm.PortfolioMedia.setValue(
-        this.PortfolioMediaModel.join(",")
-      );
+      this.spinner.show();
+      this.editPortfolioForm.PortfolioMedia.setValue("");
       this.submitDetail();
     }
   }
@@ -350,12 +353,19 @@ export class RdPortfolioEditComponent implements OnInit {
     });
   }
   submitDetail() {
+    this.editPortfolioForm.UserPortfolioMedia.setValue("");
     const data = this.editPortfolioFormGroup.value;
-    const dxData: any = [];
-    data.PortfolioMedia = JSON.stringify(data.PortfolioMedia);
-    data.UserPortfolioMedia = JSON.stringify(this.userPortfolioMedia);
-    var dimData = new RdPortfolio(data);
-    this.rdUserService.addUserPortfolio(dimData).subscribe(
+    // data.PortfolioMedia =
+    //   this.PortfolioMediaModel.length > 0
+    //     ? JSON.stringify(data.PortfolioMedia)
+    //     : "";
+    // console.log(data);
+    data.UserPortfolioMedia =
+      data.UserPortfolioMedia.length > 0
+        ? JSON.stringify(data.UserPortfolioMedia)
+        : "";
+    // console.log(new RdPortfolio(data));
+    this.rdUserService.addUserPortfolio(new RdPortfolio(data)).subscribe(
       (res) => {
         // console.log(res);
         this.spinner.hide();
@@ -367,7 +377,8 @@ export class RdPortfolioEditComponent implements OnInit {
         }
       },
       (error) => {
-        // console.log(error);
+        this.spinner.hide();
+        console.log(error);
       }
     );
   }
