@@ -163,6 +163,16 @@ export class RdPortfolioListComponent implements OnInit {
                 this.selectedPortfolio,
                 element.userPortfolioAttachment
               );
+              // element.userPortfolioRating = parseFloat(
+              //   element.userPortfolioRating.toString()
+              // )
+              //   .toFixed(1)
+              //   .replace(/\.0+$/, "");
+              element.userPortfolioRatingAverage = parseFloat(
+                element.userPortfolioRatingAverage.toString()
+              )
+                .toFixed(1)
+                .replace(/\.0+$/, "");
             });
             this.userPortfolioMedia = res.UserPortfolioMedia;
             if (this.userPortfolioMedia[0].attachments[0].IsImage === "image") {
