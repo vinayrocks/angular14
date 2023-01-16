@@ -116,6 +116,8 @@ export class RdRadianListComponent implements OnInit {
   ConnectionsReceiver: any = [];
   ConnectionsSender: any = [];
   Connections: any = [];
+  defaultImagePath: string =
+    "../../../../../../assets/img/radian/userAvatar.png";
   constructor(
     private rdUserService: RdUserService,
     private router: Router,
@@ -173,17 +175,24 @@ export class RdRadianListComponent implements OnInit {
       behavior: "smooth",
     });
   }
+  shiftTab(tabNumber: number) {
+    this._istab = tabNumber;
+  }
   GetProfilePath() {
-    return (
-      "http://itechprovisions.com/radianApi/media/" +
-      this.currentUser.firstName +
-      "_" +
-      this.currentUser.username.split("@")[0] +
-      "/Profile/" +
-      this.currentUser.ProfileName.replace(" ", "") +
-      "/ProfileImages/" +
-      this.currentUser.ProfilePicture
-    );
+    if (this.currentUser.ProfilePicture === null) {
+      return this.defaultImagePath;
+    } else {
+      return (
+        "http://itechprovisions.com/radianApi/media/" +
+        this.currentUser.firstName +
+        "_" +
+        this.currentUser.username.split("@")[0] +
+        "/Profile/" +
+        this.currentUser.ProfileName.replace(" ", "") +
+        "/ProfileImages/" +
+        this.currentUser.ProfilePicture
+      );
+    }
   }
   GetCoverPicture() {
     return (
@@ -287,7 +296,7 @@ export class RdRadianListComponent implements OnInit {
           this.ConnectionsSender = res.ConnectionsSender;
           this.Connections = res.Connections;
           this.userProfiles = res.data;
-          this.selectedUser = res.data[0];
+          this.selectedUser = this.userProfiles[0];
           // console.log(res);
           // console.log(this.selectedUser);
           this.projectPath = res.projectPath;

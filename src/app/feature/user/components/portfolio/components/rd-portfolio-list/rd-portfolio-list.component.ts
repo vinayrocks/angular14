@@ -114,8 +114,7 @@ export class RdPortfolioListComponent implements OnInit {
     private _encryptDecryptService: RdEncryptDecryptService,
     private spinner: NgxSpinnerService,
     private rdAuthenticateService: RdAuthenticateService
-  ) {}
-  ngOnInit() {
+  ) {
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("profile-page");
     var navbar = document.getElementsByTagName("nav")[0];
@@ -129,6 +128,8 @@ export class RdPortfolioListComponent implements OnInit {
         "/Portfolio/";
       this.routerData.UserId = this.currentUser.id;
     }
+  }
+  ngOnInit() {
     this.getUserPorfolio();
   }
   gotoTop() {

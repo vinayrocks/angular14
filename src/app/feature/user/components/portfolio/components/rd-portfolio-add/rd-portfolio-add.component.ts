@@ -61,7 +61,6 @@ export class RdPortfolioAddComponent implements OnInit {
     this.currentUser.ProfileSkillName = JSON.parse(
       this.currentUser.ProfileSkillName
     );
-    console.log(this.currentUser);
   }
 
   ngOnInit() {
@@ -175,7 +174,6 @@ export class RdPortfolioAddComponent implements OnInit {
     }
   }
   onSubmit() {
-    this.spinner.show();
     // stop here if form is invalid
     if (this.addPortfolioFormGroup.invalid) {
       this.notificationService.error("Please fill in the required fields");
@@ -183,6 +181,8 @@ export class RdPortfolioAddComponent implements OnInit {
       return;
     }
     if (this.serverFile.length > 0) {
+      // console.log(this.serverFile.length);
+      this.spinner.show();
       this.rdUserService
         .UploadUserPortfolioFile(
           this.serverFile,
@@ -191,8 +191,8 @@ export class RdPortfolioAddComponent implements OnInit {
         .pipe(first())
         .subscribe(
           (res) => {
-            this.spinner.hide();
             if (res.status) {
+              // console.log(res.data.split(","));
               var dataReposne = res.data.split(",");
               this.serverFile = [];
               dataReposne.forEach((element: any, index: number) => {
@@ -206,7 +206,7 @@ export class RdPortfolioAddComponent implements OnInit {
               this.addPortfolioForm.PortfolioMedia.setValue(
                 this.PortfolioMediaModel.join(",")
               );
-              // console.log(new RdPortfolio(this.addPortfolioFormGroup.value))
+              //console.log(new RdPortfolio(this.addPortfolioFormGroup.value));
               this.rdUserService
                 .addUserPortfolio(
                   new RdPortfolio(this.addPortfolioFormGroup.value)
@@ -214,32 +214,52 @@ export class RdPortfolioAddComponent implements OnInit {
                 .subscribe((res) => {
                   if (res.status) {
                     this.notificationService.success(res.message);
-                    this.rdAuthenticateService.logout();
-                    this.currentUser.isLoggedIn = false;
-                    this.currentUser.isPortfolio = false;
-                    window.location.href = "/account/login";
+                    if (!this.currentUser.isPortfolio) {
+                      this.rdAuthenticateService.logout();
+                      this.currentUser.isLoggedIn = false;
+                      this.currentUser.isPortfolio = false;
+                      window.location.href = "/account/login";
+                      this.spinner.hide();
+                    } else {
+                      this.router.navigate(["/member/portfolio_view"]);
+                      this.spinner.hide();
+                    }
                   } else {
                     this.notificationService.error(res.message);
+                    this.spinner.hide();
                   }
                 });
             } else {
               this.notificationService.error(res.message);
+              this.spinner.hide();
             }
           },
           (error) => {
+            // console.log("error" + JSON.stringify(error));
             this.spinner.hide();
           }
         );
     } else {
+      this.spinner.show();
       this.addPortfolioForm.PortfolioMedia.setValue("");
       this.rdUserService
         .addUserPortfolio(new RdPortfolio(this.addPortfolioFormGroup.value))
         .subscribe((res) => {
           if (res.status) {
             this.notificationService.success(res.message);
-            this.router.navigate(["/member/portfolio_view"]);
+            if (!this.currentUser.isPortfolio) {
+              this.rdAuthenticateService.logout();
+              this.currentUser.isLoggedIn = false;
+              this.currentUser.isPortfolio = false;
+              window.location.href = "/account/login";
+              this.spinner.hide();
+            } else {
+              this.router.navigate(["/member/portfolio_view"]);
+              this.spinner.hide();
+            }
           } else {
             this.notificationService.error(res.message);
+            this.spinner.hide();
           }
         });
     }

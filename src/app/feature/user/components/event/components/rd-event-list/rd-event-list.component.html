@@ -30,206 +30,220 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-9">
-            <div class="row card portfolio">
-                <!-- <div class="row">
-                    <div class="col-md-12">
+    <div class="row" *ngIf="this.userEvents?.length>0">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row card portfolio">
+                        <!-- <div class="row">
+                            <div class="col-md-12">
+                                <h4>About Event</h4>
+                                <p>{{radianDetail.EventDescription}}</p>
+                            </div>
+                        </div> -->
                         <h4>About Event</h4>
-                        <p>{{radianDetail.EventDescription}}</p>
-                    </div>
-                </div> -->
-                <h4>About Event</h4>
-                <p>{{selectedEvent?.EventDescription}}</p>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>Location</h4>
-                        <p><i class="fa fa-map-marker icon-marker"></i>{{selectedEvent?.EventLocation?.street}},
-                            {{selectedEvent?.EventLocation?.city}}, {{selectedEvent?.EventLocation?.state}},
-                            {{selectedEvent?.EventLocation?.zip}},
-                            {{selectedEvent?.EventLocation?.country}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>Start Date</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4>End Date</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        {{selectedEvent?.EventStartDateTime|date:'EEEE, MMMM d, y'}} at
-                        {{selectedEvent?.EventStartDateTime|date:'hh:mm'}}
-                    </div>
-                    <div class="col-md-6">
-                        {{selectedEvent?.EventEndDateTime|date:'EEEE, MMMM d, y'}} at
-                        {{selectedEvent?.EventEndDateTime|date:'hh:mm'}}
+                        <p>{{selectedEvent?.EventDescription}}</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Location</h4>
+                                <p><i class="fa fa-map-marker icon-marker"></i>{{selectedEvent?.EventLocation?.street}},
+                                    {{selectedEvent?.EventLocation?.city}}, {{selectedEvent?.EventLocation?.state}},
+                                    {{selectedEvent?.EventLocation?.zip}},
+                                    {{selectedEvent?.EventLocation?.country}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Start Date</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>End Date</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{selectedEvent?.EventStartDateTime|date:'EEEE, MMMM d, y'}} at
+                                {{selectedEvent?.EventStartDateTime|date:'hh:mm'}}
+                            </div>
+                            <div class="col-md-6">
+                                {{selectedEvent?.EventEndDateTime|date:'EEEE, MMMM d, y'}} at
+                                {{selectedEvent?.EventEndDateTime|date:'hh:mm'}}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="row card portfolio">
-                <!-- <div class="row">
-                    <div class="col-md-12">
+                <div class="col-md-3">
+                    <div class="row card portfolio">
+                        <!-- <div class="row">
+                            <div class="col-md-12">
+                                <h4>Click on Intersted to stay updated about this Event</h4>
+                            </div>
+                        </div> -->
                         <h4>Click on Intersted to stay updated about this Event</h4>
-                    </div>
-                </div> -->
-                <h4>Click on Intersted to stay updated about this Event</h4>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4></h4>
-                        <button mat-button class="btn btn-primary btn-round btn-margin reset-btn">Interested</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4></h4>
-                        <i class="fa fa-hand-o-right icon-interested"></i><label
-                            class="users-label">{{userList?.length}}</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row card portfolio">
-                <h4>Event Categories</h4>
-                <div class="row">
-                    <div class="col-md-4 custom-col-skills" *ngFor="let item of selectedEvent?.EventCategory">
-                        <i class="{{item.iconClass}}"></i>
-                        <br />
-                        <h5 class="h5-custom">{{item.name}}</h5>
-                    </div>
-                </div>
-                <!--<div class="col-md-4">
-                    <div class="portfolio-label">Event Status</div>
-                    <div class="pretty p-switch p-fill">
-                        <input type="radio" disabled="true" [checked]="selectedEvent?.EventStatus" />
-                        <div class="state p-success">
-                            <label>Active/Inactive</label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4></h4>
+                                <button mat-button
+                                    class="btn btn-primary btn-round btn-margin reset-btn">Interested</button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="portfolio-label">Event Categories</div>
-                    <div class="pretty p-switch p-fill" *ngFor="let elem of selectedEvent?.EventCategory;let i=index;">
-                        <input type="radio" disabled="true" checked [value]="true" />
-                        <div class="state p-success p-fill">
-                            <label>{{elem.name}}</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="portfolio-label"></div>
-                    <button class="btn btn-primary btn-custom btn-round btn-margin"
-                        (click)="OpenUserList(selectedEvent?.id)"><img class="interestedUsers"
-                            src="assets/img/radian/interested_Users.png" />&nbsp;&nbsp;&nbsp;Click here to view users
-                        interested for this Event</button>&nbsp;
-                </div>-->
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row card portfolio">
-                <h4>Interested Users</h4>
-                <div class="row mt-top" style="padding: 0px 20px 0px 20px;" appBlockCopy>
-                    <div class="col-md-12">
-                        <div class="row" style="margin-bottom: 20px">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th width=30%>Name</th>
-                                        <th width=30%>Email</th>
-                                        <th width=40%>Contact Number</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngIf="userList?.length===0">
-                                        <td colspan="3">No Records</td>
-                                    </tr>
-                                    <tr *ngFor="let item of userList">
-                                        <td width=30%><a class="evt-name">{{item.FirstName}} {{item.LastName}}</a></td>
-                                        <td width=30% class="evt-detail">{{item.Email}}</td>
-                                        <td width=40%>{{item.userContactDetail.cellCode}}
-                                            {{item.userContactDetail.cell}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row" *ngIf="selectedEvent?.EventMedia?.length>0">
-        <div class="col-md-12">
-            <div class="row card portfolio">
-                <h4>Event Media</h4>
-                <div class="row">
-                    <div class="col-md-2 custom-img-col-2" *ngFor="let elem of selectedEvent?.EventMedia;let i=index;">
-                        <div class="custom-photo-container">
-                            <img src="{{elem?.Name}}" alt="" class="img-raised" title=""
-                                (click)='openImageDialog(selectedEvent?.EventMedia,i)' *ngIf="elem?.IsImage==='image'">
-                            <a *ngIf="elem?.IsImage==='pdf'" (click)="downloadPdf(elem?.Name)">
-                                <img src="assets/img/radian/document.png" alt="" class="img-raised">
-                            </a>
-                            <div *ngIf="elem?.IsImage==='video'" class="video">
-                                <img src="{{elem?.Image}}" (click)='openImageDialog(selectedEvent?.EventMedia,i)'>
-                                <a></a>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4></h4>
+                                <i class="fa fa-hand-o-right icon-interested"></i><label
+                                    class="users-label">{{userList?.length}}</label>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row" [@enterAnimation]>
-        <div class="col-md-12">
-            <div class="row card portfolio">
-                <h4>Other Events</h4>
-                <p-carousel [value]="userEvents" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
-                    [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-                    <!-- <ng-template pTemplate="header">
-                  <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
-              </ng-template> -->
-                    <ng-template let-product pTemplate="item">
-                        <div class="product-item">
-                            <div class="product-item-content">
-                                <div class="p-mb-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Event Categories</h4>
+                        <div class="row">
+                            <div class="col-md-4 custom-col-skills" *ngFor="let item of selectedEvent?.EventCategory">
+                                <i class="{{item.iconClass}}"></i>
+                                <br />
+                                <h5 class="h5-custom">{{item.name}}</h5>
+                            </div>
+                        </div>
+                        <!--<div class="col-md-4">
+                            <div class="portfolio-label">Event Status</div>
+                            <div class="pretty p-switch p-fill">
+                                <input type="radio" disabled="true" [checked]="selectedEvent?.EventStatus" />
+                                <div class="state p-success">
+                                    <label>Active/Inactive</label>
                                 </div>
-                                <div>
-                                    <a (click)="GetUserList(product)">
-                                        <h4 class="p-mb-1">{{product.EventName}}</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="portfolio-label">Event Categories</div>
+                            <div class="pretty p-switch p-fill" *ngFor="let elem of selectedEvent?.EventCategory;let i=index;">
+                                <input type="radio" disabled="true" checked [value]="true" />
+                                <div class="state p-success p-fill">
+                                    <label>{{elem.name}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="portfolio-label"></div>
+                            <button class="btn btn-primary btn-custom btn-round btn-margin"
+                                (click)="OpenUserList(selectedEvent?.id)"><img class="interestedUsers"
+                                    src="assets/img/radian/interested_Users.png" />&nbsp;&nbsp;&nbsp;Click here to view users
+                                interested for this Event</button>&nbsp;
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Interested Users</h4>
+                        <div class="row mt-top" style="padding: 0px 20px 0px 20px;" appBlockCopy>
+                            <div class="col-md-12">
+                                <div class="row" style="margin-bottom: 20px">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th width=30%>Name</th>
+                                                <th width=30%>Email</th>
+                                                <th width=40%>Contact Number</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngIf="userList?.length===0">
+                                                <td colspan="3">No Records</td>
+                                            </tr>
+                                            <tr *ngFor="let item of userList">
+                                                <td width=30%><a class="evt-name">{{item.FirstName}}
+                                                        {{item.LastName}}</a></td>
+                                                <td width=30% class="evt-detail">{{item.Email}}</td>
+                                                <td width=40%>{{item.userContactDetail.cellCode}}
+                                                    {{item.userContactDetail.cell}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="selectedEvent?.EventMedia?.length>0">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Event Media</h4>
+                        <div class="row">
+                            <div class="col-md-2 custom-img-col-2"
+                                *ngFor="let elem of selectedEvent?.EventMedia;let i=index;">
+                                <div class="custom-photo-container">
+                                    <img src="{{elem?.Name}}" alt="" class="img-raised" title=""
+                                        (click)='openImageDialog(selectedEvent?.EventMedia,i)'
+                                        *ngIf="elem?.IsImage==='image'">
+                                    <a *ngIf="elem?.IsImage==='pdf'" (click)="downloadPdf(elem?.Name)">
+                                        <img src="assets/img/radian/document.png" alt="" class="img-raised">
                                     </a>
-                                    <span
-                                        [class]="'product-badge status-'+product.EventName.toLowerCase()">{{product.EventDescription}}</span>
-                                    <div class="car-buttons p-mt-5">
+                                    <div *ngIf="elem?.IsImage==='video'" class="video">
+                                        <img src="{{elem?.Image}}"
+                                            (click)='openImageDialog(selectedEvent?.EventMedia,i)'>
+                                        <a></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </ng-template>
-                </p-carousel>
+                    </div>
+                </div>
+            </div>
+            <div class="row" [@enterAnimation]>
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <h4>Other Events</h4>
+                        <p-carousel [value]="userEvents" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
+                            [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+                            <!-- <ng-template pTemplate="header">
+                          <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
+                      </ng-template> -->
+                            <ng-template let-product pTemplate="item">
+                                <div class="product-item">
+                                    <div class="product-item-content">
+                                        <div class="p-mb-3">
+                                        </div>
+                                        <div>
+                                            <a (click)="GetUserList(product)">
+                                                <h4 class="p-mb-1">{{product.EventName}}</h4>
+                                            </a>
+                                            <span
+                                                [class]="'product-badge status-'+product.EventName.toLowerCase()">{{product.EventDescription}}</span>
+                                            <div class="car-buttons p-mt-5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-carousel>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row card portfolio">
+                        <div class="col-md-12 flt-left">
+                            <button class="btn btn-primary btn-round btn-margin submit-btn"
+                                (click)="openEdit(selectedEvent?.id)">Edit
+                                Event</button>&nbsp;
+                            <button mat-button class="btn btn-primary btn-round btn-margin reset-btn"
+                                (click)="DeleteEvent(selectedEvent)">Delete Event</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="this.userEvents?.length===0">
         <div class="col-md-12">
             <div class="row card portfolio">
-                <div class="col-md-12 flt-left">
-                    <button class="btn btn-primary btn-round btn-margin submit-btn"
-                        (click)="openEdit(selectedEvent?.id)">Edit
-                        Event</button>&nbsp;
-                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn"
-                        (click)="DeleteEvent(selectedEvent)">Delete Event</button>
-                </div>
+                <h4>No Events</h4>
             </div>
         </div>
     </div>

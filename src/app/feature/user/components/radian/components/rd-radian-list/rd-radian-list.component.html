@@ -10,7 +10,7 @@
       <div class="wrapper">
         <img src="{{profileImagePath}}" alt="" class="user-profile">
         <h3 class="title">{{selectedUser.ProfileName}}</h3>
-        <p>{{selectedUser?.ProfileSkill.name}}</p>
+        <p>{{selectedUser?.ProfileSkill?.name}}</p>
       </div>
       <div class="row ">
         <div class="wrapper">
@@ -20,11 +20,11 @@
       <div class="row ">
         <div class="col-lg-12">
           <ul class=" nav nav-tabs justify-content-center s-nav">
-            <li><a [ngClass]="{'active':_istab===1}" (click)="_istab=1">About</a></li>
-            <li><a [ngClass]="{'active':_istab===2}" (click)="_istab=2">Education</a></li>
-            <li><a [ngClass]="{'active':_istab===3}" (click)="_istab=3">Certification & Licenses</a></li>
-            <li><a [ngClass]="{'active':_istab===4}" (click)="_istab=4">Experiences</a></li>
-            <li><a [ngClass]="{'active':_istab===5}" (click)="_istab=5">Connections</a></li>
+            <li><a [ngClass]="{'active':_istab===1}" (click)="shiftTab(1)">About</a></li>
+            <li><a [ngClass]="{'active':_istab===2}" (click)="shiftTab(2)">Education</a></li>
+            <li><a [ngClass]="{'active':_istab===3}" (click)="shiftTab(3)">Certification & Licenses</a></li>
+            <li><a [ngClass]="{'active':_istab===4}" (click)="shiftTab(4)">Experiences</a></li>
+            <li><a [ngClass]="{'active':_istab===5}" (click)="shiftTab(5)">Connections</a></li>
           </ul>
         </div>
       </div>
@@ -48,7 +48,7 @@
               <div class="col-md-4 custom-col-skills" *ngFor="let item of selectedUser.ProfileExpertise">
                 <i class="{{item.iconClass}}"></i>
                 <br />
-                <h5 class="h5-custom">{{item.name}}</h5>
+                <h5 class="h5-custom">{{item?.name}}</h5>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@
                     <div class="p-mb-3">
                     </div>
                     <div>
-                      <h4 class="p-mb-1">{{product.name}}</h4>
+                      <h4 class="p-mb-1">{{product?.name}}</h4>
                       <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
                       <!-- <span
                         [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
@@ -141,7 +141,7 @@
               <div class="col-md-4 custom-col-skills" *ngFor="let item of selectedUser.ProfileExpertise">
                 <i class="{{item.iconClass}}"></i>
                 <br />
-                <h5 class="h5-custom">{{item.name}}</h5>
+                <h5 class="h5-custom">{{item?.name}}</h5>
               </div>
             </div>
           </div>
@@ -149,7 +149,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="row card portfolio" *ngIf="selectedUser.EducationDetails.length>0">
+          <div class="row card portfolio" *ngIf="selectedUser.EducationDetails?.length>0">
             <h4>Educations</h4>
             <div class="row" *ngFor="let item of selectedUser.EducationDetails;let i = index">
               <div class="col-md-5">
@@ -199,7 +199,7 @@
               </div>
             </div>
           </div>
-          <div class="row card portfolio" *ngIf="selectedUser.EducationDetails.length===0">
+          <div class="row card portfolio" *ngIf="selectedUser.EducationDetails?.length===0">
             <h4>Educations</h4>
             <div class="col-md-12">
               <h4>No Records</h4>
@@ -228,7 +228,7 @@
               <div class="col-md-4 custom-col-skills" *ngFor="let item of selectedUser.ProfileExpertise">
                 <i class="{{item.iconClass}}"></i>
                 <br />
-                <h5 class="h5-custom">{{item.name}}</h5>
+                <h5 class="h5-custom">{{item?.name}}</h5>
               </div>
             </div>
           </div>
@@ -236,7 +236,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails.length>0">
+          <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails?.length>0">
             <h4>Certification Details</h4>
             <div class="row" *ngFor="let item of selectedUser.CertificationDetails;let i = index">
               <div class="col-md-5">
@@ -282,7 +282,7 @@
               </div>
             </div>
           </div>
-          <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails.length===0">
+          <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails?.length===0">
             <h4>Certification Details</h4>
             <div class="col-md-12">
               <h4>No Records</h4>
@@ -311,7 +311,7 @@
               <div class="col-md-4 custom-col-skills" *ngFor="let item of selectedUser.ProfileExpertise">
                 <i class="{{item.iconClass}}"></i>
                 <br />
-                <h5 class="h5-custom">{{item.name}}</h5>
+                <h5 class="h5-custom">{{item?.name}}</h5>
               </div>
             </div>
           </div>
@@ -319,7 +319,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails.length>0">
+          <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails?.length>0">
             <h4>Experience Details</h4>
             <div class="row" *ngFor="let item of selectedUser.ExperienceDetails;let i = index">
               <div class="col-md-5">
@@ -368,7 +368,7 @@
               </div>
             </div>
           </div>
-          <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails.length===0">
+          <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails?.length===0">
             <h4>Experience Details</h4>
             <div class="col-md-12">
               <h4>No Records</h4>
