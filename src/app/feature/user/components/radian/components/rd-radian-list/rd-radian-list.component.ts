@@ -215,7 +215,6 @@ export class RdRadianListComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res) => {
-          // console.log(res);
           res.data.forEach((element) => {
             element.ProfileExpertise =
               element.ProfileExpertise === ""
@@ -297,8 +296,6 @@ export class RdRadianListComponent implements OnInit {
           this.Connections = res.Connections;
           this.userProfiles = res.data;
           this.selectedUser = this.userProfiles[0];
-          // console.log(res);
-          // console.log(this.selectedUser);
           this.projectPath = res.projectPath;
           this.spinner.hide();
         },
@@ -337,8 +334,6 @@ export class RdRadianListComponent implements OnInit {
     dxData.ConnectionReceiverId = item.ConnectionReceiverId;
     dxData.ConnectionSenderId = item.ConnectionSenderId;
     dxData.ConnectionStatus = 1;
-
-    // console.log(dxData);
     this.rdUserService
       .sendConnectionRequest(dxData)
       .pipe(first())

@@ -22,8 +22,21 @@ import * as moment from "moment";
 import { DefaultNgxMatCalendarRangeStrategy } from "@angular-material-components/datetime-picker";
 import { stringify } from "querystring";
 import { RdAuthenticateService } from "src/app/shared/services/authentication/rd-authenticate.service";
+import { animate, style, transition, trigger } from "@angular/animations";
 @Component({
   selector: "app-rd-radian-add",
+  animations: [
+    trigger("enterAnimation", [
+      transition(":enter", [
+        style({ transform: "translateX(100%)", opacity: 0 }),
+        animate("500ms", style({ transform: "translateX(0)", opacity: 1 })),
+      ]),
+      transition(":leave", [
+        style({ transform: "translateX(0)", opacity: 1 }),
+        animate("500ms", style({ transform: "translateX(100%)", opacity: 0 })),
+      ]),
+    ]),
+  ],
   templateUrl: "./rd-radian-add.component.html",
   styleUrls: ["./rd-radian-add.component.scss"],
 })
@@ -196,7 +209,6 @@ export class RdRadianAddComponent implements OnInit {
     // stop here if form is invalid
     // this.checkChildArrayValidation();
     if (this.addRadianFormGroup.invalid) {
-      // console.log(this.addRadianFormGroup);
       this.notificationService.error("Please fill in the required fields");
       this.validateAllFormFields(this.addRadianFormGroup);
 
@@ -241,7 +253,6 @@ export class RdRadianAddComponent implements OnInit {
       // this.spinner.show()
       dxData.ProfilePicture = "";
       dxData.CoverPicture = "";
-      // console.log(dxData)
       this.rdUserService
         .addUserProfile(new RdRadian(dxData))
         .subscribe((res) => {
@@ -376,19 +387,7 @@ export class RdRadianAddComponent implements OnInit {
     };
     container.setViewMode("year");
   }
-  degreeSelect(event: any, index) {
-    // let dx:any=this.getEducationControls()[index];
-    // console.log(dx.controls)
-    // if(event.name.toLowerCase()==='other'){
-    //   this._disableOther = true;
-    //   dx.controls['Others'].addValidators(Validators.required);
-    //   dx.controls['showOther'].setValue(true);
-    // } else {
-    //   this._disableOther = false;
-    //   dx.controls['Others'].removeValidators(Validators.required);
-    //   dx.controls['showOther'].setValue(false);
-    // }
-  }
+  degreeSelect(event: any, index) {}
   close(modal: any) {
     modal.dismiss("Cross click");
     this.croppedImage = "";

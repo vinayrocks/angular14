@@ -15,12 +15,25 @@ import { NotificationService } from "src/app/shared/services/common/rd-notificat
 import { environment } from "src/environments/environment";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { NgxSpinnerService } from "ngx-spinner";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 // declare the javascript function here
 declare function modifyPdf(filePath, PDFDocument, StandardFonts, rgb): any;
 
 @Component({
   selector: "app-rd-portfolio-list",
+  animations: [
+    trigger("enterAnimation", [
+      transition(":enter", [
+        style({ transform: "translateX(100%)", opacity: 0 }),
+        animate("500ms", style({ transform: "translateX(0)", opacity: 1 })),
+      ]),
+      transition(":leave", [
+        style({ transform: "translateX(0)", opacity: 1 }),
+        animate("500ms", style({ transform: "translateX(100%)", opacity: 0 })),
+      ]),
+    ]),
+  ],
   templateUrl: "./rd-portfolio-list.component.html",
   styleUrls: ["./rd-portfolio-list.component.scss"],
   styles: [
@@ -147,10 +160,6 @@ export class RdPortfolioListComponent implements OnInit {
       .subscribe(
         (res) => {
           this.spinner.hide();
-          // res.data.forEach(element => {
-          //   element.PortfolioMedia= (element.PortfolioMedia!=='' && element.PortfolioMedia!==null)?this.GetPortfolioImagePath(element):'';
-          // });
-          // console.log(res)
           this.projectPath = res.projectPath;
           this.userPortfolio = res.data;
           this.selectedPortfolio = res.data[0];
@@ -301,8 +310,6 @@ export class RdPortfolioListComponent implements OnInit {
         this.selectedPortfolioImage = "";
       }
     }
-
-    //console.log(this.selectedPortfolioImage);
     this.gotoTop();
   }
   ngOnDestroy() {

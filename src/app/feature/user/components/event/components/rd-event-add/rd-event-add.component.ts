@@ -19,8 +19,21 @@ import * as countryState from "src/app/shared/core/json-data/countryState.json";
 import * as countryCode from "src/app/shared/core/json-data/countryCodes.json";
 import * as moment from "moment";
 import { RdAuthenticateService } from "src/app/shared/services/authentication/rd-authenticate.service";
+import { animate, style, transition, trigger } from "@angular/animations";
 @Component({
   selector: "app-rd-event-add",
+  animations: [
+    trigger("enterAnimation", [
+      transition(":enter", [
+        style({ transform: "translateX(100%)", opacity: 0 }),
+        animate("500ms", style({ transform: "translateX(0)", opacity: 1 })),
+      ]),
+      transition(":leave", [
+        style({ transform: "translateX(0)", opacity: 1 }),
+        animate("500ms", style({ transform: "translateX(100%)", opacity: 0 })),
+      ]),
+    ]),
+  ],
   templateUrl: "./rd-event-add.component.html",
   styleUrls: ["./rd-event-add.component.scss"],
 })
@@ -156,11 +169,9 @@ export class RdEventAddComponent implements OnInit {
     this.addEventForm.zip.updateValueAndValidity();
   }
   getSkillSubCategory(event: any) {
-    // console.log(event);
     this.skillsSubcategory = event.radianSkillSubCategories;
   }
   getStates(event: any) {
-    // console.log(event);
     this.state = event.states;
   }
   fileChangeEvent(event: any, index: number): void {

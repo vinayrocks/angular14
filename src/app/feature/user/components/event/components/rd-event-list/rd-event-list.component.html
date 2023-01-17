@@ -1,31 +1,19 @@
-<div class="container">
-    <div class="img default-cover">
-        <!--<div class="edit-btn">
-            <a [routerLink]="['/member/event_add']" class="btn btn-primary btn-round btn-margin reset-btn">
-                <i class="pi pi-camera"></i>Select Cover Image</a>
-        </div>-->
-    </div>
+<div class="cont" [@enterAnimation]>
     <div class="card social-prof">
         <div class="card-body">
-            <div class="wrapper">
-                <img *ngIf="eventImagePath===''" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""
-                    class="user-profile">
-                <img *ngIf="eventImagePath!==''" src="{{eventImagePath}}" alt="" class="user-profile">
-                <h3 class="title">{{selectedEvent?.EventName}}</h3>
-                <!--<p>{{selectedEvent?.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
-
-            </div>
             <div class="row">
-                <div class="wrapper">
-                    <img *ngIf="selectedEvent?.EventStatus" src="../../../../../../../assets/img/radian/activeEvent.png"
-                        class="active-inactive" />
-                    <img *ngIf="!selectedEvent?.EventStatus"
-                        src="../../../../../../../assets/img/radian/inactiveEvent.png" class="active-inactive" />
+                <div class="col-lg-1"></div>
+                <div class="col-lg-8">
+                    <div class="wrapper ft-right" *ngIf="this.userEvents?.length>0">
+                        <img *ngIf="selectedEvent?.EventStatus"
+                            src="../../../../../../../assets/img/radian/activeEvent.png" class="active-inactive" />
+                        <img *ngIf="!selectedEvent?.EventStatus"
+                            src="../../../../../../../assets/img/radian/inactiveEvent.png" class="active-inactive" />
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="wrapper">
-                    <a [routerLink]="['/member/event_add']" class="btn btn-danger btn-round">Create New Event</a>
+                <div class="col-lg-3">
+                    <a [routerLink]="['/member/event_add']" class="btn btn-danger btn-round ft-right">Create New
+                        Event</a>
                 </div>
             </div>
         </div>
@@ -242,18 +230,18 @@
     </div>
     <div class="row" *ngIf="this.userEvents?.length===0">
         <div class="col-md-12">
-            <div class="row card portfolio"> 
+            <div class="row card portfolio">
                 <h2 class="title" style="text-align: center;">No Events</h2>
                 <div class="separator separator-primary"></div>
                 <div class="row">
                     <div class="col-md-4">
-                        
+
                     </div>
                     <div class="col-md-4">
                         <img src="./././././././assets/img/radian/no-info.gif" />
                     </div>
                     <div class="col-md-4">
-                        
+
                     </div>
                 </div>
             </div>

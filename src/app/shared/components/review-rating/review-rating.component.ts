@@ -47,7 +47,6 @@ export class ReviewRatingComponent {
     dxData.UserId = this.currentUser.id;
     dxData.userPortfolioAttachmentRatingId =
       this.data.userPortfolioAttachmentRatingId;
-    // console.log(dxData)
     this.rdUserService.submitRating(dxData).subscribe((res) => {
       this.dialogRef.close();
     });

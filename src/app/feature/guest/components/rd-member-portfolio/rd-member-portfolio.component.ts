@@ -118,7 +118,6 @@ export class RdMemberPortfolioComponent implements OnInit {
     const dmData: any = {};
     dmData.PortfolioId = this.routerData.PortfolioId;
     dmData.UserId = this.currentUser.id;
-    // console.log(dmData)
     this.rdUserService
       .getPortfolioDetail(new RdGetPortfolio(dmData))
       .pipe(first())
@@ -151,7 +150,6 @@ export class RdMemberPortfolioComponent implements OnInit {
           });
           this.userPortfolioMedia = res.UserPortfolioMedia;
           this.userMedia = res.UserPortfolioMediaRating;
-          // console.log(res)
         },
         (error) => {
           this.spinner.hide();

@@ -209,12 +209,6 @@ export class RdHomeComponent implements OnInit {
 
     return results;
   }
-  // openSign(){
-  //   console.log(this.currentUser)
-  //   if (this.currentUser === null) {
-  //     window.location.href = '/account/signup';
-  //   }
-  // }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("landing-page");

@@ -1,23 +1,19 @@
-<div class="container">
-    <div class="img default-cover">
-        <!--<div class="edit-btn">
-            <a class="btn btn-primary btn-round btn-margin reset-btn">
-                <i class="pi pi-camera"></i>Select Cover Image</a>
-        </div>-->
-    </div>
+<div class="cont" [@enterAnimation]>
     <div class="card social-prof">
         <div class="card-body">
-            <div class="wrapper" *ngIf="selectedPortfolio!==null">
-                <img *ngIf="selectedPortfolioImage===''" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""
-                    class="user-profile">
-                <img *ngIf="selectedPortfolioImage!==''" src="{{selectedPortfolioImage}}" alt="" class="user-profile">
-                <h3 class="title">{{selectedPortfolio?.PortfolioName}}</h3>
-                <!--<p>{{selectedPortfolio.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
-
-            </div>
-            <div class="row ">
-                <div class="wrapper">
-                    <a [routerLink]="['/member/portfolio_add']" class="btn btn-danger btn-round">Create New
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-8">
+                    <div class="wrapper ft-right" *ngIf="selectedPortfolio!==null">
+                        <img *ngIf="selectedPortfolioImage===''"
+                            src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+                        <img *ngIf="selectedPortfolioImage!==''" src="{{selectedPortfolioImage}}" alt=""
+                            class="user-profile">
+                        <h3 class="title">{{selectedPortfolio?.PortfolioName}}</h3>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <a [routerLink]="['/member/portfolio_add']" class="btn btn-danger btn-round ft-right">Create New
                         Portfolio</a>
                 </div>
             </div>
@@ -132,3 +128,4 @@
             </div>
         </div>
     </div>
+</div>

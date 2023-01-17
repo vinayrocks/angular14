@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [@enterAnimation]>
   <form class="form" name="editRadianFormGroup" [formGroup]="editRadianFormGroup">
     <ng-template #contentProfile let-modal>
       <div class="modal-header">
@@ -76,26 +76,6 @@
         </div>
       </div>
     </ng-template>
-    <div class="img default-cover">
-      <div class="edit-btn">
-        <a (click)="openCoverPopup(contentCover)" class="btn btn-primary btn-round btn-margin reset-btn">
-          <i class="pi pi-camera"></i>Select Cover Image</a>
-      </div>
-    </div>
-    <div class="card social-prof">
-      <div class="card-body">
-        <div class="wrapper">
-          <a (click)="openProfilePopup(contentProfile)">
-            <img *ngIf="profileImagePath===''" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt=""
-              class="user-profile">
-            <img *ngIf="profileImagePath!==''" src="{{profileImagePath}}" alt="" class="user-profile">
-          </a>
-
-          <h3 class="title">{{userProfile.ProfileName}}</h3>
-          <p>{{userProfile.ProfileSkill.name}}</p>
-        </div>
-      </div>
-    </div>
     <div class="row">
       <div class="col-md-12">
         <div class="row card portfolio portfolio-custom">

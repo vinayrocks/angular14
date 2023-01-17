@@ -181,7 +181,6 @@ export class RdSignupComponent implements OnInit {
     this.skillsSubcategory = event.radianSkillSubCategories;
   }
   mobileCode(event: any) {
-    // console.log(event);
     this.registerForm.mobileCountryCode.setValue(event.dial_code);
   }
   onSelectExperties(event, item: any) {
@@ -263,65 +262,22 @@ export class RdSignupComponent implements OnInit {
   onSubmit() {
     this.spinner.show();
     // Stop here if form is invalid
-    // console.log(this.registerFormGroup.controls);
     if (this.registerFormGroup.invalid) {
       this.notificationService.error("Please fill in the required fields");
       this.validateAllFormFields(this.registerFormGroup);
       this.spinner.hide();
       return;
     } else {
-      //if (this.serverFile.length > 0) {
-      //this.userService
-      //.UploadUserPortfolioFile(
-      //this.serverFile,
-      //this.registerFormGroup.value
-      //)
-      //.pipe(first())
-      //.subscribe(
-      //(res) => {
-      //this.spinner.hide();
-      //if (res.status) {
-      //var dataReposne = res.data.split(",");
-      //this.serverFile = [];
-      //dataReposne.forEach((element) => {
-      //this.PortfolioMediaModel.push(element);
-      //});
-      //this.registerForm.PortfolioMedia.setValue(this.PortfolioMediaModel.join(","));
-      //this.createUser();
-      //} else {
-      //this.notificationService.error(res.message);
-      //}
-      //},
-      //(error) => {
-      //this.spinner.hide();
-      //}
-      //);
-      //} else {
-      //this.registerForm.PortfolioMedia.setValue("");
-      //}
       this.createUser();
     }
   }
   createUser() {
-    // console.log(this.registerFormGroup.value);
     this.rdAuthenticateService
       .register(new RdRegister(this.registerFormGroup.value))
       .pipe(first())
       .subscribe(
         (res) => {
           if (res.status) {
-            // new concept added
-            // this.notificationService.success(res.message);
-            // this.razorPayService.payWithRazor(res).subscribe((pay:any) => {
-            //
-            //   this.notificationService.success(res.message);
-            //   this.router.navigate(['/home']);
-            // },
-            // error => {
-            //   this.spinner.hide()
-            //   this.notificationService.error('Something went wrong.Please try again.');
-            // })
-            // console.log(res);
             const options: any = {
               order_id: res.razorPayOrderId, // order_id created by you in backend
               theme: {
@@ -354,7 +310,6 @@ export class RdSignupComponent implements OnInit {
 
             rzp1.on("payment.failed", function (response) {
               // Todo - store this information in the server
-              // console.log("payment.failed" + response);
               this.error = response.error.reason;
               this.spinner.hide();
             });
@@ -362,7 +317,6 @@ export class RdSignupComponent implements OnInit {
         },
         (error) => {
           this.spinner.hide();
-          // console.log("payment.error" + JSON.stringify(error));
           this.notificationService.error(
             "Something went wrong.Please try again."
           );
@@ -375,7 +329,6 @@ export class RdSignupComponent implements OnInit {
     event.detail.MembershipId = "";
     this.rdAuthenticateService.verifyPayment(event.detail).subscribe(
       (data) => {
-        // console.log(data);
         this.notificationService.success(data.message);
         setTimeout(() => {
           this.spinner.hide();
@@ -383,14 +336,12 @@ export class RdSignupComponent implements OnInit {
         }, 1000);
       },
       (err) => {
-        // console.log(err);
         this.spinner.hide();
       }
     );
   }
   @HostListener("window:modal.ondismiss", ["$event"])
   onPaymentModelClose(event): void {
-    // console.log(event);
     this.spinner.hide();
     this.router.navigate(["/home"]);
   }

@@ -15,8 +15,21 @@ import { Router } from "@angular/router";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { NgxSpinnerService } from "ngx-spinner";
 import { RdAuthenticateService } from "src/app/shared/services/authentication/rd-authenticate.service";
+import { animate, style, transition, trigger } from "@angular/animations";
 @Component({
   selector: "app-rd-portfolio-add",
+  animations: [
+    trigger("enterAnimation", [
+      transition(":enter", [
+        style({ transform: "translateX(100%)", opacity: 0 }),
+        animate("500ms", style({ transform: "translateX(0)", opacity: 1 })),
+      ]),
+      transition(":leave", [
+        style({ transform: "translateX(0)", opacity: 1 }),
+        animate("500ms", style({ transform: "translateX(100%)", opacity: 0 })),
+      ]),
+    ]),
+  ],
   templateUrl: "./rd-portfolio-add.component.html",
   styleUrls: ["./rd-portfolio-add.component.scss"],
 })
@@ -181,7 +194,6 @@ export class RdPortfolioAddComponent implements OnInit {
       return;
     }
     if (this.serverFile.length > 0) {
-      // console.log(this.serverFile.length);
       this.spinner.show();
       this.rdUserService
         .UploadUserPortfolioFile(
@@ -192,7 +204,6 @@ export class RdPortfolioAddComponent implements OnInit {
         .subscribe(
           (res) => {
             if (res.status) {
-              // console.log(res.data.split(","));
               var dataReposne = res.data.split(",");
               this.serverFile = [];
               dataReposne.forEach((element: any, index: number) => {
@@ -206,7 +217,6 @@ export class RdPortfolioAddComponent implements OnInit {
               this.addPortfolioForm.PortfolioMedia.setValue(
                 this.PortfolioMediaModel.join(",")
               );
-              //console.log(new RdPortfolio(this.addPortfolioFormGroup.value));
               this.rdUserService
                 .addUserPortfolio(
                   new RdPortfolio(this.addPortfolioFormGroup.value)
@@ -235,7 +245,6 @@ export class RdPortfolioAddComponent implements OnInit {
             }
           },
           (error) => {
-            // console.log("error" + JSON.stringify(error));
             this.spinner.hide();
           }
         );

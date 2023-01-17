@@ -21,8 +21,21 @@ import { NgxSpinnerService } from "ngx-spinner";
 import * as countryState from "src/app/shared/core/json-data/countryState.json";
 import * as countryCode from "src/app/shared/core/json-data/countryCodes.json";
 import * as moment from "moment";
+import { animate, style, transition, trigger } from "@angular/animations";
 @Component({
   selector: "app-rd-event-edit",
+  animations: [
+    trigger("enterAnimation", [
+      transition(":enter", [
+        style({ transform: "translateX(100%)", opacity: 0 }),
+        animate("500ms", style({ transform: "translateX(0)", opacity: 1 })),
+      ]),
+      transition(":leave", [
+        style({ transform: "translateX(0)", opacity: 1 }),
+        animate("500ms", style({ transform: "translateX(100%)", opacity: 0 })),
+      ]),
+    ]),
+  ],
   templateUrl: "./rd-event-edit.component.html",
   styleUrls: ["./rd-event-edit.component.scss"],
 })
@@ -122,7 +135,6 @@ export class RdEventEditComponent implements OnInit {
     this.skills = (skillsInterest as any).default;
     this.countryState = (countryState as any).default;
     this.countryCode = (countryCode as any).default;
-    // console.log(this.currentUser);
   }
   ngOnInit() {
     var rellaxHeader = new Rellax(".rellax-header");
@@ -404,13 +416,11 @@ export class RdEventEditComponent implements OnInit {
     }
     if (this.serverFile.length != 0) {
       this.spinner.show();
-      // console.log("----image");
       this.rdUserService
         .UploadUserEventImage(this.serverFile, dt.EventName)
         .pipe(first())
         .subscribe(
           (res) => {
-            // console.log("----image end");
             this.spinner.hide();
             var dataReposne = res.data.split(",");
             this.serverFile = [];
@@ -424,8 +434,6 @@ export class RdEventEditComponent implements OnInit {
                 (x: any) => x !== ""
               ).join(",");
             }
-
-            // console.log(dt.EventMedia);
             this.submitDetail(dt);
           },
           (error) => {
@@ -436,7 +444,6 @@ export class RdEventEditComponent implements OnInit {
           }
         );
     } else {
-      // console.log("----no image");
       this.editEventForm.EventMedia.setValue(this.EventPictureModel);
       this.submitDetail(dt);
     }
@@ -451,12 +458,9 @@ export class RdEventEditComponent implements OnInit {
     );
     dt.country =
       dt.country.country === undefined ? dt.country : dt.country.country;
-    // console.log("---- method starts");
     const dx = new RdEvent(dt);
-    // console.log(dx);
     this.rdUserService.addUserEvent(dx).subscribe(
       (res) => {
-        // console.log("---- method ends");
         this.spinner.hide();
         if (res.status) {
           this.notificationService.success(res.message);
