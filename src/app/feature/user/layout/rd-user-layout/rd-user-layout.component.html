@@ -1,39 +1,27 @@
-
 <div class="wrapper" appBlockCopy>
-    <!-- <div class="page-header page-header-small" filter-color="orange">
-        <div class="page-header-image rellax-header" data-rellax-speed="0">
-            <img *ngIf="currentUser?.CoverPicture!==null" src="{{coverImagePath}}" class="custom-cover-picture">
-            <img *ngIf="currentUser?.CoverPicture===null" src="./assets/img/default-cover-picture.jpg" class="custom-cover-picture"/>
-        </div>
-        <div class="container">
-            <div class="content-center">
-                <div class="photo-container">
-                    <img *ngIf="currentUser?.ProfilePicture!==null" src="{{profileImagePath}}" alt="">
-                    <img *ngIf="currentUser?.ProfilePicture===null" src="./assets/img/default-avatar.png" alt="">
-                </div>
-                <h2 class="title">{{pageLabel}}</h2>
-                <h2 *ngIf="currentUrl=='/member/portfolio_view'" class="title">My Portfolios</h2>
-                <div class="separator separator-primary" style="margin-bottom: 20px; background-color:#FFF"></div>
-                <p class="category">Photographer</p>
-                <div class="content">
-                    <div class="social-description">
-                        <h2>26</h2>
-                        <p>Comments</p>
-                    </div>
-                    <div class="social-description">
-                        <h2>26</h2>
-                        <p>Comments</p>
-                    </div>
-                    <div class="social-description">
-                        <h2>48</h2>
-                        <p>Bookmarks</p>
+    <div class="section" style="background-color: #F2F3F5;">
+        <div class="cont">
+            <div class="img default-cover">
+                <div class="social-prof">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <img src="{{profileImagePath}}" alt="" class="user-profile">
+                            <h3 class="title">{{currentUser.ProfileName}}</h3>
+                            <p>{{ProfileSkill}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <a [routerLink]="['/member/hunar_add']"
+                                class="btn btn-primary btn-round btn-margin reset-btn">
+                                <i class="pi pi-camera"></i>Select Cover Image</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
-    <div class="section" style="background-color: #F2F3F5;">
         <router-outlet></router-outlet>
     </div>
-    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-climbing-dot" [fullScreen] = "true"><p style="color: white;font-size: 20px;" > Loading... </p></ngx-spinner>
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-climbing-dot" [fullScreen]="true">
+        <p style="color: white;font-size: 20px;"> Loading... </p>
+    </ngx-spinner>
 </div>

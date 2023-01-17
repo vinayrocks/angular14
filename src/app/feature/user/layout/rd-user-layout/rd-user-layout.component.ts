@@ -14,14 +14,16 @@ export class RdUserLayoutComponent implements OnInit {
   profileImagePath: string;
   coverImagePath: string;
   pageLabel: string = "";
-  defaultImagePath: string =
-    "../../../../../../assets/img/radian/userAvatar.png";
+  defaultImagePath: string = "../../../../assets/img/radian/userAvatar.png";
+  ProfileSkill: string = "";
   constructor(
     private rdAuthenticateService: RdAuthenticateService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
+    this.ProfileSkill = JSON.parse(this.currentUser.ProfileSkillName).name;
+    console.log(this.currentUser);
     router.events.subscribe((val) => {
       this.checkCurrentRoute();
     });
