@@ -17,8 +17,21 @@ import { RdCommon } from "src/app/shared/core/models/rd-common/rd-common";
 import { RdAuthenticateService } from "src/app/shared/services/authentication/rd-authenticate.service";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { NgxSpinnerService } from "ngx-spinner";
+import { animate, style, transition, trigger } from "@angular/animations";
 @Component({
   selector: "app-rd-portfolio-edit",
+  animations: [
+    trigger("enterAnimation", [
+      transition(":enter", [
+        style({ transform: "translateX(100%)", opacity: 0 }),
+        animate("500ms", style({ transform: "translateX(0)", opacity: 1 })),
+      ]),
+      transition(":leave", [
+        style({ transform: "translateX(0)", opacity: 1 }),
+        animate("500ms", style({ transform: "translateX(100%)", opacity: 0 })),
+      ]),
+    ]),
+  ],
   templateUrl: "./rd-portfolio-edit.component.html",
   styleUrls: ["./rd-portfolio-edit.component.scss"],
 })
@@ -92,7 +105,6 @@ export class RdPortfolioEditComponent implements OnInit {
     } else {
       this.router.navigate(["/member/portfolio_view"]);
     }
-    // console.log(this.currentUser);
   }
   ngOnInit() {
     var rellaxHeader = new Rellax(".rellax-header");
@@ -355,19 +367,12 @@ export class RdPortfolioEditComponent implements OnInit {
   submitDetail() {
     this.editPortfolioForm.UserPortfolioMedia.setValue("");
     const data = this.editPortfolioFormGroup.value;
-    // data.PortfolioMedia =
-    //   this.PortfolioMediaModel.length > 0
-    //     ? JSON.stringify(data.PortfolioMedia)
-    //     : "";
-    // console.log(data);
     data.UserPortfolioMedia =
       data.UserPortfolioMedia.length > 0
         ? JSON.stringify(data.UserPortfolioMedia)
         : "";
-    // console.log(new RdPortfolio(data));
     this.rdUserService.addUserPortfolio(new RdPortfolio(data)).subscribe(
       (res) => {
-        // console.log(res);
         this.spinner.hide();
         if (res.status) {
           this.notificationService.success(res.message);
@@ -378,7 +383,6 @@ export class RdPortfolioEditComponent implements OnInit {
       },
       (error) => {
         this.spinner.hide();
-        console.log(error);
       }
     );
   }

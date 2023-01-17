@@ -23,7 +23,6 @@ export class RdUserLayoutComponent implements OnInit {
   ) {
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
     this.ProfileSkill = JSON.parse(this.currentUser.ProfileSkillName).name;
-    console.log(this.currentUser);
     router.events.subscribe((val) => {
       this.checkCurrentRoute();
     });

@@ -88,7 +88,6 @@ export class RdRadianDetailComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res) => {
-          // console.log(res)
           this.spinner.hide();
           res.data.forEach((element) => {
             element.EventStatus = element.EventStatus === "1" ? true : false;
@@ -123,8 +122,6 @@ export class RdRadianDetailComponent implements OnInit {
       );
   }
   GetUserList(data) {
-    // console.log(data);
-    // this.selectedEvent = data;
     this.getEventUserParameter.EventId = data.EventId;
     this.rdUserService
       .getEventInterestedUserList(
@@ -138,7 +135,6 @@ export class RdRadianDetailComponent implements OnInit {
               element.userContactDetail = JSON.parse(element.userContactDetail);
             });
             this.userList = res.data;
-            // console.log(this.userList);
           }
         },
         (error) => {}

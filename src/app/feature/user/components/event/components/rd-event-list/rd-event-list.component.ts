@@ -19,12 +19,25 @@ import { RdUserListBoxComponent } from "src/app/core/components/rd-user-list-box
 import { environment } from "src/environments/environment";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { NgxSpinnerService } from "ngx-spinner";
+import { animate, style, transition, trigger } from "@angular/animations";
 
 // declare the javascript function here
 declare function modifyPdf(filePath, PDFDocument, StandardFonts, rgb): any;
 
 @Component({
   selector: "app-rd-event-list",
+  animations: [
+    trigger("enterAnimation", [
+      transition(":enter", [
+        style({ transform: "translateX(100%)", opacity: 0 }),
+        animate("500ms", style({ transform: "translateX(0)", opacity: 1 })),
+      ]),
+      transition(":leave", [
+        style({ transform: "translateX(0)", opacity: 1 }),
+        animate("500ms", style({ transform: "translateX(100%)", opacity: 0 })),
+      ]),
+    ]),
+  ],
   templateUrl: "./rd-event-list.component.html",
   styleUrls: ["./rd-event-list.component.scss"],
 })
@@ -131,8 +144,6 @@ export class RdEventListComponent implements OnInit {
               this.selectedEvent.EventMedia.length > 0
                 ? this.selectedEvent.EventMedia[0].Name
                 : "";
-            // ();
-            // console.log(res.data);
           }
         },
         (error) => {
@@ -275,7 +286,6 @@ export class RdEventListComponent implements OnInit {
     modifyPdf(filePath, PDFDocument, StandardFonts, rgb);
   }
   GetUserList(data) {
-    // console.log(data);
     this.selectedEvent = data;
     this.getEventUserParameter.EventId = data.id;
     this.rdUserService

@@ -2,13 +2,27 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~pretty-checkbox/src/pretty-checkbox.scss";
-@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,300&display=swap");
+
 body {
   overflow-x: hidden;
   font-family: "Open Sans";
 }
 .form-control {
   height: inherit !important;
+}
+.cont {
+  max-width: 1350px;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+.card .card-body {
+  min-height: 102px !important;
+}
+.ft-right {
+  float: right;
 }
 ::-webkit-scrollbar {
   width: 0.3em;

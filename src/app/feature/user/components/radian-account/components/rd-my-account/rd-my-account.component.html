@@ -1,22 +1,10 @@
-<div class="container">
-    <div class="img default-cover">
-    </div>
-    <div class="card social-prof">
-      <div class="card-body">
-        <div class="wrapper">
-          <a>
-            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
-          </a>
-          <h3 class="title">{{currentUser.ProfileName}}</h3>
-          <p>[Visual]</p>
-        </div>
-      </div>
-    </div>
+<div class="cont" [@enterAnimation]>
     <div class="row card portfolio mb-search">
         <div class="col-md-12 custom-event">
             <div class="container-fluid">
                 <h2>{{label}} Subscription</h2>
-                <div class="portfolio-label" *ngIf="loggedUser.userRenewDate!==null">Renew On {{loggedUser.userRenewDate| date:'MMM d, y'}}</div>
+                <div class="portfolio-label" *ngIf="loggedUser.userRenewDate!==null">Renew On
+                    {{loggedUser.userRenewDate| date:'MMM d, y'}}</div>
             </div>
         </div>
     </div>
@@ -26,10 +14,11 @@
                 <div class="container-fluid">
                     <h4>Upgrade Membership Category</h4>
                     <div class="row">
-                        <div class="card-register-membership custom-set"  [ngClass]="membershipData?.length>1 ? 'col-md-4' : 'col-md-12 db-center'"
-                        *ngFor="let item of membershipData;let i=index;">
-                            <input #radioBtn id="radio{{i}}" type="radio" formControlName="memberShip" value="{{item.Id}}" 
-                            (change)="onSelectMembership($event,item)">
+                        <div class="card-register-membership custom-set"
+                            [ngClass]="membershipData?.length>1 ? 'col-md-4' : 'col-md-12 db-center'"
+                            *ngFor="let item of membershipData;let i=index;">
+                            <input #radioBtn id="radio{{i}}" type="radio" formControlName="memberShip"
+                                value="{{item.Id}}" (change)="onSelectMembership($event,item)">
                             <label class="form-check-label card-label" for="radio{{i}}">
                                 <h4>{{item.name}}</h4>
                                 <h5>{{item.currency}} {{item.amount}}</h5><br />
@@ -45,7 +34,8 @@
     <div class="row card portfolio mb-search">
         <div class="col-md-12 custom-event">
             <div class="container-fluid">
-                <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="onSubmit()">Change Plan & Pay</button>&nbsp;
+                <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="onSubmit()">Change Plan &
+                    Pay</button>&nbsp;
             </div>
         </div>
     </div>

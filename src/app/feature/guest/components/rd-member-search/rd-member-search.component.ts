@@ -77,7 +77,6 @@ export class RdMemberSearchComponent implements OnInit {
       this.radianLikeData.UserId = this.currentUser.id;
       this.routerData.UserId = this.currentUser.id;
     }
-    // console.log(this.currentUser);
   }
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];
@@ -114,7 +113,6 @@ export class RdMemberSearchComponent implements OnInit {
     }
     this.searchMemberForm.SearchCount.setValue(SearchCount);
     const dxData = this.searchMemberFormGroup.value;
-    // // console.log(this.searchMemberFormGroup.value)
     dxData.SearchBySkill =
       dxData.SearchBySkill.radianSkillCategoryId === undefined
         ? ""

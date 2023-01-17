@@ -21,8 +21,21 @@ import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { NgxSpinnerService } from "ngx-spinner";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import * as moment from "moment";
+import { animate, style, transition, trigger } from "@angular/animations";
 @Component({
   selector: "app-rd-radian-edit",
+  animations: [
+    trigger("enterAnimation", [
+      transition(":enter", [
+        style({ transform: "translateX(100%)", opacity: 0 }),
+        animate("500ms", style({ transform: "translateX(0)", opacity: 1 })),
+      ]),
+      transition(":leave", [
+        style({ transform: "translateX(0)", opacity: 1 }),
+        animate("500ms", style({ transform: "translateX(100%)", opacity: 0 })),
+      ]),
+    ]),
+  ],
   templateUrl: "./rd-radian-edit.component.html",
   styleUrls: ["./rd-radian-edit.component.scss"],
 })
@@ -206,21 +219,33 @@ export class RdRadianEditComponent implements OnInit {
       }
     });
     if (this.userProfile.isDefaultProfile) {
-      this.userProfile.CertificationDetails.forEach((element) => {
-        this.addCertificationLicensed(element);
-      });
-      this.userProfile.EducationDetails.forEach((element) => {
-        this.addEducation(element);
-        // console.log(element)
-        this.degreeName = this.degreeName.filter(
-          (x) => x.name.toLowerCase() !== element.EducationName.toLowerCase()
-        );
-      });
-      this.userProfile.ExperienceDetails.forEach((element) => {
-        this.addExperience(element);
-      });
+      if (this.userProfile.CertificationDetails !== null) {
+        this.userProfile.CertificationDetails.forEach((element) => {
+          this.addCertificationLicensed(element);
+        });
+      } else {
+        this.addCertificationLicensed(null);
+      }
+
+      if (this.userProfile.EducationDetails !== null) {
+        this.userProfile.EducationDetails.forEach((element) => {
+          this.addEducation(element);
+          this.degreeName = this.degreeName.filter(
+            (x) => x.name.toLowerCase() !== element.EducationName.toLowerCase()
+          );
+        });
+      } else {
+        this.addEducation(null);
+      }
+
+      if (this.userProfile.ExperienceDetails !== null) {
+        this.userProfile.ExperienceDetails.forEach((element) => {
+          this.addExperience(element);
+        });
+      } else {
+        this.addExperience(null);
+      }
     }
-    // console.log(this.editRadianFormGroup.controls)
   }
 
   getUserProfile(data) {
@@ -315,7 +340,6 @@ export class RdRadianEditComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res) => {
-          // console.log(res.data)
           this.spinner.hide(res);
           this.userPortfolio = res.data;
           var dbData = [];
@@ -347,7 +371,6 @@ export class RdRadianEditComponent implements OnInit {
       );
   }
   onSubmit() {
-    // console.log(this.editRadianFormGroup)
     const edData = this.editRadianFormGroup.get("Education") as FormArray;
     edData.controls.map((x: any) =>
       x.controls["StartsOn"].setValue(
@@ -382,8 +405,6 @@ export class RdRadianEditComponent implements OnInit {
     );
 
     const dxData = this.editRadianFormGroup.value;
-    // console.log(this.editRadianFormGroup)
-    // stop here if form is invalid
     if (this.editRadianFormGroup.invalid) {
       this.notificationService.error("Please fill in the required fields");
       this.validateAllFormFields(this.editRadianFormGroup);
@@ -446,7 +467,6 @@ export class RdRadianEditComponent implements OnInit {
     } else {
       this.spinner.show();
       dxData.isDefaultProfile = this.userProfile.isDefaultProfile;
-      // console.log(new RdRadian(dxData))
       this.rdUserService
         .addUserProfile(new RdRadian(dxData))
         .subscribe((res) => {
@@ -514,7 +534,6 @@ export class RdRadianEditComponent implements OnInit {
     return this.editRadianFormGroup.get("Education") as FormArray;
   }
   newEducation(item): FormGroup {
-    // console.log(item)
     return this._formBuilder.group({
       EducationName: [
         item !== null ? item.EducationName : "",
@@ -628,7 +647,6 @@ export class RdRadianEditComponent implements OnInit {
     this.degreeName = this.degreeName.filter(
       (x) => x.name.toLowerCase() !== event.name.toLowerCase()
     );
-    // console.log(this.editRadianFormGroup)
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];

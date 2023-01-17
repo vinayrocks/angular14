@@ -246,8 +246,6 @@ export class RdUserService {
     rdProfile.CoverPicture =
       rdProfile.CoverPicture === null ? "" : rdProfile.CoverPicture;
     var data = this._encryptDecryptService.ecryptModel(rdProfile);
-    //console.log(data);
-    //return null;
     return this.http.post<any>(
       environment.apiCommon + "radianApi/Profiles/createProfile.php",
       JSON.stringify(data)
@@ -413,8 +411,6 @@ export class RdUserService {
     );
   }
   sendConnectionRequest(rdCommon) {
-    // console.log(this._encryptDecryptService.ecryptModel(rdCommon));
-    // return null;
     return this.http
       .post<any>(
         environment.apiCommon + "radianApi/Profiles/userConnections.php",

@@ -14,8 +14,21 @@ import { RdAuthenticateService } from "src/app/shared/services/authentication/rd
 import { BehaviorSubject } from "rxjs";
 import { NgxSpinner } from "ngx-spinner/lib/ngx-spinner.enum";
 import { NgxSpinnerService } from "ngx-spinner";
+import { animate, style, transition, trigger } from "@angular/animations";
 @Component({
   selector: "app-rd-setting",
+  animations: [
+    trigger("enterAnimation", [
+      transition(":enter", [
+        style({ transform: "translateX(100%)", opacity: 0 }),
+        animate("500ms", style({ transform: "translateX(0)", opacity: 1 })),
+      ]),
+      transition(":leave", [
+        style({ transform: "translateX(0)", opacity: 1 }),
+        animate("500ms", style({ transform: "translateX(100%)", opacity: 0 })),
+      ]),
+    ]),
+  ],
   templateUrl: "./rd-setting.component.html",
   styleUrls: ["./rd-setting.component.scss"],
 })

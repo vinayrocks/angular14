@@ -1,4 +1,4 @@
-<div class="container">
+<div class="cont">
   <!-- <div class="img default-cover">
     <div class="edit-btn">
       <a [routerLink]="['/member/hunar_add']" class="btn btn-primary btn-round btn-margin reset-btn">
@@ -13,12 +13,8 @@
         <p>{{selectedUser?.ProfileSkill?.name}}</p>
       </div> -->
       <div class="row ">
-        <div class="wrapper">
-          <a [routerLink]="['/member/hunar_add']" class="btn btn-danger btn-round">Create New Profile</a>
-        </div>
-      </div>
-      <div class="row ">
-        <div class="col-lg-12">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
           <ul class=" nav nav-tabs justify-content-center s-nav">
             <li><a [ngClass]="{'active':_istab===1}" (click)="shiftTab(1)">About</a></li>
             <li><a [ngClass]="{'active':_istab===2}" (click)="shiftTab(2)">Education</a></li>
@@ -26,6 +22,9 @@
             <li><a [ngClass]="{'active':_istab===4}" (click)="shiftTab(4)">Experiences</a></li>
             <li><a [ngClass]="{'active':_istab===5}" (click)="shiftTab(5)">Connections</a></li>
           </ul>
+        </div>
+        <div class="col-lg-2">
+          <a [routerLink]="['/member/hunar_add']" class="btn btn-danger btn-round ft-right ">Create New Profile</a>
         </div>
       </div>
     </div>
@@ -149,7 +148,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="row card portfolio" *ngIf="selectedUser.EducationDetails?.length>0">
+          <div class="row card portfolio" *ngIf="selectedUser.EducationDetails!==null">
             <h4>Educations</h4>
             <div class="row" *ngFor="let item of selectedUser.EducationDetails;let i = index">
               <div class="col-md-5">
@@ -199,10 +198,18 @@
               </div>
             </div>
           </div>
-          <div class="row card portfolio" *ngIf="selectedUser.EducationDetails?.length===0">
-            <h4>Educations</h4>
-            <div class="col-md-12">
-              <h4>No Records</h4>
+          <div class="row card portfolio" *ngIf="selectedUser.EducationDetails===null">
+            <h2 class="title" style="text-align: center;">No Educations</h2>
+            <div class="separator separator-primary"></div>
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+                <img src="../../../../../../../assets/img/radian/no-info.gif" />
+              </div>
+              <div class="col-md-4">
+
+              </div>
             </div>
           </div>
         </div>
@@ -236,7 +243,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails?.length>0">
+          <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails!==null">
             <h4>Certification Details</h4>
             <div class="row" *ngFor="let item of selectedUser.CertificationDetails;let i = index">
               <div class="col-md-5">
@@ -282,10 +289,18 @@
               </div>
             </div>
           </div>
-          <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails?.length===0">
-            <h4>Certification Details</h4>
-            <div class="col-md-12">
-              <h4>No Records</h4>
+          <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails===null">
+            <h2 class="title" style="text-align: center;">No Certification</h2>
+            <div class="separator separator-primary"></div>
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+                <img src="../../../../../../../assets/img/radian/no-info.gif" />
+              </div>
+              <div class="col-md-4">
+
+              </div>
             </div>
           </div>
         </div>
@@ -319,7 +334,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails?.length>0">
+          <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails!==null">
             <h4>Experience Details</h4>
             <div class="row" *ngFor="let item of selectedUser.ExperienceDetails;let i = index">
               <div class="col-md-5">
@@ -368,10 +383,18 @@
               </div>
             </div>
           </div>
-          <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails?.length===0">
-            <h4>Experience Details</h4>
-            <div class="col-md-12">
-              <h4>No Records</h4>
+          <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails===null">
+            <h2 class="title" style="text-align: center;">No Experience</h2>
+            <div class="separator separator-primary"></div>
+            <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+                <img src="../../../../../../../assets/img/radian/no-info.gif" />
+              </div>
+              <div class="col-md-4">
+
+              </div>
             </div>
           </div>
         </div>

@@ -131,7 +131,6 @@ export class RdRadianUpdateComponent implements OnInit {
       .subscribe((res) => {
         if (res.status) {
           if (res.data !== "No Results Found!") {
-            // console.log(this.currentUser);
             if (this.currentUser !== null) {
               res.data = res.data.filter(
                 (x: any) => x.Email !== this.currentUser.username

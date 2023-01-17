@@ -28,7 +28,6 @@ export class RdAuthenticateService {
       )
       .pipe(
         map((res) => {
-          // console.log(res)
           if (res.status) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             this.setLocalStorageData(res.data);
@@ -39,7 +38,6 @@ export class RdAuthenticateService {
   }
   register(RdRegister: RdRegister) {
     var data = this._encryptDecryptService.ecryptModel(RdRegister);
-    // console.log(data);
     return this.http
       .post<any>(
         environment.apiCommon + "radianApi/Users/registrationDetailsTemp.php",
@@ -157,7 +155,6 @@ export class RdAuthenticateService {
       : JSON.parse(localStorage.getItem("currentUser"));
   }
   setLocalStorageData(data) {
-    // console.log(data);
     if (data !== null) {
       if (data.LinkedPortfolio === null) {
         data.isPortfolio = false;
