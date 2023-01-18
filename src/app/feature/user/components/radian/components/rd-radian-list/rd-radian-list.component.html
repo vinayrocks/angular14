@@ -1,4 +1,20 @@
 <div class="cont">
+  <div class="card social-prof">
+    <div class="card-body">
+      <div class="row ">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <ul class=" nav nav-tabs justify-content-center s-nav">
+            <li><a [ngClass]="{'active':_istab===1}" (click)="shiftTab(1)">About</a></li>
+            <li><a [ngClass]="{'active':_istab===2}" (click)="shiftTab(2)">Education</a></li>
+            <li><a [ngClass]="{'active':_istab===3}" (click)="shiftTab(3)">Certification & Licenses</a></li>
+            <li><a [ngClass]="{'active':_istab===4}" (click)="shiftTab(4)">Experiences</a></li>
+            <li><a [ngClass]="{'active':_istab===5}" (click)="shiftTab(5)">Connections</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row" [@enterAnimation] *ngIf="_istab===1">
     <div class="col-md-12">
       <div class="row">
