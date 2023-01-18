@@ -1,4 +1,4 @@
-<div class="container" [@enterAnimation]>
+<div class="cont" [@enterAnimation]>
   <form class="form" name="editRadianFormGroup" [formGroup]="editRadianFormGroup">
     <ng-template #contentProfile let-modal>
       <div class="modal-header">
@@ -18,7 +18,7 @@
           <div class="col-md-10">
             <div class="row mt-top">
               <div class="col-md-12">
-                <input type="file" (change)="fileChangeEvent($event,contentProfile)" />
+                <input type="file" (change)="fileChangeEvent($event,contentProfile)" /> 
               </div>
             </div>
 
