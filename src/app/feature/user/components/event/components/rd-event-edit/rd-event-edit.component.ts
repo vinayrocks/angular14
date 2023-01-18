@@ -99,7 +99,7 @@ export class RdEventEditComponent implements OnInit {
     search: true,
     placeholder: "Select",
     searchPlaceholder: "Search",
-    searchOnKey: "country",
+    searchOnKey: "radianSkillCategoryName",
     height: "150px",
   };
   constructor(
@@ -249,12 +249,14 @@ export class RdEventEditComponent implements OnInit {
     this.editEventForm.state.updateValueAndValidity();
     this.editEventForm.zip.updateValueAndValidity();
   }
-
   getStates(event: any) {
+    this.editEventForm.country.setValue(event.country);
     this.state = event.states;
+    this.editEventForm.state.setValue("");
   }
   getSkillSubCategory(event: any) {
     this.tempSubCategory = [];
+    this.editEventForm.EventCategory.setValue(event.radianSkillCategoryId);
     if (this.editEventForm.EventSkill.value !== "") {
       this.skillsSubcategory = event.radianSkillSubCategories;
       this.skillsSubcategory.forEach((element) => {
@@ -404,7 +406,7 @@ export class RdEventEditComponent implements OnInit {
         this.tempArr.splice(index, 1);
       }
     }
-    this.editEventForm.EventCategory.setValue(this.tempArr.join(","));
+    this.editEventForm.profileSkillSubCategory.setValue(this.tempArr.join(","));
   }
   onSubmit() {
     const dt = this.editEventFormGroup.value;
@@ -456,8 +458,6 @@ export class RdEventEditComponent implements OnInit {
     dt.EventEndDateTime = moment(dt.EventEndDateTime).format(
       "YYYY-MM-DD HH:mm:ss"
     );
-    dt.country =
-      dt.country.country === undefined ? dt.country : dt.country.country;
     const dx = new RdEvent(dt);
     this.rdUserService.addUserEvent(dx).subscribe(
       (res) => {

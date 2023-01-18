@@ -160,10 +160,13 @@ export class RdPortfolioEditComponent implements OnInit {
     this.editPortfolioForm.PortfolioName.setValue(
       this.userPortfolio.PortfolioName
     );
-    // this.editPortfolioForm.PortfolioMedia.setValue(this.userPortfolio.PortfolioMedia);
+    this.editPortfolioForm.PortfolioMedia.setValue(
+      this.userPortfolio.PortfolioMedia
+    );
     this.editPortfolioForm.PortfolioArtifacts.setValue(
       this.userPortfolio.PortfolioArtifacts
     );
+    // this.editPortfolioForm.UserPortfolioMedia.setValue(this.userPortfolioMedia);
   }
   getUserPorfolio(data) {
     this.spinner.show();
@@ -365,11 +368,11 @@ export class RdPortfolioEditComponent implements OnInit {
     });
   }
   submitDetail() {
-    this.editPortfolioForm.UserPortfolioMedia.setValue("");
+    // this.editPortfolioForm.UserPortfolioMedia.setValue("");
     const data = this.editPortfolioFormGroup.value;
     data.UserPortfolioMedia =
-      data.UserPortfolioMedia.length > 0
-        ? JSON.stringify(data.UserPortfolioMedia)
+      this.userPortfolioMedia.length > 0
+        ? JSON.stringify(this.userPortfolioMedia)
         : "";
     this.rdUserService.addUserPortfolio(new RdPortfolio(data)).subscribe(
       (res) => {

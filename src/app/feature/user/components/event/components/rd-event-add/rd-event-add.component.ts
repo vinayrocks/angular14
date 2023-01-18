@@ -93,7 +93,7 @@ export class RdEventAddComponent implements OnInit {
     search: true,
     placeholder: "Select",
     searchPlaceholder: "Search",
-    searchOnKey: "country",
+    searchOnKey: "radianSkillCategoryName",
     height: "150px",
   };
   currentUser: any = [];
@@ -169,10 +169,13 @@ export class RdEventAddComponent implements OnInit {
     this.addEventForm.zip.updateValueAndValidity();
   }
   getSkillSubCategory(event: any) {
+    this.addEventForm.EventSkill.setValue(event.radianSkillCategoryId);
     this.skillsSubcategory = event.radianSkillSubCategories;
   }
   getStates(event: any) {
+    this.addEventForm.country.setValue(event.country);
     this.state = event.states;
+    this.addEventForm.state.setValue("");
   }
   fileChangeEvent(event: any, index: number): void {
     const data: any = [];
@@ -278,13 +281,12 @@ export class RdEventAddComponent implements OnInit {
   }
   onSubmit() {
     const dt = this.addEventFormGroup.value;
-    dt.EventStartDateTime.setValue(
-      moment(dt.EventStartDateTime).format("YYYY-MM-DD HH:mm:ss")
+    dt.EventStartDateTime = moment(dt.EventStartDateTime).format(
+      "YYYY-MM-DD HH:mm"
     );
-    dt.EventEndDateTime.setValue(
-      moment(dt.EventEndDateTime).format("YYYY-MM-DD HH:mm:ss")
+    dt.EventEndDateTime = moment(dt.EventEndDateTime).format(
+      "YYYY-MM-DD HH:mm"
     );
-    dt.country = dt.country.country;
     this.spinner.show();
     // stop here if form is invalid
     if (this.addEventFormGroup.invalid) {

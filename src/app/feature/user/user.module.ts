@@ -20,6 +20,7 @@ import { ButtonModule } from "primeng/button";
 import { ToastModule } from "primeng/toast";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharedModule } from "src/app/shared/shared.module";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
@@ -53,6 +54,7 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     ReactiveFormsModule,
     SharedModule.forRoot(),
     NgbModule,
+    NgxChartsModule,
   ],
   providers: [{ provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }],
 })
