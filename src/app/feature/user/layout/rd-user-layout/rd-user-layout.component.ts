@@ -17,11 +17,13 @@ export class RdUserLayoutComponent implements OnInit {
   coverImagePath: string;
   pageLabel: string = "";
   defaultImagePath: string = "../../../../assets/img/radian/userAvatar.png";
+  defaultCoverPath: string = "../../../../assets/img/default-cover-picture.png";
   ProfileSkill: string = "";
   imageChangedEvent: any = "";
   croppedImage: any = "";
   isUploaded: Boolean = false;
   serverFile: any = [];
+  activatedUrl: string = "";
   constructor(
     private rdAuthenticateService: RdAuthenticateService,
     private activatedRoute: ActivatedRoute,
@@ -30,7 +32,10 @@ export class RdUserLayoutComponent implements OnInit {
   ) {
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
     this.ProfileSkill = JSON.parse(this.currentUser.ProfileSkillName).name;
-    router.events.subscribe((val) => {
+    router.events.subscribe((val: any) => {
+      if (val instanceof NavigationEnd) {
+        this.activatedUrl = this.router.url.toString();
+      }
       this.checkCurrentRoute();
     });
   }
@@ -87,15 +92,19 @@ export class RdUserLayoutComponent implements OnInit {
     }
   }
   GetCoverPicture() {
-    return (
-      "http://itechprovisions.com/radianApi/media/" +
-      this.currentUser.firstName +
-      "_" +
-      this.currentUser.username.split("@")[0] +
-      "/Profile/" +
-      this.currentUser.ProfileName +
-      "/CoverImages/" +
-      this.currentUser.CoverPicture
-    );
+    if (this.currentUser.ProfilePicture === null) {
+      return this.defaultCoverPath;
+    } else {
+      return (
+        "http://itechprovisions.com/radianApi/media/" +
+        this.currentUser.firstName +
+        "_" +
+        this.currentUser.username.split("@")[0] +
+        "/Profile/" +
+        this.currentUser.ProfileName +
+        "/CoverImages/" +
+        this.currentUser.CoverPicture
+      );
+    }
   }
 }

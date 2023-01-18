@@ -1,5 +1,5 @@
 <div class="wrapper" appBlockCopy>
-    <!-- <ng-template #contentProfile let-modal>
+  <!-- <ng-template #contentProfile let-modal>
         <div class="modal-header">
           <h4 class="modal-title">Profile Picture</h4>
           <button type="button" class="btn-close" aria-label="Close" (click)="close(modal)"></button>
@@ -75,43 +75,42 @@
           </div>
         </div>
       </ng-template> -->
-    <div class="section" style="background-color: #F2F3F5;">
-        <div class="cont">
-            <div class="img default-cover">
-                <div class="edit-btn">
-                    <a class="btn btn-primary btn-round btn-margin reset-btn">
-                        <i class="pi pi-camera"></i>Select Cover Image</a>
-                </div>
-            </div>
-            <div class="social-prof">
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <img src="{{profileImagePath}}" alt="" class="user-profile">
-                        <h3 class="title">{{currentUser.ProfileName}}</h3>
-                        <p>{{ProfileSkill}}</p>
-                    </div>
-                    <!-- <div class="col-md-4">
-                        <a [routerLink]="['/member/hunar_add']" class="btn btn-primary btn-round btn-margin reset-btn">
-                            <i class="pi pi-camera"></i>Select Cover Image</a>
-                    </div> -->
-                </div>
-            </div>
-            <!-- <div class="card social-prof">
-                <div class="card-body">
-                  <div class="wrapper">
-                    <a>
-                      <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
-                    </a>
-                    <h3 class="title">{{currentUser.ProfileName}}</h3>
-                    <p>{{currentUser.ProfileSkillName.name}}</p>
-                  </div>
-                </div>
-              </div> -->
+  <div class="section" style="background-color: #F2F3F5;">
+    <div class="cont">
+      <div class="img default-cover" [ngStyle]="{background: 'url('+coverImagePath+')'}">
+        <div class="edit-btn">
+          <a class="btn btn-primary btn-round btn-margin reset-btn">
+            <i class="pi pi-camera"></i>Select Cover Image</a>
         </div>
-        <router-outlet></router-outlet>
+      </div>
+      <div class="card social-prof">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <img src="{{profileImagePath}}" alt="" class="user-profile">
+            <h3 class="title">{{currentUser.ProfileName}}</h3>
+            <p>{{ProfileSkill}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <a *ngIf="activatedUrl==='/member/event_view'" [routerLink]="['/member/event_add']"
+              class="btn btn-danger btn-round">Create New
+              Event</a>
+            <a *ngIf="activatedUrl==='/member/portfolio_view'" [routerLink]="['/member/portfolio_add']"
+              class="btn btn-danger btn-round">Create New
+              Portfolio</a>
+            <a *ngIf="activatedUrl==='/member/hunar_view'" [routerLink]="['/member/hunar_add']"
+              class="btn btn-danger btn-round">Create New Profile</a>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
     </div>
-    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-climbing-dot" [fullScreen]="true">
-        <p style="color: white;font-size: 20px;"> Loading... </p>
-    </ngx-spinner>
+    <router-outlet></router-outlet>
+  </div>
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-climbing-dot" [fullScreen]="true">
+    <p style="color: white;font-size: 20px;"> Loading... </p>
+  </ngx-spinner>
 </div>

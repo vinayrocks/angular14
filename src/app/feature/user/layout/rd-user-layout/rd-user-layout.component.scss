@@ -490,9 +490,8 @@ h3.title {
   margin-top: 10px;
 }
 .default-cover {
-  background-image: url("../../../../../assets/img/default-cover-picture.png");
   height: 363px;
-  background-size: cover;
+  background-size: cover !important;
   position: relative;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -551,7 +550,7 @@ h3.title {
   font-size: 14px;
   border-radius: 5px;
 }
-.social-prof {
-  margin-top: -139px;
-  position: relative;
-}
+// .social-prof {
+//   margin-top: -139px;
+//   position: relative;
+// }
