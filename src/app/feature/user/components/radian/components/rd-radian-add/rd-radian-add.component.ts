@@ -388,11 +388,4 @@ export class RdRadianAddComponent implements OnInit {
     container.setViewMode("year");
   }
   degreeSelect(event: any, index) {}
-  close(modal: any) {
-    modal.dismiss("Cross click");
-    this.croppedImage = "";
-  }
-  closeCover(modal: any) {
-    modal.dismiss("Cross click");
-  }
 }

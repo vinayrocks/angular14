@@ -502,14 +502,7 @@ export class RdRadianEditComponent implements OnInit {
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
   }
-  CoverFileChangeEvent(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      var filesAmount = event.target.files.length;
-      for (let i = 0; i < filesAmount; i++) {
-        this.serverFile.push(event.target.files[i]);
-      }
-    }
-  }
+
   onSelectExperties(event, item: any) {
     if (event.target.checked) {
       this.tempArr.push(item.id);
