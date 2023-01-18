@@ -52,8 +52,8 @@
 
               </div>
             </div>
-            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country" [config]="skillCategoryConfig"
-              [options]="skills" (change)="getSkillSubCategory($event.value)">
+            <ngx-select-dropdown [instanceId]="'instance1'" [config]="skillCategoryConfig" [options]="skills"
+              (change)="getSkillSubCategory($event.value)">
             </ngx-select-dropdown>
             <br />
             <div class="pretty p-switch p-fill" *ngFor="let item of skillsSubcategory;let i=index;">
