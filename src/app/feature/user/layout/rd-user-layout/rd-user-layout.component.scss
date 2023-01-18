@@ -437,7 +437,7 @@ ul.friend-list .right p {
 
 .edit-btn {
   display: flex;
-  height: 569px;
+  height: 415px;
   justify-content: right;
   align-items: center;
   padding-right: 20px;
@@ -550,4 +550,8 @@ h3.title {
   border: 1px solid #2f3c4f;
   font-size: 14px;
   border-radius: 5px;
+}
+.social-prof {
+  margin-top: -139px;
+  position: relative;
 }
