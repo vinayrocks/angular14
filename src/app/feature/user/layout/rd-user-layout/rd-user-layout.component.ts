@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { ImageCroppedEvent } from "ngx-image-cropper";
 import { map, take } from "rxjs/operators";
 import { RdAuthenticateService } from "src/app/shared/services/authentication/rd-authenticate.service";
 
@@ -16,10 +18,15 @@ export class RdUserLayoutComponent implements OnInit {
   pageLabel: string = "";
   defaultImagePath: string = "../../../../assets/img/radian/userAvatar.png";
   ProfileSkill: string = "";
+  imageChangedEvent: any = "";
+  croppedImage: any = "";
+  isUploaded: Boolean = false;
+  serverFile: any = [];
   constructor(
     private rdAuthenticateService: RdAuthenticateService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
     this.ProfileSkill = JSON.parse(this.currentUser.ProfileSkillName).name;
@@ -34,7 +41,19 @@ export class RdUserLayoutComponent implements OnInit {
       this.coverImagePath = this.GetCoverPicture();
     }
   }
-
+  openProfilePopup(content: any) {
+    this.modalService.open(content, { centered: true, size: "lg" });
+  }
+  fileChangeEvent(event: any, content: any): void {
+    this.imageChangedEvent = event;
+    this.isUploaded = true;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+  }
+  openCoverPopup(content: any) {
+    this.modalService.open(content, { centered: true, size: "lg" });
+  }
   checkCurrentRoute() {
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
     if (this.currentUser !== null) {
