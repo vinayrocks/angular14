@@ -1,34 +1,4 @@
 <div class="cont">
-  <!-- <div class="img default-cover">
-    <div class="edit-btn">
-      <a [routerLink]="['/member/hunar_add']" class="btn btn-primary btn-round btn-margin reset-btn">
-        <i class="pi pi-camera"></i>Select Cover Image</a>
-    </div>
-  </div> -->
-  <div class="card social-prof">
-    <div class="card-body">
-      <!-- <div class="wrapper">
-        <img src="{{profileImagePath}}" alt="" class="user-profile">
-        <h3 class="title">{{selectedUser.ProfileName}}</h3>
-        <p>{{selectedUser?.ProfileSkill?.name}}</p>
-      </div> -->
-      <div class="row ">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
-          <ul class=" nav nav-tabs justify-content-center s-nav">
-            <li><a [ngClass]="{'active':_istab===1}" (click)="shiftTab(1)">About</a></li>
-            <li><a [ngClass]="{'active':_istab===2}" (click)="shiftTab(2)">Education</a></li>
-            <li><a [ngClass]="{'active':_istab===3}" (click)="shiftTab(3)">Certification & Licenses</a></li>
-            <li><a [ngClass]="{'active':_istab===4}" (click)="shiftTab(4)">Experiences</a></li>
-            <li><a [ngClass]="{'active':_istab===5}" (click)="shiftTab(5)">Connections</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-2">
-          <a [routerLink]="['/member/hunar_add']" class="btn btn-danger btn-round ft-right ">Create New Profile</a>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="row" [@enterAnimation] *ngIf="_istab===1">
     <div class="col-md-12">
       <div class="row">
