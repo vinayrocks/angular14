@@ -1,85 +1,82 @@
 <div class="wrapper" appBlockCopy>
-  <!-- <ng-template #contentProfile let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title">Profile Picture</h4>
-          <button type="button" class="btn-close" aria-label="Close" (click)="close(modal)"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row mt-top"
+  <ng-template #contentProfile let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Profile Picture</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="close(modal)"></button>
+    </div>
+    <div class="modal-body">
+      <!-- <div class="row mt-top"
             *ngIf="addRadianFormGroup.controls['ProfilePicture'].errors && (addRadianFormGroup.controls['ProfilePicture'].dirty || addRadianFormGroup.controls['ProfilePicture'].touched)">
             <div class="col-md-12">
               <app-required-validation-message [fieldName]="'Image'"
                 *ngIf="addRadianFormGroup.controls['ProfilePicture'].errors.required">
               </app-required-validation-message>
             </div>
-          </div>
+          </div> -->
+      <div class="row mt-top">
+        <div class="col-md-10">
           <div class="row mt-top">
-            <div class="col-md-10">
-              <div class="row mt-top">
-                <div class="col-md-12">
-                  <input type="file" (change)="fileChangeEvent($event,contentProfile)" />
-                </div>
-              </div>
-  
-            </div>
-          </div>
-          <div class="row mt-top model-profile" *ngIf="isUploaded">
-            <div class="col-md-8">
-              <h6>Crop Image</h6>
-              <div class="row">
-                <div class="col-md-12">
-                  <image-cropper class="border-custom" [imageChangedEvent]="imageChangedEvent"
-                    [maintainAspectRatio]="true" [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png"
-                    (imageCropped)="imageCropped($event)">
-                  </image-cropper>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <h6>Preview</h6>
-              <div class="row">
-                <div class="col-md-12">
-                  <img [src]="croppedImage" class="border-custom" />
-                </div>
-  
-              </div>
-            </div>
-          </div>
-        </div>
-  
-      </ng-template>
-      <ng-template #contentCover let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title">Cover Picture</h4>
-          <button type="button" class="btn-close" aria-label="Close" (click)="closeCover(modal)"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row mt-top"
-            *ngIf="addRadianFormGroup.controls['CoverPicture'].errors && (addRadianFormGroup.controls['CoverPicture'].dirty || addRadianFormGroup.controls['CoverPicture'].touched)">
             <div class="col-md-12">
-              <app-required-validation-message [fieldName]="'Cover Image'"
-                *ngIf="addRadianFormGroup.controls['CoverPicture'].errors.required"></app-required-validation-message>
+              <input type="file" (change)="fileChangeEvent($event,contentProfile)" />
             </div>
           </div>
-          <div class="row mt-top">
-            <div class="col-md-2 custom-label">
-              <div class="portfolio-label">Cover Picture</div>
-            </div>
-            <div class="col-md-10">
-              <div class="row mt-top">
-                <div class="col-md-12">
-                  <input type="file" (change)="CoverFileChangeEvent($event)" />
-                </div>
-              </div>
+
+        </div>
+      </div>
+      <div class="row mt-top model-profile" *ngIf="isUploaded">
+        <div class="col-md-8">
+          <h6>Crop Image</h6>
+          <div class="row">
+            <div class="col-md-12">
+              <image-cropper class="border-custom" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)">
+              </image-cropper>
             </div>
           </div>
         </div>
-      </ng-template> -->
+        <div class="col-md-4">
+          <h6>Preview</h6>
+          <div class="row">
+            <div class="col-md-12">
+              <img [src]="croppedImage" class="border-custom" />
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="updateProfileImage()">Update</button>
+    </div>
+  </ng-template>
+  <ng-template #contentCover let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Cover Picture</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="closeCover(modal)"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row mt-top">
+        <div class="col-md-2 custom-label">
+          <div class="portfolio-label">Cover Picture</div>
+        </div>
+        <div class="col-md-10">
+          <div class="row mt-top">
+            <div class="col-md-12">
+              <input type="file" (change)="CoverFileChangeEvent($event)" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary btn-round btn-margin submit-btn" (click)="updateProfileImage()">Update</button>
+    </div>
+  </ng-template>
   <div class="section" style="background-color: #F2F3F5;">
     <div class="cont">
       <div class="img default-cover" [ngStyle]="{background: 'url('+coverImagePath+')'}">
         <div class="edit-btn">
-          <a class="btn btn-primary btn-round btn-margin reset-btn">
+          <a class="btn btn-primary btn-round btn-margin reset-btn" (click)="openCoverPopup(contentCover)">
             <i class="pi pi-camera"></i>Select Cover Image</a>
         </div>
       </div>
@@ -87,7 +84,7 @@
         <div class="row">
           <div class="col-md-4"></div>
           <div class="col-md-4">
-            <img src="{{profileImagePath}}" alt="" class="user-profile">
+            <img src="{{profileImagePath}}" alt="" class="user-profile" (click)="openProfilePopup(contentProfile)">
             <h3 class="title">{{currentUser.ProfileName}}</h3>
             <p>{{ProfileSkill}}</p>
           </div>

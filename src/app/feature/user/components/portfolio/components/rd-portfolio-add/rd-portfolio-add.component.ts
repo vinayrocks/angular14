@@ -154,9 +154,11 @@ export class RdPortfolioAddComponent implements OnInit {
         })
         .then((res) => {
           this.urls.push({
-            Name: this.embedService.embed(data.imageMovieURL),
+            Name: res.link,
             IsImage: "video",
-            Image: res.link,
+            FileName: data.imageMovieURL,
+            Image: this.embedService.embed(data.imageMovieURL),
+            AllowRating: false,
           });
         });
       // this.urls.push({Name:this.embedService.embed(this.editPortfolioForm.linkURL.value),IsImage:'video',
@@ -165,7 +167,7 @@ export class RdPortfolioAddComponent implements OnInit {
       this.addMoreImageArray.push(index + 1);
       this.isImageType = true;
       this.isUploaded = true;
-      this.PortfolioMediaModel.push(data.imageMovieURL);
+      // this.PortfolioMediaModel.push(data.imageMovieURL);
       this.addPortfolioForm.linkURL.setValue("");
     } else {
       this.notificationService.error("Not a valid link.Please try again.");
@@ -206,13 +208,22 @@ export class RdPortfolioAddComponent implements OnInit {
             if (res.status) {
               var dataReposne = res.data.split(",");
               this.serverFile = [];
-              dataReposne.forEach((element: any, index: number) => {
-                const dxDat = {
-                  FileName: element,
-                  AllowRating: this.urls[index].AllowRating,
-                  Rating: 0,
-                };
-                this.PortfolioMediaModel.push(JSON.stringify(dxDat));
+              this.urls.forEach((element: any, index: number) => {
+                if (element.IsImage !== "video") {
+                  const dxDat = {
+                    FileName: dataReposne[index],
+                    AllowRating: element.AllowRating,
+                    Rating: 0,
+                  };
+                  this.PortfolioMediaModel.push(JSON.stringify(dxDat));
+                } else {
+                  const dxDat = {
+                    FileName: element.FileName,
+                    AllowRating: element.AllowRating,
+                    Rating: 0,
+                  };
+                  this.PortfolioMediaModel.push(JSON.stringify(dxDat));
+                }
               });
               this.addPortfolioForm.PortfolioMedia.setValue(
                 this.PortfolioMediaModel.join(",")

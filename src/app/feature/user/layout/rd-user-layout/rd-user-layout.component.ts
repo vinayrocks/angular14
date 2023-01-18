@@ -2,8 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ImageCroppedEvent } from "ngx-image-cropper";
-import { map, take } from "rxjs/operators";
+import { NgxSpinnerService } from "ngx-spinner";
+import { first, map, take } from "rxjs/operators";
 import { RdAuthenticateService } from "src/app/shared/services/authentication/rd-authenticate.service";
+import { RdUserService } from "src/app/shared/services/user/rd-user-service";
 
 @Component({
   selector: "app-rd-user-layout",
@@ -28,7 +30,9 @@ export class RdUserLayoutComponent implements OnInit {
     private rdAuthenticateService: RdAuthenticateService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private rdUserService: RdUserService,
+    private spinner: NgxSpinnerService
   ) {
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
     this.ProfileSkill = JSON.parse(this.currentUser.ProfileSkillName).name;
@@ -54,10 +58,19 @@ export class RdUserLayoutComponent implements OnInit {
     this.isUploaded = true;
   }
   imageCropped(event: ImageCroppedEvent) {
+    debugger;
     this.croppedImage = event.base64;
   }
   openCoverPopup(content: any) {
     this.modalService.open(content, { centered: true, size: "lg" });
+  }
+  CoverFileChangeEvent(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      var filesAmount = event.target.files.length;
+      for (let i = 0; i < filesAmount; i++) {
+        this.serverFile.push(event.target.files[i]);
+      }
+    }
   }
   checkCurrentRoute() {
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
@@ -74,7 +87,13 @@ export class RdUserLayoutComponent implements OnInit {
       }
     }
   }
-
+  close(modal: any) {
+    modal.dismiss("Cross click");
+    this.croppedImage = "";
+  }
+  closeCover(modal: any) {
+    modal.dismiss("Cross click");
+  }
   GetProfilePath() {
     if (this.currentUser.ProfilePicture === null) {
       return this.defaultImagePath;
@@ -92,7 +111,7 @@ export class RdUserLayoutComponent implements OnInit {
     }
   }
   GetCoverPicture() {
-    if (this.currentUser.ProfilePicture === null) {
+    if (this.currentUser.CoverPicture === null) {
       return this.defaultCoverPath;
     } else {
       return (
@@ -101,10 +120,46 @@ export class RdUserLayoutComponent implements OnInit {
         "_" +
         this.currentUser.username.split("@")[0] +
         "/Profile/" +
-        this.currentUser.ProfileName +
+        this.currentUser.ProfileName.replace(" ", "") +
         "/CoverImages/" +
         this.currentUser.CoverPicture
       );
     }
   }
+  updateProfileImage() {
+    this.spinner.show();
+    this.rdUserService
+      .UploadUserRadianProfileImage(
+        this.croppedImage,
+        this.serverFile,
+        this.currentUser.ProfileName
+      )
+      .pipe(first())
+      .subscribe(
+        (res) => {
+          this.serverFile = [];
+          this.currentUser.ProfilePicture =
+            res.data.ProfilePicture === null
+              ? this.currentUser.ProfilePicture
+              : res.data.ProfilePicture;
+          this.currentUser.CoverPicture =
+            res.data.CoverPicture === null
+              ? this.currentUser.CoverPicture
+              : res.data.CoverPicture;
+          this.rdAuthenticateService.setLocalStorageData(this.currentUser);
+          this.currentUser = this.rdAuthenticateService.getLocalStorageData();
+
+          this.profileImagePath = this.GetProfilePath();
+          this.coverImagePath = this.GetCoverPicture();
+
+          this.modalService.dismissAll();
+          this.croppedImage = "";
+          this.spinner.hide();
+        },
+        (error) => {
+          this.spinner.hide();
+        }
+      );
+  }
+  updateCoverImage() {}
 }

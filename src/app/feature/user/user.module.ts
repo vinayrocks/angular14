@@ -21,6 +21,7 @@ import { ToastModule } from "primeng/toast";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharedModule } from "src/app/shared/shared.module";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { ImageCropperModule } from "ngx-image-cropper";
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
@@ -55,6 +56,7 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     SharedModule.forRoot(),
     NgbModule,
     NgxChartsModule,
+    ImageCropperModule,
   ],
   providers: [{ provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }],
 })
