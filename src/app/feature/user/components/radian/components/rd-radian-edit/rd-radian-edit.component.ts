@@ -258,35 +258,35 @@ export class RdRadianEditComponent implements OnInit {
         (res) => {
           res.data[0].isDefaultProfile =
             parseInt(res.data[0].isDefaultProfile) === 1 ? true : false;
-          if (res.data[0].isDefaultProfile) {
-            res.data.forEach((element) => {
-              element.ProfileExpertise =
-                element.ProfileExpertise === ""
-                  ? ""
-                  : JSON.parse(element.ProfileExpertise);
-              element.ProfileSkill =
-                element.ProfileSkill === ""
-                  ? ""
-                  : JSON.parse(element.ProfileSkill);
-              element.LinkedPortfolio =
-                element.LinkedPortfolio === ""
-                  ? ""
-                  : JSON.parse(element.LinkedPortfolio);
 
-              element.CertificationDetails =
-                element.CertificationDetails === ""
-                  ? ""
-                  : JSON.parse(element.CertificationDetails);
-              element.EducationDetails =
-                element.EducationDetails === ""
-                  ? ""
-                  : JSON.parse(element.EducationDetails);
-              element.ExperienceDetails =
-                element.ExperienceDetails === ""
-                  ? ""
-                  : JSON.parse(element.ExperienceDetails);
-            });
-          }
+          console.log(res);
+          res.data.forEach((element) => {
+            element.ProfileExpertise =
+              element.ProfileExpertise === ""
+                ? ""
+                : JSON.parse(element.ProfileExpertise);
+            element.ProfileSkill =
+              element.ProfileSkill === ""
+                ? ""
+                : JSON.parse(element.ProfileSkill);
+            element.LinkedPortfolio =
+              element.LinkedPortfolio === ""
+                ? ""
+                : JSON.parse(element.LinkedPortfolio);
+
+            element.CertificationDetails =
+              element.CertificationDetails === ""
+                ? ""
+                : JSON.parse(element.CertificationDetails);
+            element.EducationDetails =
+              element.EducationDetails === ""
+                ? ""
+                : JSON.parse(element.EducationDetails);
+            element.ExperienceDetails =
+              element.ExperienceDetails === ""
+                ? ""
+                : JSON.parse(element.ExperienceDetails);
+          });
 
           this.userProfile = res.data[0];
           if (this.currentUser !== null) {
