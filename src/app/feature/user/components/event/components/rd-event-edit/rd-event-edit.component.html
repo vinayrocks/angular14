@@ -57,8 +57,8 @@
                   *ngIf="editEventForm.EventCategory.errors.required"></app-required-validation-message>
               </div>
             </div>
-            <ngx-select-dropdown [instanceId]="'instance1'" formControlName="country" [config]="skillCategoryConfig"
-              [options]="skills" (change)="getSkillSubCategory($event.value)">
+            <ngx-select-dropdown [instanceId]="'instance1'" [config]="skillCategoryConfig" [options]="skills"
+              (change)="getSkillSubCategory($event.value)">
             </ngx-select-dropdown>
             <!-- <select class="select-css" placeholder="Skill/Art" formControlName="EventSkill"
               (change)="getSkillSubCategory($event.target.value)">
@@ -85,6 +85,13 @@
           <div class="col-md-12" *ngIf="editEventForm.IsEventOnline.value">
             <div class="portfolio-label">Event Invitation Link</div>
             <div class="input-group">
+              <div class="row"
+                *ngIf="editEventForm.EventLink.errors && (editEventForm.EventLink.dirty || editEventForm.EventLink.touched)">
+                <div class="col-md-12">
+                  <app-required-validation-message [fieldName]="'Event Link'"
+                    *ngIf="editEventForm.EventLink.errors.required"></app-required-validation-message>
+                </div>
+              </div>
               <input type="text" class="signUp-form-control form-control" formControlName="EventLink">
             </div>
           </div>
@@ -241,7 +248,9 @@
               </a>
               <div *ngIf="elem.IsImage==='video'" class="video">
                 <img src="{{elem.Image}}">
-                <a></a>
+                <button href="#" class="play-icon" title="Video Play">
+                  <i class="fa fa-play"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -317,8 +326,11 @@
               </a>
               <div *ngIf="url.IsImage==='video'" class="video">
                 <img src="{{url.Image}}" class="img-raised">
-                <a></a>
+                <button href="#" class="play-icon" title="Video Play">
+                  <i class="fa fa-play"></i>
+                </button>
               </div>
+
             </div>
           </div>
         </div>

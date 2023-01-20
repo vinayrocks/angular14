@@ -120,7 +120,6 @@ export class RdEventListComponent implements OnInit {
       .subscribe(
         (res) => {
           this.spinner.hide();
-
           if (res !== "") {
             res.data.forEach((element) => {
               element.EventStatus = element.EventStatus === "1" ? true : false;
@@ -130,7 +129,10 @@ export class RdEventListComponent implements OnInit {
                 element.EventCategory === ""
                   ? []
                   : JSON.parse(element.EventCategory);
-              element.EventMedia = this.GetEventImagePath(element);
+              element.EventMedia =
+                element.EventMedia === "" || element.EventMedia.length === 0
+                  ? []
+                  : this.GetEventImagePath(element);
               element.EventLocation =
                 element.EventLocation === ""
                   ? []
@@ -177,9 +179,9 @@ export class RdEventListComponent implements OnInit {
       if (element.EventMedia.split(",").length > 1) {
         element.EventMedia.split(",").forEach((data) => {
           if (
-            data.indexOf("youtu.be") === -1 &&
-            data.indexOf("youtube") === -1 &&
-            data.indexOf("pdf") === -1
+            data.Name.indexOf("youtu.be") === -1 &&
+            data.Name.indexOf("youtube") === -1 &&
+            data.Name.indexOf("pdf") === -1
           ) {
             imageArry.push({
               Name:
@@ -188,13 +190,13 @@ export class RdEventListComponent implements OnInit {
                 this.projectFilePath +
                 element.EventName.toString().replace(/\s/g, "") +
                 "/" +
-                data,
+                data.Name,
               IsImage: "image",
             });
           } else if (
-            data.indexOf("youtu.be") === -1 &&
-            data.indexOf("youtube") === -1 &&
-            data.indexOf("pdf") !== -1
+            data.Name.indexOf("youtu.be") === -1 &&
+            data.Name.indexOf("youtube") === -1 &&
+            data.Name.indexOf("pdf") !== -1
           ) {
             imageArry.push({
               Name:
@@ -203,17 +205,17 @@ export class RdEventListComponent implements OnInit {
                 this.projectFilePath +
                 element.EventName.toString().replace(/\s/g, "") +
                 "/" +
-                data,
+                data.Name,
               IsImage: "pdf",
             });
           } else {
             this.embedService
-              .embed_image(data, { image: "mqdefault" })
+              .embed_image(data.Name, { image: "mqdefault" })
               .then((res) => {
                 imageArry.push({
-                  Name: this.embedService.embed(data),
+                  Name: data.Name,
                   IsImage: "video",
-                  Image: res.link,
+                  Image: data.Image,
                 });
               });
           }

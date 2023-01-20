@@ -47,7 +47,9 @@
               </a>
               <div *ngIf="elem.IsImage==='video'" class="video">
                 <img src="{{elem.userPortfolioAttachment}}">
-                <a></a>
+                <button href="#" class="play-icon" title="Video Play">
+                  <i class="fa fa-play"></i>
+                </button>
               </div>
               <div class="row row-allow">
                 <div class="col-md-12">
@@ -134,7 +136,9 @@
               </a>
               <div *ngIf="url.IsImage==='video'" class="video">
                 <img src="{{url.Name}}" class="img-raised">
-                <a></a>
+                <button href="#" class="play-icon" title="Video Play">
+                  <i class="fa fa-play"></i>
+                </button>
               </div>
             </div>
             <div class="row row-allow">

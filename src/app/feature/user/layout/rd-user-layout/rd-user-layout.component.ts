@@ -58,7 +58,6 @@ export class RdUserLayoutComponent implements OnInit {
     this.isUploaded = true;
   }
   imageCropped(event: ImageCroppedEvent) {
-    debugger;
     this.croppedImage = event.base64;
   }
   openCoverPopup(content: any) {
