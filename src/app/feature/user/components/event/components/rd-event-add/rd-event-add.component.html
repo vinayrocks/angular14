@@ -27,7 +27,7 @@
     </div>
     <div class="row card portfolio portfolio-custom">
       <div class="col-md-12">
-        <h4>Event Details</h4> 
+        <h4>Event Details</h4>
         <div class="row mt-top">
           <div class="col-md-6">
             <div class="portfolio-label">Event Name</div>
@@ -73,6 +73,13 @@
           <div class="col-md-12" *ngIf="addEventForm.IsEventOnline.value">
             <div class="portfolio-label">Event Invitation Link</div>
             <div class="input-group">
+              <div class="row"
+                *ngIf="addEventForm.EventLink.errors && (addEventForm.EventLink.dirty || addEventForm.EventLink.touched)">
+                <div class="col-md-12">
+                  <app-required-validation-message [fieldName]="'Event Link'"
+                    *ngIf="addEventForm.EventLink.errors.required"></app-required-validation-message>
+                </div>
+              </div>
               <input type="text" class="signUp-form-control form-control" formControlName="EventLink">
             </div>
           </div>
@@ -282,7 +289,9 @@
               </a>
               <div *ngIf="url.IsImage==='video'" class="video">
                 <img src="{{url.Image}}" class="img-raised">
-                <a></a>
+                <button href="#" class="play-icon" title="Video Play">
+                  <i class="fa fa-play"></i>
+                </button>
               </div>
             </div>
           </div>

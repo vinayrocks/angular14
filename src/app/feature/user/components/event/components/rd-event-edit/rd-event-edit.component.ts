@@ -152,30 +152,12 @@ export class RdEventEditComponent implements OnInit {
       EventCategory: ["", Validators.required],
       EventStatus: [true],
       IsEventOnline: [false],
-      EventLink: [
-        "",
-        this.requiredIfValidator(() => this.editEventForm.IsEventOnline.value),
-      ],
-      country: [
-        "",
-        this.requiredIfValidator(() => !this.editEventForm.IsEventOnline.value),
-      ],
-      street: [
-        "",
-        this.requiredIfValidator(() => !this.editEventForm.IsEventOnline.value),
-      ],
-      city: [
-        "",
-        this.requiredIfValidator(() => !this.editEventForm.IsEventOnline.value),
-      ],
-      state: [
-        "",
-        this.requiredIfValidator(() => !this.editEventForm.IsEventOnline.value),
-      ],
-      zip: [
-        "",
-        this.requiredIfValidator(() => !this.editEventForm.IsEventOnline.value),
-      ],
+      EventLink: [""],
+      country: [""],
+      street: [""],
+      city: [""],
+      state: [""],
+      zip: [""],
       EventStartDateTime: ["", Validators.required],
       EventEndDateTime: ["", Validators.required],
       linkURL: [""],
@@ -240,14 +222,39 @@ export class RdEventEditComponent implements OnInit {
     this.editEventForm.EventEndDateTime.setValue(
       this.userEvent.EventEndDateTime
     );
+    if (this.userEvent.IsEventOnline) {
+      this.editEventForm.EventLink.addValidators(Validators.required);
+    } else {
+      this.editEventForm.country.addValidators(Validators.required);
+      this.editEventForm.street.addValidators(Validators.required);
+      this.editEventForm.city.addValidators(Validators.required);
+      this.editEventForm.state.addValidators(Validators.required);
+      this.editEventForm.zip.addValidators(Validators.required);
+    }
   }
   changeEventType(event: any) {
-    this.editEventForm.EventLink.updateValueAndValidity();
-    this.editEventForm.country.updateValueAndValidity();
-    this.editEventForm.street.updateValueAndValidity();
-    this.editEventForm.city.updateValueAndValidity();
-    this.editEventForm.state.updateValueAndValidity();
-    this.editEventForm.zip.updateValueAndValidity();
+    // this.editEventForm.EventLink.updateValueAndValidity();
+    // this.editEventForm.country.updateValueAndValidity();
+    // this.editEventForm.street.updateValueAndValidity();
+    // this.editEventForm.city.updateValueAndValidity();
+    // this.editEventForm.state.updateValueAndValidity();
+    // this.editEventForm.zip.updateValueAndValidity();
+
+    if (event.target.value) {
+      this.editEventForm.EventLink.removeValidators(Validators.required);
+      this.editEventForm.country.removeValidators(Validators.required);
+      this.editEventForm.street.removeValidators(Validators.required);
+      this.editEventForm.city.removeValidators(Validators.required);
+      this.editEventForm.state.removeValidators(Validators.required);
+      this.editEventForm.zip.removeValidators(Validators.required);
+    } else {
+      this.editEventForm.EventLink.removeValidators(Validators.required);
+      this.editEventForm.country.addValidators(Validators.required);
+      this.editEventForm.street.addValidators(Validators.required);
+      this.editEventForm.city.addValidators(Validators.required);
+      this.editEventForm.state.addValidators(Validators.required);
+      this.editEventForm.zip.addValidators(Validators.required);
+    }
   }
   getStates(event: any) {
     this.editEventForm.country.setValue(event.country);
@@ -256,9 +263,11 @@ export class RdEventEditComponent implements OnInit {
   }
   getSkillSubCategory(event: any) {
     this.tempSubCategory = [];
-    this.editEventForm.EventCategory.setValue(event.radianSkillCategoryId);
+    this.editEventForm.EventSkill.setValue(event.radianSkillCategoryId);
+    this.skillsSubcategory = event.radianSkillSubCategories;
     if (this.editEventForm.EventSkill.value !== "") {
       this.skillsSubcategory = event.radianSkillSubCategories;
+      this.tempSubCategory = [];
       this.skillsSubcategory.forEach((element) => {
         if (this.tempArr.indexOf(element.subCategoryName) !== -1) {
           this.tempSubCategory.push({
@@ -295,7 +304,9 @@ export class RdEventEditComponent implements OnInit {
                 ? []
                 : JSON.parse(element.EventLocation);
             element.EventMedia =
-              element.EventMedia === "" ? [] : this.GetEventImagePath(element);
+              element.EventMedia === "" || element.EventMedia.length === 0
+                ? []
+                : this.GetEventImagePath(element);
           });
           this.projectPath = res.projectPath;
           this.userEvent = res.data[0];
@@ -368,6 +379,17 @@ export class RdEventEditComponent implements OnInit {
             IsImage: "video",
             Image: res.link,
           });
+          this.EventPictureModel.push(
+            JSON.stringify({
+              Name: data.imageMovieURL,
+              IsImage: "video",
+              Image: res.link,
+            })
+          );
+          this.editEventForm.EventMedia.setValue(
+            this.EventPictureModel.filter((x: any) => x !== "").join(",")
+          );
+          this.editEventForm.linkURL.setValue("");
         });
       // this.urls.push({Name:this.embedService.embed(this.editPortfolioForm.linkURL.value),IsImage:'video',
       // Image:res.link});
@@ -375,8 +397,8 @@ export class RdEventEditComponent implements OnInit {
       this.addMoreImageArray.push(index + 1);
       this.isImageType = true;
       this.isUploaded = true;
-      this.EventPictureModel.push(data.imageMovieURL);
-      this.editEventForm.linkURL.setValue("");
+      // this.EventPictureModel.push(data.imageMovieURL);
+      // this.editEventForm.linkURL.setValue("");
     } else {
       this.notificationService.error("Not a valid link.Please try again.");
       this.editEventForm.linkURL.setValue("");
@@ -399,18 +421,17 @@ export class RdEventEditComponent implements OnInit {
   }
   onSelectExperties(event, item: any) {
     if (event.target.checked) {
-      this.tempArr.push(item.id);
+      this.tempArr.push(item.Id);
     } else {
-      const index: number = this.tempArr.indexOf(item.id);
+      const index: number = this.tempArr.indexOf(item.Id);
       if (index !== -1) {
         this.tempArr.splice(index, 1);
       }
     }
-    this.editEventForm.profileSkillSubCategory.setValue(this.tempArr.join(","));
+    this.editEventForm.EventCategory.setValue(this.tempArr.join(","));
   }
   onSubmit() {
     const dt = this.editEventFormGroup.value;
-
     if (this.editEventFormGroup.invalid) {
       this.notificationService.error("Please fill in the required fields");
       this.validateAllFormFields(this.editEventFormGroup);
@@ -446,7 +467,7 @@ export class RdEventEditComponent implements OnInit {
           }
         );
     } else {
-      this.editEventForm.EventMedia.setValue(this.EventPictureModel);
+      // dt.EventMedia = this.EventPictureModel.filter((x: any) => x !== "").join(",");
       this.submitDetail(dt);
     }
   }

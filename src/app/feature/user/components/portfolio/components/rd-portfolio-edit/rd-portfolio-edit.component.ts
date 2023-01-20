@@ -193,8 +193,10 @@ export class RdPortfolioEditComponent implements OnInit {
               el.IsImage = "pdf";
             } else {
               const img = this.embedService
-                .embed_image(data, { image: "mqdefault" })
+                .embed_image(el.userPortfolioAttachment, { image: "mqdefault" })
                 .then((res) => {
+                  el.IsImage = "video";
+                  el.userPortfolioAttachment = res.link;
                   el.IsImage = "video";
                 });
             }
@@ -225,16 +227,27 @@ export class RdPortfolioEditComponent implements OnInit {
             Name: res.link,
             IsImage: "video",
             FileName: data.imageMovieURL,
-            Image: this.embedService.embed(data.imageMovieURL),
             AllowRating: false,
+            Rating: 0,
           });
+          this.PortfolioMediaModel.push(
+            JSON.stringify({
+              Name: res.link,
+              IsImage: "video",
+              FileName: data.imageMovieURL,
+              AllowRating: false,
+              Rating: 0,
+            })
+          );
+          this.editPortfolioForm.PortfolioMedia.setValue(
+            this.PortfolioMediaModel.join(",")
+          );
+          this.editPortfolioForm.linkURL.setValue("");
         });
       this.imageIndex = index + 1;
       this.addMoreImageArray.push(index + 1);
       this.isImageType = true;
       this.isUploaded = true;
-      this.PortfolioMediaModel.push(data.imageMovieURL);
-      this.editPortfolioForm.linkURL.setValue("");
     } else {
       this.notificationService.error("Not a valid link.Please try again.");
       this.editPortfolioForm.linkURL.setValue("");
@@ -328,14 +341,6 @@ export class RdPortfolioEditComponent implements OnInit {
             var dataReposne = res.data.split(",");
             this.serverFile = [];
             this.PortfolioMediaModel = [];
-            // dataReposne.forEach((element: any, index: number) => {
-            //   const dxDat = {
-            //     FileName: element,
-            //     AllowRating: this.urls[index].AllowRating,
-            //     Rating: 0,
-            //   };
-            //   this.PortfolioMediaModel.push(JSON.stringify(dxDat));
-            // });
             this.urls.forEach((element: any, index: number) => {
               if (element.IsImage !== "video") {
                 const dxDat = {
@@ -367,7 +372,7 @@ export class RdPortfolioEditComponent implements OnInit {
         );
     } else {
       this.spinner.show();
-      this.editPortfolioForm.PortfolioMedia.setValue("");
+      //this.editPortfolioForm.PortfolioMedia.setValue("");
       this.submitDetail();
     }
   }
@@ -392,6 +397,7 @@ export class RdPortfolioEditComponent implements OnInit {
       this.userPortfolioMedia.length > 0
         ? JSON.stringify(this.userPortfolioMedia)
         : "";
+
     this.rdUserService.addUserPortfolio(new RdPortfolio(data)).subscribe(
       (res) => {
         this.spinner.hide();

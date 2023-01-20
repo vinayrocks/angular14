@@ -161,12 +161,21 @@ export class RdEventAddComponent implements OnInit {
     return this.addEventFormGroup.controls;
   }
   changeEventType(event: any) {
-    this.addEventForm.EventLink.updateValueAndValidity();
-    this.addEventForm.country.updateValueAndValidity();
-    this.addEventForm.street.updateValueAndValidity();
-    this.addEventForm.city.updateValueAndValidity();
-    this.addEventForm.state.updateValueAndValidity();
-    this.addEventForm.zip.updateValueAndValidity();
+    if (event.target.value) {
+      this.addEventForm.EventLink.removeValidators(Validators.required);
+      this.addEventForm.country.removeValidators(Validators.required);
+      this.addEventForm.street.removeValidators(Validators.required);
+      this.addEventForm.city.removeValidators(Validators.required);
+      this.addEventForm.state.removeValidators(Validators.required);
+      this.addEventForm.zip.removeValidators(Validators.required);
+    } else {
+      this.addEventForm.EventLink.removeValidators(Validators.required);
+      this.addEventForm.country.addValidators(Validators.required);
+      this.addEventForm.street.addValidators(Validators.required);
+      this.addEventForm.city.addValidators(Validators.required);
+      this.addEventForm.state.addValidators(Validators.required);
+      this.addEventForm.zip.addValidators(Validators.required);
+    }
   }
   getSkillSubCategory(event: any) {
     this.addEventForm.EventSkill.setValue(event.radianSkillCategoryId);

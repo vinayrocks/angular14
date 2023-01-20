@@ -258,8 +258,6 @@ export class RdRadianEditComponent implements OnInit {
         (res) => {
           res.data[0].isDefaultProfile =
             parseInt(res.data[0].isDefaultProfile) === 1 ? true : false;
-
-          console.log(res);
           res.data.forEach((element) => {
             element.ProfileExpertise =
               element.ProfileExpertise === ""
@@ -505,9 +503,9 @@ export class RdRadianEditComponent implements OnInit {
 
   onSelectExperties(event, item: any) {
     if (event.target.checked) {
-      this.tempArr.push(item.id);
+      this.tempArr.push(item.Id);
     } else {
-      const index: number = this.tempArr.indexOf(item.id);
+      const index: number = this.tempArr.indexOf(item.Id);
       if (index !== -1) {
         this.tempArr.splice(index, 1);
       }
