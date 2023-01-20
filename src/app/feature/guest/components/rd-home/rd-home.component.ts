@@ -12,7 +12,7 @@ import { RdAuthenticateService } from "src/app/shared/services/authentication/rd
 @Component({
   selector: "app-rd-home",
   templateUrl: "./rd-home.component.html",
-  styleUrls: ["./rd-home.component.scss"],
+  styleUrls: ["./rd-home.component.scss"], 
   animations: [
     trigger("inOutAnimation", [
       transition(":enter", [
@@ -35,6 +35,8 @@ export class RdHomeComponent implements OnInit {
   radianUpdates: any;
   loading: Boolean = false;
   currentUser: any = [];
+  responsiveOptions: any = [];
+  tutorials: Tutorial[];
   constructor(
     private notificationService: NotificationService,
     private rdUserService: RdUserService,
@@ -50,9 +52,49 @@ export class RdHomeComponent implements OnInit {
     const subscribe = source.subscribe((val) => {
       this.data = new Date().getSeconds();
     });
+    this.responsiveOptions = [
+      {
+        breakpoint: "1024px",
+        numVisible: 3,
+        numScroll: 3,
+      },
+      {
+        breakpoint: "768px",
+        numVisible: 2,
+        numScroll: 2,
+      },
+      {
+        breakpoint: "560px",
+        numVisible: 1,
+        numScroll: 1,
+      },
+    ];
   }
 
+
   ngOnInit() {
+    this.tutorials = [
+      {
+          title: 'Web MH ',
+          image:
+'assets/img/radian/home_1.jpg',
+      },
+      {
+          title: 'Interview Experience ',
+          image:
+'assets/img/radian/home_2.jpg',
+      },
+      {
+          title: 'GeeksforGeeks Logo ',
+          image:
+'assets/img/radian/home_3.jpg',
+      },
+      {
+          title: 'GeeksforGeeks Carnival ',
+          image:
+'assets/img/radian/home_4.jpg',
+      },
+  ];
     var rellaxHeader = new Rellax(".rellax-header");
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("landing-page");
@@ -67,6 +109,7 @@ export class RdHomeComponent implements OnInit {
     });
     this.getRadianEvents();
   }
+  
   get homeUpdatesForm() {
     return this.homeFormGroup.controls;
   }
@@ -215,4 +258,8 @@ export class RdHomeComponent implements OnInit {
     var navbar = document.getElementsByTagName("nav")[0];
     navbar.classList.remove("navbar-transparent");
   }
+}
+export interface Tutorial {
+  title?: String;
+  image?: String;
 }
