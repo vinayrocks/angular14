@@ -30,6 +30,7 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { CarouselModule } from 'primeng/carousel';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ImageModule } from 'primeng/image';
 @NgModule({
   declarations: [RdRadianUpdateComponent, RdMemberSearchComponent, RdHomeComponent,
     RdGuestLayoutComponent, RdAboutUsComponent, RdContactUsComponent, RdHowItWorksComponent,
@@ -49,6 +50,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgxSpinnerModule,
     SelectDropDownModule,
     CarouselModule,
+    ImageModule,
     BsDatepickerModule,
     NgxChartsModule,
     SharedModule.forRoot()

@@ -22,6 +22,25 @@
     <div class="row" *ngIf="selectedPortfolio!==null">
         <div class="col-md-12">
             <div class="row card portfolio">
+                <h4>Portfolio Name</h4>
+                <p>{{selectedPortfolio.PortfolioName}}</p>
+            </div>
+            <!--<div class="row card portfolio">
+                <div class="col-md-4">
+                    <div class="portfolio-label">Event Status</div>
+                    <div class="pretty p-switch p-fill">
+                        <input type="radio" disabled="true" [checked]="selectedPortfolio.EventStatus" />
+                        <div class="state p-success">
+                            <label>Active/Inactive</label>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </div>
+    <div class="row" *ngIf="selectedPortfolio!==null">
+        <div class="col-md-12">
+            <div class="row card portfolio">
                 <h4>About Portfolio</h4>
                 <p>{{selectedPortfolio.PortfolioArtifacts}}</p>
             </div>
