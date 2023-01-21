@@ -581,3 +581,24 @@ fieldset[disabled] .form-control {
 .custom-img-col-2 {
   margin-right: 40px;
 }
+.play-icon {
+  color: #ffffff;
+  margin-left: 8px;
+  transform: translate(8vh, -15vh);
+  -ms-transform: translate(8vh, -15vh);
+  cursor: pointer;
+  width: 20%;
+  z-index: 2;
+  background-color: #ff0000;
+  height: 40px;
+  border-radius: 5px;
+  width: 45px;
+  border:0px;
+  i {
+    font-size: 22px !important;
+    display: block;
+    position: inherit;
+    color: #ffffff !important;
+    margin-top: 7px;
+  }
+}

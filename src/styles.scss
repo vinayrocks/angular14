@@ -666,27 +666,7 @@ a {
 path.bar {
   pointer-events: none;
 }
-.play-icon {
-  color: #ffffff;
-  left: 50%;
-  transform: translate(8vh, -15vh);
-  -ms-transform: translate(8vh, -15vh);
-  cursor: pointer;
-  width: 20%;
-  z-index: 2;
-  background-color: #ff0000;
-  height: 35px;
-  border-radius: 8px;
-  width: 45px;
-  border-color: #ff0000;
-  i {
-    font-size: 20px !important;
-    display: block;
-    position: inherit;
-    padding: 4px 0px 0px 1px;
-    color: #ffffff !important;
-  }
-}
+
 .play-icon:hover {
   opacity: 0.7;
 }
