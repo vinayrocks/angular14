@@ -213,7 +213,7 @@ export class RdEventListComponent implements OnInit {
               .embed_image(data, { image: "mqdefault" })
               .then((res) => {
                 imageArry.push({
-                  Name: data,
+                  Name: this.embedService.embed(data),
                   IsImage: "video",
                   Image: res.link,
                 });
