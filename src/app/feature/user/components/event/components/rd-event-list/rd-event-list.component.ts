@@ -179,9 +179,9 @@ export class RdEventListComponent implements OnInit {
       if (element.EventMedia.split(",").length > 1) {
         element.EventMedia.split(",").forEach((data) => {
           if (
-            data.Name.indexOf("youtu.be") === -1 &&
-            data.Name.indexOf("youtube") === -1 &&
-            data.Name.indexOf("pdf") === -1
+            data.indexOf("youtu.be") === -1 &&
+            data.indexOf("youtube") === -1 &&
+            data.indexOf("pdf") === -1
           ) {
             imageArry.push({
               Name:
@@ -190,13 +190,13 @@ export class RdEventListComponent implements OnInit {
                 this.projectFilePath +
                 element.EventName.toString().replace(/\s/g, "") +
                 "/" +
-                data.Name,
+                data,
               IsImage: "image",
             });
           } else if (
-            data.Name.indexOf("youtu.be") === -1 &&
-            data.Name.indexOf("youtube") === -1 &&
-            data.Name.indexOf("pdf") !== -1
+            data.indexOf("youtu.be") === -1 &&
+            data.indexOf("youtube") === -1 &&
+            data.indexOf("pdf") !== -1
           ) {
             imageArry.push({
               Name:
@@ -205,17 +205,17 @@ export class RdEventListComponent implements OnInit {
                 this.projectFilePath +
                 element.EventName.toString().replace(/\s/g, "") +
                 "/" +
-                data.Name,
+                data,
               IsImage: "pdf",
             });
           } else {
             this.embedService
-              .embed_image(data.Name, { image: "mqdefault" })
+              .embed_image(data, { image: "mqdefault" })
               .then((res) => {
                 imageArry.push({
-                  Name: data.Name,
+                  Name: data,
                   IsImage: "video",
-                  Image: data.Image,
+                  Image: res.link,
                 });
               });
           }

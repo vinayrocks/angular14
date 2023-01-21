@@ -167,6 +167,11 @@ export class RdEventEditComponent implements OnInit {
     return this.editEventFormGroup.controls;
   }
   setFormGroup() {
+    this.editEventFormGroup.controls["EventSkill"].setValue(
+      this.userEvent.EventSkill.name === undefined
+        ? ""
+        : this.userEvent.EventSkill.name
+    );
     const id = this.userEvent.EventSkill.id;
     this.userEvent.EventCategory.forEach((element) => {
       this.tempArr.push(element.id);
@@ -198,7 +203,7 @@ export class RdEventEditComponent implements OnInit {
       this.userEvent.IsEventOnline = true;
     }
     this.editEventForm.EventName.setValue(this.userEvent.EventName);
-    this.editEventForm.EventSkill.setValue(this.userEvent.EventSkill.id);
+    // this.editEventForm.EventSkill.setValue(this.userEvent.EventSkill.id);
     this.editEventForm.EventMedia.setValue(
       this.userEvent.EventMedia.map((x: any) => x.name)
     );
@@ -263,7 +268,7 @@ export class RdEventEditComponent implements OnInit {
   }
   getSkillSubCategory(event: any) {
     this.tempSubCategory = [];
-    this.editEventForm.EventSkill.setValue(event.radianSkillCategoryId);
+    // this.editEventForm.EventSkill.setValue(event.radianSkillCategoryId);
     this.skillsSubcategory = event.radianSkillSubCategories;
     if (this.editEventForm.EventSkill.value !== "") {
       this.skillsSubcategory = event.radianSkillSubCategories;
@@ -313,7 +318,6 @@ export class RdEventEditComponent implements OnInit {
           this.eventName = res.data[0].EventName;
           this.eventName = this.eventName.replace(/\s/g, "");
           this.getStates(this.userEvent.EventLocation.country);
-
           this.setFormGroup();
         },
         (error) => {
@@ -379,15 +383,11 @@ export class RdEventEditComponent implements OnInit {
             IsImage: "video",
             Image: res.link,
           });
-          this.EventPictureModel.push(
-            JSON.stringify({
-              Name: data.imageMovieURL,
-              IsImage: "video",
-              Image: res.link,
-            })
-          );
+          this.EventPictureModel.push(data.imageMovieURL);
           this.editEventForm.EventMedia.setValue(
-            this.EventPictureModel.filter((x: any) => x !== "").join(",")
+            this.EventPictureModel.filter(
+              (x: any) => x !== "" && x !== undefined
+            ).join(",")
           );
           this.editEventForm.linkURL.setValue("");
         });
@@ -432,6 +432,18 @@ export class RdEventEditComponent implements OnInit {
   }
   onSubmit() {
     const dt = this.editEventFormGroup.value;
+    if (typeof dt.EventSkill === "string") {
+      dt.EventSkill = this.skills.filter(function (item) {
+        return item.radianSkillCategoryName === dt.EventSkill;
+      })[0].radianSkillCategoryId;
+    } else {
+      dt.EventSkill =
+        dt.EventSkill.radianSkillCategoryId === undefined
+          ? this.skills.filter(function (item) {
+              return item.radianSkillCategoryName === dt.EventSkill;
+            })[0].radianSkillCategoryId
+          : dt.EventSkill.radianSkillCategoryId;
+    }
     if (this.editEventFormGroup.invalid) {
       this.notificationService.error("Please fill in the required fields");
       this.validateAllFormFields(this.editEventFormGroup);
