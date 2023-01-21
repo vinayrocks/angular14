@@ -11,27 +11,38 @@
                 <div class="wrapper">
                     <img src="{{memberDetail.ProfilePicture}}" alt="" class="user-profile">
                     <!-- <h3 class="title">{{currentUser.ProfileName}}</h3> -->
-                    <p class="para-custom"
-                        *ngIf="routerData.UserId!==0 && memberDetail.isCurrentLoggedInUserConnected!==0">
-                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"
-                            (click)="sendConnectionRequest()"
-                            *ngIf="memberDetail.isCurrentLoggedInUserConnected===null"><i
-                                class="fas fa-user-tie icon-like-share"></i>Connect</button>&nbsp;&nbsp;
-                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"
-                            *ngIf="memberDetail.isCurrentLoggedInUserConnected===1"><i
-                                class="fas fa-user-tie icon-like-share"></i>Connected</button>&nbsp;&nbsp;
-                    </p>
-                    <p *ngIf="routerData.UserId!==0 && memberDetail.isCurrentLoggedInUserConnected===0">
-                        <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===null"
-                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Request
-                            Sent</button>
-                        <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===0"
-                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Accept
-                        </button>
-                        <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===0"
-                            class="btn btn-primary btn-round btn-margin reset-btn-custom">Reject
-                        </button>
-                    </p>
+                    <div class="row">
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+                            <p class="para-custom"
+                                *ngIf="routerData.UserId!==0 && memberDetail.isCurrentLoggedInUserConnected!==0">
+                                <button mat-button class="btn btn-primary btn-round btn-margin connect-btn-custom"
+                                    (click)="sendConnectionRequest()"
+                                    *ngIf="memberDetail.isCurrentLoggedInUserConnected===null"><i
+                                        class="fas fa-user-tie icon-like-share"></i>Connect</button>
+                                <button mat-button class="btn btn-primary btn-round btn-margin connected-btn-custom"
+                                    *ngIf="memberDetail.isCurrentLoggedInUserConnected===1"><i
+                                        class="fas fa-user-tie icon-like-share"></i>Connected</button>
+                            </p>
+                            <p class="para-custom" *ngIf="routerData.UserId!==0 && memberDetail.isCurrentLoggedInUserConnected===0">
+                                <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===null"
+                                    class="btn btn-primary btn-round btn-margin request-sent-btn-custom">Request
+                                    Sent</button>
+                                <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===0"
+                                    class="btn btn-primary btn-round btn-margin connected-btn-custom">Accept
+                                </button>
+                                <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===0"
+                                    class="btn btn-primary btn-round btn-margin reset-btn-custom">Reject
+                                </button>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+
                     <!-- <p class="para-custom">
                         <button mat-button
                             class="btn btn-primary btn-round btn-margin like-share-button connected-custom"><i
@@ -425,7 +436,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row card portfolio">
-                            <h4>Connections</h4>
+                            <h4>Connections</h4><br/>
                             <div class="row" *ngIf="Connections!==null">
                                 <div class="col-md-3" *ngFor="let item of Connections">
                                     <div class="conn-req-card">
@@ -454,7 +465,20 @@
                                 </div>
                             </div>
                             <div class="row" *ngIf="Connections===null">
-                                <h6>No Connections</h6>
+                                <div class="col-md-12">
+                                    <div class="separator separator-primary"></div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="./././././././assets/img/radian/no-info.gif" />
+                                        </div>
+                                        <div class="col-md-4">
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

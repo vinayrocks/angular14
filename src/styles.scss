@@ -186,7 +186,9 @@ span.text-error.text-error-label {
   text-align: left;
 }
 .border-custom {
-  border: 1px solid #111111;
+  border: none;
+  border-radius: 10px;
+  box-shadow:0 0 3px #0000004d !important;
 }
 .col-md-12 .border-custom {
   min-height: 264px;

@@ -67,15 +67,14 @@
                                 <h4>Click on Intersted to stay updated about this Event</h4>
                             </div>
                         </div> -->
-                        <h4>Click on Intersted to stay updated about this Event</h4>
+                        <h2>Interested Users</h2>
                         <div class="row">
                             <div class="col-md-12">
                                 <h4></h4>
-                                <button mat-button
-                                    class="btn btn-primary btn-round btn-margin reset-btn">Interested</button>
+                                <div class="separator separator-primary"></div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row intersted">
                             <div class="col-md-12">
                                 <h4></h4>
                                 <i class="fa fa-hand-o-right icon-interested"></i><label
@@ -204,8 +203,8 @@
                                             <a (click)="GetUserList(product)">
                                                 <h4 class="p-mb-1">{{product.EventName}}</h4>
                                             </a>
-                                            <span
-                                                [class]="'product-badge status-'+product.EventName.toLowerCase()">{{product.EventDescription}}</span>
+                                            <!-- <span
+                                                [class]="'product-badge status-'+product.EventName.toLowerCase()">{{product.EventDescription}}</span>-->
                                             <div class="car-buttons p-mt-5">
                                             </div>
                                         </div>

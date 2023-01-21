@@ -558,3 +558,37 @@ h3.title {
 .custom-user-layout-row{
   margin-bottom: 25px;
 }
+h3 {
+  font-family: "Open Sans" !important;
+  font-weight: 700;
+}
+h6 {
+  font-family: "Open Sans" !important;
+  font-weight: 700;
+}
+.upload-custom{
+  margin-bottom: 10px!important;
+  border: 1px solid #2F3C4F!important;
+  background: #ffffff!important;
+  color: #181f29!important;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 18px 20px;
+  text-align: center;
+}
+.modal-header{
+  padding: 40px;
+}
+.modal-body{
+  padding: 40px;
+  text-align: center;
+}
+.modal-footer{
+  padding: 40px;
+}
+.alignment{
+  justify-content: center;
+}
+.custom-padding{
+  padding: 0 40px 40px 40px
+}

@@ -10,7 +10,7 @@
       style="background-image: url('assets/img/radian/home_4.jpg');"></div>
   </div>
 </a>-->
-<p-carousel [value]="tutorials">
+<p-carousel [value]="tutorials" [showNavigators]="false">
   <ng-template let-item pTemplate="item">
       <p-image [src]="item.image" 
                 alt="Image" 
