@@ -105,48 +105,46 @@
                 </div>
             </div>
         </div>
-        <div class="row" [@enterAnimation] *ngIf="userPortfolio?.length>0">
-            <div class="col-md-12">
-                <div class="row card portfolio">
-                    <h4>Other Portfolios</h4>
-                    <p-carousel [value]="userPortfolio" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
-                        [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-                        <!-- <ng-template pTemplate="header">
+        <div class="col-md-12" [@enterAnimation] *ngIf="userPortfolio?.length>0">
+            <div class="row card portfolio">
+                <h4>Other Portfolios</h4>
+                <p-carousel [value]="userPortfolio" styleClass="custom-carousel" [numVisible]="2" [numScroll]="2"
+                    [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+                    <!-- <ng-template pTemplate="header">
                   <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
               </ng-template> -->
-                        <ng-template let-product pTemplate="item">
-                            <div class="product-item">
-                                <div class="product-item-content">
-                                    <div class="p-mb-3">
-                                    </div>
-                                    <div>
-                                        <a (click)="selectPortfolio(product)">
-                                            <h4 class="p-mb-1">{{product.PortfolioName}}</h4>
-                                        </a>
-                                        <span
-                                            [class]="'product-badge status-'+product.PortfolioName.toLowerCase()">{{product.PortfolioArtifacts}}</span>
-                                        <div class="car-buttons p-mt-5">
-                                        </div>
+                    <ng-template let-product pTemplate="item">
+                        <div class="product-item">
+                            <div class="product-item-content">
+                                <div class="p-mb-3">
+                                </div>
+                                <div>
+                                    <a (click)="selectPortfolio(product)">
+                                        <h4 class="p-mb-1">{{product.PortfolioName}}</h4>
+                                    </a>
+                                    <!-- <span
+                                        [class]="'product-badge status-'+product.PortfolioName.toLowerCase()">{{product.PortfolioArtifacts}}</span>-->
+                                    <div class="car-buttons p-mt-5">
                                     </div>
                                 </div>
                             </div>
-                        </ng-template>
-                    </p-carousel>
+                        </div>
+                    </ng-template>
+                </p-carousel>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row card portfolio">
+                <div class="col-md-12 flt-left">
+                    <button class="btn btn-primary btn-round btn-margin submit-btn"
+                        (click)="openEdit(selectedPortfolio.id)">Edit
+                        Portfolio</button>&nbsp;
+                    <button mat-button class="btn btn-primary btn-round btn-margin reset-btn"
+                        (click)="DeletePortfolio(selectedPortfolio)">Delete Portfolio</button>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row card portfolio">
-                    <div class="col-md-12 flt-left">
-                        <button class="btn btn-primary btn-round btn-margin submit-btn"
-                            (click)="openEdit(selectedPortfolio.id)">Edit
-                            Portfolio</button>&nbsp;
-                        <button mat-button class="btn btn-primary btn-round btn-margin reset-btn"
-                            (click)="DeletePortfolio(selectedPortfolio)">Delete Portfolio</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>

@@ -39,7 +39,7 @@
             <h4>Skills</h4>
             <div class="row">
               <div class="col-md-4 custom-col-skills" *ngFor="let item of selectedUser.ProfileExpertise">
-                <i class="{{item.iconClass}}"></i> 
+                <i class="{{item.iconClass}}"></i>
                 <br />
                 <h5 class="h5-custom">{{item?.name}}</h5>
               </div>
@@ -52,7 +52,7 @@
           <div class="row card portfolio">
             <h4>Linked Portfolios</h4>
             <p-carousel [value]="selectedUser.LinkedPortfolio" styleClass="custom-carousel" [numVisible]="2"
-              [numScroll]="2" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+              [numScroll]="2" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions"> 
               <!-- <ng-template pTemplate="header">
                   <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
               </ng-template> -->
@@ -99,8 +99,8 @@
                       </a>
 
                       <!-- <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6> -->
-                      <span
-                        [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>
+                      <!-- <span
+                        [class]="'product-badge status-'+product.ProfileName.toLowerCase()">{{product.ProfileDescription}}</span>-->
                       <div class="car-buttons p-mt-5">
                         <!-- <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
                                   <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
@@ -423,7 +423,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>New Connection Requests</h4>
+            <h4>New Connection Requests</h4><br/>
             <div class="row" *ngIf="ConnectionsReceiver!==null">
               <div class="col-md-3" *ngFor="let item of ConnectionsReceiver">
                 <div class="conn-req-card">
@@ -462,7 +462,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>Sent Connections Request</h4>
+            <h4>Sent Connections Request</h4><br/>
             <div class="row" *ngIf="ConnectionsSender!==null">
               <div class="col-md-3" *ngFor="let item of ConnectionsSender">
                 <div class="conn-req-card">
@@ -484,7 +484,19 @@
               </div>
             </div>
             <div class="row" *ngIf="ConnectionsSender===null">
-              <h6>No Connection Sent</h6>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-4">
+
+                  </div>
+                  <div class="col-md-4">
+                    <img src="./././././././assets/img/radian/no-info.gif" />
+                  </div>
+                  <div class="col-md-4">
+
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -494,7 +506,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>Connections</h4>
+            <h4>Connections</h4><br/>
             <div class="row" *ngIf="Connections!==null">
               <div class="col-md-3" *ngFor="let item of Connections">
                 <div class="conn-req-card">
@@ -515,7 +527,19 @@
               </div>
             </div>
             <div class="row" *ngIf="Connections===null">
-              <h6>No Connections</h6>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-4">
+
+                  </div>
+                  <div class="col-md-4">
+                    <img src="./././././././assets/img/radian/no-info.gif" />
+                  </div>
+                  <div class="col-md-4">
+
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

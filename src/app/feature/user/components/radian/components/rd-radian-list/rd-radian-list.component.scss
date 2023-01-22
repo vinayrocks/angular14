@@ -64,10 +64,11 @@ background-color: #696D74;
 .product-item {
 .product-item-content {
     border: 1px solid var(--surface-d);
-    border-radius: 3px;
+    border-radius: 10px;
     margin: .3rem;
     text-align: center;
     padding: 2rem 0;
+    background-image: linear-gradient(to right bottom, #38b6ff, #91c4ff, #c3d5ff, #e6e9ff, #ffffff);
 }
 
 .product-image {

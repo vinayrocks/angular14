@@ -19,12 +19,13 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="input-group">
-                        <input type="text" class="signUp-form-control form-control mt-top custom-input mat-expansion-panel"
+                        <input type="text"
+                          class="signUp-form-control form-control mt-top custom-input mat-expansion-panel"
                           placeholder="" formControlName="SearchByText">
                       </div>
                     </div>
                   </div>
-                  <hr/>
+                  <hr />
                   <label class="lbl-custom">Search By Category</label>
                   <div class="row">
                     <div class="col-md-12">
@@ -36,11 +37,11 @@
                         </option>
                       </select> -->
                       <ngx-select-dropdown [instanceId]="'instance1'" formControlName="SearchBySkill"
-                      [config]="skillCategoryConfig" [options]="skills" (change)="getSKillSubCategory($event.value)">
-                     </ngx-select-dropdown>
+                        [config]="skillCategoryConfig" [options]="skills" (change)="getSKillSubCategory($event.value)">
+                      </ngx-select-dropdown>
                     </div>
                   </div>
-                  <br/>
+                  <br />
                   <div class="row">
                     <div class="col-md-12">
                       <div class="pretty p-switch p-fill" *ngFor="let item of skillsSubcategory;let i=index;">
@@ -51,14 +52,13 @@
                       </div>
                     </div>
                   </div>
-                  <br/>
+                  <br />
                   <div class="row">
                     <div class="col-md-12">
-                        <button mat-button class="btn btn-danger mt-top btn-lg"
-                          [disabled]="!searchRadianUpdatesFormGroup.valid" (click)="onSubmit(0,true)">Search</button>
-                        &nbsp;&nbsp;
-                        <button mat-button class="btn reset-btn btn-round mt-top btn-lg"
-                        (click)="reset()">Reset</button>
+                      <button mat-button class="btn btn-danger mt-top btn-lg"
+                        [disabled]="!searchRadianUpdatesFormGroup.valid" (click)="onSubmit(0,true)">Search</button>
+                      &nbsp;&nbsp;
+                      <button mat-button class="btn reset-btn btn-round mt-top btn-lg" (click)="reset()">Reset</button>
                     </div>
                   </div>
                   <!--<mat-accordion>
@@ -70,7 +70,7 @@
                         <mat-panel-description>
                                                     Skills categories
                                                 </mat-panel-description> -->
-                      <!-- </mat-expansion-panel-header>
+                  <!-- </mat-expansion-panel-header>
                       <div class="row">
                         <div class="col-md-3">
                           <select class="select-css" placeholder="Skill/Art" formControlName="SearchBySkillCategory"
@@ -100,8 +100,20 @@
       </div>
       <div class="col-md-7">
         <div class="row card portfolio mb-search-card" *ngIf="radianUpdates?.length===0">
-          <div clas="col-md-12" style="text-align:center;">
-            <h4>No results found...</h4>
+          <div class="col-md-12">
+            <h2 class="title" style="text-align: center;">No Events</h2>
+            <div class="separator separator-primary"></div>
+            <div class="row">
+              <div class="col-md-4">
+
+              </div> 
+              <div class="col-md-4">
+                <img src="./././././././assets/img/radian/no-info.gif" />
+              </div>
+              <div class="col-md-4">
+
+              </div>
+            </div>
           </div>
         </div>
         <div class="row card portfolio mb-search-card" *ngFor="let item of radianUpdates">
@@ -109,18 +121,18 @@
             <div class="col-md-12" *ngIf="radianUpdates?.length!==0">
               <div class="row">
                 <div class="col-md-1">
-                  <img src="{{item.ProfilePicture}}" alt="Thumbnail Image"
-                                            class="rounded img-fluid img-raised">
+                  <img src="{{item.ProfilePicture}}" alt="Thumbnail Image" class="rounded img-fluid img-raised">
                 </div>
                 <div class="col-md-11 custom-col">
-                  <span class="title mem-title"><a (click)="GetRadianDetail(item)">{{item.FirstName}} {{item.LastName}}</a> has created an event 
+                  <span class="title mem-title"><a (click)="GetRadianDetail(item)">{{item.FirstName}}
+                      {{item.LastName}}</a> has created an event
                     <a (click)="GetRadianDetail(item)">{{item.EventName}}</a></span>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12 custom-editor">
                   <textarea class="custom-angular-editor" [attr.disabled]="true" rows="8" class="txtarea-custom"
-                    [(ngModel)]="item.EventDescription" >
+                    [(ngModel)]="item.EventDescription">
                   </textarea>
                 </div>
               </div>
@@ -139,7 +151,7 @@
                   </p>
                 </div>
               </div>
-              <hr/>
+              <hr />
               <div class="row custom-row-like">
                 <div class="col-md-12">
                   <div class="row custom-row-like">
@@ -154,7 +166,7 @@
                   </div>
                 </div>
               </div>
-              <hr/>
+              <hr />
               <div class="row custom-row-like">
                 <div class="col-md-3">
                   <div class="row custom-row-like custom-row-for-marking-like">
@@ -190,7 +202,7 @@
                   <div class="row custom-row-like custom-row-for-marking-like">
                     <div class="col-md-6">
                       <a class="a-btn a-click">
-                        <img class="custom-margin-icon"src="./assets/img/radian/comment-icon.png">
+                        <img class="custom-margin-icon" src="./assets/img/radian/comment-icon.png">
                         <p class="like-count-text">Comment</p>
                       </a>
                     </div>

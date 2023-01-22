@@ -66,10 +66,11 @@ h4 {
 .product-item {
   .product-item-content {
     border: 1px solid var(--surface-d);
-    border-radius: 3px;
+    border-radius: 10px;
     margin: 0.3rem;
     text-align: center;
     padding: 2rem 0;
+    background-image: linear-gradient(to right bottom, #38b6ff, #91c4ff, #c3d5ff, #e6e9ff, #ffffff);
   }
 
   .product-image {
@@ -571,11 +572,11 @@ fieldset[disabled] .form-control {
   margin-right: 10px;
 }
 .icon-interested {
-  font-size: 24px;
+  font-size: 40px;
   margin-right: 10px;
 }
 .users-label {
-  font-size: 18px;
+  font-size: 30px;
   font-weight: 600;
 }
 .custom-img-col-2 {
@@ -601,4 +602,13 @@ fieldset[disabled] .form-control {
     color: #ffffff !important;
     margin-top: 7px;
   }
+}
+h2 {
+  font-family: "Open Sans" !important;
+  font-weight: 700;
+  font-size: 30px;
+  text-align: center;
+}
+.intersted{
+  text-align: center;
 }
