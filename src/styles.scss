@@ -188,7 +188,7 @@ span.text-error.text-error-label {
 .border-custom {
   border: none;
   border-radius: 10px;
-  box-shadow:0 0 3px #0000004d !important;
+  box-shadow: 0 0 3px #0000004d !important;
 }
 .col-md-12 .border-custom {
   min-height: 264px;
@@ -674,4 +674,94 @@ path.bar {
 }
 .video {
   height: 235px !important;
+}
+.p-bgcolor1 {
+  background-image: linear-gradient(
+    to right bottom,
+    #38b6ff,
+    #91c4ff,
+    #c3d5ff,
+    #e6e9ff,
+    #ffffff
+  );
+}
+.p-bgcolor2 {
+  background: linear-gradient(
+    to right bottom,
+    #5271ff,
+    #8c92ff,
+    #b7b5ff,
+    #ddd9ff,
+    #ffffff
+  );
+}
+.p-bgcolor3 {
+  background: linear-gradient(
+    to right bottom,
+    #5e17eb,
+    #945af2,
+    #bd91f8,
+    #e0c8fc,
+    #ffffff
+  );
+}
+.p-bgcolor4 {
+  background: linear-gradient(
+    to right bottom,
+    #7ed957,
+    #a2e382,
+    #c3edac,
+    #e2f6d5,
+    #ffffff
+  );
+}
+.p-bgcolor5 {
+  background: linear-gradient(
+    to right bottom,
+    #c9e265,
+    #d9e98d,
+    #e7f0b3,
+    #f4f8d9,
+    #ffffff
+  );
+}
+.p-bgcolor6 {
+  background: linear-gradient(
+    to right bottom,
+    #ffbd59,
+    #ffcd83,
+    #ffddac,
+    #ffeed5,
+    #ffffff
+  );
+}
+.p-bgcolor7 {
+  background: linear-gradient(
+    to right bottom,
+    #ffbd59,
+    #ffcd83,
+    #ffddac,
+    #ffeed5,
+    #ffffff
+  );
+}
+.p-bgcolor8 {
+  background: linear-gradient(
+    to right bottom,
+    #ff914d,
+    #ffad79,
+    #ffc8a5,
+    #ffe3d1,
+    #ffffff
+  );
+}
+.p-bgcolor9 {
+  background: linear-gradient(
+    to right bottom,
+    #ff1616,
+    #ff6b4f,
+    #ffa087,
+    #ffd0c2,
+    #ffffff
+  );
 }

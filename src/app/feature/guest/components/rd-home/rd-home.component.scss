@@ -305,3 +305,16 @@ small {
 .position-absolute {
   border-radius: 10px;
 }
+.home-item-content {
+  height: 137px;
+  font-size: xxx-large;
+  padding: 13px 0 0;
+  font-weight: bolder;
+  label {
+    border: 1px solid #111111;
+    border-radius: 89px;
+    padding: 20px 20px 20px 20px;
+    text-align: center;
+    width: 118px;
+  }
+}

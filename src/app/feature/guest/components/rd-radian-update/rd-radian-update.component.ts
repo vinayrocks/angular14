@@ -53,6 +53,7 @@ export class RdRadianUpdateComponent implements OnInit {
     searchOnKey: "country",
     height: "150px",
   };
+  defaultImagePath: string = "../../../../assets/img/radian/userAvatar.png";
   constructor(
     private _formBuilder: FormBuilder,
     private rdUserService: RdUserService,
@@ -188,7 +189,7 @@ export class RdRadianUpdateComponent implements OnInit {
         data.ProfilePicture
       );
     } else {
-      return "assets/img/default-avatar.png";
+      return this.defaultImagePath;
     }
   }
   // getProfilefilePath(data:any){

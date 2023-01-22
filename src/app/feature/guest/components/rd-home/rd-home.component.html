@@ -12,10 +12,8 @@
 </a>-->
 <p-carousel [value]="tutorials" [showNavigators]="false">
   <ng-template let-item pTemplate="item">
-      <p-image [src]="item.image" 
-                alt="Image" 
-                width="1920px">
-      </p-image>
+    <p-image [src]="item.image" alt="Image" width="1920px">
+    </p-image>
   </ng-template>
 </p-carousel>
 
@@ -109,10 +107,10 @@
       </div>
     </div>
     <div class="row g-3" [@inOutAnimation] data-rellax-speed="0" *ngFor="let item of radianUpdates">
-      <div class="col-xl-3 col-lg-6" *ngFor="let child of item">
+      <div class="col-xl-3 col-lg-6" *ngFor="let child of item;let i = index">
         <div class="blog-item">
-          <div *ngIf="child.EventImages!==null">
-            <img src="{{child.EventImages[0].Name}}" alt="" class="img-event" title=""
+          <div *ngIf="child.EventImages!==null" class="home-item-content" [ngClass]="'p-bgcolor'+ (i+1)">
+            <!-- <img src="{{child.EventImages[0].Name}}" alt="" class="img-event" title=""
               *ngIf="child.EventImages[0].IsImage==='image'">
             <a *ngIf="child.EventImages[0].IsImage==='pdf'">
               <img src="assets/img/radian/document.png" alt="" class="img-event">
@@ -120,7 +118,8 @@
             <div *ngIf="child.EventImages[0].IsImage==='video'" class="video">
               <img src="{{child.EventImages[0].Image}}">
               <a></a>
-            </div>
+            </div> -->
+            <label>{{child.EventSkill.name.charAt(0)}}</label>
           </div>
 
           <img *ngIf="child.EventImages===null" class="img-event" src="./././././assets/img/radian/singer.jpg" />

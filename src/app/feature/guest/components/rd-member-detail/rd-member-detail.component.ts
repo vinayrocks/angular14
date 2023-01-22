@@ -59,6 +59,7 @@ export class RdMemberDetailComponent implements OnInit {
     },
   ];
   Connections: any = null;
+  defaultImagePath: string = "../../../../assets/img/radian/userAvatar.png";
   constructor(
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
@@ -187,7 +188,7 @@ export class RdMemberDetailComponent implements OnInit {
         data.ProfilePicture
       );
     } else {
-      return "assets/img/default-avatar.png";
+      return this.defaultImagePath;
     }
   }
   getCoverfilePath(data: any) {
@@ -288,5 +289,40 @@ export class RdMemberDetailComponent implements OnInit {
         },
         (error) => {}
       );
+  }
+  AcceptRequest(item: any) {
+    // console.log(item);
+    // const dxData = new ConnectProfile(ConnectProfile);
+    // dxData.ConnectionId = item.ConnectionId;
+    // dxData.ConnectionReceiverId = this.currentUser.id;
+    // dxData.ConnectionSenderId = item.UserLoginId;
+    // dxData.ConnectionStatus = 1;
+    // this.rdUserService
+    //   .sendConnectionRequest(dxData)
+    //   .pipe(first())
+    //   .subscribe(
+    //     (res) => {
+    //       this.notificationService.success(res.message);
+    //       this.GetProfileDetail();
+    //     },
+    //     (error) => {}
+    //   );
+  }
+  RejectRequest(item: any) {
+    // const dxData = new ConnectProfile(ConnectProfile);
+    // dxData.ConnectionId = parseitem.ConnectionId;
+    // dxData.ConnectionReceiverId = this.currentUser.id;
+    // dxData.ConnectionSenderId = item.UserLoginId;
+    // dxData.ConnectionStatus = 2;
+    // this.rdUserService
+    //   .sendConnectionRequest(dxData)
+    //   .pipe(first())
+    //   .subscribe(
+    //     (res) => {
+    //       this.notificationService.success(res.message);
+    //       this.GetProfileDetail();
+    //     },
+    //     (error) => {}
+    //   );
   }
 }
