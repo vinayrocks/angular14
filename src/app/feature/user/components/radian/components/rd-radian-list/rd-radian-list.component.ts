@@ -296,6 +296,9 @@ export class RdRadianListComponent implements OnInit {
           this.Connections = res.Connections;
           this.userProfiles = res.data;
           this.selectedUser = this.userProfiles[0];
+          this.selectedUser.LinkedPortfolio.map((x: any, index: number) => {
+            x.index = index;
+          });
           this.projectPath = res.projectPath;
           this.spinner.hide();
         },
@@ -326,6 +329,9 @@ export class RdRadianListComponent implements OnInit {
     // this.selectedUser.CertificationDetails = JSON.parse(this.selectedUser.CertificationDetails);
     // this.selectedUser.EducationDetails = JSON.parse(this.selectedUser.EducationDetails);
     // this.selectedUser.ExperienceDetails = JSON.parse(this.selectedUser.ExperienceDetails);
+    this.selectedUser.LinkedPortfolio.map((x: any, index: number) => {
+      x.index = index;
+    });
     this.gotoTop();
   }
   AcceptRequest(item: any) {

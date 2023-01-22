@@ -52,13 +52,13 @@
           <div class="row card portfolio">
             <h4>Linked Portfolios</h4>
             <p-carousel [value]="selectedUser.LinkedPortfolio" styleClass="custom-carousel" [numVisible]="2"
-              [numScroll]="2" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions"> 
+              [numScroll]="2" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
               <!-- <ng-template pTemplate="header">
                   <h5>Circular, AutoPlay, 3 Items per Page and Scroll by 1</h5>
               </ng-template> -->
               <ng-template let-product pTemplate="item">
                 <div class="product-item">
-                  <div class="product-item-content">
+                  <div class="product-item-content" [ngClass]="'p-bgcolor'+ (product.index+1)">
                     <div class="p-mb-3">
                     </div>
                     <div>
@@ -423,7 +423,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>New Connection Requests</h4><br/>
+            <h4>New Connection Requests</h4><br />
             <div class="row" *ngIf="ConnectionsReceiver!==null">
               <div class="col-md-3" *ngFor="let item of ConnectionsReceiver">
                 <div class="conn-req-card">
@@ -462,7 +462,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>Sent Connections Request</h4><br/>
+            <h4>Sent Connections Request</h4><br />
             <div class="row" *ngIf="ConnectionsSender!==null">
               <div class="col-md-3" *ngFor="let item of ConnectionsSender">
                 <div class="conn-req-card">
@@ -506,7 +506,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>Connections</h4><br/>
+            <h4>Connections</h4><br />
             <div class="row" *ngIf="Connections!==null">
               <div class="col-md-3" *ngFor="let item of Connections">
                 <div class="conn-req-card">

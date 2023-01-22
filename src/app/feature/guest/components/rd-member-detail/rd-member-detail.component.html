@@ -26,15 +26,18 @@
                                     *ngIf="memberDetail.isCurrentLoggedInUserConnected===1"><i
                                         class="fas fa-user-tie icon-like-share"></i>Connected</button>
                             </p>
-                            <p class="para-custom" *ngIf="routerData.UserId!==0 && memberDetail.isCurrentLoggedInUserConnected===0">
+                            <p class="para-custom"
+                                *ngIf="routerData.UserId!==0 && memberDetail.isCurrentLoggedInUserConnected===0">
                                 <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===null"
                                     class="btn btn-primary btn-round btn-margin request-sent-btn-custom">Request
                                     Sent</button>
                                 <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===0"
-                                    class="btn btn-primary btn-round btn-margin connected-btn-custom">Accept
+                                    class="btn btn-primary btn-round btn-margin connected-btn-custom"
+                                    (click)="AcceptRequest(memberDetail)">Accept
                                 </button>
                                 <button mat-button *ngIf="memberDetail.isCurrentLoggedInReceiver===0"
-                                    class="btn btn-primary btn-round btn-margin reset-btn-custom">Reject
+                                    class="btn btn-primary btn-round btn-margin reset-btn-custom"
+                                    (click)="RejectRequest(memberDetail)">Reject
                                 </button>
                             </p>
                         </div>
@@ -436,7 +439,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row card portfolio">
-                            <h4>Connections</h4><br/>
+                            <h4>Connections</h4><br />
                             <div class="row" *ngIf="Connections!==null">
                                 <div class="col-md-3" *ngFor="let item of Connections">
                                     <div class="conn-req-card">
