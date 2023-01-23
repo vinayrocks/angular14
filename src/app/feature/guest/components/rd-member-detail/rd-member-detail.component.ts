@@ -291,38 +291,38 @@ export class RdMemberDetailComponent implements OnInit {
       );
   }
   AcceptRequest(item: any) {
-    // console.log(item);
-    // const dxData = new ConnectProfile(ConnectProfile);
-    // dxData.ConnectionId = item.ConnectionId;
-    // dxData.ConnectionReceiverId = this.currentUser.id;
-    // dxData.ConnectionSenderId = item.UserLoginId;
-    // dxData.ConnectionStatus = 1;
-    // this.rdUserService
-    //   .sendConnectionRequest(dxData)
-    //   .pipe(first())
-    //   .subscribe(
-    //     (res) => {
-    //       this.notificationService.success(res.message);
-    //       this.GetProfileDetail();
-    //     },
-    //     (error) => {}
-    //   );
+    console.log(item);
+    const dxData = new ConnectProfile(ConnectProfile);
+    dxData.ConnectionId = parseInt(item.userConnectionId);
+    dxData.ConnectionReceiverId = this.currentUser.id;
+    dxData.ConnectionSenderId = item.UserLoginId;
+    dxData.ConnectionStatus = 1;
+    this.rdUserService
+      .sendConnectionRequest(dxData)
+      .pipe(first())
+      .subscribe(
+        (res) => {
+          this.notificationService.success(res.message);
+          this.GetProfileDetail();
+        },
+        (error) => {}
+      );
   }
   RejectRequest(item: any) {
-    // const dxData = new ConnectProfile(ConnectProfile);
-    // dxData.ConnectionId = parseitem.ConnectionId;
-    // dxData.ConnectionReceiverId = this.currentUser.id;
-    // dxData.ConnectionSenderId = item.UserLoginId;
-    // dxData.ConnectionStatus = 2;
-    // this.rdUserService
-    //   .sendConnectionRequest(dxData)
-    //   .pipe(first())
-    //   .subscribe(
-    //     (res) => {
-    //       this.notificationService.success(res.message);
-    //       this.GetProfileDetail();
-    //     },
-    //     (error) => {}
-    //   );
+    const dxData = new ConnectProfile(ConnectProfile);
+    dxData.ConnectionId = parseInt(item.userConnectionId);
+    dxData.ConnectionReceiverId = this.currentUser.id;
+    dxData.ConnectionSenderId = item.UserLoginId;
+    dxData.ConnectionStatus = 2;
+    this.rdUserService
+      .sendConnectionRequest(dxData)
+      .pipe(first())
+      .subscribe(
+        (res) => {
+          this.notificationService.success(res.message);
+          this.GetProfileDetail();
+        },
+        (error) => {}
+      );
   }
 }
