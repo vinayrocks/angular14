@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RdResetPasswordComponent } from './rd-reset-password/rd-reset-password.component';
@@ -34,7 +34,7 @@ import { ToastModule } from 'primeng/toast';
     ButtonModule,
     ToastModule
   ],
-  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
