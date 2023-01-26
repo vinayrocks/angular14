@@ -34,7 +34,7 @@ import { ToastModule } from 'primeng/toast';
     ButtonModule,
     ToastModule
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
