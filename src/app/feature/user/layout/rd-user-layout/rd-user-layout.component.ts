@@ -162,10 +162,11 @@ export class RdUserLayoutComponent implements OnInit {
           // const dxData: any = [];
           // dxData.ProfilePicture = this.currentUser.ProfilePicture;
           // dxData.CoverPicture = this.currentUser.CoverPicture;
+
           this.rdUserService
             .updateUserProfileCover({
-              ProfilePicture: this.currentUser.ProfilePicture,
-              CoverPicture: this.currentUser.CoverPicture
+              ProfilePicture: this.currentUser.ProfilePicture===null?'':this.currentUser.ProfilePicture,
+              CoverPicture: this.currentUser.CoverPicture===null?'':this.currentUser.CoverPicture,
             })
             .pipe(first())
             .subscribe(
