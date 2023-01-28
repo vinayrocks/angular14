@@ -200,8 +200,7 @@
             </div>
           </div>
           <div class="row card portfolio" *ngIf="selectedUser.EducationDetails===null">
-            <h2 class="title" style="text-align: center;">No Educations</h2>
-            <div class="separator separator-primary"></div>
+            <h4>Education Details</h4>
             <div class="row">
               <div class="col-md-4">
               </div>
@@ -298,8 +297,7 @@
             </div>
           </div>
           <div class="row card portfolio" *ngIf="selectedUser.CertificationDetails===null">
-            <h2 class="title" style="text-align: center;">No Certification</h2>
-            <div class="separator separator-primary"></div>
+            <h4>Certifcation Details</h4>
             <div class="row">
               <div class="col-md-4">
               </div>
@@ -399,8 +397,7 @@
             </div>
           </div>
           <div class="row card portfolio" *ngIf="selectedUser.ExperienceDetails===null">
-            <h2 class="title" style="text-align: center;">No Experience</h2>
-            <div class="separator separator-primary"></div>
+            <h4>Experience</h4>
             <div class="row">
               <div class="col-md-4">
               </div>
@@ -462,7 +459,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>Sent Connections Request</h4><br />
+            <h4>Sent Connections Request</h4><br /> 
             <div class="row" *ngIf="ConnectionsSender!==null">
               <div class="col-md-3" *ngFor="let item of ConnectionsSender">
                 <div class="conn-req-card">
