@@ -148,11 +148,34 @@ export class RdUserLayoutComponent implements OnInit {
           this.rdAuthenticateService.setLocalStorageData(this.currentUser);
           this.currentUser = this.rdAuthenticateService.getLocalStorageData();
 
-          this.profileImagePath = this.GetProfilePath();
-          this.coverImagePath = this.GetCoverPicture();
+          if (res.data.ProfilePicture !== null) {
+            this.profileImagePath = this.GetProfilePath();
+          }
+          if (res.data.CoverPicture !== null) {
+            this.coverImagePath = this.GetCoverPicture();
+          }
+
 
           this.modalService.dismissAll();
           this.croppedImage = "";
+
+          // const dxData: any = [];
+          // dxData.ProfilePicture = this.currentUser.ProfilePicture;
+          // dxData.CoverPicture = this.currentUser.CoverPicture;
+          this.rdUserService
+            .updateUserProfileCover({
+              ProfilePicture: this.currentUser.ProfilePicture,
+              CoverPicture: this.currentUser.CoverPicture
+            })
+            .pipe(first())
+            .subscribe(
+              (res) => {
+                this.spinner.hide();
+              },
+              (error) => {
+                this.spinner.hide();
+              }
+            );
           this.spinner.hide();
         },
         (error) => {
@@ -160,5 +183,5 @@ export class RdUserLayoutComponent implements OnInit {
         }
       );
   }
-  updateCoverImage() {}
+  updateCoverImage() { }
 }

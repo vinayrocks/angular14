@@ -12,7 +12,7 @@ export class RdUserService {
     private http: HttpClient,
     private _encryptDecryptService: RdEncryptDecryptService,
     private rdAuthenticateService: RdAuthenticateService
-  ) {}
+  ) { }
 
   getUserProfiles(rdCommon) {
     return this.http
@@ -334,7 +334,7 @@ export class RdUserService {
       return this.http
         .post<any>(
           environment.apiCommon +
-            "radianApi/Portfolios/deleteUserPortfolio.php",
+          "radianApi/Portfolios/deleteUserPortfolio.php",
           JSON.stringify(this._encryptDecryptService.ecryptModel(rdCommon))
         )
         .pipe(
@@ -406,7 +406,7 @@ export class RdUserService {
     var data = this._encryptDecryptService.ecryptModel(rdSearchRadian);
     return this.http.post<any>(
       environment.apiCommon +
-        "radianApi/Portfolios/userPortfolioAttachmentRating.php",
+      "radianApi/Portfolios/userPortfolioAttachmentRating.php",
       JSON.stringify(data)
     );
   }
@@ -421,5 +421,16 @@ export class RdUserService {
           return res;
         })
       );
+  }
+  updateUserProfileCover(rdPortfolio: any) {
+    this.currentUserSubject = this.rdAuthenticateService.getLocalStorageData();
+    rdPortfolio.UserId = this.currentUserSubject.id;
+    //console.log(rdPortfolio)
+    var data = this._encryptDecryptService.ecryptModel(rdPortfolio);
+    return this.http.post<any>(
+      environment.apiCommon + "radianApi/Profiles/userProfileCover.php",
+      JSON.stringify(data)
+    );
+    // return null;
   }
 }
