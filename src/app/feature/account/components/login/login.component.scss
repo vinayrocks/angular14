@@ -65,14 +65,6 @@ input[type="radio"]:checked + label h4{
 .title{
   text-align: center;
 }
-.signUp-form-control{
-    margin-bottom: 10px !important;
-    border: 0px !important;
-    background: #333333 !important;
-    color: #FFFFFF !important;
-    border-radius: 5px;
-    font-size: 14px;
-  }
 .form-check-label.card-label h4{
     margin-top: unset;
 }
@@ -103,11 +95,11 @@ h5, h6{
   border: 2px solid #38b6ff!important;
 }
 .signUp-form-control{
-    margin-bottom: 10px !important;
-    border: 1px solid #2F3C4F !important;
-    background: #ffffff !important;
-    color: #181F29 !important;
-  }
+  margin-bottom: 10px !important;
+  border: 1px solid #2F3C4F !important;
+  background: #ffffff !important;
+  color: #181F29 !important;
+}
 
   ::placeholder{
     color: #181F29;
