@@ -1,6 +1,6 @@
 <div class="section" style="background-color: #F2F3F5;">
     <div class="container">
-        <div class="img default-cover">
+        <div class="img default-cover" [ngStyle]="{background: 'url('+memberDetail.CoverPicture+')'}">
             <!-- <div class="edit-btn">
           <a class="btn btn-primary btn-round btn-margin reset-btn">
             <i class="pi pi-camera"></i>Select Cover Image</a>
@@ -56,13 +56,14 @@
                 <div class="row ">
                     <div class="col-lg-12">
                         <ul class=" nav nav-tabs justify-content-center s-nav">
-                            <li><a [ngClass]="{'active':_istab===1}" (click)="_istab=1">About</a></li>
-                            <li><a [ngClass]="{'active':_istab===2}" (click)="_istab=2">Education</a></li>
-                            <li><a [ngClass]="{'active':_istab===3}" (click)="_istab=3">Certification & Licenses</a>
+                            <li><a [ngClass]="{'active':_istab===1}" (click)="shiftTab(1)">About</a></li>
+                            <li><a [ngClass]="{'active':_istab===2}" (click)="shiftTab(2)">Education</a></li>
+                            <li><a [ngClass]="{'active':_istab===3}" (click)="shiftTab(3)">Certification & Licenses</a>
                             </li>
-                            <li><a [ngClass]="{'active':_istab===4}" (click)="_istab=4">Experiences</a></li>
-                            <li><a [ngClass]="{'active':_istab===5}" (click)="_istab=5"
+                            <li><a [ngClass]="{'active':_istab===4}" (click)="shiftTab(4)">Experiences</a></li>
+                            <li><a [ngClass]="{'active':_istab===5}" (click)="shiftTab(5)"
                                     *ngIf="routerData.UserId!==0">Connections</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -99,10 +100,11 @@
                             <h4>Linked Portfolios</h4>
                             <p-carousel [value]="memberDetail.ProfilePortfolio" styleClass="custom-carousel"
                                 [numVisible]="2" [numScroll]="2" [circular]="true" [autoplayInterval]="3000"
-                                [responsiveOptions]="responsiveOptions">
+                                [responsiveOptions]="responsiveOptions"
+                                *ngIf="memberDetail?.ProfilePortfolio?.length>0">
                                 <ng-template let-product pTemplate="item">
                                     <div class="product-item">
-                                        <div class="product-item-content">
+                                        <div class="product-item-content" [ngClass]="'p-bgcolor'+ (product.index+1)">
                                             <div class="p-mb-3">
                                             </div>
                                             <div>
@@ -115,6 +117,7 @@
                                     </div>
                                 </ng-template>
                             </p-carousel>
+                            <h5 *ngIf="memberDetail.ProfilePortfolio?.length===0">No Portfolio</h5>
                         </div>
                     </div>
                 </div>
@@ -124,10 +127,10 @@
                             <h4>Events</h4>
                             <p-carousel [value]="memberEvents" styleClass="custom-carousel" [numVisible]="2"
                                 [numScroll]="2" [circular]="true" [autoplayInterval]="3000"
-                                [responsiveOptions]="responsiveOptions">
+                                [responsiveOptions]="responsiveOptions" *ngIf="memberEvents?.length>0">
                                 <ng-template let-product pTemplate="item">
                                     <div class="product-item">
-                                        <div class="product-item-content">
+                                        <div class="product-item-content" [ngClass]="'p-bgcolor'+ (product.index+1)">
                                             <div class="p-mb-3">
                                             </div>
                                             <div>
@@ -143,6 +146,7 @@
                                     </div>
                                 </ng-template>
                             </p-carousel>
+                            <h5 *ngIf="memberEvents?.length===0">No Events</h5>
                         </div>
                     </div>
                 </div>
@@ -152,10 +156,10 @@
                             <h4>Other Profiles</h4>
                             <p-carousel [value]="memberProfiles" styleClass="custom-carousel" [numVisible]="2"
                                 [numScroll]="2" [circular]="true" [autoplayInterval]="3000"
-                                [responsiveOptions]="responsiveOptions">
+                                [responsiveOptions]="responsiveOptions" *ngIf="memberProfiles?.length>0">
                                 <ng-template let-product pTemplate="item">
                                     <div class="product-item">
-                                        <div class="product-item-content">
+                                        <div class="product-item-content" [ngClass]="'p-bgcolor'+ (product.index+1)">
                                             <div class="p-mb-3">
                                             </div>
                                             <div>
@@ -171,6 +175,7 @@
                                     </div>
                                 </ng-template>
                             </p-carousel>
+                            <h5 *ngIf="memberProfiles?.length===0">No Profiles</h5>
                         </div>
                     </div>
                 </div>
@@ -204,7 +209,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row card portfolio" *ngIf="memberDetail.EducationDetails.length>0">
+                        <div class="row card portfolio" *ngIf="memberDetail.EducationDetails?.length>0">
                             <h4>Educations</h4>
                             <div class="row" *ngFor="let item of memberDetail.EducationDetails;let i = index">
                                 <div class="col-md-5">
@@ -253,7 +258,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row card portfolio" *ngIf="memberDetail.EducationDetails.length===0">
+                        <div class="row card portfolio" *ngIf="memberDetail.EducationDetails?.length===0">
                             <h4>Educations</h4>
                             <div class="col-md-12">
                                 <h4>No Records</h4>
@@ -291,7 +296,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row card portfolio" *ngIf="memberDetail.CertificationDetails.length>0">
+                        <div class="row card portfolio" *ngIf="memberDetail.CertificationDetails?.length>0">
                             <h4>Certification Details</h4>
                             <div class="row" *ngFor="let item of memberDetail.CertificationDetails;let i = index">
                                 <div class="col-md-3">
@@ -335,7 +340,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row card portfolio" *ngIf="memberDetail.CertificationDetails.length===0">
+                        <div class="row card portfolio" *ngIf="memberDetail.CertificationDetails?.length===0">
                             <h4>Certification Details</h4>
                             <div class="col-md-12">
                                 <h4>No Records</h4>
@@ -373,7 +378,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="row card portfolio" *ngIf="memberDetail.ExperienceDetails.length>0">
+                        <div class="row card portfolio" *ngIf="memberDetail.ExperienceDetails?.length>0">
                             <h4>Experience Details</h4>
                             <div class="row" *ngFor="let item of memberDetail.ExperienceDetails;let i = index">
                                 <div class="col-md-3">
@@ -422,7 +427,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row card portfolio" *ngIf="memberDetail.ExperienceDetails.length===0">
+                        <div class="row card portfolio" *ngIf="memberDetail.ExperienceDetails?.length===0">
                             <h4>Experience Details</h4>
                             <div class="col-md-12">
                                 <h4>No Records</h4>

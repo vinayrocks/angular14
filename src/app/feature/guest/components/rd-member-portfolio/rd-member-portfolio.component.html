@@ -1,10 +1,10 @@
 <div class="section" style="background-color: #F2F3F5;">
     <div class="container">
-        <div class="img default-cover"></div>
+        <div class="img default-cover" [ngStyle]="{background: 'url('+defaultCoverPath+')'}"></div>
         <div class="card social-prof">
             <div class="card-body">
                 <div class="wrapper">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+                    <img src="{{defaultImagePath}}" alt="" class="user-profile">
                     <h3 class="title">{{selectedPortfolio?.userPortfolioName}}</h3>
                     <!--<p>{{selectedPortfolio.userPortfolioModifiedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
 
@@ -35,7 +35,9 @@
 
                                 <div *ngIf="elem.attachments[0].IsImage==='video'" class="video">
                                     <img src="{{elem.attachments[0].Image}}">
-                                    <a></a>
+                                    <button href="#" class="play-icon" title="Video Play">
+                                        <i class="fa fa-youtube-play"></i>
+                                    </button>
                                 </div>
                             </div>
                             <div class="row row-rating" *ngIf="elem.userPortfolioIsRatingAllowed">

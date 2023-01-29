@@ -60,6 +60,9 @@ export class RdMemberDetailComponent implements OnInit {
   ];
   Connections: any = null;
   defaultImagePath: string = "../../../../assets/img/radian/userAvatar.png";
+  defaultCoverPath: string = "../../../../assets/img/default-cover-picture.png";
+  profileImagePath: string;
+  coverImagePath: string;
   constructor(
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
@@ -82,6 +85,9 @@ export class RdMemberDetailComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    this.memberEvents = [];
+    this.memberProfiles = [];
+    this.memberDetail = [];
     this.GetProfileDetail();
   }
   GetProfileDetail() {
@@ -91,8 +97,8 @@ export class RdMemberDetailComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res) => {
-          this.memberEvents = res.Events;
-          this.memberProfiles = res.Profiles;
+          this.memberEvents = res.Events === null ? [] : res.Events;
+          this.memberProfiles = res.Profiles === null ? [] : res.Profiles;
           this.memberDetail = res.data[0];
           if (this.memberDetail.isCurrentLoggedInUserConnected !== null) {
             this.memberDetail.isCurrentLoggedInUserConnected = parseInt(
@@ -121,17 +127,17 @@ export class RdMemberDetailComponent implements OnInit {
               ? []
               : JSON.parse(this.memberDetail.ProfileExpertise);
           this.memberDetail.ProfilePortfolio =
-            this.memberDetail.ProfilePortfolio === ""
+            (this.memberDetail.ProfilePortfolio === null || this.memberDetail.ProfilePortfolio === '')
               ? []
               : JSON.parse(this.memberDetail.ProfilePortfolio);
           this.memberDetail.ProfileSkills =
             this.memberDetail.ProfileSkills === ""
               ? []
               : JSON.parse(this.memberDetail.ProfileSkills);
-          this.memberDetail.ProfilePicture = this.getProfilefilePath(
+          this.memberDetail.ProfilePicture = this.GetProfilePath(
             this.memberDetail
           );
-          this.memberDetail.CoverPicture = this.getCoverfilePath(
+          this.memberDetail.CoverPicture = this.GetCoverPicture(
             this.memberDetail
           );
           this.UserLiked = res.data[0].LikeCount;
@@ -165,7 +171,21 @@ export class RdMemberDetailComponent implements OnInit {
             );
             this.Connections = res.Connections;
           }
-
+          if (this.memberDetail?.ProfilePortfolio?.length > 0) {
+            this.memberDetail.ProfilePortfolio.map((x: any, index: number) => {
+              x.index = index;
+            });
+          }
+          if (this.memberEvents?.length > 0) {
+            this.memberEvents.map((x: any, index: number) => {
+              x.index = index;
+            });
+          }
+          if (this.memberProfiles?.length > 0) {
+            this.memberProfiles.map((x: any, index: number) => {
+              x.index = index;
+            });
+          }
           this.spinner.hide();
         },
         (error) => {
@@ -174,11 +194,12 @@ export class RdMemberDetailComponent implements OnInit {
       );
   }
 
-  getProfilefilePath(data: any) {
-    if (data.ProfilePicture != null) {
+  GetProfilePath(data: any) {
+    if (data.ProfilePicture === null) {
+      return this.defaultImagePath;
+    } else {
       return (
-        environment.apiCommon +
-        "radianApi/media/" +
+        "http://itechprovisions.com/radianApi/media/" +
         data.FirstName +
         "_" +
         data.Email.split("@")[0] +
@@ -187,15 +208,14 @@ export class RdMemberDetailComponent implements OnInit {
         "/ProfileImages/" +
         data.ProfilePicture
       );
-    } else {
-      return this.defaultImagePath;
     }
   }
-  getCoverfilePath(data: any) {
-    if (data.CoverPicture != null) {
+  GetCoverPicture(data: any) {
+    if (data.CoverPicture === null) {
+      return this.defaultCoverPath;
+    } else {
       return (
-        environment.apiCommon +
-        "radianApi/media/" +
+        "http://itechprovisions.com/radianApi/media/" +
         data.FirstName +
         "_" +
         data.Email.split("@")[0] +
@@ -204,8 +224,6 @@ export class RdMemberDetailComponent implements OnInit {
         "/CoverImages/" +
         data.CoverPicture
       );
-    } else {
-      return "assets/img/default-cover-picture.jpg";
     }
   }
   likeRadianEvent(status, data) {
@@ -220,7 +238,7 @@ export class RdMemberDetailComponent implements OnInit {
           this.notificationService.success(res.message);
           this.GetProfileDetail();
         },
-        (error) => {}
+        (error) => { }
       );
   }
 
@@ -271,7 +289,7 @@ export class RdMemberDetailComponent implements OnInit {
           this.notificationService.success(res.message);
           this.GetProfileDetail();
         },
-        (error) => {}
+        (error) => { }
       );
   }
   SendRequest(item: any) {
@@ -287,11 +305,10 @@ export class RdMemberDetailComponent implements OnInit {
           this.notificationService.success(res.message);
           this.GetProfileDetail();
         },
-        (error) => {}
+        (error) => { }
       );
   }
   AcceptRequest(item: any) {
-    console.log(item);
     const dxData = new ConnectProfile(ConnectProfile);
     dxData.ConnectionId = parseInt(item.userConnectionId);
     dxData.ConnectionReceiverId = this.currentUser.id;
@@ -305,7 +322,7 @@ export class RdMemberDetailComponent implements OnInit {
           this.notificationService.success(res.message);
           this.GetProfileDetail();
         },
-        (error) => {}
+        (error) => { }
       );
   }
   RejectRequest(item: any) {
@@ -322,7 +339,10 @@ export class RdMemberDetailComponent implements OnInit {
           this.notificationService.success(res.message);
           this.GetProfileDetail();
         },
-        (error) => {}
+        (error) => { }
       );
+  }
+  shiftTab(tabNumber: number) {
+    this._istab = tabNumber;
   }
 }

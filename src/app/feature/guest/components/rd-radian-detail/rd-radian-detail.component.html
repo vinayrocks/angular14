@@ -1,6 +1,6 @@
 <div class="section" style="background-color: #F2F3F5;">
     <div class="container">
-        <div class="img default-cover">
+        <div class="img default-cover" [ngStyle]="{background: 'url('+defaultCoverPath+')'}">
             <!--<div class="edit-btn">
             <a [routerLink]="['/member/event_add']" class="btn btn-primary btn-round btn-margin reset-btn">
                 <i class="pi pi-camera"></i>Select Cover Image</a>
@@ -9,7 +9,7 @@
         <div class="card social-prof">
             <div class="card-body">
                 <div class="wrapper">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="user-profile">
+                    <img src="{{defaultImagePath}}" alt="" class="user-profile">
                     <h3 class="title">{{radianDetail.EventName}}</h3>
                     <!-- <h4>End Date: {{radianDetail.EventStartDateTime|date:'MM/dd/yyyy hh:mm:ss'}}</h4> -->
                     <!--<p>{{selectedEvent.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
@@ -94,7 +94,7 @@
                             <!-- <button mat-button (click)="likeRadianEvent(false,radianDetail)" *ngIf="UserLiked"
                                 class="btn btn-primary btn-round btn-margin reset-btn">You are Interested</button> -->
                             <button mat-button *ngIf="UserInterested"
-                                class="btn btn-primary btn-round btn-margin interested-btn">You are Interested</button> 
+                                class="btn btn-primary btn-round btn-margin interested-btn">You are Interested</button>
                         </div>
                     </div>
                     <div class="row">
@@ -163,7 +163,7 @@
                 <div class="row card portfolio">
                     <h4>Event Media</h4>
                     <div class="row">
-                        <div class="col-md-2" *ngFor="let elem of radianDetail.EventMedia;let i=index;">
+                        <div class="col-md-2" *ngFor="let elem of radianDetail.EventImages;let i=index;">
                             <div class="custom-photo-container">
                                 <img src="{{elem.Name}}" alt="" class="img-raised" title=""
                                     (click)='openImageDialog(radianDetail.EventMedia,i)' *ngIf="elem.IsImage==='image'">
@@ -171,8 +171,10 @@
                                     <img src="assets/img/radian/document.png" alt="" class="img-raised">
                                 </a>
                                 <div *ngIf="elem.IsImage==='video'" class="video">
-                                    <img src="{{elem.Image}}" (click)='openImageDialog(radianDetail.EventMedia,i)'>
-                                    <a></a>
+                                    <img src="{{elem.Image}}" (click)='openImageDialog(radianDetail.EventImages,i)'>
+                                    <button href="#" class="play-icon" title="Video Play">
+                                        <i class="fa fa-youtube-play"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>

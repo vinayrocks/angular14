@@ -425,7 +425,6 @@ export class RdUserService {
   updateUserProfileCover(rdPortfolio: any) {
     this.currentUserSubject = this.rdAuthenticateService.getLocalStorageData();
     rdPortfolio.UserId = this.currentUserSubject.id;
-    //console.log(rdPortfolio)
     var data = this._encryptDecryptService.ecryptModel(rdPortfolio);
     return this.http.post<any>(
       environment.apiCommon + "radianApi/Profiles/userProfileCover.php",
