@@ -152,8 +152,8 @@ export class RdEventAddComponent implements OnInit {
         "",
         this.requiredIfValidator(() => !this.addEventForm.IsEventOnline.value),
       ],
-      EventStartDateTime: ["", Validators.required],
-      EventEndDateTime: ["", Validators.required],
+      EventStartDateTime: [null, Validators.required],
+      EventEndDateTime: [null, Validators.required],
       linkURL: [""],
     });
   }

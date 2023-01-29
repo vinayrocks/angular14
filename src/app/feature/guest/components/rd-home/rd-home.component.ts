@@ -12,7 +12,7 @@ import { RdAuthenticateService } from "src/app/shared/services/authentication/rd
 @Component({
   selector: "app-rd-home",
   templateUrl: "./rd-home.component.html",
-  styleUrls: ["./rd-home.component.scss"], 
+  styleUrls: ["./rd-home.component.scss"],
   animations: [
     trigger("inOutAnimation", [
       transition(":enter", [
@@ -75,26 +75,26 @@ export class RdHomeComponent implements OnInit {
   ngOnInit() {
     this.tutorials = [
       {
-          title: 'Web MH ',
-          image:
-'assets/img/radian/home_1.jpg',
+        title: 'Web MH ',
+        image:
+          'assets/img/radian/home_1.jpg',
       },
       {
-          title: 'Interview Experience ',
-          image:
-'assets/img/radian/home_2.jpg',
+        title: 'Interview Experience ',
+        image:
+          'assets/img/radian/home_2.jpg',
       },
       {
-          title: 'GeeksforGeeks Logo ',
-          image:
-'assets/img/radian/home_3.jpg',
+        title: 'GeeksforGeeks Logo ',
+        image:
+          'assets/img/radian/home_3.jpg',
       },
       {
-          title: 'GeeksforGeeks Carnival ',
-          image:
-'assets/img/radian/home_4.jpg',
+        title: 'GeeksforGeeks Carnival ',
+        image:
+          'assets/img/radian/home_4.jpg',
       },
-  ];
+    ];
     var rellaxHeader = new Rellax(".rellax-header");
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("landing-page");
@@ -109,7 +109,7 @@ export class RdHomeComponent implements OnInit {
     });
     this.getRadianEvents();
   }
-  
+
   get homeUpdatesForm() {
     return this.homeFormGroup.controls;
   }
@@ -131,6 +131,7 @@ export class RdHomeComponent implements OnInit {
             element.EventSkill = JSON.parse(element.EventSkill);
             element.EventImages = this.getProfilefilePath(element);
           });
+          console.log(res)
           this.radianUpdates = this.chunkArray(res.data, 4);
         } else {
           this.notificationService.success(res.message);
