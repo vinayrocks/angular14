@@ -95,6 +95,8 @@ export class RdMemberPortfolioComponent implements OnInit {
     },
   ];
   userMedia: any = [];
+  defaultImagePath: string = "../../../../assets/img/radian/userAvatar.png";
+  defaultCoverPath: string = "../../../../assets/img/default-cover-picture.png";
   constructor(
     private embedService: EmbedVideoService,
     private route: ActivatedRoute,

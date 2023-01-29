@@ -1,17 +1,15 @@
 <!-- The Modal/Lightbox -->
-<ngb-carousel #imagecarousel="ngbCarousel" [interval]="10000000" [showNavigationIndicators]="false"
- [wrap]="true">
-    <ng-template ngbSlide *ngFor="let item of imageArray;let i=index;" id="slide{{i}}">
-      <div class="row">
-        <div class="col-md-12">
-          <img class="d-block" src="{{item.Name}}" alt="First slide"  *ngIf="item.IsImage==='image'">
-          <a href="{{item.Name}}" *ngIf="item.IsImage==='pdf'" target="_blank">
-            <img src="assets/img/radian/document.png" alt="" class="img-raised">
-          </a>
-          <div class="custom-player" [innerHtml]="item.Name" *ngIf="item.IsImage==='video'"></div>
-        </div>
+<ngb-carousel #imagecarousel="ngbCarousel" [interval]="10000000" [showNavigationIndicators]="false" [wrap]="true">
+  <ng-template ngbSlide *ngFor="let item of imageArray;let i=index;" id="slide{{i}}">
+    <div class="row">
+      <div class="col-md-12">
+        <img class="d-block" src="{{item.Name}}" alt="First slide" *ngIf="item.IsImage==='image'">
+        <a href="{{item.Name}}" *ngIf="item.IsImage==='pdf'" target="_blank">
+          <img src="assets/img/radian/document.png" alt="" class="img-raised">
+        </a>
+        <div class="custom-player" [innerHtml]="item.Name" *ngIf="item.IsImage==='video'"></div>
       </div>
-      
-    </ng-template>
-</ngb-carousel>
+    </div>
 
+  </ng-template>
+</ngb-carousel>

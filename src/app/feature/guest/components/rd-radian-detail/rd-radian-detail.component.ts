@@ -29,7 +29,6 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class RdRadianDetailComponent implements OnInit {
   routerData: any = [];
   radianDetail: any = [];
-  CoverPicture: String = "";
   radianLikeData: any = [];
   UserInterested: any = [];
   config: AngularEditorConfig = {
@@ -46,6 +45,8 @@ export class RdRadianDetailComponent implements OnInit {
   UserLiked: String = "";
   getEventUserParameter: any = [];
   userList: any = [];
+  defaultImagePath: string = "../../../../assets/img/radian/userAvatar.png";
+  defaultCoverPath: string = "../../../../assets/img/default-cover-picture.png";
   constructor(
     private embedService: EmbedVideoService,
     private route: ActivatedRoute,
@@ -102,7 +103,7 @@ export class RdRadianDetailComponent implements OnInit {
             element.EventSkill =
               element.EventSkill === "" ? [] : JSON.parse(element.EventSkill);
             element.EventImages =
-              element.EventImages === ""
+              (element.EventImages === "" || element.EventImages === null)
                 ? []
                 : this.getProfilefilePath(element);
             element.EventLocation =
@@ -137,7 +138,7 @@ export class RdRadianDetailComponent implements OnInit {
             this.userList = res.data;
           }
         },
-        (error) => {}
+        (error) => { }
       );
   }
   getProfilefilePath(data: any) {
@@ -163,18 +164,16 @@ export class RdRadianDetailComponent implements OnInit {
               element,
             IsImage: "image",
           });
-          if (this.CoverPicture === "") {
-            this.CoverPicture =
-              environment.apiCommon +
-              "radianApi/media/" +
-              data.FirstName +
-              "_" +
-              data.Email.split("@")[0] +
-              "/Event/" +
-              data.EventName.replace(/\s/g, "") +
-              "/" +
-              element;
-          }
+          // this.CoverPicture =
+          // environment.apiCommon +
+          // "radianApi/media/" +
+          // data.FirstName +
+          // "_" +
+          // data.Email.split("@")[0] +
+          // "/Event/" +
+          // data.EventName.replace(/\s/g, "") +
+          // "/" +
+          // element;
         } else if (
           element.indexOf("youtu.be") === -1 &&
           element.indexOf("youtube") === -1 &&
@@ -224,18 +223,18 @@ export class RdRadianDetailComponent implements OnInit {
             data,
           IsImage: "image",
         });
-        if (this.CoverPicture === "") {
-          this.CoverPicture =
-            environment.apiCommon +
-            "radianApi/media/" +
-            data.FirstName +
-            "_" +
-            data.Email.split("@")[0] +
-            "/Event/" +
-            data.EventName +
-            "/" +
-            data;
-        }
+        // if (this.CoverPicture === "") {
+        //   this.CoverPicture =
+        //     environment.apiCommon +
+        //     "radianApi/media/" +
+        //     data.FirstName +
+        //     "_" +
+        //     data.Email.split("@")[0] +
+        //     "/Event/" +
+        //     data.EventName +
+        //     "/" +
+        //     data;
+        // }
       } else if (
         data.EventImages.indexOf("youtu.be") === -1 &&
         data.EventImages.indexOf("youtube") === -1 &&
@@ -256,10 +255,10 @@ export class RdRadianDetailComponent implements OnInit {
         });
       } else {
         this.embedService
-          .embed_image(data.EventMedia, { image: "mqdefault" })
+          .embed_image(data.EventImages, { image: "mqdefault" })
           .then((res) => {
             imageArry.push({
-              Name: this.embedService.embed(data.EventMedia),
+              Name: this.embedService.embed(data.EventImages),
               IsImage: "video",
               Image: res.link,
             });
@@ -281,7 +280,7 @@ export class RdRadianDetailComponent implements OnInit {
           // this.notificationService.success(res.message);
           this.GetEventDetail();
         },
-        (error) => {}
+        (error) => { }
       );
   }
   getShareLink() {

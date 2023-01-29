@@ -60,32 +60,6 @@ export class RdRadianListComponent implements OnInit {
   };
   responsiveOptions: any = [];
   _istab: number = 1;
-  ConnectionRequest: any = [
-    {
-      ConnectionId: 1,
-      ConnectionSenderId: 1,
-      SenderName: "Visual",
-      ConnectionReceiverId: 1,
-      ConnectionStatus: 0,
-      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
-    },
-    {
-      ConnectionId: 2,
-      ConnectionSenderId: 2,
-      SenderName: "Vinay",
-      ConnectionReceiverId: 1,
-      ConnectionStatus: 2,
-      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
-    },
-    {
-      ConnectionId: 3,
-      ConnectionSenderId: 3,
-      SenderName: "Abhishek",
-      ConnectionReceiverId: 1,
-      ConnectionStatus: 0,
-      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
-    },
-  ];
   UserConnection: any = [
     {
       ConnectionId: 4,
@@ -348,7 +322,7 @@ export class RdRadianListComponent implements OnInit {
           this.notificationService.success(res.message);
           this.getUserProfiles();
         },
-        (error) => {}
+        (error) => { }
       );
   }
   RejectRequest(item: any) {
@@ -365,7 +339,7 @@ export class RdRadianListComponent implements OnInit {
           this.notificationService.success(res.message);
           this.getUserProfiles();
         },
-        (error) => {}
+        (error) => { }
       );
   }
   DeleteRequest(item: any) {
@@ -382,7 +356,7 @@ export class RdRadianListComponent implements OnInit {
           this.notificationService.success(res.message);
           this.getUserProfiles();
         },
-        (error) => {}
+        (error) => { }
       );
   }
   ngOnDestroy() {

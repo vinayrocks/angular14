@@ -425,7 +425,7 @@
               <div class="col-md-3" *ngFor="let item of ConnectionsReceiver">
                 <div class="conn-req-card">
                   <div class="user-image">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
+                    <img src="{{defaultImagePath}}" />
                   </div>
                   <div class="user-details">
                     <h4 class="userName">{{item.ProfileName}}</h4>
@@ -449,7 +449,7 @@
               </div>
             </div>
             <div class="row" *ngIf="ConnectionsReceiver===null">
-              <h6>No Connection Requests</h6>   
+              <h6>No Connection Requests</h6>
             </div>
           </div>
         </div>
@@ -459,12 +459,12 @@
       <div class="row">
         <div class="col-md-12">
           <div class="row card portfolio">
-            <h4>Sent Connections Request</h4><br /> 
+            <h4>Sent Connections Request</h4><br />
             <div class="row" *ngIf="ConnectionsSender!==null">
               <div class="col-md-3" *ngFor="let item of ConnectionsSender">
                 <div class="conn-req-card">
                   <div class="user-image">
-                    <img src="../../../../../../assets/img/radian/userAvatar.png" />
+                    <img src="{{defaultImagePath}}" />
                   </div>
                   <div class="user-details">
                     <h4 class="userName">{{item.ProfileName}}</h4>
