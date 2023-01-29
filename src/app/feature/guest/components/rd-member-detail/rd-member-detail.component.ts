@@ -134,10 +134,10 @@ export class RdMemberDetailComponent implements OnInit {
             this.memberDetail.ProfileSkills === ""
               ? []
               : JSON.parse(this.memberDetail.ProfileSkills);
-          this.memberDetail.ProfilePicture = this.GetProfilePath(
+          this.profileImagePath = this.GetProfilePath(
             this.memberDetail
           );
-          this.memberDetail.CoverPicture = this.GetCoverPicture(
+          this.coverImagePath = this.GetCoverPicture(
             this.memberDetail
           );
           this.UserLiked = res.data[0].LikeCount;
@@ -193,7 +193,11 @@ export class RdMemberDetailComponent implements OnInit {
         }
       );
   }
-
+  redirectToProfile(data: any) {
+    console.log(data)
+    this.memberDetail = [];
+    this.memberDetail = data;
+  }
   GetProfilePath(data: any) {
     if (data.ProfilePicture === null) {
       return this.defaultImagePath;
@@ -344,5 +348,11 @@ export class RdMemberDetailComponent implements OnInit {
   }
   shiftTab(tabNumber: number) {
     this._istab = tabNumber;
+  }
+  redirectToEvent(data: any) {
+    this.router.navigate([
+      "/detail",
+      this._encryptDecryptService.set(data.EventId),
+    ]);
   }
 }

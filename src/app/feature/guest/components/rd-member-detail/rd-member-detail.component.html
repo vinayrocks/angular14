@@ -1,6 +1,6 @@
 <div class="section" style="background-color: #F2F3F5;">
     <div class="container">
-        <div class="img default-cover" [ngStyle]="{background: 'url('+memberDetail.CoverPicture+')'}">
+        <div class="img default-cover" [ngStyle]="{background: 'url('+coverImagePath+')'}">
             <!-- <div class="edit-btn">
           <a class="btn btn-primary btn-round btn-margin reset-btn">
             <i class="pi pi-camera"></i>Select Cover Image</a>
@@ -9,7 +9,7 @@
         <div class="card social-prof">
             <div class="card-body">
                 <div class="wrapper">
-                    <img src="{{memberDetail.ProfilePicture}}" alt="" class="user-profile">
+                    <img src="{{profileImagePath}}" alt="" class="user-profile">
                     <!-- <h3 class="title">{{currentUser.ProfileName}}</h3> -->
                     <div class="row">
                         <div class="col-md-4">
@@ -134,7 +134,7 @@
                                             <div class="p-mb-3">
                                             </div>
                                             <div>
-                                                <a>
+                                                <a (click)="redirectToEvent(product)">
                                                     <h4 class="p-mb-1">{{product.EventName}}</h4>
                                                 </a>
                                                 <span
@@ -163,7 +163,7 @@
                                             <div class="p-mb-3">
                                             </div>
                                             <div>
-                                                <a>
+                                                <a (click)="redirectToProfile(product)">
                                                     <h4 class="p-mb-1">{{product.ProfileName}}</h4>
                                                 </a>
                                                 <span
@@ -449,7 +449,7 @@
                                 <div class="col-md-3" *ngFor="let item of Connections">
                                     <div class="conn-req-card">
                                         <div class="user-image">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" />
+                                            <img src="{{defaultImagePath}}" />
                                         </div>
                                         <div class="user-details">
                                             <h4 class="userName">{{item.ProfileName}}</h4>

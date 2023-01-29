@@ -224,6 +224,15 @@ export class RdRadianUpdateComponent implements OnInit {
       this._encryptDecryptService.set(element.EventId),
     ]);
   }
+  GetProfileDetail(element) {
+    if (element.UserId !== undefined) {
+      this.router.navigate([
+        "/member-detail",
+        this._encryptDecryptService.set(element.EventId),
+      ]);
+    }
+
+  }
   likeRadianEvent(status, data) {
     this.radianLikeData.RadianType = "Event";
     this.radianLikeData.RadianTypeId = data.EventId;
@@ -236,7 +245,7 @@ export class RdRadianUpdateComponent implements OnInit {
           // this.notificationService.success(res.message);
           this.onSubmit(0);
         },
-        (error) => {}
+        (error) => { }
       );
   }
   getShareLink(item) {
@@ -254,5 +263,5 @@ export class RdRadianUpdateComponent implements OnInit {
     navbar.classList.remove("navbar-transparent");
   }
 
-  reset() {}
+  reset() { }
 }
