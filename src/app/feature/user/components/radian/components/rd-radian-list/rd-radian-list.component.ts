@@ -60,32 +60,6 @@ export class RdRadianListComponent implements OnInit {
   };
   responsiveOptions: any = [];
   _istab: number = 1;
-  UserConnection: any = [
-    {
-      ConnectionId: 4,
-      ConnectionSenderId: 4,
-      SenderName: "kimso well",
-      ConnectionReceiverId: 1,
-      ConnectionStatus: 1,
-      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
-    },
-    {
-      ConnectionId: 5,
-      ConnectionSenderId: 5,
-      SenderName: "kimmy",
-      ConnectionReceiverId: 1,
-      ConnectionStatus: 1,
-      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
-    },
-    {
-      ConnectionId: 6,
-      ConnectionSenderId: 6,
-      SenderName: "Mark",
-      ConnectionReceiverId: 1,
-      ConnectionStatus: 1,
-      ImagePath: "https://bootdey.com/img/Content/avatar/avatar2.png",
-    },
-  ];
   sendConnectionModel: any = [];
   ConnectionsReceiver: any = [];
   ConnectionsSender: any = [];

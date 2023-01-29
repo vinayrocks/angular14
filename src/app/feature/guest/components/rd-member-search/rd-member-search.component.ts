@@ -133,7 +133,7 @@ export class RdMemberSearchComponent implements OnInit {
               (x: any) => x.ProfileId !== this.currentUser.id
             );
           }
-
+          console.log(res)
           res.data.forEach((element) => {
             // element.UserLiked=true;
             element.ContactDetails =
@@ -240,7 +240,7 @@ export class RdMemberSearchComponent implements OnInit {
           // this.notificationService.success(res.message);
           this.onSubmit(0);
         },
-        (error) => {}
+        (error) => { }
       );
   }
   ngOnDestroy() {
@@ -250,5 +250,5 @@ export class RdMemberSearchComponent implements OnInit {
     navbar.classList.remove("navbar-transparent");
   }
 
-  reset() {}
+  reset() { }
 }

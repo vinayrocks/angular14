@@ -152,6 +152,7 @@ export class RdMemberPortfolioComponent implements OnInit {
           });
           this.userPortfolioMedia = res.UserPortfolioMedia;
           this.userMedia = res.UserPortfolioMediaRating;
+          console.log(res)
         },
         (error) => {
           this.spinner.hide();

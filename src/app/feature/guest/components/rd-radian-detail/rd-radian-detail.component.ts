@@ -304,6 +304,7 @@ export class RdRadianDetailComponent implements OnInit {
       .subscribe((res) => {
         if (res.status) {
           this.notificationService.success(res.message);
+          this.GetEventDetail();
         } else {
           this.notificationService.warn(res.message);
         }
