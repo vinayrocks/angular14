@@ -143,15 +143,15 @@ export class RdMemberDetailComponent implements OnInit {
           this.UserLiked = res.data[0].LikeCount;
           this.memberDetail = res.data[0];
           this.memberDetail.CertificationDetails =
-            this.memberDetail.CertificationDetails !== ""
+            (this.memberDetail.CertificationDetails !== "" && this.memberDetail.CertificationDetails !== null)
               ? JSON.parse(this.memberDetail.CertificationDetails)
               : [];
           this.memberDetail.EducationDetails =
-            this.memberDetail.EducationDetails !== ""
+            (this.memberDetail.EducationDetails !== "" && this.memberDetail.EducationDetails !== null)
               ? JSON.parse(this.memberDetail.EducationDetails)
               : [];
           this.memberDetail.ExperienceDetails =
-            this.memberDetail.ExperienceDetails !== ""
+            (this.memberDetail.ExperienceDetails !== "" && this.memberDetail.ExperienceDetails !== null)
               ? JSON.parse(this.memberDetail.ExperienceDetails)
               : [];
           if (res.Connections !== null) {

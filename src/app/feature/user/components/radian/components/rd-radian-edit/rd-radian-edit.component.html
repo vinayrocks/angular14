@@ -91,7 +91,8 @@
                     <div class="input-group">
 
                       <input type="text" class="signUp-form-control form-control" autocomplete="off"
-                        #StartsOn="bsDatepicker" formControlName="StartsOn" [maxDate]="maxDate" [bsConfig]="{
+                        #StartsOn="bsDatepicker" formControlName="StartsOn"
+                        [maxDate]="getDate(item.controls['EndsOn'].value)" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'
@@ -259,7 +260,7 @@
                     <div class="input-group">
 
                       <input type="text" class="signUp-form-control form-control" autocomplete="off"
-                        #StartDate="bsDatepicker" [minDate]="minDate" [maxDate]="maxDate" [bsConfig]="{
+                        #StartDate="bsDatepicker" [maxDate]="item.controls['ToDate'].value" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'
@@ -282,8 +283,8 @@
                     <div class="input-group">
 
                       <input type="text" class="signUp-form-control form-control" autocomplete="off"
-                        #ToDate="bsDatepicker" [minDate]="minDate" formControlName="ToDate" [maxDate]="maxDate"
-                        [bsConfig]="{
+                        #ToDate="bsDatepicker" formControlName="ToDate" [minDate]="item.controls['StartDate'].value"
+                        [maxDate]="maxDate" [bsConfig]="{
                         isAnimated: true,
                         minMode: 'year',
                         dateInputFormat: 'YYYY'

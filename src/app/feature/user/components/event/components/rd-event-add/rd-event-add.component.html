@@ -172,7 +172,7 @@
             </div>
             <div class="input-group">
               <input matInput [ngxMatDatetimePicker]="startPicker" formControlName="EventStartDateTime"
-                class="date-input-custom" />
+                class="date-input-custom" [min]="minDate" [max]="addEventForm.EventEndDateTime.value">
               <mat-datepicker-toggle matSuffix [for]="startPicker" class="date-icon-custom"></mat-datepicker-toggle>
               <ngx-mat-datetime-picker #startPicker> </ngx-mat-datetime-picker>
             </div>
@@ -188,7 +188,7 @@
             </div>
             <div class="input-group">
               <input matInput [ngxMatDatetimePicker]="endPicker" formControlName="EventEndDateTime"
-                class="date-input-custom" />
+                class="date-input-custom" [min]="addEventForm.EventStartDateTime.value" />
               <mat-datepicker-toggle matSuffix [for]="endPicker" class="date-icon-custom"></mat-datepicker-toggle>
               <ngx-mat-datetime-picker #endPicker> </ngx-mat-datetime-picker>
             </div>

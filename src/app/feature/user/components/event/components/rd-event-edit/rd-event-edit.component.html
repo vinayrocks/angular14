@@ -193,7 +193,8 @@
             </div>
             <div class="input-group">
               <input matInput [ngxMatDatetimePicker]="startPicker" class="signUp-form-control form-control"
-                formControlName="EventStartDateTime" style="width: 80%;" />
+                formControlName="EventStartDateTime" style="width: 80%;" [min]="minDate"
+                [max]="editEventForm.EventEndDateTime.value" />
               <mat-datepicker-toggle matSuffix [for]="startPicker" class="date-icon-custom"></mat-datepicker-toggle>
               <ngx-mat-datetime-picker #startPicker> </ngx-mat-datetime-picker>
             </div>
@@ -209,7 +210,8 @@
             </div>
             <div class="input-group">
               <input matInput [ngxMatDatetimePicker]="endPicker" formControlName="EventEndDateTime"
-                class="signUp-form-control form-control" style="width: 80%;" />
+                class="signUp-form-control form-control" style="width: 80%;"
+                [min]="editEventForm.EventStartDateTime.value" />
               <mat-datepicker-toggle matSuffix [for]="endPicker" class="date-icon-custom"></mat-datepicker-toggle>
               <ngx-mat-datetime-picker #endPicker> </ngx-mat-datetime-picker>
             </div>

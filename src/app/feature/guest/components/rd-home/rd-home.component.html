@@ -106,10 +106,10 @@
         <div class="separator separator-primary"></div>
       </div>
     </div>
-    <div class="row g-3" [@inOutAnimation] data-rellax-speed="0" *ngFor="let item of radianUpdates">
-      <div class="col-xl-3 col-lg-4" *ngFor="let child of item;let i = index">
+    <div class="row g-3" [@inOutAnimation] data-rellax-speed="0">
+      <div class="col-xl-3 col-lg-4" *ngFor="let item of radianUpdates|slice: 0:4;let i=index">
         <div class="blog-item">
-          <div *ngIf="child.EventImages!==null" class="home-item-content" [ngClass]="'p-bgcolor'+ (i+1)">
+          <div *ngIf="item.EventImages!==null" class="home-item-content" [ngClass]="'p-bgcolor'+ (i+1)">
             <!-- <img src="{{child.EventImages[0].Name}}" alt="" class="img-event" title=""
               *ngIf="child.EventImages[0].IsImage==='image'">
             <a *ngIf="child.EventImages[0].IsImage==='pdf'">
@@ -119,22 +119,22 @@
               <img src="{{child.EventImages[0].Image}}">
               <a></a>
             </div> -->
-            <label>{{child.EventSkill.name.charAt(0)}}</label>
+            <label>{{item.EventSkill.name.charAt(0)}}</label>
           </div>
 
-          <img *ngIf="child.EventImages===null" class="img-event" src="./././././assets/img/radian/singer.jpg" />
+          <img *ngIf="item.EventImages===null" class="img-event" src="./././././assets/img/radian/singer.jpg" />
           <div class="d-flex align-items-center">
             <div class="bg-secondary mt-n4 d-flex flex-column flex-shrink-0 justify-content-center text-center me-4"
               style="width: 70px; height: 100px;">
               <i class="fa fa-calendar-alt text-primary mb-2"></i>
-              <p class="m-0 text-white">{{ child.ModifiedDate | date: "MMM dd" }}</p>
-              <small class="text-white">{{ child.ModifiedDate | date: "yyyy" }}</small>
+              <p class="m-0 text-white">{{ item.ModifiedDate | date: "MMM dd" }}</p>
+              <small class="text-white">{{ item.ModifiedDate | date: "yyyy" }}</small>
             </div>
-            <a [routerLink]="['/updates']" class="bg-a h5 m-0 text-truncate me-4" href="">{{child.EventName}}</a>
+            <a [routerLink]="['/updates']" class="bg-a h5 m-0 text-truncate me-4" href="">{{item.EventName}}</a>
           </div>
           <div class="d-flex justify-content-between border-top border-secondary p-4">
             <div class="d-flex align-items-center">
-              <h6 class="title">{{child.EventSkill.name}}</h6>
+              <h6 class="title">{{item.EventSkill.name}}</h6>
             </div>
           </div>
         </div>

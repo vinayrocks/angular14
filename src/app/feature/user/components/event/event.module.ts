@@ -17,6 +17,7 @@ import { NgxMatMomentModule, NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angula
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CarouselModule } from 'primeng/carousel';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
     dateInput: 'l, LTS'
@@ -45,7 +46,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     NgxMatMomentModule,
     MatDatepickerModule,
     CarouselModule,
-    SelectDropDownModule
+    SelectDropDownModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [EmbedVideoService,
     { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }]

@@ -387,5 +387,5 @@ export class RdRadianAddComponent implements OnInit {
     };
     container.setViewMode("year");
   }
-  degreeSelect(event: any, index) {}
+  degreeSelect(event: any, index) { }
 }

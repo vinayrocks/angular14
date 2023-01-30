@@ -97,6 +97,7 @@ export class RdEventAddComponent implements OnInit {
     height: "150px",
   };
   currentUser: any = [];
+  minDate: any = new Date();
   constructor(
     private _formBuilder: FormBuilder,
     private rdUserService: RdUserService,
