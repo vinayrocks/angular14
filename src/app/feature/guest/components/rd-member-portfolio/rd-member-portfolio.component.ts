@@ -154,6 +154,7 @@ export class RdMemberPortfolioComponent implements OnInit {
           this.userMedia = res.UserPortfolioMediaRating;
           this.GetProfilePath(res.data[0]);
           this.GetCoverPicture(res.data[0]);
+          console.log(this.selectedPortfolio)
         },
         (error) => {
           this.spinner.hide();
@@ -192,7 +193,7 @@ export class RdMemberPortfolioComponent implements OnInit {
           "_" +
           selectedItem.userEmail.split("@")[0] +
           "/Portfolio/" +
-          selectedItem.userPortfolioName.replace(" ", "") +
+          selectedItem.userPortfolioName.replaceAll(" ", "") +
           "/" +
           data,
         IsImage: "image",
@@ -210,7 +211,7 @@ export class RdMemberPortfolioComponent implements OnInit {
           "_" +
           selectedItem.userEmail.split("@")[0] +
           "/Portfolio/" +
-          selectedItem.userPortfolioName.replace(" ", "") +
+          selectedItem.userPortfolioName.replaceAll(" ", "") +
           "/" +
           data,
         IsImage: "pdf",

@@ -83,7 +83,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <i class="fa fa-hand-o-right icon-interested"></i><label
-                                class="users-label">{{radianDetail.LikeCount}}
+                                class="users-label">{{radianDetail.InserestedUsersCount}}
                                 Users</label>
                         </div>
                     </div>
@@ -94,7 +94,8 @@
                             <button mat-button class="btn btn-primary btn-round btn-margin"
                                 [ngClass]="!UserLiked?'like-share-button':''"
                                 (click)="likeRadianEvent(!UserLiked,radianDetail)"><i
-                                    class="fa fa-thumbs-up icon-like-share"></i>Like</button>&nbsp;&nbsp;
+                                    class="fa fa-thumbs-up icon-like-share"></i>Like
+                                {{radianDetail.LikeCount}}</button>&nbsp;&nbsp;
                             <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"
                                 (click)="getShareLink()"><i class="fa fa-share-alt icon-like-share"></i>Share</button>
                         </p>
