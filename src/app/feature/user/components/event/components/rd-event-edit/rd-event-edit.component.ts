@@ -102,6 +102,7 @@ export class RdEventEditComponent implements OnInit {
     searchOnKey: "radianSkillCategoryName",
     height: "150px",
   };
+  minDate: any = new Date();
   constructor(
     private _formBuilder: FormBuilder,
     private rdUserService: RdUserService,
@@ -440,8 +441,8 @@ export class RdEventEditComponent implements OnInit {
       dt.EventSkill =
         dt.EventSkill.radianSkillCategoryId === undefined
           ? this.skills.filter(function (item) {
-              return item.radianSkillCategoryName === dt.EventSkill;
-            })[0].radianSkillCategoryId
+            return item.radianSkillCategoryName === dt.EventSkill;
+          })[0].radianSkillCategoryId
           : dt.EventSkill.radianSkillCategoryId;
     }
     if (this.editEventFormGroup.invalid) {
