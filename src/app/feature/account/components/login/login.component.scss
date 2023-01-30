@@ -94,11 +94,13 @@ h5, h6{
   box-shadow: none !important;
   border: 2px solid #38b6ff!important;
 }
-.signUp-form-control{
+.signUp-form-control {
   margin-bottom: 10px !important;
-  border: 1px solid #2F3C4F !important;
+  border: 1px solid #2f3c4f !important;
   background: #ffffff !important;
-  color: #181F29 !important;
+  color: #181f29 !important;
+  font-size: 14px;
+  border-radius: 5px !important;
 }
 
   ::placeholder{
