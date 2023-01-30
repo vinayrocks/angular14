@@ -179,7 +179,7 @@ background-color: #eee;
 
 .card .s-nav>li>a.active {
 text-decoration: none;
-background-color: #3afe;
+background-color: #ff0000;
 color: #fff;
 }
 
@@ -585,4 +585,15 @@ font-size: 14px;
 .interested-btn{
   background-color: #7ed957;
   font-size: 14px;
+}
+.para-custom_v1{
+  margin-top:30px;
+}
+.vx1{
+  img{
+    width: 31px!important;
+    height: 31px!important;
+    float: right;
+    margin-top: 20px;
+  }
 }

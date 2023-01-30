@@ -194,7 +194,6 @@ export class RdMemberDetailComponent implements OnInit {
       );
   }
   redirectToProfile(data: any) {
-    console.log(data)
     this.memberDetail = [];
     this.memberDetail = data;
   }

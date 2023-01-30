@@ -228,7 +228,7 @@ export class RdRadianUpdateComponent implements OnInit {
     if (element.UserId !== undefined) {
       this.router.navigate([
         "/member-detail",
-        this._encryptDecryptService.set(element.EventId),
+        this._encryptDecryptService.set(element.UserId),
       ]);
     }
 
