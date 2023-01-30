@@ -133,7 +133,6 @@ export class RdMemberSearchComponent implements OnInit {
               (x: any) => x.ProfileId !== this.currentUser.id
             );
           }
-          console.log(res)
           res.data.forEach((element) => {
             // element.UserLiked=true;
             element.ContactDetails =

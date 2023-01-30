@@ -131,7 +131,6 @@ export class RdHomeComponent implements OnInit {
             element.EventSkill = JSON.parse(element.EventSkill);
             element.EventImages = this.getProfilefilePath(element);
           });
-          console.log(res)
           this.radianUpdates = this.chunkArray(res.data, 4);
         } else {
           this.notificationService.success(res.message);

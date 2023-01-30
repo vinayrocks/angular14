@@ -152,7 +152,8 @@ export class RdMemberPortfolioComponent implements OnInit {
           });
           this.userPortfolioMedia = res.UserPortfolioMedia;
           this.userMedia = res.UserPortfolioMediaRating;
-          console.log(res)
+          this.GetProfilePath(res.data[0]);
+          this.GetCoverPicture(res.data[0]);
         },
         (error) => {
           this.spinner.hide();
@@ -276,5 +277,37 @@ export class RdMemberPortfolioComponent implements OnInit {
       dxRef.close();
       this.GetPortfolioDetail();
     });
+  }
+  GetProfilePath(data) {
+    if (data.ProfilePicture === null) {
+      this.defaultImagePath = this.defaultImagePath;
+    } else {
+      this.defaultImagePath = (
+        "http://itechprovisions.com/radianApi/media/" +
+        data.userFirstName +
+        "_" +
+        data.userEmail.split("@")[0] +
+        "/Profile/" +
+        data.ProfileName.replace(" ", "") +
+        "/ProfileImages/" +
+        data.ProfilePicture
+      );
+    }
+  }
+  GetCoverPicture(data) {
+    if (data.CoverPicture === null) {
+      this.defaultCoverPath = this.defaultCoverPath;
+    } else {
+      this.defaultCoverPath = (
+        "http://itechprovisions.com/radianApi/media/" +
+        data.userFirstName +
+        "_" +
+        data.userEmail.split("@")[0] +
+        "/Profile/" +
+        data.ProfileName.replace(" ", "") +
+        "/CoverImages/" +
+        data.CoverPicture
+      );
+    }
   }
 }

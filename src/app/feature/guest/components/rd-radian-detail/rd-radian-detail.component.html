@@ -10,38 +10,35 @@
             <div class="card-body">
                 <div class="wrapper">
                     <img src="{{defaultImagePath}}" alt="" class="user-profile">
-                    <h3 class="title">{{radianDetail.EventName}}</h3>
+                    <h3 class="title">{{radianDetail.FirstName}} {{radianDetail.LastName}}</h3>
                     <!-- <h4>End Date: {{radianDetail.EventStartDateTime|date:'MM/dd/yyyy hh:mm:ss'}}</h4> -->
                     <!--<p>{{selectedEvent.LastUpdatedDate|date:'MM/dd/yyyy hh:mm:ss'}}</p>-->
-                    <p class="para-custom">
-                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"
-                            (click)="likeRadianEvent(!UserLiked,radianDetail)"><i
-                                class="fa fa-thumbs-up icon-like-share"></i>Like</button>&nbsp;&nbsp;
-                        <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"
-                            (click)="getShareLink()"><i class="fa fa-share-alt icon-like-share"></i>Share</button>
-                    </p>
+
                 </div>
-                <div class="row">
-                    <div class="wrapper">
-                        <img *ngIf="radianDetail.EventStatus"
-                            src="../../../../../../../assets/img/radian/activeEvent.png" class="active-inactive" />
-                        <img *ngIf="!radianDetail.EventStatus"
-                            src="../../../../../../../assets/img/radian/inactiveEvent.png" class="active-inactive" />
-                    </div>
-                </div>
+
             </div>
         </div>
         <div class="row">
             <div class="col-md-9">
                 <div class="row card portfolio">
-                    <!-- <div class="row">
-                    <div class="col-md-12">
-                        <h4>About Event</h4>
-                        <p>{{radianDetail.EventDescription}}</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>Event Name</h4>
+                            <p>{{radianDetail.EventName}} </p>
+                            <h4>About Event</h4>
+                            <p>{{radianDetail.EventDescription}}</p>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="wrapper vx1">
+                                <img *ngIf="radianDetail.EventStatus"
+                                    src="../../../../../../../assets/img/radian/activeEvent.png"
+                                    class="active-inactive" />
+                                <img *ngIf="!radianDetail.EventStatus"
+                                    src="../../../../../../../assets/img/radian/inactiveEvent.png"
+                                    class="active-inactive" />
+                            </div>
+                        </div>
                     </div>
-                </div> -->
-                    <h4>About Event</h4>
-                    <p>{{radianDetail.EventDescription}}</p>
                     <div class="row">
                         <div class="col-md-12">
                             <h4>Location</h4>
@@ -73,37 +70,34 @@
             </div>
             <div class="col-md-3">
                 <div class="row card portfolio">
-                    <!-- <div class="row">
-                    <div class="col-md-12">
-                        <h4>Click on Intersted to stay updated about this Event</h4>
-                    </div>
-                </div> -->
                     <h4>Click on Intersted to stay updated about this Event</h4>
                     <div class="row">
                         <div class="col-md-12">
-                            <h4></h4>
-                            <!-- <a class="a-btn a-click" (click)="likeRadianEvent(true,radianDetail)" *ngIf="!UserLiked">
-                                <img src="./assets/img/radian/like-icon.png">
-                            </a>
-                            <a class="a-btn a-click" (click)="likeRadianEvent(false,radianDetail)" *ngIf="UserLiked">
-                                <img src="./assets/img/radian/like-icon-filled.png">
-                            </a> {{radianDetail.LikeCount}} -->
                             <button mat-button (click)="addEventParticipation()" *ngIf="!UserInterested"
                                 class="btn btn-primary btn-round btn-margin reset-btn">Are You
                                 Interested?</button>
-                            <!-- <button mat-button (click)="likeRadianEvent(false,radianDetail)" *ngIf="UserLiked"
-                                class="btn btn-primary btn-round btn-margin reset-btn">You are Interested</button> -->
-                            <button mat-button *ngIf="UserInterested"
-                                class="btn btn-primary btn-round btn-margin interested-btn">You are Interested</button>
+                            <button mat-button *ngIf="UserInterested" class="btn btn-primary btn-round btn-margin">You
+                                are Interested</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <h4></h4>
                             <i class="fa fa-hand-o-right icon-interested"></i><label
                                 class="users-label">{{radianDetail.LikeCount}}
                                 Users</label>
                         </div>
+                    </div>
+                </div>
+                <div class="row card portfolio">
+                    <div class="col-md-12">
+                        <p class="para-custom_v1">
+                            <button mat-button class="btn btn-primary btn-round btn-margin"
+                                [ngClass]="!UserLiked?'like-share-button':''"
+                                (click)="likeRadianEvent(!UserLiked,radianDetail)"><i
+                                    class="fa fa-thumbs-up icon-like-share"></i>Like</button>&nbsp;&nbsp;
+                            <button mat-button class="btn btn-primary btn-round btn-margin like-share-button"
+                                (click)="getShareLink()"><i class="fa fa-share-alt icon-like-share"></i>Share</button>
+                        </p>
                     </div>
                 </div>
             </div>

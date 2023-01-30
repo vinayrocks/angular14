@@ -115,6 +115,8 @@ export class RdRadianDetailComponent implements OnInit {
           this.radianDetail = res.data[0];
           this.UserLiked = res.UserLiked;
           this.UserInterested = res.UserInterested;
+          this.GetProfilePath(res.data[0]);
+          this.GetCoverPicture(res.data[0]);
           this.GetUserList(res.data[0]);
         },
         (error) => {
@@ -319,5 +321,37 @@ export class RdRadianDetailComponent implements OnInit {
     (dialogConfig.panelClass = "image-popup"),
       (dialogConfig.data = { imageArray: data, imageActive: index });
     this.matDialog.open(PopupImageSliderComponent, dialogConfig);
+  }
+  GetProfilePath(data) {
+    if (data.ProfilePicture === null) {
+      this.defaultImagePath = this.defaultImagePath;
+    } else {
+      this.defaultImagePath = (
+        "http://itechprovisions.com/radianApi/media/" +
+        data.FirstName +
+        "_" +
+        data.Email.split("@")[0] +
+        "/Profile/" +
+        data.ProfileName.replace(" ", "") +
+        "/ProfileImages/" +
+        data.ProfilePicture
+      );
+    }
+  }
+  GetCoverPicture(data) {
+    if (data.CoverPicture === null) {
+      this.defaultCoverPath = this.defaultCoverPath;
+    } else {
+      this.defaultCoverPath = (
+        "http://itechprovisions.com/radianApi/media/" +
+        data.FirstName +
+        "_" +
+        data.Email.split("@")[0] +
+        "/Profile/" +
+        data.ProfileName.replace(" ", "") +
+        "/CoverImages/" +
+        data.CoverPicture
+      );
+    }
   }
 }

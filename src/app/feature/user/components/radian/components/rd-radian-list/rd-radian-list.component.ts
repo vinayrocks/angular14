@@ -247,6 +247,9 @@ export class RdRadianListComponent implements OnInit {
           this.selectedUser.LinkedPortfolio.map((x: any, index: number) => {
             x.index = index;
           });
+          this.userProfiles.map((x: any, index: number) => {
+            x.index = index;
+          });
           this.projectPath = res.projectPath;
           this.spinner.hide();
         },

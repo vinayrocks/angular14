@@ -90,7 +90,7 @@
               </ng-template> -->
               <ng-template let-product pTemplate="item">
                 <div class="product-item">
-                  <div class="product-item-content">
+                  <div class="product-item-content" [ngClass]="'p-bgcolor'+ (product.index+1)">
                     <div class="p-mb-3">
                     </div>
                     <div>
