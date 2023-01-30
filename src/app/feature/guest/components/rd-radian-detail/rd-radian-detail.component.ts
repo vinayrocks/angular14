@@ -111,13 +111,14 @@ export class RdRadianDetailComponent implements OnInit {
                 ? []
                 : JSON.parse(element.EventLocation);
           });
-
+          console.log(res)
           this.radianDetail = res.data[0];
           this.UserLiked = res.UserLiked;
           this.UserInterested = res.UserInterested;
           this.GetProfilePath(res.data[0]);
           this.GetCoverPicture(res.data[0]);
           this.GetUserList(res.data[0]);
+
         },
         (error) => {
           this.spinner.hide();

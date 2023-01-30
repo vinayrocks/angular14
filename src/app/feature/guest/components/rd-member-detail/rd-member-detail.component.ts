@@ -99,6 +99,8 @@ export class RdMemberDetailComponent implements OnInit {
         (res) => {
           this.memberEvents = res.Events === null ? [] : res.Events;
           this.memberProfiles = res.Profiles === null ? [] : res.Profiles;
+          const dxDefault = res.data[0];
+          this.memberProfiles.push(dxDefault);
           this.memberDetail = res.data[0];
           if (this.memberDetail.isCurrentLoggedInUserConnected !== null) {
             this.memberDetail.isCurrentLoggedInUserConnected = parseInt(
@@ -196,6 +198,49 @@ export class RdMemberDetailComponent implements OnInit {
   redirectToProfile(data: any) {
     this.memberDetail = [];
     this.memberDetail = data;
+    if (typeof this.memberDetail.CertificationDetails === 'string') {
+      this.memberDetail.CertificationDetails =
+        (this.memberDetail.CertificationDetails !== "" && this.memberDetail.CertificationDetails !== null)
+          ? JSON.parse(this.memberDetail.CertificationDetails)
+          : [];
+    }
+    if (typeof this.memberDetail.CertificationDetails === 'string') {
+      this.memberDetail.EducationDetails =
+        (this.memberDetail.EducationDetails !== "" && this.memberDetail.EducationDetails !== null)
+          ? JSON.parse(this.memberDetail.EducationDetails)
+          : [];
+    }
+    if (typeof this.memberDetail.ExperienceDetails === 'string') {
+      this.memberDetail.ExperienceDetails =
+        (this.memberDetail.ExperienceDetails !== "" && this.memberDetail.ExperienceDetails !== null)
+          ? JSON.parse(this.memberDetail.ExperienceDetails)
+          : [];
+    }
+
+    if (typeof this.memberDetail.ProfileExpertise === 'string') {
+      this.memberDetail.ProfileExpertise =
+        this.memberDetail.ProfileExpertise === ""
+          ? []
+          : JSON.parse(this.memberDetail.ProfileExpertise);
+    }
+    if (typeof this.memberDetail.ProfilePortfolio === 'string') {
+      this.memberDetail.ProfilePortfolio =
+        (this.memberDetail.ProfilePortfolio === null || this.memberDetail.ProfilePortfolio === '')
+          ? []
+          : JSON.parse(this.memberDetail.ProfilePortfolio);
+    }
+    if (typeof this.memberDetail.ProfileSkills === 'string') {
+      this.memberDetail.ProfileSkills =
+        this.memberDetail.ProfileSkills === ""
+          ? []
+          : JSON.parse(this.memberDetail.ProfileSkills);
+    }
+    if (this.memberDetail?.ProfilePortfolio?.length > 0) {
+      this.memberDetail.ProfilePortfolio.map((x: any, index: number) => {
+        x.index = index;
+      });
+    }
+    this.gotoTop();
   }
   GetProfilePath(data: any) {
     if (data.ProfilePicture === null) {
@@ -353,5 +398,12 @@ export class RdMemberDetailComponent implements OnInit {
       "/detail",
       this._encryptDecryptService.set(data.EventId),
     ]);
+  }
+  gotoTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   }
 }

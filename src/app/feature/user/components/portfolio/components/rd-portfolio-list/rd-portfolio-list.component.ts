@@ -291,11 +291,11 @@ export class RdPortfolioListComponent implements OnInit {
       });
       xData.map(
         (a: any) =>
-          (a.userPortfolioRatingAverage = parseFloat(
-            a.userPortfolioRatingAverage.toString()
-          )
-            .toFixed(1)
-            .replace(/\.0+$/, ""))
+        (a.userPortfolioRatingAverage = parseFloat(
+          a.userPortfolioRatingAverage.toString()
+        )
+          .toFixed(1)
+          .replace(/\.0+$/, ""))
       );
     }
 
