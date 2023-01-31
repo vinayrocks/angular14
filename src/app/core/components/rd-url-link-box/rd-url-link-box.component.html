@@ -1,14 +1,13 @@
 <div class="row">
   <div class="col-md-12">
-    <img src="./assets/img/radian/share-link-icon.png" class="share-icon">&nbsp;&nbsp;<span class="share-text">Copy &
-      Share the link given below on your Social Media</span>
+    <span class="share-text">Copy the link & Share it on your Social Media</span>
   </div>
 </div>
 <br /><br />
 <div>
   <div class="row">
     <div class="col-md-9">
-      <input class="form-control inpt-box" type="text" value="{{data.link}}" disabled>
+      <input class="form-control signUp-form-control inpt-box" type="text" value="{{data.link}}" disabled>
     </div>
     <div class="col-md-3">
       <button class="form-control copyBtn" [cdkCopyToClipboard]="data.link" (click)="showMessage()">Copy link</button>
@@ -17,5 +16,5 @@
 </div>
 <br />
 <div mat-dialog-actions>
-  <button class="btn btn-normal reset-btn" (click)="onNoClick()">Close</button>
+  <button class="form-control reset-btn" (click)="onNoClick()">Close</button>
 </div>

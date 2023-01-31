@@ -3,8 +3,11 @@ h2{
 }
 .reset-btn{
   background-color: #181F29;
-  margin-right:10px;
-  float: right;
+  padding: 12px 20px;
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
 }
 .cursor-click{
   cursor: copy;
@@ -53,4 +56,15 @@ i{
 .form-control:focus{
   border: 0px;
   box-shadow: none !important;
+}
+.signUp-form-control {
+  margin-bottom: 10px !important;
+  border: 1px solid #2f3c4f !important;
+  background: #ffffff !important;
+  color: #181f29 !important;
+  font-size: 14px;
+  border-radius: 5px !important;
+}
+.form-group.input-lg .form-control, .input-group.input-lg .form-control{
+  padding: 20px 18px;
 }
