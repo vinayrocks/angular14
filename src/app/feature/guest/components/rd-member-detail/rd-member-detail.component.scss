@@ -134,7 +134,6 @@ h4 {
 .social-prof .wrapper {
   width: 70%;
   margin: auto;
-  margin-top: 0px;
 }
 
 .social-prof img {
@@ -458,6 +457,7 @@ h3.title {
 
 .custom-col-skills {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .fa {
@@ -583,3 +583,7 @@ h2 {
   background-color: #ff1616;
 }
 
+.custom-wrapper{
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+}

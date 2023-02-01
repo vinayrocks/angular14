@@ -51,14 +51,22 @@ export class RdMyAccountComponent implements OnInit {
   ) {
     this.loggedUser = this.rdAuthenticateService.getLocalStorageData();
 
-    this.membershipData = (memberShipCategory as any).default.filter(
-      (x: any) =>
-        x.name === "Premium Monthly" ||
-        x.name === "Premium Annual" ||
-        x.name === "Corporate Monthly" ||
-        x.name === "Corporate Annual"
-    );
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
+
+    if (this.currentUser.userType === "1"){
+      this.membershipData = (memberShipCategory as any).default.filter(
+        (x: any) =>
+          x.name === "Premium Monthly" ||
+          x.name === "Premium Annual"
+      );
+    }else{
+      this.membershipData = (memberShipCategory as any).default.filter(
+        (x: any) =>
+          x.name === "Corporate Monthly" ||
+          x.name === "Corporate Annual"
+      );
+    }
+    
   }
 
   ngOnInit() {

@@ -289,7 +289,7 @@
   transform: skewY(8deg);
   -webkit-transform-origin: 0 100%;
   transform-origin: 0 100%;
-  }
+  } 
   
   .card-one .header .avatar {
   position: absolute;
@@ -530,6 +530,7 @@
 
   .custom-img-col-2{
     margin-right: 40px;
+    margin-bottom: 40px;
   }
 
   .bi-heart-fill{
@@ -557,4 +558,28 @@
     color: #FF3636;
     font-weight: 700;
   }
-  
+  .play-icon {
+    color: #ffffff;
+    margin-left: 8px;
+    transform: translate(8vh, -15vh);
+    -ms-transform: translate(8vh, -15vh);
+    cursor: pointer;
+    width: 20%;
+    z-index: 2;
+    background-color: #ff0000;
+    height: 40px;
+    border-radius: 5px;
+    width: 45px;
+    border:0px;
+    i {
+      font-size: 22px !important;
+      display: block;
+      position: inherit;
+      color: #ffffff !important;
+      margin-top: 7px;
+    }
+  }
+  .custom-wrapper{
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+  }

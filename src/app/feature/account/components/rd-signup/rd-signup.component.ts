@@ -105,7 +105,13 @@ export class RdSignupComponent implements OnInit {
     // this.countryCode = countryCode.CountryCodes;
 
     this.skills = (skillsInterest as any).default;
-    this.membership = (memberShipCategory as any).default;
+    //this.membership = (memberShipCategory as any).default;
+    this.membership = (memberShipCategory as any).default.filter(
+      (x: any) =>
+        x.name === "Basic" ||
+        x.name === "Premium Monthly" ||
+        x.name === "Premium Annual"
+    );
     this.countryState = (countryState as any).default;
     this.countryCode = (countryCode as any).default;
     this.setSameAddress = false;
@@ -376,22 +382,28 @@ export class RdSignupComponent implements OnInit {
   }
   changeUserType(event: any) {
     this.membership = [];
-    if (event.target.checked) {
+    if (this.registerForm.isUser.value) {
       this.registerForm.organizationName.removeValidators(Validators.required);
       this.registerForm.uniqueNumber.removeValidators(Validators.required);
       this.registerForm.organizationName.setValue("");
       this.registerForm.uniqueNumber.setValue("");
-      this.membership = (memberShipCategory as any).default;
+      this.membership = (memberShipCategory as any).default.filter(
+        (x: any) =>
+          x.name === "Basic" ||
+          x.name === "Premium Monthly" ||
+          x.name === "Premium Annual"
+      );
     } else {
       this.registerForm.organizationName.addValidators(Validators.required);
       this.registerForm.uniqueNumber.addValidators(Validators.required);
       this.membership = (memberShipCategory as any).default.filter(
         (x: any) =>
-          x.name === "Premium Monthly" ||
-          x.name === "Premium Annual" ||
+          //x.name === "Premium Monthly" ||
+          //x.name === "Premium Annual" ||
           x.name === "Corporate Monthly" ||
           x.name === "Corporate Annual"
       );
+      
       this.membership = [...this.membership];
       this.registerForm.memberShip.setValue(this.membership[0].Id);
     }
