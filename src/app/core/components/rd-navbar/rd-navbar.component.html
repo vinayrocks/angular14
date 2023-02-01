@@ -57,7 +57,7 @@ color-on-scroll="500" appBlockCopy>
             <div ngbDropdownMenu class="dropdown-menu dropdown-menu-left">
               <a class="nav-link dropdown-item" *ngIf="currentUser.isPortfolio" [routerLink]="['/member/hunar_view']" (click)="_open=false"><p class="navbar-font-logged-in">My Profiles</p></a>
               <a class="nav-link dropdown-item" *ngIf="currentUser.isPortfolio" [routerLink]="['/member/portfolio_view']" (click)="_open=false"><p class="navbar-font-logged-in">My Portfolios</p></a>
-              <a class="nav-link dropdown-item"  [routerLink]="['/member/event_view']" *ngIf="currentUser?.membershipDuration!=='Basic' && currentUser.isPortfolio" (click)="_open=false"><p class="navbar-font-logged-in">My Events</p></a>
+              <a class="nav-link dropdown-item"  [routerLink]="['/member/event_view']" *ngIf="(currentUser?.membershipDuration!=='Basic' && currentUser?.membershipDuration!=='Premium Monthly' && currentUser?.membershipDuration!=='Premium Annual')  && currentUser.isPortfolio" (click)="_open=false"><p class="navbar-font-logged-in">My Events</p></a>
               <a class="nav-link dropdown-item" *ngIf="currentUser.isPortfolio" [routerLink]="['/member/my_account']" (click)="_open=false"><p class="navbar-font-logged-in">My Account</p></a>
               <a class="nav-link dropdown-item" *ngIf="currentUser.isPortfolio" [routerLink]="['/member/setting_view']" (click)="_open=false"><p class="navbar-font-logged-in">Settings</p></a>
               <a class="nav-link dropdown-item" (click)="logout()"><p class="navbar-font-logged-in">Logout</p></a>

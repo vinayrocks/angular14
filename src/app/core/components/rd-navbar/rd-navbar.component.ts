@@ -31,7 +31,6 @@ export class RdNavbarComponent implements OnInit {
             this.currentUser.isLoggedIn=false;
             this.currentUser.isPortfolio = false;
         }
-        
     }
 
     ngOnInit() {
