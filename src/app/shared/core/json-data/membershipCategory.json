@@ -3,7 +3,7 @@
     "Id":1,
     "name": "Basic",
     "amount": "Free",
-    "currency": "INR",
+    "currency": "",
     "planType": "Free",
     "properties": [
       "Create Multiple Profiles",
