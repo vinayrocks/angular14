@@ -40,7 +40,7 @@ export class RdMyAccountComponent implements OnInit {
   loggedUser: any = [];
   selectedMemberShip: any = "";
   currentUser: any = [];
-
+  selectedmemberShip: any = [];
   constructor(
     private _formBuilder: FormBuilder,
     private rdAuthenticateService: RdAuthenticateService,
@@ -53,20 +53,20 @@ export class RdMyAccountComponent implements OnInit {
 
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
 
-    if (this.currentUser.userType === "1"){
+    if (this.currentUser.userType === "1") {
       this.membershipData = (memberShipCategory as any).default.filter(
         (x: any) =>
           x.name === "Premium Monthly" ||
           x.name === "Premium Annual"
       );
-    }else{
+    } else {
       this.membershipData = (memberShipCategory as any).default.filter(
         (x: any) =>
           x.name === "Corporate Monthly" ||
           x.name === "Corporate Annual"
       );
     }
-    
+    this.selectedMemberShip = this.membershipData.filter((x: any) => x.Id === parseInt(this.loggedUser.membership))[0];
   }
 
   ngOnInit() {
@@ -74,9 +74,9 @@ export class RdMyAccountComponent implements OnInit {
   }
   initRegisterForm() {
     this.upgradeMembershipCategoryFormGroup = this._formBuilder.group({
-      memberShip: [this.loggedUser.membership, Validators.required],
-      membershipAmount: [""],
-      membershipDuration: [""],
+      memberShip: [this.selectedMemberShip.Id, Validators.required],
+      membershipAmount: [this.selectedMemberShip.amount],
+      membershipDuration: [this.selectedMemberShip.name],
     });
     this.upgradeMembershipCategoryFormGroup.controls["memberShip"].setValue(
       this.loggedUser.membership
@@ -127,6 +127,7 @@ export class RdMyAccountComponent implements OnInit {
                   cancelable: true,
                 });
                 window.dispatchEvent(event);
+                this.spinner.hide();
               },
               modal: {
                 escape: false,
@@ -138,6 +139,7 @@ export class RdMyAccountComponent implements OnInit {
                       cancelable: true,
                     });
                     window.dispatchEvent(event);
+                    this.spinner.hide();
                   }
                 },
               },
