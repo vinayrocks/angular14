@@ -50,6 +50,20 @@ export class RdAuthenticateService {
         })
       );
   }
+  registerDirect(RdRegister: RdRegister) {
+    var data = this._encryptDecryptService.ecryptModel(RdRegister);
+    return this.http
+      .post<any>(
+        environment.apiCommon + "radianApi/Users/registrationDetails.php",
+        JSON.stringify(data)
+      )
+      .pipe(
+        map((res) => {
+          return res;
+          // return this.razorPayment(res);
+        })
+      );
+  }
   forgotPassword(rdForgotPassword: any) {
     var data = this._encryptDecryptService.ecryptModel(rdForgotPassword);
 

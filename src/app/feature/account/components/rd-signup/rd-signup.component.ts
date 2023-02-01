@@ -266,7 +266,7 @@ export class RdSignupComponent implements OnInit {
     }
   }
   onSubmit() {
-    this.spinner.show();
+    console.log(this.registerForm.memberShip.value)
     // Stop here if form is invalid
     if (this.registerFormGroup.invalid) {
       this.notificationService.error("Please fill in the required fields");
@@ -274,8 +274,39 @@ export class RdSignupComponent implements OnInit {
       this.spinner.hide();
       return;
     } else {
-      this.createUser();
+
+      console.log(this.registerFormGroup.controls["memberShip"].value)
+      if (parseInt(this.registerFormGroup.controls["memberShip"].value) === 1) {
+        this.spinner.show();
+        this.createUserDirect()
+      } else {
+        this.createUser();
+      }
+
     }
+  }
+  createUserDirect() {
+    this.rdAuthenticateService
+      .registerDirect(new RdRegister(this.registerFormGroup.value))
+      .pipe(first())
+      .subscribe(
+        (res) => {
+          if (res.status) {
+            this.notificationService.success('Registration Successful.');
+            setTimeout(() => {
+              this.spinner.hide();
+              this.router.navigate(["/home"]);
+            }, 1000);
+          }
+        },
+        (error) => {
+          console.log(error)
+          this.spinner.hide();
+          this.notificationService.error(
+            "Something went wrong.Please try again."
+          );
+        }
+      );
   }
   createUser() {
     this.rdAuthenticateService
@@ -403,7 +434,7 @@ export class RdSignupComponent implements OnInit {
           x.name === "Corporate Monthly" ||
           x.name === "Corporate Annual"
       );
-      
+
       this.membership = [...this.membership];
       this.registerForm.memberShip.setValue(this.membership[0].Id);
     }
