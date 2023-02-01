@@ -16,7 +16,7 @@
   {
     "Id":2,
     "name": "Premium Monthly",
-    "amount": "1000",
+    "amount": "1",
     "currency": "INR",
     "planType": "",
     "properties": [
@@ -48,7 +48,7 @@
   {
     "Id":4,
     "name": "Corporate Monthly",
-    "amount": "5000",
+    "amount": "1",
     "currency": "INR",
     "planType": "",
     "properties": [
