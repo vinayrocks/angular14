@@ -16,6 +16,8 @@ import { AngularEditorConfig } from "@kolkov/angular-editor";
 import { NgxSpinnerService } from "ngx-spinner";
 import { RdAuthenticateService } from "src/app/shared/services/authentication/rd-authenticate.service";
 import { animate, style, transition, trigger } from "@angular/animations";
+import { MessageBoxComponent } from "src/app/core/components/message-box/message-box.component";
+import { MatDialog } from "@angular/material/dialog";
 @Component({
   selector: "app-rd-portfolio-add",
   animations: [
@@ -68,7 +70,8 @@ export class RdPortfolioAddComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private notificationService: NotificationService,
     private router: Router,
-    private rdAuthenticateService: RdAuthenticateService
+    private rdAuthenticateService: RdAuthenticateService,
+    public matDialog: MatDialog,
   ) {
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
     this.currentUser.ProfileSkillName = JSON.parse(
@@ -236,11 +239,10 @@ export class RdPortfolioAddComponent implements OnInit {
                   if (res.status) {
                     this.notificationService.success(res.message);
                     if (!this.currentUser.isPortfolio) {
-                      this.rdAuthenticateService.logout();
-                      this.currentUser.isLoggedIn = false;
-                      this.currentUser.isPortfolio = false;
-                      window.location.href = "/account/login";
                       this.spinner.hide();
+                      this.matDialog.open(MessageBoxComponent, {
+                        width: "500px"
+                      });
                     } else {
                       this.router.navigate(["/member/portfolio_view"]);
                       this.spinner.hide();
@@ -268,11 +270,10 @@ export class RdPortfolioAddComponent implements OnInit {
           if (res.status) {
             this.notificationService.success(res.message);
             if (!this.currentUser.isPortfolio) {
-              this.rdAuthenticateService.logout();
-              this.currentUser.isLoggedIn = false;
-              this.currentUser.isPortfolio = false;
-              window.location.href = "/account/login";
               this.spinner.hide();
+              this.matDialog.open(MessageBoxComponent, {
+                width: "500px"
+              });
             } else {
               this.router.navigate(["/member/portfolio_view"]);
               this.spinner.hide();
