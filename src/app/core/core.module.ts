@@ -16,10 +16,11 @@ import { RdDeleteConfirmationBoxComponent } from './components/rd-delete-confirm
 import { RdUrlLinkBoxComponent } from './components/rd-url-link-box/rd-url-link-box.component';
 import { RdUserListBoxComponent } from './components/rd-user-list-box/rd-user-list-box.component';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import { MessageBoxComponent } from './components/message-box/message-box.component';
 
 @NgModule({
   declarations: [RdNavbarComponent, RdFooterComponent,RdLoginComponent, 
-    RdForgotPasswordComponent, RdDeleteConfirmationBoxComponent, RdUrlLinkBoxComponent, RdUserListBoxComponent],
+    RdForgotPasswordComponent, RdDeleteConfirmationBoxComponent, RdUrlLinkBoxComponent, RdUserListBoxComponent, MessageBoxComponent],
   imports: [
     CommonModule,
     RouterModule,

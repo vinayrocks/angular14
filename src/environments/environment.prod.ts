@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl:'https://itechprovisions.com/radian2020_v1',
+  apiUrl: 'https://www.bemiraculum.com',
   API_key: 'XXXXRADIAN123456',
-  apiCommon:'https://itechprovisions.com/'
+  apiCommon: 'https://itechprovisions.com/'
 };
