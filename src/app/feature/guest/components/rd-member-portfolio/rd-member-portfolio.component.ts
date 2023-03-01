@@ -107,6 +107,7 @@ export class RdMemberPortfolioComponent implements OnInit {
     private notificationService: NotificationService,
     public matDialog: MatDialog
   ) {
+
     this.currentUser = this.rdAuthenticateService.getLocalStorageData();
     this.routerData.PortfolioId = this.route.snapshot.paramMap.get("id");
     this.routerData = this._encryptDecryptService.decryptModel(this.routerData);
@@ -119,7 +120,7 @@ export class RdMemberPortfolioComponent implements OnInit {
   GetPortfolioDetail() {
     const dmData: any = {};
     dmData.PortfolioId = this.routerData.PortfolioId;
-    dmData.UserId = this.currentUser.id;
+    // dmData.UserId = this.currentUser.id;
     this.rdUserService
       .getPortfolioDetail(new RdGetPortfolio(dmData))
       .pipe(first())
@@ -129,12 +130,18 @@ export class RdMemberPortfolioComponent implements OnInit {
           // res.data.forEach(element => {
           //   element.userPortfolioAttachment=element.userPortfolioAttachment === ''?[]:this.GetPortfolioImagePath(element);
           // });
+          console.log(res)
           this.selectedPortfolio = res.data[0];
           res.UserPortfolioMedia.forEach((element) => {
-            element.attachments = this.GetPortfolioImagePath(
-              this.selectedPortfolio,
-              element.userPortfolioAttachment
-            );
+            if (element.userPortfolioAttachment !== null) {
+              element.attachments = this.GetPortfolioImagePath(
+                this.selectedPortfolio,
+                element.userPortfolioAttachment
+              );
+            } else {
+              element.attachments = [];
+            }
+
             element.userPortfolioRating = parseFloat(
               element.userPortfolioRating.toString()
             )
@@ -256,7 +263,7 @@ export class RdMemberPortfolioComponent implements OnInit {
           event.userPortfolioAttachmentRatingId;
         dxm.userPortfolioAttachmentId = event.userPortfolioAttachmentId;
         dxm.userPortfolioId = event.userPortfolioId;
-        dxm.userLoginId = this.currentUser.id;
+        // dxm.userLoginId = this.currentUser.id;
         dxm.userPortfolioRating = 0;
         dialogConfig.data = event;
       }
@@ -268,7 +275,7 @@ export class RdMemberPortfolioComponent implements OnInit {
         event.userPortfolioAttachmentRatingId;
       dxm.userPortfolioAttachmentId = event.userPortfolioAttachmentId;
       dxm.userPortfolioId = event.userPortfolioId;
-      dxm.userLoginId = this.currentUser.id;
+      // dxm.userLoginId = this.currentUser.id;
       dxm.userPortfolioRating = 0;
       dialogConfig.data = event;
     }

@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col-md-2 custom-img-col-2" *ngFor="let elem of userPortfolioMedia;let i=index;">
                             <!-- <h6>{{elem.attachments[0].Name}}}</h6> -->
-                            <div class="custom-photo-container">
+                            <div class="custom-photo-container" *ngIf="elem.attachments.length>0">
                                 <img src="{{elem.attachments[0].Name}}" alt="" class="img-raised" title=""
                                     *ngIf="elem.attachments[0].IsImage==='image'" (click)="openImageDialog(i)">
                                 <a *ngIf="elem.attachments[0].IsImage==='pdf'">
@@ -48,7 +48,8 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="row row-rating" *ngIf="elem.userPortfolioIsRatingAllowed">
+                            <div class="row row-rating"
+                                *ngIf="elem.userPortfolioIsRatingAllowed && elem.attachments.length>0">
                                 <div class="col-md-6">
                                     <ng-template #t let-fill="fill">
                                         <i class="bi-heart-fill">
@@ -73,7 +74,8 @@
                                         5</label>
                                 </div>
                             </div>
-                            <div class="row review-center" *ngIf="elem.userPortfolioIsRatingAllowed">
+                            <div class="row review-center"
+                                *ngIf="elem.userPortfolioIsRatingAllowed && elem.attachments.length>0">
                                 <div class="col-md-12">
                                     <label><a (click)="openRating(elem)" class="href_review">Write your
                                             review</a></label>
