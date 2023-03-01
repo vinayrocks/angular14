@@ -292,7 +292,7 @@ export class RdSignupComponent implements OnInit {
       .subscribe(
         (res) => {
           if (res.status) {
-            this.notificationService.success('Registration Successful.');
+            this.notificationService.success('Congratulations, Successfully Registered!');
             setTimeout(() => {
               this.spinner.hide();
               this.router.navigate(["/home"]);
