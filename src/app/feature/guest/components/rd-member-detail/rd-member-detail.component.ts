@@ -198,7 +198,7 @@ export class RdMemberDetailComponent implements OnInit {
   redirectToProfile(data: any) {
     this.memberDetail = [];
     this.memberDetail = data;
-    console.log(data);
+    // console.log(data);
     if (typeof this.memberDetail.CertificationDetails === 'string') {
       this.memberDetail.CertificationDetails =
         (this.memberDetail.CertificationDetails !== "" && this.memberDetail.CertificationDetails !== null)

@@ -266,7 +266,7 @@ export class RdSignupComponent implements OnInit {
     }
   }
   onSubmit() {
-    console.log(this.registerForm.memberShip.value)
+    // console.log(this.registerForm.memberShip.value)
     // Stop here if form is invalid
     if (this.registerFormGroup.invalid) {
       this.notificationService.error("Please fill in the required fields");
@@ -275,7 +275,7 @@ export class RdSignupComponent implements OnInit {
       return;
     } else {
 
-      console.log(this.registerFormGroup.controls["memberShip"].value)
+      // console.log(this.registerFormGroup.controls["memberShip"].value)
       if (parseInt(this.registerFormGroup.controls["memberShip"].value) === 1) {
         this.spinner.show();
         this.createUserDirect()
@@ -300,7 +300,7 @@ export class RdSignupComponent implements OnInit {
           }
         },
         (error) => {
-          console.log(error)
+         //  console.log(error)
           this.spinner.hide();
           this.notificationService.error(
             "Something went wrong.Please try again."

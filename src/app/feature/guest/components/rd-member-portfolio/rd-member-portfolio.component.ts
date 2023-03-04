@@ -130,7 +130,7 @@ export class RdMemberPortfolioComponent implements OnInit {
           // res.data.forEach(element => {
           //   element.userPortfolioAttachment=element.userPortfolioAttachment === ''?[]:this.GetPortfolioImagePath(element);
           // });
-          console.log(res)
+          // console.log(res)
           this.selectedPortfolio = res.data[0];
           res.UserPortfolioMedia.forEach((element) => {
             if (element.userPortfolioAttachment !== null) {
@@ -161,7 +161,7 @@ export class RdMemberPortfolioComponent implements OnInit {
           this.userMedia = res.UserPortfolioMediaRating;
           this.GetProfilePath(res.data[0]);
           this.GetCoverPicture(res.data[0]);
-          console.log(this.selectedPortfolio)
+          // console.log(this.selectedPortfolio)
         },
         (error) => {
           this.spinner.hide();
